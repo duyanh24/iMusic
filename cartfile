@@ -1,0 +1,8 @@
+github "AliSoftware/Reusable"
+github "Alamofire/Alamofire"
+github "ReactiveX/RxSwift"
+github "RxSwiftCommunity/RxDataSources"
+github "Moya/Moya" 
+github "SDWebImage/SDWebImage"
+github "ninjaprox/NVActivityIndicatorView"
+github "realm/realm-cocoa"
