@@ -28,7 +28,7 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
         
         output.splashFinish
             .drive(onNext: { _ in
-                SceneCoordinator.shared.transition(to: Scene.tabbar)
+                SceneCoordinator.shared.transition(to: Scene.login)
             })
             .disposed(by: bag)
     }

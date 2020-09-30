@@ -42,14 +42,14 @@ extension Scene: TargetScene {
             let moreTabbarItem = UITabBarItem(title: Strings.more, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
             mypageNavController.tabBarItem = moreTabbarItem
             
-//            let settingViewModel = SettingViewModel()
-//            let settingViewController = SettingViewController.instantiate(withViewModel: settingViewModel)
-//            let setttingNavController = BaseNavigationController(rootViewController: settingViewController)
-//            let settingTabbarItem = UITabBarItem(title: Strings.more, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
-//            settingNavController.tabBarItem = settingTabbarItem
+            let settingViewModel = SettingViewModel()
+            let settingViewController = SettingViewController.instantiate(withViewModel: settingViewModel)
+            let settingNavController = BaseNavigationController(rootViewController: settingViewController)
+            let settingTabbarItem = UITabBarItem(title: Strings.settings, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
+            settingNavController.tabBarItem = settingTabbarItem
             
             
-            rootTabbarController.viewControllers = [homeNavController, searchNavController, mypageNavController]
+            rootTabbarController.viewControllers = [homeNavController, searchNavController, mypageNavController, settingNavController]
             return .tabBar(rootTabbarController)
         case .splash:
             let splashViewModel = SplashViewModel()

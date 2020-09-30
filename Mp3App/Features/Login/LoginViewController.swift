@@ -16,8 +16,17 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var loginButton: UIButton!
     
     var viewModel: LoginViewModel!
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        handleAction()
+    }
+    
+    private func handleAction() {
+        loginButton.rx.tap
+        .subscribe(onNext: { _ in
+            SceneCoordinator.shared.transition(to: Scene.tabbar)
+        }).disposed(by: disposeBag)
     }
 }
