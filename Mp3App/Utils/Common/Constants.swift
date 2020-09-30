@@ -9,17 +9,11 @@
 import Foundation
 
 struct APIURL {
-    static let baseURL = "https://thanhhvt7196.xyz"
-    static let imageBaseURL = "https://image.thanhhvt7196.xyz"
-    static let youtubeImageURL = "https://img.youtube.com/vi/%@/hqdefault.jpg"
+    static let baseURL = ""
 }
 
 struct Constants {
     static let APIKey = ""
-    static let defaultLocaleIdentifier = "en_US_POSIX"
-    
-    static let passwordMinLength = 4
-    static let passwordMaxlength = 16
 }
 
 enum ErrorMessage {

@@ -116,21 +116,7 @@ extension SceneCoordinator: UINavigationControllerDelegate {
     }
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        switch operation {
-        case .push:
-            if toVC is FadeAnimatedViewController {
-                return FadePushAnimator(type: .navigation)
-            }
-            return nil
-        case .pop:
-            if fromVC is FadeAnimatedViewController {
-                return FadePopAnimator(type: .navigation)
-            } else {
-                return nil
-            }
-        default:
-            return nil
-        }
+        return nil
     }
 }
 
@@ -146,6 +132,6 @@ extension SceneCoordinator: UITabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TabBarFadedAnimationTransitioning()
+        return nil
     }
 }

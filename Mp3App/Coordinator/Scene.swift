@@ -48,7 +48,6 @@ extension Scene: TargetScene {
             let settingTabbarItem = UITabBarItem(title: Strings.settings, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
             settingNavController.tabBarItem = settingTabbarItem
             
-            
             rootTabbarController.viewControllers = [homeNavController, searchNavController, mypageNavController, settingNavController]
             return .tabBar(rootTabbarController)
         case .splash:

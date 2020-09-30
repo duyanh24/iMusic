@@ -28,7 +28,7 @@ extension APIRouter: TargetType {
     var sampleData: Data {
         switch self {
         default:
-            return JSONHelper.dataFromFile(path: "Networking/SampleData/PopularMoviesSample") ?? Data()
+            return Data()
         }
     }
     
