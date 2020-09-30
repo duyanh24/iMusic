@@ -33,7 +33,6 @@
 		08504FB32523346E0033DED0 /* ViewModelBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F422523346D0033DED0 /* ViewModelBased.swift */; };
 		08504FB42523346E0033DED0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F442523346D0033DED0 /* BaseViewController.swift */; };
 		08504FB52523346F0033DED0 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F452523346D0033DED0 /* BaseTableViewController.swift */; };
-		08504FB62523346F0033DED0 /* FadeAnimatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F462523346D0033DED0 /* FadeAnimatedViewController.swift */; };
 		08504FB72523346F0033DED0 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F482523346E0033DED0 /* Scene.swift */; };
 		08504FB82523346F0033DED0 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F492523346E0033DED0 /* SceneCoordinatorType.swift */; };
 		08504FB92523346F0033DED0 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F4A2523346E0033DED0 /* SceneTransitionType.swift */; };
@@ -111,7 +110,6 @@
 		08504F422523346D0033DED0 /* ViewModelBased.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelBased.swift; sourceTree = "<group>"; };
 		08504F442523346D0033DED0 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		08504F452523346D0033DED0 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
-		08504F462523346D0033DED0 /* FadeAnimatedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeAnimatedViewController.swift; sourceTree = "<group>"; };
 		08504F482523346E0033DED0 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		08504F492523346E0033DED0 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		08504F4A2523346E0033DED0 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 			children = (
 				08504F442523346D0033DED0 /* BaseViewController.swift */,
 				08504F452523346D0033DED0 /* BaseTableViewController.swift */,
-				08504F462523346D0033DED0 /* FadeAnimatedViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -722,7 +719,6 @@
 				08504FB42523346E0033DED0 /* BaseViewController.swift in Sources */,
 				08504FF82523346F0033DED0 /* MypageServices.swift in Sources */,
 				08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */,
-				08504FB62523346F0033DED0 /* FadeAnimatedViewController.swift in Sources */,
 				08504F1B252334550033DED0 /* ViewController.swift in Sources */,
 				08504FE92523346F0033DED0 /* Strings.swift in Sources */,
 				08504FB72523346F0033DED0 /* Scene.swift in Sources */,

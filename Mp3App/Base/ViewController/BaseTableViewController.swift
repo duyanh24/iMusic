@@ -10,20 +10,9 @@ import Foundation
 import UIKit
 
 class BaseTableViewController: UITableViewController {
-    override var shouldAutorotate: Bool {
-        return false
-    }
     
     override var prefersStatusBarHidden: Bool {
         return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
-    }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
     }
     
     override func viewDidLoad() {
