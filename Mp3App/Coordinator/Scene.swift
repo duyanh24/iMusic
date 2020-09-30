@@ -27,25 +27,25 @@ extension Scene: TargetScene {
             let homeViewModel = HomeViewModel()
             let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel)
             let homeNavController = BaseNavigationController(rootViewController: homeViewController)
-            let homeTabbarItem = UITabBarItem(title: Strings.home, image: Asset.tabIconHomeNormal.image, selectedImage: Asset.tabIconHomeNormal.image)
+            let homeTabbarItem = UITabBarItem(title: Strings.home, image: nil, selectedImage: nil)
             homeNavController.tabBarItem = homeTabbarItem
             
             let searchViewModel = SearchViewModel()
             let searchViewController = SearchViewController.instantiate(withViewModel: searchViewModel)
             let searchNavController = BaseNavigationController(rootViewController: searchViewController)
-            let searchTabbarItem = UITabBarItem(title: Strings.search, image: Asset.tabIconSearchNormal.image, selectedImage: Asset.tabIconSearchNormal.image)
+            let searchTabbarItem = UITabBarItem(title: Strings.search, image: nil, selectedImage: nil)
             searchNavController.tabBarItem = searchTabbarItem
             
             let mypageViewModel = MypageViewModel()
             let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel)
             let mypageNavController = BaseNavigationController(rootViewController: mypageViewController)
-            let moreTabbarItem = UITabBarItem(title: Strings.more, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
+            let moreTabbarItem = UITabBarItem(title: Strings.more, image: nil, selectedImage: nil)
             mypageNavController.tabBarItem = moreTabbarItem
             
             let settingViewModel = SettingViewModel()
             let settingViewController = SettingViewController.instantiate(withViewModel: settingViewModel)
             let settingNavController = BaseNavigationController(rootViewController: settingViewController)
-            let settingTabbarItem = UITabBarItem(title: Strings.settings, image: Asset.mcflyMoreNormal.image, selectedImage: Asset.mcflyMoreNormal.image)
+            let settingTabbarItem = UITabBarItem(title: Strings.settings, image: nil, selectedImage: nil)
             settingNavController.tabBarItem = settingTabbarItem
             
             rootTabbarController.viewControllers = [homeNavController, searchNavController, mypageNavController, settingNavController]
