@@ -25,7 +25,8 @@ extension Scene: TargetScene {
             let rootTabbarController = RootTabbarController.instantiate()
             
             let homeViewModel = HomeViewModel()
-            let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel)
+            let homeServices = HomeServices(trackService: TrackService())
+            let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel, andServices: homeServices)
             let homeNavController = BaseNavigationController(rootViewController: homeViewController)
             let homeTabbarItem = UITabBarItem(title: Strings.home, image: nil, selectedImage: nil)
             homeNavController.tabBarItem = homeTabbarItem

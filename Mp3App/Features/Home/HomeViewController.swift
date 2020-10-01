@@ -14,8 +14,20 @@ import RxCocoa
 
 class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     var viewModel: HomeViewModel!
+    var disposeBag = DisposeBag()
+    let loadDataTrigger = PublishSubject<Void>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModel()
+        loadDataTrigger.onNext(())
+    }
+    
+    private func bindViewModel() {
+        let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
+        let ouput = viewModel.transform(input: input)
+//        ouput.homeDataModel.subscribe(onNext: { _ in
+//            print("ok")
+//        }).disposed(by: disposeBag)
     }
 }

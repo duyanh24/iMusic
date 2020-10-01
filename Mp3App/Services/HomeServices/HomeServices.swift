@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol HasHomeServices {
-    
-}
-
-struct HomeServices: HasHomeServices {
-    
+struct HomeServices: HasTrackService {
+    var trackService: TrackService
 }

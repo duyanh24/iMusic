@@ -10,6 +10,9 @@
 		08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE02524684400A4407D /* UIViewController+Extension.swift */; };
 		08118EE32524684D00A4407D /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE22524684D00A4407D /* UIWindow+Extension.swift */; };
 		08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE42524687C00A4407D /* UIApplication+Extension.swift */; };
+		083880912525DD4F00987813 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880902525DD4F00987813 /* ErrorTracker.swift */; };
+		083880932525DDB500987813 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880922525DDB500987813 /* ActivityIndicator.swift */; };
+		083880952525DE0600987813 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880942525DE0600987813 /* Observable+Extension.swift */; };
 		08504F17252334550033DED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F16252334550033DED0 /* AppDelegate.swift */; };
 		08504F19252334550033DED0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F18252334550033DED0 /* SceneDelegate.swift */; };
 		08504F1B252334550033DED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F1A252334550033DED0 /* ViewController.swift */; };
@@ -79,12 +82,20 @@
 		0859101825234342001FE662 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF525234341001FE662 /* RxRelay.framework */; };
 		0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */; };
 		0859101C25234342001FE662 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF725234342001FE662 /* SDWebImage.framework */; };
+		08861D692525B58C008C0628 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D662525B58C008C0628 /* Track.swift */; };
+		08861D6A2525B58C008C0628 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D682525B58C008C0628 /* User.swift */; };
+		08861D6D2525B95C008C0628 /* TrackListRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D6C2525B95C008C0628 /* TrackListRespone.swift */; };
+		08861D712525C236008C0628 /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D702525C236008C0628 /* TrackService.swift */; };
+		08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D732525D65B008C0628 /* HomeScreenDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		08118EE02524684400A4407D /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		08118EE22524684D00A4407D /* UIWindow+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		08118EE42524687C00A4407D /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		083880902525DD4F00987813 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
+		083880922525DDB500987813 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		083880942525DE0600987813 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		08504F13252334550033DED0 /* Mp3App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mp3App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08504F16252334550033DED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08504F18252334550033DED0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +167,11 @@
 		08590FF525234341001FE662 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewExtended.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewExtended.framework; sourceTree = "<group>"; };
 		08590FF725234342001FE662 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
+		08861D662525B58C008C0628 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		08861D682525B58C008C0628 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		08861D6C2525B95C008C0628 /* TrackListRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListRespone.swift; sourceTree = "<group>"; };
+		08861D702525C236008C0628 /* TrackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackService.swift; sourceTree = "<group>"; };
+		08861D732525D65B008C0628 /* HomeScreenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +227,7 @@
 				08504F16252334550033DED0 /* AppDelegate.swift */,
 				08504F18252334550033DED0 /* SceneDelegate.swift */,
 				08504F1A252334550033DED0 /* ViewController.swift */,
+				08861D642525B58C008C0628 /* Models */,
 				08504F3E2523346D0033DED0 /* Base */,
 				08504F472523346E0033DED0 /* Coordinator */,
 				08504F2A2523346D0033DED0 /* Features */,
@@ -347,6 +364,7 @@
 		08504F4D2523346E0033DED0 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				08861D6B2525B945008C0628 /* Track */,
 				08504F4E2523346E0033DED0 /* Base */,
 			);
 			path = Response;
@@ -407,6 +425,9 @@
 				08118EE42524687C00A4407D /* UIApplication+Extension.swift */,
 				08118EE02524684400A4407D /* UIViewController+Extension.swift */,
 				08118EE22524684D00A4407D /* UIWindow+Extension.swift */,
+				083880902525DD4F00987813 /* ErrorTracker.swift */,
+				083880922525DDB500987813 /* ActivityIndicator.swift */,
+				083880942525DE0600987813 /* Observable+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -474,6 +495,7 @@
 				08504F9E2523346E0033DED0 /* SearchServices */,
 				08504FA02523346E0033DED0 /* MypageServices */,
 				08504FA22523346E0033DED0 /* HomeServices */,
+				08861D702525C236008C0628 /* TrackService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -562,6 +584,48 @@
 				08590FF125234341001FE662 /* SDWebImageMapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08861D642525B58C008C0628 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				08861D722525D64B008C0628 /* Home */,
+				08861D652525B58C008C0628 /* Track */,
+				08861D672525B58C008C0628 /* User */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		08861D652525B58C008C0628 /* Track */ = {
+			isa = PBXGroup;
+			children = (
+				08861D662525B58C008C0628 /* Track.swift */,
+			);
+			path = Track;
+			sourceTree = "<group>";
+		};
+		08861D672525B58C008C0628 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				08861D682525B58C008C0628 /* User.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		08861D6B2525B945008C0628 /* Track */ = {
+			isa = PBXGroup;
+			children = (
+				08861D6C2525B95C008C0628 /* TrackListRespone.swift */,
+			);
+			path = Track;
+			sourceTree = "<group>";
+		};
+		08861D722525D64B008C0628 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				08861D732525D65B008C0628 /* HomeScreenDataModel.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -705,22 +769,28 @@
 				08505003252336750033DED0 /* SettingServices.swift in Sources */,
 				08504FF52523346F0033DED0 /* Assets.swift in Sources */,
 				08504FA52523346E0033DED0 /* HomeViewController.swift in Sources */,
+				08861D712525C236008C0628 /* TrackService.swift in Sources */,
 				08504FBF2523346F0033DED0 /* APIClient.swift in Sources */,
+				08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */,
 				08504FB92523346F0033DED0 /* SceneTransitionType.swift in Sources */,
 				08504FFE252335B60033DED0 /* SettingViewController.swift in Sources */,
 				08504FFC252335A10033DED0 /* SettingViewModel.swift in Sources */,
 				08504FAA2523346E0033DED0 /* RootTabbarController.swift in Sources */,
+				083880952525DE0600987813 /* Observable+Extension.swift in Sources */,
 				08504FC22523346F0033DED0 /* API.swift in Sources */,
 				08504FAE2523346E0033DED0 /* SearchVIewModel.swift in Sources */,
 				08504FC12523346F0033DED0 /* HTTPStatusCodes.swift in Sources */,
 				08504FB12523346E0033DED0 /* MypageViewModel.swift in Sources */,
 				08504FE82523346F0033DED0 /* Constants.swift in Sources */,
 				08505008252336C90033DED0 /* LoginViewController.swift in Sources */,
+				083880932525DDB500987813 /* ActivityIndicator.swift in Sources */,
 				08504FB42523346E0033DED0 /* BaseViewController.swift in Sources */,
+				083880912525DD4F00987813 /* ErrorTracker.swift in Sources */,
 				08504FF82523346F0033DED0 /* MypageServices.swift in Sources */,
 				08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */,
 				08504F1B252334550033DED0 /* ViewController.swift in Sources */,
 				08504FE92523346F0033DED0 /* Strings.swift in Sources */,
+				08861D692525B58C008C0628 /* Track.swift in Sources */,
 				08504FB72523346F0033DED0 /* Scene.swift in Sources */,
 				08504FAC2523346E0033DED0 /* SearchViewController.swift in Sources */,
 				08118EE32524684D00A4407D /* UIWindow+Extension.swift in Sources */,
@@ -731,9 +801,11 @@
 				08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */,
 				08504FA92523346E0033DED0 /* SplashViewModel.swift in Sources */,
 				08504FB52523346F0033DED0 /* BaseTableViewController.swift in Sources */,
+				08861D6A2525B58C008C0628 /* User.swift in Sources */,
 				0850500D252337330033DED0 /* LoginSerivces.swift in Sources */,
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
 				08504F19252334550033DED0 /* SceneDelegate.swift in Sources */,
+				08861D6D2525B95C008C0628 /* TrackListRespone.swift in Sources */,
 				08504FA42523346E0033DED0 /* HomeViewModel.swift in Sources */,
 				08504FF72523346F0033DED0 /* SearchServices.swift in Sources */,
 				08504FB32523346E0033DED0 /* ViewModelBased.swift in Sources */,
