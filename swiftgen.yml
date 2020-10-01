@@ -1,5 +1,5 @@
-input_dir: RxSwiftCoordinator/Resources/Images
-output_dir: RxSwiftCoordinator/Resources/Images/Generated
+input_dir: Mp3App/Resources/Images
+output_dir: Mp3App/Resources/Images/Generated
 xcassets:
   inputs: Assets.xcassets
   outputs:
