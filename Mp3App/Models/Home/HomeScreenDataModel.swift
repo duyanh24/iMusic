@@ -12,4 +12,8 @@ class HomeScreenDataModel {
     var listPopularTrack: [Track] = []
     var listElectronicPlaylist: [Track] = []
     var listHiphopPlaylist: [Track] = []
+    var listRockPlaylist: [Track] = []
+    var listClassicalPlaylist: [Track] = []
+    var listChartTrack: [Track] = []
+    var listUser: [User] = []
 }

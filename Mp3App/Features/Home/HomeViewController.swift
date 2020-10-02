@@ -26,8 +26,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private func bindViewModel() {
         let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
         let ouput = viewModel.transform(input: input)
-//        ouput.homeDataModel.subscribe(onNext: { _ in
-//            print("ok")
-//        }).disposed(by: disposeBag)
+        ouput.homeDataModel.subscribe(onNext: { _ in
+            print("ok")
+        }).disposed(by: disposeBag)
     }
 }

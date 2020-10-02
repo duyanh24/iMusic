@@ -52,7 +52,22 @@ extension HomeViewModel {
             .map { $0.collection ?? [] }
             .catchErrorJustReturn([])
         
-        let homeScreenDataModel = Observable.zip(popularTrack, hiphopPlaylist, electronicPlaylist).map { (popularTrack, hiphopPlaylist, electronicPlaylist) -> HomeScreenDataModel in
+        let rockPlaylist = services.trackService.getElectronicPlaylist()
+            .trackError(errorTracker)
+            .map { $0.collection ?? [] }
+            .catchErrorJustReturn([])
+        
+        let classicalPlaylist = services.trackService.getElectronicPlaylist()
+            .trackError(errorTracker)
+            .map { $0.collection ?? [] }
+            .catchErrorJustReturn([])
+        
+        let chartTrack = services.trackService.getElectronicPlaylist()
+            .trackError(errorTracker)
+            .map { $0.collection ?? [] }
+            .catchErrorJustReturn([])
+        
+        let homeScreenDataModel = Observable.zip(popularTrack, hiphopPlaylist, electronicPlaylist).map { (popularTrack, hiphopPlaylist, electronicPlaylist, rockPlaylist, classicalPlaylist, chartTrack) -> HomeScreenDataModel in
             let homeScreenDataModel = HomeScreenDataModel()
             homeScreenDataModel.listElectronicPlaylist = electronicPlaylist
             homeScreenDataModel.listPopularTrack = popularTrack
