@@ -9,7 +9,8 @@
 import Foundation
 
 struct APIURL {
-    static let baseURL = "https://api-v2.soundcloud.com"
+    static let baseURLv2 = "https://api-v2.soundcloud.com"
+    static let baseURLv1 = "https://api.soundcloud.com"
 }
 
 struct Constants {

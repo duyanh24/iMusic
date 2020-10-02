@@ -10,10 +10,18 @@ import Foundation
 
 struct TrackListResponse: Codable {
     var genre: String?
-    var collection: [Track]?
+    var playlist: [Playlist]?
     
     enum CodingKeys: String, CodingKey {
         case genre
-        case collection
+        case playlist = "collection"
+    }
+}
+
+struct Playlist: Codable {
+    var track: Track?
+    
+    enum CodingKeys: String, CodingKey {
+        case track
     }
 }

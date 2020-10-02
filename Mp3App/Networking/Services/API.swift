@@ -13,12 +13,17 @@ enum APIRouter {
     case getPopularTrack(kind: String, limit: Int, offset: Int)
     case getChartTrack(kind: String, limit: Int, offset: Int)
     case getPlaylist(kind: String, genre: String, limit: Int, offset: Int)
-    
+    case getPopularUser(limit: Int, offset: Int)
 }
 
 extension APIRouter: TargetType {
     var baseURL: URL {
-        return URL(string: APIURL.baseURL)!
+        switch self {
+        case .getPopularUser:
+            return URL(string: APIURL.baseURLv1)!
+        default:
+            return URL(string: APIURL.baseURLv2)!
+        }
     }
     
     var method: Moya.Method {
@@ -55,13 +60,19 @@ extension APIRouter: TargetType {
             encoding = URLEncoding.default
         return .requestParameters(parameters: bodyParameters, encoding: encoding)
         
-            
         case .getPlaylist(let kind, let genre, let limit, let offset):
             bodyParameters = [APIParameterKey.kind.rawValue: kind,
                               APIParameterKey.limit.rawValue: limit,
                               APIParameterKey.offset.rawValue: offset,
                               APIParameterKey.clientId.rawValue: Constants.APIKey,
                               APIParameterKey.genre.rawValue: genre]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: bodyParameters, encoding: encoding)
+        
+        case .getPopularUser(let limit, let offset):
+            bodyParameters = [APIParameterKey.limit.rawValue: limit,
+                              APIParameterKey.offset.rawValue: offset,
+                              APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
             
@@ -80,6 +91,8 @@ extension APIRouter: TargetType {
         switch self {
         case .getPopularTrack, .getChartTrack, .getPlaylist:
             return "/charts"
+        case .getPopularUser:
+            return "/users"
         }
     }
 }

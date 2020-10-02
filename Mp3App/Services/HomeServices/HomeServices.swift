@@ -8,6 +8,7 @@
 
 import Foundation
 
-struct HomeServices: HasTrackService {
+struct HomeServices: HasTrackService, HasUserService {
     var trackService: TrackService
+    var userService: UserService
 }

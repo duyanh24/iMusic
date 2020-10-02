@@ -13,7 +13,7 @@ protocol HasTrackService {
     var trackService: TrackService { get }
 }
 
-class TrackService {
+struct TrackService {
     func getPopularTrack() -> Observable<TrackListResponse> {
         return HostAPIClient.performApiNetworkCall(router: .getPopularTrack(kind: APIParameterKey.top.rawValue, limit: 5, offset: 0), type: TrackListResponse.self)
     }

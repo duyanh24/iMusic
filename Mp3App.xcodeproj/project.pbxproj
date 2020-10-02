@@ -87,6 +87,7 @@
 		08861D6D2525B95C008C0628 /* TrackListRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D6C2525B95C008C0628 /* TrackListRespone.swift */; };
 		08861D712525C236008C0628 /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D702525C236008C0628 /* TrackService.swift */; };
 		08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D732525D65B008C0628 /* HomeScreenDataModel.swift */; };
+		08904C242526FBCF00C57721 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08904C232526FBCF00C57721 /* UserService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +173,7 @@
 		08861D6C2525B95C008C0628 /* TrackListRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListRespone.swift; sourceTree = "<group>"; };
 		08861D702525C236008C0628 /* TrackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackService.swift; sourceTree = "<group>"; };
 		08861D732525D65B008C0628 /* HomeScreenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenDataModel.swift; sourceTree = "<group>"; };
+		08904C232526FBCF00C57721 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -496,6 +498,7 @@
 				08504FA02523346E0033DED0 /* MypageServices */,
 				08504FA22523346E0033DED0 /* HomeServices */,
 				08861D702525C236008C0628 /* TrackService.swift */,
+				08904C232526FBCF00C57721 /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				08504FB42523346E0033DED0 /* BaseViewController.swift in Sources */,
 				083880912525DD4F00987813 /* ErrorTracker.swift in Sources */,
 				08504FF82523346F0033DED0 /* MypageServices.swift in Sources */,
+				08904C242526FBCF00C57721 /* UserService.swift in Sources */,
 				08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */,
 				08504F1B252334550033DED0 /* ViewController.swift in Sources */,
 				08504FE92523346F0033DED0 /* Strings.swift in Sources */,

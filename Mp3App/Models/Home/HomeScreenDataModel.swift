@@ -9,11 +9,11 @@
 import Foundation
 
 class HomeScreenDataModel {
-    var listPopularTrack: [Track] = []
-    var listElectronicPlaylist: [Track] = []
-    var listHiphopPlaylist: [Track] = []
-    var listRockPlaylist: [Track] = []
-    var listClassicalPlaylist: [Track] = []
-    var listChartTrack: [Track] = []
-    var listUser: [User] = []
+    var listPopularTrack: [Playlist] = []
+    var listElectronicPlaylist: [Playlist] = []
+    var listHiphopPlaylist: [Playlist] = []
+    var listRockPlaylist: [Playlist] = []
+    var listClassicalPlaylist: [Playlist] = []
+    var listChartTrack: [Playlist] = []
+    var listPopularUser: [User] = []
 }

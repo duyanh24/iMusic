@@ -6,7 +6,6 @@
 //  Copyright © 2020 AnhLD. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Reusable
 import RxSwift
@@ -26,8 +25,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private func bindViewModel() {
         let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
         let ouput = viewModel.transform(input: input)
-        ouput.homeDataModel.subscribe(onNext: { _ in
-            print("ok")
+        ouput.homeDataModel.subscribe(onNext: { homeScreenDataModel in
+            print(homeScreenDataModel.listPopularUser)
         }).disposed(by: disposeBag)
     }
 }
