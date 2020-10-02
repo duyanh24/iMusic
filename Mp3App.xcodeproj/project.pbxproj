@@ -11,6 +11,8 @@
 		08118EE32524684D00A4407D /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE22524684D00A4407D /* UIWindow+Extension.swift */; };
 		08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE42524687C00A4407D /* UIApplication+Extension.swift */; };
 		0817DD5725271593007D2966 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5625271593007D2966 /* Album.swift */; };
+		0817DD5D252726CF007D2966 /* SlideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */; };
+		0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */; };
 		083880912525DD4F00987813 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880902525DD4F00987813 /* ErrorTracker.swift */; };
 		083880932525DDB500987813 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880922525DDB500987813 /* ActivityIndicator.swift */; };
 		083880952525DE0600987813 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880942525DE0600987813 /* Observable+Extension.swift */; };
@@ -96,6 +98,8 @@
 		08118EE22524684D00A4407D /* UIWindow+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		08118EE42524687C00A4407D /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		0817DD5625271593007D2966 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTableViewCell.swift; sourceTree = "<group>"; };
+		0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideTableViewCell.xib; sourceTree = "<group>"; };
 		083880902525DD4F00987813 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		083880922525DDB500987813 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		083880942525DE0600987813 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
@@ -208,6 +212,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0817DD5825272678007D2966 /* Slide */ = {
+			isa = PBXGroup;
+			children = (
+				0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */,
+				0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */,
+			);
+			path = Slide;
+			sourceTree = "<group>";
+		};
 		08504F0A252334550033DED0 = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +276,7 @@
 		08504F2B2523346D0033DED0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0817DD5825272678007D2966 /* Slide */,
 				08504F2C2523346D0033DED0 /* HomeViewModel.swift */,
 				08504F2D2523346D0033DED0 /* HomeViewController.swift */,
 				08504F2E2523346D0033DED0 /* HomeViewController.storyboard */,
@@ -700,6 +714,7 @@
 				08504F23252334560033DED0 /* LaunchScreen.storyboard in Resources */,
 				0850500A252336D80033DED0 /* LoginViewController.storyboard in Resources */,
 				08504FAB2523346E0033DED0 /* RootTabbarController.storyboard in Resources */,
+				0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */,
 				08504FAD2523346E0033DED0 /* SearchViewController.storyboard in Resources */,
 				08504FBE2523346F0033DED0 /* PopularMoviesSample.json in Resources */,
 				08504F1E252334550033DED0 /* Main.storyboard in Resources */,
@@ -777,6 +792,7 @@
 				08504FA52523346E0033DED0 /* HomeViewController.swift in Sources */,
 				08861D712525C236008C0628 /* TrackService.swift in Sources */,
 				08504FBF2523346F0033DED0 /* APIClient.swift in Sources */,
+				0817DD5D252726CF007D2966 /* SlideTableViewCell.swift in Sources */,
 				08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */,
 				08504FB92523346F0033DED0 /* SceneTransitionType.swift in Sources */,
 				08504FFE252335B60033DED0 /* SettingViewController.swift in Sources */,

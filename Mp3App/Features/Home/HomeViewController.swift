@@ -10,8 +10,11 @@ import UIKit
 import Reusable
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
+    @IBOutlet weak var tableView: UITableView!
+    
     var viewModel: HomeViewModel!
     private let disposeBag = DisposeBag()
     private let loadDataTrigger = PublishSubject<Void>()
@@ -22,16 +25,18 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         loadData()
     }
     
-    private func loadData() {
-        loadDataTrigger.onNext(())
-    }
-    
     private func bindViewModel() {
         let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
         let ouput = viewModel.transform(input: input)
         ouput.homeDataModel.subscribe(onNext: { homeScreenDataModel in
-            print("-----------------------")
-            print(homeScreenDataModel.hiphopAlbums)
+//            print("-----------------------")
+//            print(homeScreenDataModel.hiphopAlbums)
         }).disposed(by: disposeBag)
+    }
+}
+
+extension HomeViewController {
+    private func loadData() {
+        loadDataTrigger.onNext(())
     }
 }
