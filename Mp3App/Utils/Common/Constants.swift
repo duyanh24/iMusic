@@ -9,11 +9,12 @@
 import Foundation
 
 struct APIURL {
-    static let baseURL = ""
+    static let baseURLv2 = "https://api-v2.soundcloud.com"
+    static let baseURLv1 = "https://api.soundcloud.com"
 }
 
 struct Constants {
-    static let APIKey = ""
+    static let APIKey = "a25e51780f7f86af0afa91f241d091f8"
 }
 
 enum ErrorMessage {
@@ -47,4 +48,20 @@ enum ContentType: String {
     case urlencoded = "application/x-www-form-urlencoded"
     case password = "X- -Password"
     case html = "text/html"
+}
+
+enum APIParameterKey: String {
+    case kind = "kind"
+    case limit = "limit"
+    case offset = "offset"
+    case clientId = "client_id"
+    case top = "top"
+    case genre = "genre"
+}
+
+enum TrackGenre: String {
+    case electronic = "soundcloud:genres:electronic"
+    case hiphop = "soundcloud:genres:hiphoprap"
+    case classical = "soundcloud:genres:classical"
+    case rock = "soundcloud:genres:rock"
 }

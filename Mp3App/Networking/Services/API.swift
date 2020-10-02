@@ -10,12 +10,20 @@ import Foundation
 import Moya
 
 enum APIRouter {
-    case getListABC
+    case getPopularAlbums(kind: APIParameterKey, limit: Int, offset: Int)
+    case getChartTrack(kind: APIParameterKey, limit: Int, offset: Int)
+    case getAlbums(kind: APIParameterKey, genre: TrackGenre, limit: Int, offset: Int)
+    case getPopularUser(limit: Int, offset: Int)
 }
 
 extension APIRouter: TargetType {
     var baseURL: URL {
-        return URL(string: APIURL.baseURL)!
+        switch self {
+        case .getPopularUser:
+            return URL(string: APIURL.baseURLv1)!
+        default:
+            return URL(string: APIURL.baseURLv2)!
+        }
     }
     
     var method: Moya.Method {
@@ -33,7 +41,44 @@ extension APIRouter: TargetType {
     }
     
     var task: Task {
-        return .requestPlain
+        var bodyParameters: [String: Any] = [:]
+        var encoding: ParameterEncoding
+        switch self {
+        case .getPopularAlbums(let kind, let limit, let offset):
+            bodyParameters = [APIParameterKey.kind.rawValue: kind.rawValue,
+                              APIParameterKey.limit.rawValue: limit,
+                              APIParameterKey.offset.rawValue: offset,
+                              APIParameterKey.clientId.rawValue: Constants.APIKey]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: bodyParameters, encoding: encoding)
+            
+        case .getChartTrack(let kind, let limit, let offset):
+            bodyParameters = [APIParameterKey.kind.rawValue: kind.rawValue,
+                          APIParameterKey.limit.rawValue: limit,
+                          APIParameterKey.offset.rawValue: offset,
+                          APIParameterKey.clientId.rawValue: Constants.APIKey]
+            encoding = URLEncoding.default
+        return .requestParameters(parameters: bodyParameters, encoding: encoding)
+        
+        case .getAlbums(let kind, let genre, let limit, let offset):
+            bodyParameters = [APIParameterKey.kind.rawValue: kind.rawValue,
+                              APIParameterKey.limit.rawValue: limit,
+                              APIParameterKey.offset.rawValue: offset,
+                              APIParameterKey.clientId.rawValue: Constants.APIKey,
+                              APIParameterKey.genre.rawValue: genre.rawValue]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: bodyParameters, encoding: encoding)
+        
+        case .getPopularUser(let limit, let offset):
+            bodyParameters = [APIParameterKey.limit.rawValue: limit,
+                              APIParameterKey.offset.rawValue: offset,
+                              APIParameterKey.clientId.rawValue: Constants.APIKey]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: bodyParameters, encoding: encoding)
+            
+        default:
+            return .requestPlain
+        }
     }
     
     var headers: [String : String]? {
@@ -44,8 +89,10 @@ extension APIRouter: TargetType {
     
     var path: String {
         switch self {
-        default:
-            return ""
+        case .getPopularAlbums, .getChartTrack, .getAlbums:
+            return "/charts"
+        case .getPopularUser:
+            return "/users"
         }
     }
 }
