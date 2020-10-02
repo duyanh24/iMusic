@@ -14,15 +14,15 @@ protocol HasTrackService {
 }
 
 struct TrackService {
-    func getPopularTrack(kind: String, limit: Int = 5, offset: Int = 0) -> Observable<TrackListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPopularTrack(kind: kind, limit: limit, offset: offset), type: TrackListResponse.self)
+    func getPopularAlbums(kind: APIParameterKey, limit: Int = 5, offset: Int = 0) -> Observable<TrackListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getPopularAlbums(kind: kind, limit: limit, offset: offset), type: TrackListResponse.self)
     }
     
-    func getChartTrack(kind: String, limit: Int = 20, offset: Int = 0) -> Observable<TrackListResponse> {
+    func getChartTrack(kind: APIParameterKey, limit: Int = 20, offset: Int = 0) -> Observable<TrackListResponse> {
         return HostAPIClient.performApiNetworkCall(router: .getChartTrack(kind: kind, limit: limit, offset: offset), type: TrackListResponse.self)
     }
     
-    func getAlbums(kind: String, genre: String, limit: Int = 20, offset: Int = 0) -> Observable<TrackListResponse> {
+    func getAlbums(kind: APIParameterKey, genre: TrackGenre, limit: Int = 20, offset: Int = 0) -> Observable<TrackListResponse> {
         return HostAPIClient.performApiNetworkCall(router: .getAlbums(kind: kind, genre: genre, limit: limit, offset: offset), type: TrackListResponse.self)
     }
 }

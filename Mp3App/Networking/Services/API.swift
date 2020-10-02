@@ -10,9 +10,9 @@ import Foundation
 import Moya
 
 enum APIRouter {
-    case getPopularTrack(kind: String, limit: Int, offset: Int)
-    case getChartTrack(kind: String, limit: Int, offset: Int)
-    case getAlbums(kind: String, genre: String, limit: Int, offset: Int)
+    case getPopularAlbums(kind: APIParameterKey, limit: Int, offset: Int)
+    case getChartTrack(kind: APIParameterKey, limit: Int, offset: Int)
+    case getAlbums(kind: APIParameterKey, genre: TrackGenre, limit: Int, offset: Int)
     case getPopularUser(limit: Int, offset: Int)
 }
 
@@ -44,8 +44,8 @@ extension APIRouter: TargetType {
         var bodyParameters: [String: Any] = [:]
         var encoding: ParameterEncoding
         switch self {
-        case .getPopularTrack(let kind, let limit, let offset):
-            bodyParameters = [APIParameterKey.kind.rawValue: kind,
+        case .getPopularAlbums(let kind, let limit, let offset):
+            bodyParameters = [APIParameterKey.kind.rawValue: kind.rawValue,
                               APIParameterKey.limit.rawValue: limit,
                               APIParameterKey.offset.rawValue: offset,
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
@@ -53,7 +53,7 @@ extension APIRouter: TargetType {
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
             
         case .getChartTrack(let kind, let limit, let offset):
-        bodyParameters = [APIParameterKey.kind.rawValue: kind,
+            bodyParameters = [APIParameterKey.kind.rawValue: kind.rawValue,
                           APIParameterKey.limit.rawValue: limit,
                           APIParameterKey.offset.rawValue: offset,
                           APIParameterKey.clientId.rawValue: Constants.APIKey]
@@ -61,11 +61,11 @@ extension APIRouter: TargetType {
         return .requestParameters(parameters: bodyParameters, encoding: encoding)
         
         case .getAlbums(let kind, let genre, let limit, let offset):
-            bodyParameters = [APIParameterKey.kind.rawValue: kind,
+            bodyParameters = [APIParameterKey.kind.rawValue: kind.rawValue,
                               APIParameterKey.limit.rawValue: limit,
                               APIParameterKey.offset.rawValue: offset,
                               APIParameterKey.clientId.rawValue: Constants.APIKey,
-                              APIParameterKey.genre.rawValue: genre]
+                              APIParameterKey.genre.rawValue: genre.rawValue]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
         
@@ -89,7 +89,7 @@ extension APIRouter: TargetType {
     
     var path: String {
         switch self {
-        case .getPopularTrack, .getChartTrack, .getAlbums:
+        case .getPopularAlbums, .getChartTrack, .getAlbums:
             return "/charts"
         case .getPopularUser:
             return "/users"

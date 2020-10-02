@@ -37,32 +37,32 @@ extension HomeViewModel {
 
 extension HomeViewModel {
     private func getAllHomeData() -> Observable<HomeScreenDataModel> {
-        let popularTracks = services.trackService.getPopularTrack(kind: APIParameterKey.top.rawValue)
+        let popularAlbums = services.trackService.getPopularAlbums(kind: APIParameterKey.top)
             .trackError(errorTracker)
             .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let hiphopAlbums = services.trackService.getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.hiphop.rawValue)
+        let hiphopAlbums = services.trackService.getAlbums(kind: APIParameterKey.top, genre: TrackGenre.hiphop)
             .trackError(errorTracker)
             .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let electronicAlbums = services.trackService.getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.electronic.rawValue)
+        let electronicAlbums = services.trackService.getAlbums(kind: APIParameterKey.top, genre: TrackGenre.electronic)
             .trackError(errorTracker)
             .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let rockAlbums = services.trackService.getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.rock.rawValue)
+        let rockAlbums = services.trackService.getAlbums(kind: APIParameterKey.top, genre: TrackGenre.rock)
             .trackError(errorTracker)
             .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let classicalAlbums = services.trackService.getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.classical.rawValue)
+        let classicalAlbums = services.trackService.getAlbums(kind: APIParameterKey.top, genre: TrackGenre.classical)
             .trackError(errorTracker)
             .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let chartTracks = services.trackService.getChartTrack(kind: APIParameterKey.top.rawValue)
+        let chartTracks = services.trackService.getChartTrack(kind: APIParameterKey.top)
             .trackError(errorTracker)
             .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
@@ -71,14 +71,14 @@ extension HomeViewModel {
             .trackError(errorTracker)
             .catchErrorJustReturn([])
         
-        let homeScreenDataModel = Observable.zip(popularTracks,
+        let homeScreenDataModel = Observable.zip(popularAlbums,
                                                  hiphopAlbums,
                                                  electronicAlbums,
                                                  rockAlbums,
                                                  classicalAlbums,
                                                  chartTracks,
                                                  popularUsers)
-                                            .map {(popularTracks,
+                                            .map {(popularAlbums,
                                                 hiphopAlbums,
                                                 electronicAlbums,
                                                 rockAlbums,
@@ -86,7 +86,7 @@ extension HomeViewModel {
                                                 chartTracks,
                                                 popularUsers) -> HomeScreenDataModel in
 
-            return HomeScreenDataModel(popularAlbums: popularTracks, electronicAlbums: electronicAlbums, hiphopAlbums: hiphopAlbums, rockAlbums: rockAlbums, classicalAlbums: classicalAlbums, chartTracks: chartTracks, popularUserList: popularUsers)
+            return HomeScreenDataModel(popularAlbums: popularAlbums, electronicAlbums: electronicAlbums, hiphopAlbums: hiphopAlbums, rockAlbums: rockAlbums, classicalAlbums: classicalAlbums, chartTracks: chartTracks, popularUsers: popularUsers)
         }
         return homeScreenDataModel
     }
