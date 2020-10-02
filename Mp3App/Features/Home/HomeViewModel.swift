@@ -19,7 +19,7 @@ class HomeViewModel: ServicesViewModel {
             guard let self = self else {
                 return .empty()
             }
-            return self.getAllHomeDatas()
+            return self.getAllHomeData()
         }
         return Output(homeDataModel: homeDataModel)
     }
@@ -36,7 +36,7 @@ extension HomeViewModel {
 }
 
 extension HomeViewModel {
-    private func getAllHomeDatas() -> Observable<HomeScreenDataModel> {
+    private func getAllHomeData() -> Observable<HomeScreenDataModel> {
         let popularTracks = services.trackService.getPopularTrack(kind: APIParameterKey.top.rawValue)
             .trackError(errorTracker)
             .map { $0.albums ?? [] }
