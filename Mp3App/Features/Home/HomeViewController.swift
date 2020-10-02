@@ -18,11 +18,11 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModel()
         loadData()
     }
     
     private func loadData() {
-        bindViewModel()
         loadDataTrigger.onNext(())
     }
     
@@ -31,7 +31,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         let ouput = viewModel.transform(input: input)
         ouput.homeDataModel.subscribe(onNext: { homeScreenDataModel in
             print("-----------------------")
-            print(homeScreenDataModel.popularUserList)
+            print(homeScreenDataModel.hiphopAlbums)
         }).disposed(by: disposeBag)
     }
 }

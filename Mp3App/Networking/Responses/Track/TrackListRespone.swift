@@ -17,11 +17,3 @@ struct TrackListResponse: Codable {
         case albums = "collection"
     }
 }
-
-struct Album: Codable {
-    var track: Track?
-    
-    enum CodingKeys: String, CodingKey {
-        case track
-    }
-}

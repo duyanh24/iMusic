@@ -10,6 +10,7 @@
 		08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE02524684400A4407D /* UIViewController+Extension.swift */; };
 		08118EE32524684D00A4407D /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE22524684D00A4407D /* UIWindow+Extension.swift */; };
 		08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE42524687C00A4407D /* UIApplication+Extension.swift */; };
+		0817DD5725271593007D2966 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5625271593007D2966 /* Album.swift */; };
 		083880912525DD4F00987813 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880902525DD4F00987813 /* ErrorTracker.swift */; };
 		083880932525DDB500987813 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880922525DDB500987813 /* ActivityIndicator.swift */; };
 		083880952525DE0600987813 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880942525DE0600987813 /* Observable+Extension.swift */; };
@@ -94,6 +95,7 @@
 		08118EE02524684400A4407D /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		08118EE22524684D00A4407D /* UIWindow+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		08118EE42524687C00A4407D /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		0817DD5625271593007D2966 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		083880902525DD4F00987813 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		083880922525DDB500987813 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		083880942525DE0600987813 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				08861D662525B58C008C0628 /* Track.swift */,
+				0817DD5625271593007D2966 /* Album.swift */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -806,6 +809,7 @@
 				08504FA92523346E0033DED0 /* SplashViewModel.swift in Sources */,
 				08504FB52523346F0033DED0 /* BaseTableViewController.swift in Sources */,
 				08861D6A2525B58C008C0628 /* User.swift in Sources */,
+				0817DD5725271593007D2966 /* Album.swift in Sources */,
 				0850500D252337330033DED0 /* LoginSerivces.swift in Sources */,
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
 				08504F19252334550033DED0 /* SceneDelegate.swift in Sources */,

@@ -14,16 +14,16 @@ class HomeScreenDataModel {
     var hiphopAlbums: [Album] = []
     var rockAlbums: [Album] = []
     var classicalAlbums: [Album] = []
-    var chartTrackList: [Album] = []
-    var popularUserList: [User] = []
+    var chartTracks: [Album] = []
+    var popularUsers: [User] = []
     
-    init (popularAlbums: [Album], electronicAlbums: [Album], hiphopAlbums: [Album], rockAlbums: [Album], classicalAlbums: [Album], chartTrackList: [Album], popularUserList: [User]) {
+    init (popularAlbums: [Album], electronicAlbums: [Album], hiphopAlbums: [Album], rockAlbums: [Album], classicalAlbums: [Album], chartTracks: [Album], popularUserList: [User]) {
         self.popularAlbums = popularAlbums
         self.electronicAlbums = electronicAlbums
         self.hiphopAlbums = hiphopAlbums
         self.rockAlbums = rockAlbums
         self.classicalAlbums = classicalAlbums
-        self.chartTrackList = chartTrackList
-        self.popularUserList = popularUserList
+        self.chartTracks = chartTracks
+        self.popularUsers = popularUserList
     }
 }
