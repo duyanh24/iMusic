@@ -9,12 +9,12 @@
 import Foundation
 
 struct User: Codable {
-    let idUser: Int?
+    let id: Int?
     let avatarURL: String?
     let userName: String?
 
     enum CodingKeys: String, CodingKey {
-        case idUser = "id"
+        case id
         case avatarURL = "avatar_url"
         case userName = "username"
     }

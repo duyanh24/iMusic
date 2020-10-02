@@ -9,7 +9,7 @@
 import Foundation
 
 struct Track: Codable {
-    var idTrack: Int?
+    var id: Int?
     var title: String?
     var user: User?
     var artworkURL: String?
@@ -18,7 +18,7 @@ struct Track: Codable {
     var streamURL: String?
 
     enum CodingKeys: String, CodingKey {
-        case idTrack = "id"
+        case id
         case title
         case user
         case artworkURL = "artwork_url"
