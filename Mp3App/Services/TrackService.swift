@@ -14,27 +14,27 @@ protocol HasTrackService {
 }
 
 struct TrackService {
-    func getPopularTrack() -> Observable<TrackListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPopularTrack(kind: APIParameterKey.top.rawValue, limit: 5, offset: 0), type: TrackListResponse.self)
+    func getPopularTrack(kind: String, limit: Int, offset: Int) -> Observable<TrackListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getPopularTrack(kind: kind, limit: limit, offset: offset), type: TrackListResponse.self)
     }
     
-    func getChartTrack() -> Observable<TrackListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getChartTrack(kind: APIParameterKey.top.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
+    func getChartTrack(kind: String, limit: Int, offset: Int) -> Observable<TrackListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getChartTrack(kind: kind, limit: limit, offset: offset), type: TrackListResponse.self)
     }
     
-    func getElectronicPlaylist() -> Observable<TrackListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPlaylist(kind: APIParameterKey.top.rawValue, genre: TrackGenre.electronic.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
+    func getElectronicAlbums(kind: String, genre: String, limit: Int, offset: Int) -> Observable<TrackListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.electronic.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
     }
     
-    func getHiphopPlaylist() -> Observable<TrackListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPlaylist(kind: APIParameterKey.top.rawValue, genre: TrackGenre.hiphop.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
+    func getHiphopAlbums(kind: String, genre: String, limit: Int, offset: Int) -> Observable<TrackListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.hiphop.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
     }
     
-    func getRockPlaylist() -> Observable<TrackListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPlaylist(kind: APIParameterKey.top.rawValue, genre: TrackGenre.rock.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
+    func getRockAlbums(kind: String, genre: String, limit: Int, offset: Int) -> Observable<TrackListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.rock.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
     }
     
-    func getClassicalPlaylist() -> Observable<TrackListResponse> {
-        return HostAPIClient.performApiNetworkCall(router: .getPlaylist(kind: APIParameterKey.top.rawValue, genre: TrackGenre.classical.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
+    func getClassicalAlbums(kind: String, genre: String, limit: Int, offset: Int) -> Observable<TrackListResponse> {
+        return HostAPIClient.performApiNetworkCall(router: .getAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.classical.rawValue, limit: 20, offset: 0), type: TrackListResponse.self)
     }
 }

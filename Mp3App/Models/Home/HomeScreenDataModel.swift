@@ -9,11 +9,21 @@
 import Foundation
 
 class HomeScreenDataModel {
-    var listPopularTrack: [Playlist] = []
-    var listElectronicPlaylist: [Playlist] = []
-    var listHiphopPlaylist: [Playlist] = []
-    var listRockPlaylist: [Playlist] = []
-    var listClassicalPlaylist: [Playlist] = []
-    var listChartTrack: [Playlist] = []
-    var listPopularUser: [User] = []
+    var popularAlbums: [Album] = []
+    var electronicAlbums: [Album] = []
+    var hiphopAlbums: [Album] = []
+    var rockAlbums: [Album] = []
+    var classicalAlbums: [Album] = []
+    var chartTrackList: [Album] = []
+    var popularUserList: [User] = []
+    
+    init (popularAlbums: [Album], electronicAlbums: [Album], hiphopAlbums: [Album], rockAlbums: [Album], classicalAlbums: [Album], chartTrackList: [Album], popularUserList: [User]) {
+        self.popularAlbums = popularAlbums
+        self.electronicAlbums = electronicAlbums
+        self.hiphopAlbums = hiphopAlbums
+        self.rockAlbums = rockAlbums
+        self.classicalAlbums = classicalAlbums
+        self.chartTrackList = chartTrackList
+        self.popularUserList = popularUserList
+    }
 }

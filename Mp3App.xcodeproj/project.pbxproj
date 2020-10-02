@@ -356,20 +356,20 @@
 		08504F4C2523346E0033DED0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				08504F4D2523346E0033DED0 /* Response */,
+				08504F4D2523346E0033DED0 /* Responses */,
 				08504F522523346E0033DED0 /* SampleData */,
 				08504F542523346E0033DED0 /* Services */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		08504F4D2523346E0033DED0 /* Response */ = {
+		08504F4D2523346E0033DED0 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
 				08861D6B2525B945008C0628 /* Track */,
 				08504F4E2523346E0033DED0 /* Base */,
 			);
-			path = Response;
+			path = Responses;
 			sourceTree = "<group>";
 		};
 		08504F4E2523346E0033DED0 /* Base */ = {

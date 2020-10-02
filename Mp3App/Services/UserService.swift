@@ -14,7 +14,7 @@ protocol HasUserService {
 }
 
 struct UserService {
-    func getPopularUser() -> Observable<[User]> {
-        return HostAPIClient.performApiNetworkCall(router: .getPopularUser(limit: 20, offset: 0), type: [User].self)
+    func getPopularUser(limit: Int, offset: Int) -> Observable<[User]> {
+        return HostAPIClient.performApiNetworkCall(router: .getPopularUser(limit: limit, offset: offset), type: [User].self)
     }
 }

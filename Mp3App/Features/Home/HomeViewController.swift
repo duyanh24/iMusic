@@ -13,11 +13,15 @@ import RxCocoa
 
 class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     var viewModel: HomeViewModel!
-    var disposeBag = DisposeBag()
-    let loadDataTrigger = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    private let loadDataTrigger = PublishSubject<Void>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
+    }
+    
+    private func loadData() {
         bindViewModel()
         loadDataTrigger.onNext(())
     }
@@ -26,7 +30,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
         let ouput = viewModel.transform(input: input)
         ouput.homeDataModel.subscribe(onNext: { homeScreenDataModel in
-            print(homeScreenDataModel.listPopularUser)
+            print("-----------------------")
+            print(homeScreenDataModel.popularUserList)
         }).disposed(by: disposeBag)
     }
 }

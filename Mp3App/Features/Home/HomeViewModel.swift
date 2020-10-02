@@ -37,63 +37,56 @@ extension HomeViewModel {
 
 extension HomeViewModel {
     private func getAllDataHome() -> Observable<HomeScreenDataModel> {
-        let popularTrack = services.trackService.getPopularTrack()
+        let popularTrack = services.trackService.getPopularTrack(kind: APIParameterKey.top.rawValue, limit: 5, offset: 0)
             .trackError(errorTracker)
-            .map { $0.playlist ?? [] }
+            .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let hiphopPlaylist = services.trackService.getHiphopPlaylist()
+        let hiphopAlbums = services.trackService.getHiphopAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.hiphop.rawValue, limit: 20, offset: 0)
             .trackError(errorTracker)
-            .map { $0.playlist ?? [] }
+            .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let electronicPlaylist = services.trackService.getElectronicPlaylist()
+        let electronicAlbums  = services.trackService.getElectronicAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.electronic.rawValue, limit: 20, offset: 0)
             .trackError(errorTracker)
-            .map { $0.playlist ?? [] }
+            .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let rockPlaylist = services.trackService.getElectronicPlaylist()
+        let rockAlbums  = services.trackService.getRockAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.rock.rawValue, limit: 20, offset: 0)
             .trackError(errorTracker)
-            .map { $0.playlist ?? [] }
+            .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let classicalPlaylist = services.trackService.getElectronicPlaylist()
+        let classicalAlbums  = services.trackService.getClassicalAlbums(kind: APIParameterKey.top.rawValue, genre: TrackGenre.classical.rawValue, limit: 20, offset: 0)
             .trackError(errorTracker)
-            .map { $0.playlist ?? [] }
+            .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let chartTrack = services.trackService.getElectronicPlaylist()
+        let chartTrack = services.trackService.getChartTrack(kind: APIParameterKey.top.rawValue, limit: 20, offset: 0)
             .trackError(errorTracker)
-            .map { $0.playlist ?? [] }
+            .map { $0.albums ?? [] }
             .catchErrorJustReturn([])
         
-        let popularUser = services.userService.getPopularUser()
+        let popularUser = services.userService.getPopularUser(limit: 20, offset: 0)
             .trackError(errorTracker)
             .catchErrorJustReturn([])
         
         let homeScreenDataModel = Observable.zip(popularTrack,
-                                                 hiphopPlaylist,
-                                                 electronicPlaylist,
-                                                 rockPlaylist,
-                                                 classicalPlaylist,
+                                                 hiphopAlbums,
+                                                 electronicAlbums,
+                                                 rockAlbums,
+                                                 classicalAlbums,
                                                  chartTrack,
                                                  popularUser)
                                             .map {(popularTrack,
-                                                hiphopPlaylist,
-                                                electronicPlaylist,
-                                                rockPlaylist,
-                                                classicalPlaylist,
+                                                hiphopAlbums,
+                                                electronicAlbums,
+                                                rockAlbums,
+                                                classicalAlbums,
                                                 chartTrack,
                                                 popularUser) -> HomeScreenDataModel in
-            let homeScreenDataModel = HomeScreenDataModel()
-            homeScreenDataModel.listElectronicPlaylist = electronicPlaylist
-            homeScreenDataModel.listPopularTrack = popularTrack
-            homeScreenDataModel.listHiphopPlaylist = hiphopPlaylist
-            homeScreenDataModel.listRockPlaylist = rockPlaylist
-            homeScreenDataModel.listClassicalPlaylist = classicalPlaylist
-            homeScreenDataModel.listChartTrack = chartTrack
-            homeScreenDataModel.listPopularUser = popularUser
-            return homeScreenDataModel
+
+            return HomeScreenDataModel(popularAlbums: popularTrack, electronicAlbums: electronicAlbums, hiphopAlbums: hiphopAlbums, rockAlbums: rockAlbums, classicalAlbums: classicalAlbums, chartTrackList: chartTrack, popularUserList: popularUser)
         }
         return homeScreenDataModel
     }

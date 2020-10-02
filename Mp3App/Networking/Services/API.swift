@@ -12,7 +12,7 @@ import Moya
 enum APIRouter {
     case getPopularTrack(kind: String, limit: Int, offset: Int)
     case getChartTrack(kind: String, limit: Int, offset: Int)
-    case getPlaylist(kind: String, genre: String, limit: Int, offset: Int)
+    case getAlbums(kind: String, genre: String, limit: Int, offset: Int)
     case getPopularUser(limit: Int, offset: Int)
 }
 
@@ -60,7 +60,7 @@ extension APIRouter: TargetType {
             encoding = URLEncoding.default
         return .requestParameters(parameters: bodyParameters, encoding: encoding)
         
-        case .getPlaylist(let kind, let genre, let limit, let offset):
+        case .getAlbums(let kind, let genre, let limit, let offset):
             bodyParameters = [APIParameterKey.kind.rawValue: kind,
                               APIParameterKey.limit.rawValue: limit,
                               APIParameterKey.offset.rawValue: offset,
@@ -89,7 +89,7 @@ extension APIRouter: TargetType {
     
     var path: String {
         switch self {
-        case .getPopularTrack, .getChartTrack, .getPlaylist:
+        case .getPopularTrack, .getChartTrack, .getAlbums:
             return "/charts"
         case .getPopularUser:
             return "/users"

@@ -10,15 +10,15 @@ import Foundation
 
 struct TrackListResponse: Codable {
     var genre: String?
-    var playlist: [Playlist]?
+    var albums: [Album]?
     
     enum CodingKeys: String, CodingKey {
         case genre
-        case playlist = "collection"
+        case albums = "collection"
     }
 }
 
-struct Playlist: Codable {
+struct Album: Codable {
     var track: Track?
     
     enum CodingKeys: String, CodingKey {
