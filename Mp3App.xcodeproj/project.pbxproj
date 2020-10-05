@@ -16,6 +16,8 @@
 		083880912525DD4F00987813 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880902525DD4F00987813 /* ErrorTracker.swift */; };
 		083880932525DDB500987813 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880922525DDB500987813 /* ActivityIndicator.swift */; };
 		083880952525DE0600987813 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880942525DE0600987813 /* Observable+Extension.swift */; };
+		083B0169252B0F5E00E0EAB7 /* UIGradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B0168252B0F5E00E0EAB7 /* UIGradientImageView.swift */; };
+		083B016B252B13F000E0EAB7 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B016A252B13F000E0EAB7 /* UIImageView+Extension.swift */; };
 		08504F17252334550033DED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F16252334550033DED0 /* AppDelegate.swift */; };
 		08504F19252334550033DED0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F18252334550033DED0 /* SceneDelegate.swift */; };
 		08504F1B252334550033DED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08504F1A252334550033DED0 /* ViewController.swift */; };
@@ -85,6 +87,9 @@
 		0859101825234342001FE662 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF525234341001FE662 /* RxRelay.framework */; };
 		0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */; };
 		0859101C25234342001FE662 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF725234342001FE662 /* SDWebImage.framework */; };
+		087B7E7A252AF5D000E85951 /* FSPagerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 087B7E79252AF5D000E85951 /* FSPagerView.framework */; };
+		087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */; };
+		087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */; };
 		08861D692525B58C008C0628 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D662525B58C008C0628 /* Track.swift */; };
 		08861D6A2525B58C008C0628 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D682525B58C008C0628 /* User.swift */; };
 		08861D6D2525B95C008C0628 /* TrackListRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D6C2525B95C008C0628 /* TrackListRespone.swift */; };
@@ -104,6 +109,8 @@
 		083880902525DD4F00987813 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		083880922525DDB500987813 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		083880942525DE0600987813 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
+		083B0168252B0F5E00E0EAB7 /* UIGradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGradientImageView.swift; sourceTree = "<group>"; };
+		083B016A252B13F000E0EAB7 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		08504F13252334550033DED0 /* Mp3App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mp3App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08504F16252334550033DED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08504F18252334550033DED0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +182,9 @@
 		08590FF525234341001FE662 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewExtended.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewExtended.framework; sourceTree = "<group>"; };
 		08590FF725234342001FE662 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
+		087B7E79252AF5D000E85951 /* FSPagerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSPagerView.framework; path = Carthage/Build/iOS/FSPagerView.framework; sourceTree = "<group>"; };
+		087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCollectionViewCell.swift; sourceTree = "<group>"; };
+		087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideCollectionViewCell.xib; sourceTree = "<group>"; };
 		08861D662525B58C008C0628 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		08861D682525B58C008C0628 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08861D6C2525B95C008C0628 /* TrackListRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListRespone.swift; sourceTree = "<group>"; };
@@ -193,6 +203,7 @@
 				0859101225234342001FE662 /* ReactiveSwift.framework in Frameworks */,
 				0859100225234342001FE662 /* RxCocoa.framework in Frameworks */,
 				0859100825234342001FE662 /* Alamofire.framework in Frameworks */,
+				087B7E7A252AF5D000E85951 /* FSPagerView.framework in Frameworks */,
 				08590FFE25234342001FE662 /* RxMoya.framework in Frameworks */,
 				0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */,
 				0859100025234342001FE662 /* Moya.framework in Frameworks */,
@@ -219,8 +230,18 @@
 			children = (
 				0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */,
 				0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */,
+				087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */,
+				087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */,
 			);
 			path = Slide;
+			sourceTree = "<group>";
+		};
+		083B0167252B0F0800E0EAB7 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				083B0168252B0F5E00E0EAB7 /* UIGradientImageView.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		08504F0A252334550033DED0 = {
@@ -424,21 +445,11 @@
 		08504F592523346E0033DED0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				08504F5A2523346E0033DED0 /* Animation */,
+				083B0167252B0F0800E0EAB7 /* CustomView */,
 				08504F622523346E0033DED0 /* Extensions */,
-				08504F822523346E0033DED0 /* PersistentManager */,
 				08504F842523346E0033DED0 /* Common */,
-				08504F872523346E0033DED0 /* CustomView */,
-				08504F932523346E0033DED0 /* Helpers */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		08504F5A2523346E0033DED0 /* Animation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Animation;
 			sourceTree = "<group>";
 		};
 		08504F622523346E0033DED0 /* Extensions */ = {
@@ -450,15 +461,9 @@
 				083880902525DD4F00987813 /* ErrorTracker.swift */,
 				083880922525DDB500987813 /* ActivityIndicator.swift */,
 				083880942525DE0600987813 /* Observable+Extension.swift */,
+				083B016A252B13F000E0EAB7 /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		08504F822523346E0033DED0 /* PersistentManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PersistentManager;
 			sourceTree = "<group>";
 		};
 		08504F842523346E0033DED0 /* Common */ = {
@@ -468,20 +473,6 @@
 				08504F862523346E0033DED0 /* Strings.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		08504F872523346E0033DED0 /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomView;
-			sourceTree = "<group>";
-		};
-		08504F932523346E0033DED0 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		08504F982523346E0033DED0 /* Resources */ = {
@@ -586,6 +577,7 @@
 		08590FE425234341001FE662 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				087B7E79252AF5D000E85951 /* FSPagerView.framework */,
 				08590FED25234341001FE662 /* Alamofire.framework */,
 				08590FE625234341001FE662 /* Differentiator.framework */,
 				08590FE925234341001FE662 /* Moya.framework */,
@@ -730,6 +722,7 @@
 				08504FBE2523346F0033DED0 /* PopularMoviesSample.json in Resources */,
 				08504F1E252334550033DED0 /* Main.storyboard in Resources */,
 				08504FA72523346E0033DED0 /* SplashViewController.storyboard in Resources */,
+				087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +755,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImageMapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FSPagerView.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -784,6 +778,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SDWebImage.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SDWebImageMapKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FSPagerView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -802,6 +797,7 @@
 				08504FF52523346F0033DED0 /* Assets.swift in Sources */,
 				08504FA52523346E0033DED0 /* HomeViewController.swift in Sources */,
 				08861D712525C236008C0628 /* TrackService.swift in Sources */,
+				083B0169252B0F5E00E0EAB7 /* UIGradientImageView.swift in Sources */,
 				08504FBF2523346F0033DED0 /* APIClient.swift in Sources */,
 				0817DD5D252726CF007D2966 /* SlideTableViewCell.swift in Sources */,
 				08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */,
@@ -810,6 +806,7 @@
 				08504FFC252335A10033DED0 /* SettingViewModel.swift in Sources */,
 				08504FAA2523346E0033DED0 /* RootTabbarController.swift in Sources */,
 				083880952525DE0600987813 /* Observable+Extension.swift in Sources */,
+				087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */,
 				08504FC22523346F0033DED0 /* API.swift in Sources */,
 				08504FAE2523346E0033DED0 /* SearchVIewModel.swift in Sources */,
 				08504FC12523346F0033DED0 /* HTTPStatusCodes.swift in Sources */,
@@ -848,6 +845,7 @@
 				08505006252336BC0033DED0 /* LoginViewModel.swift in Sources */,
 				08504FF92523346F0033DED0 /* HomeServices.swift in Sources */,
 				08504FBD2523346F0033DED0 /* BaseSuccessResult.swift in Sources */,
+				083B016B252B13F000E0EAB7 /* UIImageView+Extension.swift in Sources */,
 				08504FB02523346E0033DED0 /* MypageViewController.swift in Sources */,
 				08504FBB2523346F0033DED0 /* APIError.swift in Sources */,
 			);

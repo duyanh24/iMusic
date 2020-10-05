@@ -31,7 +31,7 @@ extension HomeViewModel {
     }
     
     struct Output {
-        var homeDataModel: Observable<HomeScreenDataModel>
+        var homeDataModel: Observable<[HomeSectionModel]>
     }
 }
 

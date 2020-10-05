@@ -16,19 +16,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="c7I-tT-KIc">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="c7I-tT-KIc" firstAttribute="leading" secondItem="Txv-AF-qcE" secondAttribute="leading" id="8kN-Ss-t6X"/>
-                            <constraint firstItem="Txv-AF-qcE" firstAttribute="trailing" secondItem="c7I-tT-KIc" secondAttribute="trailing" id="A2r-AV-DaC"/>
+                            <constraint firstItem="c7I-tT-KIc" firstAttribute="leading" secondItem="eHs-xx-bzy" secondAttribute="leading" id="8kN-Ss-t6X"/>
+                            <constraint firstAttribute="trailing" secondItem="c7I-tT-KIc" secondAttribute="trailing" id="A2r-AV-DaC"/>
                             <constraint firstItem="c7I-tT-KIc" firstAttribute="top" secondItem="eHs-xx-bzy" secondAttribute="top" id="YM3-Z4-Ace"/>
-                            <constraint firstItem="Txv-AF-qcE" firstAttribute="bottom" secondItem="c7I-tT-KIc" secondAttribute="bottom" id="pd6-w1-nY9"/>
+                            <constraint firstAttribute="bottom" secondItem="c7I-tT-KIc" secondAttribute="bottom" id="pd6-w1-nY9"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Txv-AF-qcE"/>
+                        <viewLayoutGuide key="safeArea" id="5dp-6l-anS"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="c7I-tT-KIc" id="FgZ-vj-VAS"/>
