@@ -91,6 +91,7 @@
 		08861D712525C236008C0628 /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D702525C236008C0628 /* TrackService.swift */; };
 		08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D732525D65B008C0628 /* HomeScreenDataModel.swift */; };
 		08904C242526FBCF00C57721 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08904C232526FBCF00C57721 /* UserService.swift */; };
+		184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D82DF252B201400768D41 /* HomeDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +181,7 @@
 		08861D702525C236008C0628 /* TrackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackService.swift; sourceTree = "<group>"; };
 		08861D732525D65B008C0628 /* HomeScreenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenDataModel.swift; sourceTree = "<group>"; };
 		08904C232526FBCF00C57721 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		184D82DF252B201400768D41 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,10 +278,12 @@
 		08504F2B2523346D0033DED0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				184D82E3252B2EB900768D41 /* Albums */,
 				0817DD5825272678007D2966 /* Slide */,
 				08504F2C2523346D0033DED0 /* HomeViewModel.swift */,
 				08504F2D2523346D0033DED0 /* HomeViewController.swift */,
 				08504F2E2523346D0033DED0 /* HomeViewController.storyboard */,
+				184D82DF252B201400768D41 /* HomeDataSource.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -648,6 +652,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		184D82E3252B2EB900768D41 /* Albums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Albums;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -828,6 +839,7 @@
 				0817DD5725271593007D2966 /* Album.swift in Sources */,
 				0850500D252337330033DED0 /* LoginSerivces.swift in Sources */,
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
+				184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */,
 				08504F19252334550033DED0 /* SceneDelegate.swift in Sources */,
 				08861D6D2525B95C008C0628 /* TrackListRespone.swift in Sources */,
 				08504FA42523346E0033DED0 /* HomeViewModel.swift in Sources */,

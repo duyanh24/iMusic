@@ -20,7 +20,7 @@ class HomeViewModel: ServicesViewModel {
                 return .empty()
             }
             return self.getAllHomeData()
-        }
+        }.map({ $0.toDataSource()})
         return Output(homeDataModel: homeDataModel)
     }
 }
