@@ -13,6 +13,7 @@ import RxCocoa
 class HomeViewModel: ServicesViewModel {
     var services: HomeServices!
     private let errorTracker = ErrorTracker()
+    var collectionViewContentOffSetDictionary: [HomeSectionType: CGPoint] = [:]
     
     func transform(input: Input) -> Output {
         let homeDataModel = input.loadDataTrigger.flatMapLatest { [weak self] _ -> Observable<HomeScreenDataModel> in

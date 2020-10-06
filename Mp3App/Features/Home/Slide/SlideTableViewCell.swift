@@ -48,14 +48,14 @@ class SlideTableViewCell: UITableViewCell, NibReusable {
             return
         }
         
-        backgroundImageView.sd_imageTransition = .fade
-        let transformer = SDImageBlurTransformer(radius: 100)
-        let context: [SDWebImageContextOption: Any]? = [.imageTransformer: transformer]
-        backgroundImageView.sd_setImage(with: URL(string: url), placeholderImage: nil, context: context, progress: nil) { [weak self] (_, error, _, _) in
-            if error != nil {
-                self?.backgroundImageView.image = nil
-            }
-        }
+//        backgroundImageView.sd_imageTransition = .fade
+//        let transformer = SDImageBlurTransformer(radius: 100)
+//        let context: [SDWebImageContextOption: Any]? = [.imageTransformer: transformer]
+//        backgroundImageView.sd_setImage(with: URL(string: url), placeholderImage: nil, context: context, progress: nil) { [weak self] (_, error, _, _) in
+//            if error != nil {
+//                self?.backgroundImageView.image = nil
+//            }
+//        }
         
     }
     
@@ -93,17 +93,17 @@ extension SlideTableViewCell: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = scrollView.contentOffset.x / collectionView.frame.size.width
         pageControl.currentPage = Int(currentPage)
-        guard let url = albums[Int(currentPage)].track?.artworkURL else {
-            return
-        }
-        backgroundImageView.sd_imageTransition = .fade
-        let transformer = SDImageBlurTransformer(radius: 50)
-        let context: [SDWebImageContextOption: Any]? = [.imageTransformer: transformer]
-        backgroundImageView.sd_setImage(with: URL(string: url), placeholderImage: nil, context: context, progress: nil) { [weak self] (_, error, _, _) in
-            if error != nil {
-                self?.backgroundImageView.image = nil
-            }
-        }
+//        guard let url = albums[Int(currentPage)].track?.artworkURL else {
+//            return
+//        }
+//        backgroundImageView.sd_imageTransition = .fade
+//        let transformer = SDImageBlurTransformer(radius: 50)
+//        let context: [SDWebImageContextOption: Any]? = [.imageTransformer: transformer]
+//        backgroundImageView.sd_setImage(with: URL(string: url), placeholderImage: nil, context: context, progress: nil) { [weak self] (_, error, _, _) in
+//            if error != nil {
+//                self?.backgroundImageView.image = nil
+//            }
+//        }
         delegate.didEndDragging(startIndex: Int(currentPage))
     }
 }

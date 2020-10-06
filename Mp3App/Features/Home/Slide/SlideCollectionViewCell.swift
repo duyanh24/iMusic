@@ -26,7 +26,7 @@ class SlideCollectionViewCell: UICollectionViewCell, NibReusable {
     
     func setupData(album: Album) {
         titleLabel.text = album.track?.title
-        guard let url = album.track?.artworkURL else {
+        guard let url = Converter().convertLargeImgtoCrop(imgUrl: album.track?.artworkURL) else {
             return
         }
         slideImage.sd_imageTransition = .fade

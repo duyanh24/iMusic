@@ -22,14 +22,12 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         guard let self = self else { return UITableViewCell() }
         switch dataSource[indexPath] {
         case .albumsSlide(let type, let albums):
-            //let cell = tableView.dequeueReusableCell(for: indexPath) as SlideTableViewCell
-            //cell.configureCell(albums: albums)
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SlideTableViewCell", for: IndexPath(row: indexPath.row, section: 0)) as? SlideTableViewCell else {
-                return UITableViewCell()
-            }
+            let cell = tableView.dequeueReusableCell(for: indexPath) as SlideTableViewCell
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SlideTableViewCell", for: IndexPath(row: indexPath.row, section: 0)) as? SlideTableViewCell else {
+//                return UITableViewCell()
+//            }
             cell.delegate = self
             cell.setupData(albums: albums, startIndex: self.startIndex)
-            print(albums)
             return cell
         case .albumsChart(let type, let albums):
             print("albumsDefault")
@@ -38,8 +36,17 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
             print("singers")
             return UITableViewCell()
         case .albumsDefault(let type, let albums):
-            print("albumsDefault")
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(for: indexPath) as AlbumsTableViewCell
+            
+            cell.contentOffsetChange.subscribe(onNext: { [weak self] contentOffset in
+                guard let self = self else { return }
+                self.viewModel.collectionViewContentOffSetDictionary[type] = contentOffset
+            }).disposed(by: cell.disposeBag)
+            
+            let albumsTableViewCellViewModel = AlbumsTableViewCellViewModel(type: type, albums: albums, contentOffset: self.viewModel.collectionViewContentOffSetDictionary[type] ?? .zero)
+            
+            cell.configureCell(viewModel: albumsTableViewCellViewModel)
+            return cell
         }
     })
     
