@@ -45,6 +45,12 @@ class HomeScreenDataModel {
                                                items: [.albumsDefault(type: .hiphopAlbums, albums: hiphopAlbums.compactMap { $0 })])
             )
         }
+        if !chartTracks.isEmpty {
+            sectionModels.append(.chartAlbums(
+                type: .chartAlbums,
+                items: Array(chartTracks.prefix(5)).map { HomeSectionItem.albumsChart(type: .chartAlbums, albums: $0)})
+            )
+        }
         if !rockAlbums.isEmpty {
             sectionModels.append(.rockAlbums(type: .rockAlbums,
                                                items: [.albumsDefault(type: .rockAlbums, albums: rockAlbums.compactMap { $0 })])
@@ -55,11 +61,7 @@ class HomeScreenDataModel {
                                                items: [.albumsDefault(type: .classicalAlbums, albums: classicalAlbums.compactMap { $0 })])
             )
         }
-        if !chartTracks.isEmpty {
-            sectionModels.append(.chartAlbums(type: .chartAlbums,
-                                               items: [.albumsChart(type: .chartAlbums, albums: chartTracks.compactMap { $0 })])
-            )
-        }
+        
         if !popularUsers.isEmpty {
             sectionModels.append(.popularUsers(type: .popularUsers,
                                                items: [.singers(type: .popularUsers, users: popularUsers.compactMap { $0 })])

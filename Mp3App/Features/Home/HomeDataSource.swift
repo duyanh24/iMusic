@@ -52,7 +52,7 @@ enum HomeSectionModel {
 enum HomeSectionItem {
     case albumsDefault(type: HomeSectionType, albums: [Album])
     case albumsSlide(type: HomeSectionType, albums: [Album])
-    case albumsChart(type: HomeSectionType, albums: [Album])
+    case albumsChart(type: HomeSectionType, albums: Album)
     case singers(type: HomeSectionType, users: [User])
 }
 

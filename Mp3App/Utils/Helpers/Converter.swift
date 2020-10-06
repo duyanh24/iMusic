@@ -12,4 +12,8 @@ class Converter {
     static func convertLargeImgtoCrop(imgUrl: String) -> String {
         return imgUrl.replacingOccurrences(of: "-large.", with: "-crop.")
     }
+    
+    static func convertLargeImgtoMedium(imgUrl: String) -> String {
+        return imgUrl.replacingOccurrences(of: "-large.", with: "-t300x300.")
+    }
 }

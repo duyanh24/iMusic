@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 
@@ -33,7 +34,7 @@ extension AlbumsTableViewCellViewModel {
     }
     
     struct Output {
-        var dataSource: Driver<[MovieSectionModel]>
+        var dataSource: Driver<[AlbumSectionModel]>
         var homeSectionType: Driver<HomeSectionType>
         var contentOffset: Driver<CGPoint>
     }

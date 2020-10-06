@@ -10,11 +10,8 @@ import UIKit
 import Reusable
 import SDWebImage
 
-protocol SlideTableViewCellDelegate: AnyObject {
-    func didEndDragging(startIndex: Int)
-}
-
 class SlideTableViewCell: UITableViewCell, NibReusable {
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var backgroundImageView: UIImageView!
@@ -25,12 +22,10 @@ class SlideTableViewCell: UITableViewCell, NibReusable {
         }
     }
     
-    weak var delegate: SlideTableViewCellDelegate!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
-        // Initialization code
+        setupUI()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,24 +34,15 @@ class SlideTableViewCell: UITableViewCell, NibReusable {
         // Configure the view for the selected state
     }
     
-    func setupData(albums: [Album], startIndex: Int){
+    func setupData(albums: [Album]){
         self.albums = albums
         pageControl.numberOfPages = albums.count
-        
-        collectionView.scrollToItem(at: IndexPath(item: startIndex, section: 0), at: UICollectionView.ScrollPosition.centeredHorizontally, animated: false)
-        guard let url = albums[startIndex].track?.artworkURL else {
-            return
-        }
-        
-//        backgroundImageView.sd_imageTransition = .fade
-//        let transformer = SDImageBlurTransformer(radius: 100)
-//        let context: [SDWebImageContextOption: Any]? = [.imageTransformer: transformer]
-//        backgroundImageView.sd_setImage(with: URL(string: url), placeholderImage: nil, context: context, progress: nil) { [weak self] (_, error, _, _) in
-//            if error != nil {
-//                self?.backgroundImageView.image = nil
-//            }
-//        }
-        
+        //collectionView.scrollToItem(at: IndexPath(item: startIndex, section: 0), at: UICollectionView.ScrollPosition.centeredHorizontally, animated: false)
+    }
+    
+    private func setupUI() {
+        self.selectionStyle = .none
+        collectionView.layer.cornerRadius = 5
     }
     
     func setupCollectionView() {
@@ -81,7 +67,11 @@ extension SlideTableViewCell: UICollectionViewDataSource {
 
 extension SlideTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.frame.size
+        let paddingTop: CGFloat = 20.0
+        let paddingLeft: CGFloat = 20.0
+        let width = containerView.frame.size.width - paddingLeft * 2
+        let height = containerView.frame.size.height - paddingTop * 2
+        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -93,17 +83,5 @@ extension SlideTableViewCell: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = scrollView.contentOffset.x / collectionView.frame.size.width
         pageControl.currentPage = Int(currentPage)
-//        guard let url = albums[Int(currentPage)].track?.artworkURL else {
-//            return
-//        }
-//        backgroundImageView.sd_imageTransition = .fade
-//        let transformer = SDImageBlurTransformer(radius: 50)
-//        let context: [SDWebImageContextOption: Any]? = [.imageTransformer: transformer]
-//        backgroundImageView.sd_setImage(with: URL(string: url), placeholderImage: nil, context: context, progress: nil) { [weak self] (_, error, _, _) in
-//            if error != nil {
-//                self?.backgroundImageView.image = nil
-//            }
-//        }
-        delegate.didEndDragging(startIndex: Int(currentPage))
     }
 }

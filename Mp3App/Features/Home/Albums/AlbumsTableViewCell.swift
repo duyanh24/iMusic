@@ -14,7 +14,7 @@ import RxDataSources
 
 typealias AlbumSectionModel = SectionModel<String, Album>
 
-class AlbumsTableViewCell: UITableViewCell {
+class AlbumsTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -28,10 +28,11 @@ class AlbumsTableViewCell: UITableViewCell {
     
     let contentOffsetChange = PublishSubject<CGPoint>()
     var viewModel: AlbumsTableViewCellViewModel!
-    private var disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupUI()
         setupCollectionView()
     }
 
@@ -46,9 +47,14 @@ class AlbumsTableViewCell: UITableViewCell {
         bindViewModel()
     }
     
+    private func setupUI() {
+        self.selectionStyle = .none
+    }
+    
     private func setupCollectionView() {
+        collectionView.contentInset.left = 20
+        collectionView.contentInset.right = 20
         collectionView.register(cellType: AlbumCollectionViewCell.self)
-        collectionView.dataSource = self
         collectionView.delegate = self
     }
     
@@ -77,7 +83,11 @@ class AlbumsTableViewCell: UITableViewCell {
 
 extension AlbumsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.frame.size
+        let titleHeight: CGFloat = 60
+        let headerHeight: CGFloat = 65
+        let height = contentView.frame.size.height - headerHeight
+        let width = height - titleHeight
+        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

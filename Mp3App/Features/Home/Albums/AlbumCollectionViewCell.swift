@@ -11,11 +11,12 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class AlbumCollectionViewCell: UICollectionViewCell {
+class AlbumCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var albumTitleLabel: UILabel!
     
     var viewModel: AlbumCollectionViewCellViewModel!
+    private let disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +40,13 @@ class AlbumCollectionViewCell: UICollectionViewCell {
         output.album
             .drive(onNext: { [weak self] album in
                 // show data album
+                self?.albumTitleLabel.text = album.track?.title
+                guard let url = album.track?.artworkURL else {
+                    return
+                }
+                let imgMediumUrl = Converter.convertLargeImgtoCrop(imgUrl: url)
+                self?.albumImageView.sd_imageTransition = .fade
+                self?.albumImageView.sd_setImage(with: URL(string: imgMediumUrl))
             })
             .disposed(by: disposeBag)
     }

@@ -10,6 +10,10 @@
 		08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE02524684400A4407D /* UIViewController+Extension.swift */; };
 		08118EE32524684D00A4407D /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE22524684D00A4407D /* UIWindow+Extension.swift */; };
 		08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE42524687C00A4407D /* UIApplication+Extension.swift */; };
+		08143BE7252C5A3400BF3993 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08143BE5252C5A3400BF3993 /* ChartTableViewCell.swift */; };
+		08143BE8252C5A3400BF3993 /* ChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08143BE6252C5A3400BF3993 /* ChartTableViewCell.xib */; };
+		08143BEA252C5E0500BF3993 /* ChartTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08143BE9252C5E0500BF3993 /* ChartTableViewCellViewModel.swift */; };
+		08143BEC252C76B300BF3993 /* HeaderOfChartCellUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08143BEB252C76B300BF3993 /* HeaderOfChartCellUIView.swift */; };
 		0817DD5725271593007D2966 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5625271593007D2966 /* Album.swift */; };
 		0817DD5D252726CF007D2966 /* SlideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */; };
 		0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */; };
@@ -110,6 +114,10 @@
 		08118EE02524684400A4407D /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		08118EE22524684D00A4407D /* UIWindow+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		08118EE42524687C00A4407D /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		08143BE5252C5A3400BF3993 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
+		08143BE6252C5A3400BF3993 /* ChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartTableViewCell.xib; sourceTree = "<group>"; };
+		08143BE9252C5E0500BF3993 /* ChartTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		08143BEB252C76B300BF3993 /* HeaderOfChartCellUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderOfChartCellUIView.swift; sourceTree = "<group>"; };
 		0817DD5625271593007D2966 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTableViewCell.swift; sourceTree = "<group>"; };
 		0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideTableViewCell.xib; sourceTree = "<group>"; };
@@ -239,6 +247,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08143BE1252C557A00BF3993 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				08143BE5252C5A3400BF3993 /* ChartTableViewCell.swift */,
+				08143BE6252C5A3400BF3993 /* ChartTableViewCell.xib */,
+				08143BE9252C5E0500BF3993 /* ChartTableViewCellViewModel.swift */,
+				08143BEB252C76B300BF3993 /* HeaderOfChartCellUIView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 		0817DD5825272678007D2966 /* Slide */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +332,7 @@
 		08504F2B2523346D0033DED0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				08143BE1252C557A00BF3993 /* Chart */,
 				184D82E3252B2EB900768D41 /* Albums */,
 				0817DD5825272678007D2966 /* Slide */,
 				08504F2C2523346D0033DED0 /* HomeViewModel.swift */,
@@ -751,6 +771,7 @@
 				0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */,
 				08504FAD2523346E0033DED0 /* SearchViewController.storyboard in Resources */,
 				08504FBE2523346F0033DED0 /* PopularMoviesSample.json in Resources */,
+				08143BE8252C5A3400BF3993 /* ChartTableViewCell.xib in Resources */,
 				08504F1E252334550033DED0 /* Main.storyboard in Resources */,
 				08504FA72523346E0033DED0 /* SplashViewController.storyboard in Resources */,
 				087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */,
@@ -876,11 +897,14 @@
 				1845F90D252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift in Sources */,
 				08504FA42523346E0033DED0 /* HomeViewModel.swift in Sources */,
 				08504FF72523346F0033DED0 /* SearchServices.swift in Sources */,
+				08143BE7252C5A3400BF3993 /* ChartTableViewCell.swift in Sources */,
+				08143BEA252C5E0500BF3993 /* ChartTableViewCellViewModel.swift in Sources */,
 				08504FB32523346E0033DED0 /* ViewModelBased.swift in Sources */,
 				08505006252336BC0033DED0 /* LoginViewModel.swift in Sources */,
 				08504FF92523346F0033DED0 /* HomeServices.swift in Sources */,
 				1845F90B252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift in Sources */,
 				08504FBD2523346F0033DED0 /* BaseSuccessResult.swift in Sources */,
+				08143BEC252C76B300BF3993 /* HeaderOfChartCellUIView.swift in Sources */,
 				083B016B252B13F000E0EAB7 /* UIImageView+Extension.swift in Sources */,
 				08504FB02523346E0033DED0 /* MypageViewController.swift in Sources */,
 				08504FBB2523346F0033DED0 /* APIError.swift in Sources */,

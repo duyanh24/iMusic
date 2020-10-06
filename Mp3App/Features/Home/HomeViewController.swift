@@ -21,30 +21,32 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<HomeSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
         switch dataSource[indexPath] {
+            
         case .albumsSlide(let type, let albums):
             let cell = tableView.dequeueReusableCell(for: indexPath) as SlideTableViewCell
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SlideTableViewCell", for: IndexPath(row: indexPath.row, section: 0)) as? SlideTableViewCell else {
-//                return UITableViewCell()
-//            }
-            cell.delegate = self
-            cell.setupData(albums: albums, startIndex: self.startIndex)
+            cell.setupData(albums: albums)
             return cell
-        case .albumsChart(let type, let albums):
-            print("albumsDefault")
-            return UITableViewCell()
+        case .albumsChart(let type, let album):
+            let cell = tableView.dequeueReusableCell(for: indexPath) as ChartTableViewCell
+            let chartTableViewCellViewModel = ChartTableViewCellViewModel(album: album, rank: indexPath.row + 1)
+
+            cell.configureCell(viewModel: chartTableViewCellViewModel)
+            return cell
+            
         case .singers(let type, let users):
             print("singers")
             return UITableViewCell()
+
         case .albumsDefault(let type, let albums):
             let cell = tableView.dequeueReusableCell(for: indexPath) as AlbumsTableViewCell
-            
+
             cell.contentOffsetChange.subscribe(onNext: { [weak self] contentOffset in
                 guard let self = self else { return }
                 self.viewModel.collectionViewContentOffSetDictionary[type] = contentOffset
             }).disposed(by: cell.disposeBag)
-            
-            let albumsTableViewCellViewModel = AlbumsTableViewCellViewModel(type: type, albums: albums, contentOffset: self.viewModel.collectionViewContentOffSetDictionary[type] ?? .zero)
-            
+
+            let albumsTableViewCellViewModel = AlbumsTableViewCellViewModel(type: type, albums: albums, contentOffset: self.viewModel.collectionViewContentOffSetDictionary[type] ?? CGPoint(x: -20, y: 0))
+
             cell.configureCell(viewModel: albumsTableViewCellViewModel)
             return cell
         }
@@ -77,19 +79,16 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private func bindViewModel() {
         let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
         let output = viewModel.transform(input: input)
-        //ouput.homeDataModel.subscribe(onNext: { homeScreenDataModel in
-//            print("-----------------------")
-//            print(homeScreenDataModel.hiphopAlbums)
-        //}).disposed(by: disposeBag)
-        
         output.homeDataModel.bind(to: tableView.rx.items(dataSource: dataSource))
         .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
-        tableView.contentInsetAdjustmentBehavior = .never
+        //tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
-        tableView.register(UINib(nibName: "SlideTableViewCell", bundle: nil), forCellReuseIdentifier: "SlideTableViewCell")
+        tableView.register(cellType: SlideTableViewCell.self)
+        tableView.register(cellType: AlbumsTableViewCell.self)
+        tableView.register(cellType: ChartTableViewCell.self)
     }
 }
 
@@ -101,7 +100,10 @@ extension HomeViewController {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+        switch dataSource[indexPath.section] {
+        case .chartAlbums:
+            return 60
+        case .popularAlbums:
             let paddingLeft: CGFloat = 20
             let paddingTop: CGFloat = 20
             let width = UIScreen.main.bounds.width - paddingLeft * 2
@@ -113,15 +115,23 @@ extension HomeViewController: UITableViewDelegate {
                 statusBarHeight = UIApplication.shared.statusBarFrame.height
             }
             let height = width * 7 / 16 + statusBarHeight + paddingTop * 2
-            
             return height
-        } else {
-            return 50
+            
+        case .popularUsers:
+            return 200
+        default:
+            return 250
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNonzeroMagnitude
+        switch dataSource[section] {
+        case .chartAlbums:
+            return 50
+        default:
+            return .leastNonzeroMagnitude
+        }
+        //return .leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -129,16 +139,20 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+        switch dataSource[section] {
+        case .chartAlbums:
+//            let view = UIView()
+//            let label = UILabel()
+//            label.text = "ok"
+//            view.backgroundColor = .blue
+//            view.addSubview(label)
+            return HeaderOfChartCellUIView()
+        default:
+            return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
-    }
-}
-
-extension HomeViewController: SlideTableViewCellDelegate {
-    func didEndDragging(startIndex: Int) {
-        self.startIndex = startIndex
     }
 }
