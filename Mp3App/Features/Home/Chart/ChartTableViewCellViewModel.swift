@@ -20,7 +20,7 @@ class ChartTableViewCellViewModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        return Output(dataSource: .just(album), rank: .just(rank))
+        return Output(albumData: .just(album), rank: .just(rank))
     }
 }
 
@@ -29,7 +29,7 @@ extension ChartTableViewCellViewModel {
     }
     
     struct Output {
-        var dataSource: Driver<Album>
+        var albumData: Driver<Album>
         var rank: Driver<Int>
     }
 }

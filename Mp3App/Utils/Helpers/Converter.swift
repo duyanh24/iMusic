@@ -9,11 +9,7 @@
 import Foundation
 
 class Converter {
-    static func convertLargeImgtoCrop(imgURL: String) -> String {
-        return imgUrl.replacingOccurrences(of: "-large.", with: "-crop.")
-    }
-    
-    static func convertLargeImgtoMedium(imgURL: String) -> String {
-        return imgUrl.replacingOccurrences(of: "-large.", with: "-t300x300.")
+    static func changeImageURLSize(imgURL: String, originalSize: ImageSize, desireSize: ImageSize) -> String {
+        return imgURL.replacingOccurrences(of: originalSize.rawValue, with: desireSize.rawValue)
     }
 }

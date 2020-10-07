@@ -49,8 +49,8 @@ class AlbumCollectionViewCell: UICollectionViewCell, ViewModelBased, NibReusable
                 guard let url = album.track?.artworkURL else {
                     return
                 }
-                let imgMediumURL = Converter.convertLargeImgtoCrop(imgURL: url)
-                self?.albumImageView.setImage(stringURL: imgMediumURL)
+                let imageMediumURL = Converter.changeImageURLSize(imgURL: url, originalSize: .large, desireSize: .medium)
+                self?.albumImageView.setImage(stringURL: imageMediumURL)
             })
             .disposed(by: disposeBag)
     }

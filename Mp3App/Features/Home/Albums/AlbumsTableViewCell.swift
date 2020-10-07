@@ -33,7 +33,6 @@ class AlbumsTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
-        setupCollectionView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -54,6 +53,7 @@ class AlbumsTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     
     private func setupUI() {
         selectionStyle = .none
+        setupCollectionView()
     }
     
     private func setupCollectionView() {

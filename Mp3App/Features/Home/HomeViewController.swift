@@ -16,7 +16,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: HomeViewModel!
-    var startIndex = 0
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<HomeSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
@@ -41,10 +40,10 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
 
             cell.contentOffsetChange.subscribe(onNext: { [weak self] contentOffset in
                 guard let self = self else { return }
-                self.viewModel.collectionViewContentOffSetDictionary[type] = contentOffset
+                self.viewModel.collectionViewContentOffsetDictionary[type] = contentOffset
             }).disposed(by: cell.disposeBag)
 
-            let albumsTableViewCellViewModel = AlbumsTableViewCellViewModel(type: type, albums: albums, contentOffset: self.viewModel.collectionViewContentOffSetDictionary[type] ?? CGPoint(x: -20, y: 0))
+            let albumsTableViewCellViewModel = AlbumsTableViewCellViewModel(type: type, albums: albums, contentOffset: self.viewModel.collectionViewContentOffsetDictionary[type] ?? CGPoint(x: -20, y: 0))
 
             cell.configureCell(viewModel: albumsTableViewCellViewModel)
             return cell
