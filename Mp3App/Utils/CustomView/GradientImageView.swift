@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UIGradientImageView: UIImageView {
+class GradientImageView: UIImageView {
     let myGradientLayer: CAGradientLayer
     
     override init(frame: CGRect) {

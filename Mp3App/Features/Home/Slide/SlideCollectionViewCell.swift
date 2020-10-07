@@ -12,7 +12,7 @@ import Reusable
 
 class SlideCollectionViewCell: UICollectionViewCell, NibReusable {
 
-    @IBOutlet weak var slideImage: UIGradientImageView!
+    @IBOutlet weak var slideGradientImageView: GradientImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
@@ -21,7 +21,7 @@ class SlideCollectionViewCell: UICollectionViewCell, NibReusable {
     }
     
     private func setupUI() {
-        slideImage.layer.cornerRadius = 5
+        slideGradientImageView.layer.cornerRadius = 5
     }
     
     func setupData(album: Album) {
@@ -29,7 +29,7 @@ class SlideCollectionViewCell: UICollectionViewCell, NibReusable {
         guard let url = album.track?.artworkURL else {
             return
         }
-        let imgCropURL = Converter.changeImageURLSize(imgURL: url, originalSize: .large, desireSize: .crop)
-        slideImage.setImage(stringURL: imgCropURL)
+        let imageCropURL = Converter.changeImageURLSize(imgURL: url, desireSize: .crop)
+        slideGradientImageView.setImage(stringURL: imageCropURL)
     }
 }
