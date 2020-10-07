@@ -42,12 +42,5 @@ class HeaderOfChartCellUIView: UIView {
         label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
         label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
-        
-//        let path = UIBezierPath(roundedRect: containerView.bounds,
-//                                byRoundingCorners: [.topLeft, .topRight],
-//                                cornerRadii: CGSize(width: 5, height:  5))
-//        let maskLayer = CAShapeLayer()
-//        maskLayer.path = path.cgPath
-//        containerView.layer.mask = maskLayer
     }
 }

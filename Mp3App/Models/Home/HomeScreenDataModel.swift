@@ -62,11 +62,11 @@ class HomeScreenDataModel {
             )
         }
         
-        if !popularUsers.isEmpty {
-            sectionModels.append(.popularUsers(type: .popularUsers,
-                                               items: [.singers(type: .popularUsers, users: popularUsers.compactMap { $0 })])
-            )
-        }
+//        if !popularUsers.isEmpty {
+//            sectionModels.append(.popularUsers(type: .popularUsers,
+//                                               items: [.singers(type: .popularUsers, users: popularUsers.compactMap { $0 })])
+//            )
+//        }
         return sectionModels
     }
 }
