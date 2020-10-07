@@ -14,7 +14,7 @@ import RxDataSources
 
 typealias AlbumSectionModel = SectionModel<String, Album>
 
-class AlbumsTableViewCell: UITableViewCell, NibReusable {
+class AlbumsTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -28,7 +28,7 @@ class AlbumsTableViewCell: UITableViewCell, NibReusable {
     
     let contentOffsetChange = PublishSubject<CGPoint>()
     var viewModel: AlbumsTableViewCellViewModel!
-    let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,13 +42,18 @@ class AlbumsTableViewCell: UITableViewCell, NibReusable {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
     func configureCell(viewModel: AlbumsTableViewCellViewModel) {
         self.viewModel = viewModel
         bindViewModel()
     }
     
     private func setupUI() {
-        self.selectionStyle = .none
+        selectionStyle = .none
     }
     
     private func setupCollectionView() {

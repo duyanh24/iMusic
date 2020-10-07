@@ -29,8 +29,7 @@ class SlideCollectionViewCell: UICollectionViewCell, NibReusable {
         guard let url = album.track?.artworkURL else {
             return
         }
-        let imgCropUrl = Converter.convertLargeImgtoCrop(imgUrl: url)
-        slideImage.sd_imageTransition = .fade
-        slideImage.sd_setImage(with: URL(string: imgCropUrl))
+        let imgCropURL = Converter.convertLargeImgtoCrop(imgURL: url)
+        slideImage.setImage(stringURL: imgCropURL)
     }
 }

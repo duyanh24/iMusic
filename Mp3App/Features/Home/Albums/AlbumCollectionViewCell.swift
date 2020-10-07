@@ -11,12 +11,12 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class AlbumCollectionViewCell: UICollectionViewCell, NibReusable {
+class AlbumCollectionViewCell: UICollectionViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var albumTitleLabel: UILabel!
     
     var viewModel: AlbumCollectionViewCellViewModel!
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +32,11 @@ class AlbumCollectionViewCell: UICollectionViewCell, NibReusable {
         self.viewModel = viewModel
         bindViewModel()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 
     private func bindViewModel() {
         let input = AlbumCollectionViewCellViewModel.Input()
@@ -44,9 +49,8 @@ class AlbumCollectionViewCell: UICollectionViewCell, NibReusable {
                 guard let url = album.track?.artworkURL else {
                     return
                 }
-                let imgMediumUrl = Converter.convertLargeImgtoCrop(imgUrl: url)
-                self?.albumImageView.sd_imageTransition = .fade
-                self?.albumImageView.sd_setImage(with: URL(string: imgMediumUrl))
+                let imgMediumURL = Converter.convertLargeImgtoCrop(imgURL: url)
+                self?.albumImageView.setImage(stringURL: imgMediumURL)
             })
             .disposed(by: disposeBag)
     }

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import SDWebImage
 
-class ChartTableViewCell: UITableViewCell, NibReusable {
+class ChartTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var albumImageView: UIImageView!
@@ -20,16 +20,21 @@ class ChartTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak var singerLabel: UILabel!
     
     var viewModel: ChartTableViewCellViewModel!
-    let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupUI()
         // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        setupUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     private func setupUI() {
@@ -52,8 +57,7 @@ class ChartTableViewCell: UITableViewCell, NibReusable {
             guard let url = album.track?.artworkURL else {
                 return
             }
-            self?.albumImageView.sd_imageTransition = .fade
-            self?.albumImageView.sd_setImage(with: URL(string: url))
+            self?.albumImageView.setImage(stringURL: url)
         }).disposed(by: disposeBag)
         
         output.rank.drive(onNext: { [weak self] (rank) in

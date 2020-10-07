@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeaderOfChartCellUIView: UIView {
+class ChartCellHeaderView: UIView {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

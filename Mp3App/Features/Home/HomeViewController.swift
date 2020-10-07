@@ -34,7 +34,6 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
             return cell
             
         case .singers(let type, let users):
-            print("singers")
             return UITableViewCell()
 
         case .albumsDefault(let type, let albums):
@@ -107,14 +106,9 @@ extension HomeViewController: UITableViewDelegate {
             let paddingLeft: CGFloat = 20
             let paddingTop: CGFloat = 20
             let width = UIScreen.main.bounds.width - paddingLeft * 2
-            var statusBarHeight: CGFloat = 0
-            if #available(iOS 13.0, *) {
-                let window = UIApplication.shared.currentWindow
-                statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-            } else {
-                statusBarHeight = UIApplication.shared.statusBarFrame.height
-            }
-            let height = width * 7 / 16 + statusBarHeight + paddingTop * 2
+            let statusBarHeight = ScreenSize.calculatorStatusBarHeight()
+            
+            let height = width * 7 / 16 + statusBarHeight + paddingTop * 2 // 7/16 is size ratio of the image on banner top
             return height
             
         case .popularUsers:
@@ -131,7 +125,6 @@ extension HomeViewController: UITableViewDelegate {
         default:
             return .leastNonzeroMagnitude
         }
-        //return .leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -141,12 +134,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch dataSource[section] {
         case .chartAlbums:
-//            let view = UIView()
-//            let label = UILabel()
-//            label.text = "ok"
-//            view.backgroundColor = .blue
-//            view.addSubview(label)
-            return HeaderOfChartCellUIView()
+            return ChartCellHeaderView()
         default:
             return nil
         }

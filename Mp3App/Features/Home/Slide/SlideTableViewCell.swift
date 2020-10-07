@@ -37,7 +37,6 @@ class SlideTableViewCell: UITableViewCell, NibReusable {
     func setupData(albums: [Album]){
         self.albums = albums
         pageControl.numberOfPages = albums.count
-        //collectionView.scrollToItem(at: IndexPath(item: startIndex, section: 0), at: UICollectionView.ScrollPosition.centeredHorizontally, animated: false)
     }
     
     private func setupUI() {

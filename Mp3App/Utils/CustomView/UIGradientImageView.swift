@@ -9,24 +9,23 @@
 import Foundation
 import UIKit
 
-class UIGradientImageView: UIImageView
-{
+class UIGradientImageView: UIImageView {
     let myGradientLayer: CAGradientLayer
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         myGradientLayer = CAGradientLayer()
         super.init(frame: frame)
         self.setup()
         addGradientLayer()
     }
     
-    func addGradientLayer(){
-        if myGradientLayer.superlayer == nil{
+    func addGradientLayer() {
+        if myGradientLayer.superlayer == nil {
             self.layer.addSublayer(myGradientLayer)
         }
     }
     
-    required init(coder aDecoder: NSCoder){
+    required init(coder aDecoder: NSCoder) {
         myGradientLayer = CAGradientLayer()
         super.init(coder: aDecoder)!
         self.setup()
@@ -37,7 +36,7 @@ class UIGradientImageView: UIImageView
         return [UIColor.clear.cgColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor]
     }
     
-    func getLocations() -> [CGFloat]{
+    func getLocations() -> [CGFloat] {
         return [0.4,  0.9]
     }
     

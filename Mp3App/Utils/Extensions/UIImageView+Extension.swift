@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 extension UIImageView {
     func blurImage(imageDefault: UIImage?) {
@@ -37,5 +38,10 @@ extension UIImageView {
         
         let processedImage = UIImage(cgImage: cgimg)
         self.image = processedImage
+    }
+    
+    func setImage(stringURL: String) {
+        self.sd_imageTransition = .fade
+        self.sd_setImage(with: URL(string: stringURL))
     }
 }
