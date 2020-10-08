@@ -65,3 +65,11 @@ enum TrackGenre: String {
     case classical = "soundcloud:genres:classical"
     case rock = "soundcloud:genres:rock"
 }
+
+enum ImageSize: String {
+    case large = "-large."
+    case crop = "-crop."
+    case medium = "-t300x300."
+    case small = "-small."
+    case tiny = "-tiny."
+}

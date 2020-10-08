@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SlideCollectionViewCell" id="gTV-IL-0wX" customClass="SlideCollectionViewCell" customModule="Mp3App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="509" height="326"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="509" height="326"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhA-9u-OSB">
+                        <rect key="frame" x="0.0" y="0.0" width="509" height="326"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ibW-WL-jYD" customClass="GradientImageView" customModule="Mp3App" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="509" height="326"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWn-Wv-4Wy">
+                                <rect key="frame" x="20" y="288" width="469" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZWn-Wv-4Wy" secondAttribute="trailing" constant="20" id="4XE-1c-CW3"/>
+                            <constraint firstItem="ibW-WL-jYD" firstAttribute="top" secondItem="MhA-9u-OSB" secondAttribute="top" id="55y-Uw-faP"/>
+                            <constraint firstItem="ZWn-Wv-4Wy" firstAttribute="leading" secondItem="MhA-9u-OSB" secondAttribute="leading" constant="20" id="oen-A3-g0z"/>
+                            <constraint firstAttribute="trailing" secondItem="ibW-WL-jYD" secondAttribute="trailing" id="rLv-f3-4GE"/>
+                            <constraint firstItem="ibW-WL-jYD" firstAttribute="leading" secondItem="MhA-9u-OSB" secondAttribute="leading" id="sxy-p0-hgg"/>
+                            <constraint firstAttribute="bottom" secondItem="ibW-WL-jYD" secondAttribute="bottom" id="vXc-uI-AOy"/>
+                            <constraint firstAttribute="bottom" secondItem="ZWn-Wv-4Wy" secondAttribute="bottom" constant="20" id="yVc-wE-gTd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="MhA-9u-OSB" secondAttribute="trailing" id="2Mw-6B-bDy"/>
+                <constraint firstItem="MhA-9u-OSB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="90i-WJ-ZNX"/>
+                <constraint firstAttribute="bottom" secondItem="MhA-9u-OSB" secondAttribute="bottom" id="9wM-0Q-iIZ"/>
+                <constraint firstItem="MhA-9u-OSB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TJY-cI-Jj0"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="509" height="326"/>
+            <connections>
+                <outlet property="slideGradientImageView" destination="ibW-WL-jYD" id="HUr-Er-GnH"/>
+                <outlet property="titleLabel" destination="ZWn-Wv-4Wy" id="Llh-jt-qTg"/>
+            </connections>
+            <point key="canvasLocation" x="-44.20289855072464" y="125.22321428571428"/>
+        </collectionViewCell>
+    </objects>
+</document>

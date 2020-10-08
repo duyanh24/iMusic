@@ -25,6 +25,14 @@ struct Strings {
     static let passwordIsInvalid = "Password is invalid"
     static let passwordInRange = "Password must be between %d and %d characters"
     
+    //home
+    static let hiphop = "Hiphop - Rap"
+    static let electronic = "Nhạc điện tử"
+    static let classical = "Cổ điển"
+    static let chart = "Bảng xếp hạng"
+    static let singer = "Ca sĩ"
+    static let rock = "Nhạc Rock"
+    static let popular = "Phổ biến"
     
     //alert message
     static let sureToSignOut = "Are you sure that you want to sign out?"

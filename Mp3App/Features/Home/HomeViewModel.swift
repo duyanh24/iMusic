@@ -6,13 +6,14 @@
 //  Copyright © 2020 AnhLD. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 
 class HomeViewModel: ServicesViewModel {
     var services: HomeServices!
     private let errorTracker = ErrorTracker()
+    var collectionViewContentOffsetDictionary: [HomeSectionType: CGPoint] = [:]
     
     func transform(input: Input) -> Output {
         let homeDataModel = input.loadDataTrigger.flatMapLatest { [weak self] _ -> Observable<HomeScreenDataModel> in
@@ -20,7 +21,7 @@ class HomeViewModel: ServicesViewModel {
                 return .empty()
             }
             return self.getAllHomeData()
-        }
+        }.map({ $0.toDataSource()})
         return Output(homeDataModel: homeDataModel)
     }
 }
@@ -31,7 +32,7 @@ extension HomeViewModel {
     }
     
     struct Output {
-        var homeDataModel: Observable<HomeScreenDataModel>
+        var homeDataModel: Observable<[HomeSectionModel]>
     }
 }
 

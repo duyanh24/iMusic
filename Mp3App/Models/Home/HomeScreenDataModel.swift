@@ -26,4 +26,47 @@ class HomeScreenDataModel {
         self.chartTracks = chartTracks
         self.popularUsers = popularUsers
     }
+    
+    func toDataSource() -> [HomeSectionModel] {
+        var sectionModels = [HomeSectionModel]()
+        
+        if !popularAlbums.isEmpty {
+            sectionModels.append(.popularAlbums(type: .popularAlbums,
+                                               items: [.albumsSlide(type: .popularAlbums, albums: popularAlbums.compactMap { $0 })])
+            )
+        }
+        if !electronicAlbums.isEmpty {
+            sectionModels.append(.electronicAlbums(type: .electronicAlbums,
+                                                   items: [.albumsDefault(type: .electronicAlbums, albums: electronicAlbums.compactMap { $0 })])
+            )
+        }
+        if !hiphopAlbums.isEmpty {
+            sectionModels.append(.hiphopAlbums(type: .hiphopAlbums,
+                                               items: [.albumsDefault(type: .hiphopAlbums, albums: hiphopAlbums.compactMap { $0 })])
+            )
+        }
+        if !chartTracks.isEmpty {
+            sectionModels.append(.chartAlbums(
+                type: .chartAlbums,
+                items: Array(chartTracks.prefix(5)).map { HomeSectionItem.albumsChart(type: .chartAlbums, albums: $0)})
+            )
+        }
+        if !rockAlbums.isEmpty {
+            sectionModels.append(.rockAlbums(type: .rockAlbums,
+                                               items: [.albumsDefault(type: .rockAlbums, albums: rockAlbums.compactMap { $0 })])
+            )
+        }
+        if !classicalAlbums.isEmpty {
+            sectionModels.append(.classicalAlbums(type: .classicalAlbums,
+                                               items: [.albumsDefault(type: .classicalAlbums, albums: classicalAlbums.compactMap { $0 })])
+            )
+        }
+        
+//        if !popularUsers.isEmpty {
+//            sectionModels.append(.popularUsers(type: .popularUsers,
+//                                               items: [.singers(type: .popularUsers, users: popularUsers.compactMap { $0 })])
+//            )
+//        }
+        return sectionModels
+    }
 }
