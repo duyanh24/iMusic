@@ -28,7 +28,7 @@ class AlbumsTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     
     let contentOffsetChange = PublishSubject<CGPoint>()
     var viewModel: AlbumsTableViewCellViewModel!
-    private var disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
