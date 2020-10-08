@@ -14,13 +14,17 @@ class BaseViewController: UIViewController {
         return false
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
     }
     
     func prepareUI() {
-        navigationController?.navigationBar.barStyle = .default
+//        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true

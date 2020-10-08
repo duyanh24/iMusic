@@ -12,13 +12,29 @@ import RxSwift
 import Reusable
 
 class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased {
-    var viewModel: SplashViewModel!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
     
+    var viewModel: SplashViewModel!
     private let bag = DisposeBag()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+    }
+    
+    override func prepareUI() {
+        super.prepareUI()
+        setupUI()
+    }
+    
+    private func setupUI() {
+        backgroundImageView.image = Asset.splashScreenNormal.image
+        logoImageView.image = Asset.logoNormal.image
     }
     
     private func bind() {

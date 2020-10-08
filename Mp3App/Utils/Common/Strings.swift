@@ -18,8 +18,8 @@ struct Strings {
     static let settings = "Settings"
     
     //login validate
-    static let username = "Username"
-    static let password = "Password"
+    static let username = "Tài khoản"
+    static let password = "Mật khẩu"
     static let usernameIsEmpty = "Username can not be empty"
     static let passwordIsEmpty = "Password can not be empty"
     static let passwordIsInvalid = "Password is invalid"
