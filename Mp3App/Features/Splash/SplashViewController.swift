@@ -12,11 +12,8 @@ import RxSwift
 import Reusable
 
 class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased {
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var logoImageView: UIImageView!
-    
     var viewModel: SplashViewModel!
-    private let bag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -24,20 +21,10 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
+        bindViewModel()
     }
     
-    override func prepareUI() {
-        super.prepareUI()
-        setupUI()
-    }
-    
-    private func setupUI() {
-        backgroundImageView.image = Asset.splashScreenNormal.image
-        logoImageView.image = Asset.logoNormal.image
-    }
-    
-    private func bind() {
+    private func bindViewModel() {
         let input = SplashViewModel.Input()
         let output = viewModel.transform(input: input)
         
@@ -45,6 +32,6 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
             .drive(onNext: { _ in
                 SceneCoordinator.shared.transition(to: Scene.login)
             })
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
     }
 }

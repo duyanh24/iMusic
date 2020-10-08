@@ -15,11 +15,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7QA-4U-ImO">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_screen_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="7QA-4U-ImO">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XU2-qT-6uF">
-                                <rect key="frame" x="127" y="393" width="160" height="60"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="XU2-qT-6uF">
+                                <rect key="frame" x="127" y="423" width="160" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="6Up-5I-d2V"/>
                                     <constraint firstAttribute="width" constant="160" id="ugm-Rf-PES"/>
@@ -30,21 +30,21 @@
                         <constraints>
                             <constraint firstItem="yZX-9K-daL" firstAttribute="trailing" secondItem="7QA-4U-ImO" secondAttribute="trailing" id="4cB-LV-s06"/>
                             <constraint firstItem="7QA-4U-ImO" firstAttribute="top" secondItem="ae4-wp-PWw" secondAttribute="top" id="80Y-Qp-2tK"/>
-                            <constraint firstItem="XU2-qT-6uF" firstAttribute="centerY" secondItem="yZX-9K-daL" secondAttribute="centerY" constant="-30" id="P7O-nK-FjX"/>
+                            <constraint firstItem="XU2-qT-6uF" firstAttribute="centerY" secondItem="yZX-9K-daL" secondAttribute="centerY" id="P7O-nK-FjX"/>
                             <constraint firstItem="XU2-qT-6uF" firstAttribute="centerX" secondItem="yZX-9K-daL" secondAttribute="centerX" id="Q6B-zl-N0q"/>
-                            <constraint firstItem="yZX-9K-daL" firstAttribute="bottom" secondItem="7QA-4U-ImO" secondAttribute="bottom" id="Qnr-lu-6du"/>
+                            <constraint firstAttribute="bottom" secondItem="7QA-4U-ImO" secondAttribute="bottom" id="Qnr-lu-6du"/>
                             <constraint firstItem="7QA-4U-ImO" firstAttribute="leading" secondItem="yZX-9K-daL" secondAttribute="leading" id="SWb-7z-pN8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yZX-9K-daL"/>
                     </view>
-                    <connections>
-                        <outlet property="backgroundImageView" destination="7QA-4U-ImO" id="ENH-9l-1E9"/>
-                        <outlet property="logoImageView" destination="XU2-qT-6uF" id="SFP-Ea-1ue"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zIQ-JC-JBy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-109" y="-214"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo_Normal" width="100" height="30"/>
+        <image name="splash_screen_Normal" width="310.5" height="672"/>
+    </resources>
 </document>

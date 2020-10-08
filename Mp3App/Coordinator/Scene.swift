@@ -40,7 +40,7 @@ extension Scene: TargetScene {
             let mypageViewModel = MypageViewModel()
             let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel)
             let mypageNavController = BaseNavigationController(rootViewController: mypageViewController)
-            let moreTabbarItem = UITabBarItem(title: Strings.more, image: nil, selectedImage: nil)
+            let moreTabbarItem = UITabBarItem(title: Strings.profile, image: nil, selectedImage: nil)
             mypageNavController.tabBarItem = moreTabbarItem
             
             let settingViewModel = SettingViewModel()
