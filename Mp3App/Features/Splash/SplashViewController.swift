@@ -13,15 +13,18 @@ import Reusable
 
 class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased {
     var viewModel: SplashViewModel!
+    private let disposeBag = DisposeBag()
     
-    private let bag = DisposeBag()
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
+        bindViewModel()
     }
     
-    private func bind() {
+    private func bindViewModel() {
         let input = SplashViewModel.Input()
         let output = viewModel.transform(input: input)
         
@@ -29,6 +32,6 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
             .drive(onNext: { _ in
                 SceneCoordinator.shared.transition(to: Scene.login)
             })
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
     }
 }

@@ -77,8 +77,10 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     private func bindViewModel() {
         let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
         let output = viewModel.transform(input: input)
-        output.homeDataModel.bind(to: tableView.rx.items(dataSource: dataSource))
-        .disposed(by: disposeBag)
+        
+        output.homeDataModel
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
     
     private func setupTableView() {

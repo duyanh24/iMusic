@@ -10,20 +10,18 @@ import Foundation
 
 struct Strings {
     //common
-    static let home = "Home"
-    static let search = "Search"
-    static let more = "More"
-    static let help = "Help"
-    static let privacy = "Privacy"
-    static let settings = "Settings"
+    static let home = "Trang chủ"
+    static let search = "Tìm kiếm"
+    static let profile = "Cá nhân"
+    static let settings = "Thiết lập"
     
     //login validate
-    static let username = "Username"
-    static let password = "Password"
-    static let usernameIsEmpty = "Username can not be empty"
-    static let passwordIsEmpty = "Password can not be empty"
-    static let passwordIsInvalid = "Password is invalid"
-    static let passwordInRange = "Password must be between %d and %d characters"
+    static let username = "Tài khoản"
+    static let password = "Mật khẩu"
+    static let usernameIsEmpty = "Vui lòng nhập tài khoản"
+    static let passwordIsEmpty = "Vui lòng nhập mật khẩu"
+    static let passwordIsInvalid = "Mật khẩu không đúng"
+    static let passwordInRange = "Mật khẩu phải chứa từ %d đến %d ký tự"
     
     //home
     static let hiphop = "Hiphop - Rap"
@@ -35,8 +33,8 @@ struct Strings {
     static let popular = "Phổ biến"
     
     //alert message
-    static let sureToSignOut = "Are you sure that you want to sign out?"
-    static let signOut = "Sign Out"
+    static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"
+    static let signOut = "Đăng xuất"
     static let yes = "Yes"
     static let no = "No"
     static let OK = "OK"
