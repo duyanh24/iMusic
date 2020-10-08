@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1005149511865-l5vqmn5e85oh831b1lktolkutiror3gq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1005149511865-l5vqmn5e85oh831b1lktolkutiror3gq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBqL7BCb3bhUBUJNQudcMQrNj2TqrwwDEs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1005149511865</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.duyanh.zing</string>
+	<key>PROJECT_ID</key>
+	<string>mp3app-e68f5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mp3app-e68f5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1005149511865:ios:d9335a510ad517375e3b68</string>
+	<key>DATABASE_URL</key>
+	<string>https://mp3app-e68f5.firebaseio.com</string>
+</dict>
+</plist>

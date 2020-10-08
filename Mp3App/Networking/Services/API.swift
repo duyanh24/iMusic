@@ -75,9 +75,6 @@ extension APIRouter: TargetType {
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
-            
-        default:
-            return .requestPlain
         }
     }
     
