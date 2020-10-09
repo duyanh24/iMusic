@@ -73,3 +73,10 @@ enum ImageSize: String {
     case small = "-small."
     case tiny = "-tiny."
 }
+
+enum FirebaseProperty: String {
+    case users = "users"
+    case username = "username"
+    case password = "password"
+    case id = "id"
+}

@@ -6,6 +6,8 @@ target 'Mp3App' do
   use_frameworks!
 
   # Pods for Mp3App
-pod 'Firebase/Analytics'
 
+pod 'Firebase/Analytics'
+pod 'Firebase/Database'
+pod 'CodableFirebase'
 end

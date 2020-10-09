@@ -16,6 +16,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var registerButton: UIButton!
     
     var viewModel: LoginViewModel!
     private let disposeBag = DisposeBag()
@@ -27,6 +28,10 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         handleAction()
+    }
+    
+    func testRegister() {
+        FirebaseAccount.shared.registerAccount(username: "duyanh123", password: "matkhau")
     }
     
     override func prepareUI() {
@@ -54,6 +59,10 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         .subscribe(onNext: { _ in
             SceneCoordinator.shared.transition(to: Scene.tabbar)
         }).disposed(by: disposeBag)
+        
+        registerButton.rx.tap
+        .subscribe(onNext: {[weak self] _ in
+            self?.testRegister()
+        }).disposed(by: disposeBag)
     }
 }
-
