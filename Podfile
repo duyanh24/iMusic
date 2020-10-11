@@ -9,5 +9,7 @@ target 'Mp3App' do
 
 pod 'Firebase/Analytics'
 pod 'Firebase/Database'
-pod 'CodableFirebase'
+pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
+pod 'FirebaseFirestoreSwift'
 end

@@ -17,6 +17,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var viewModel: LoginViewModel!
     private let disposeBag = DisposeBag()
@@ -27,11 +28,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        handleAction()
-    }
-    
-    func testRegister() {
-        FirebaseAccount.shared.registerAccount(username: "duyanh123", password: "matkhau")
+        bindViewModel()
     }
     
     override func prepareUI() {
@@ -44,6 +41,26 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         loginButton.layer.cornerRadius = 5
     }
     
+    private func bindViewModel() {
+        let input = LoginViewModel.Input(email: usernameTextField.rx.text.asObservable(),
+                                         password: passwordTextField.rx.text.asObservable(),
+                                         login: loginButton.rx.tap.asObservable())
+        
+        let output = viewModel.transform(input: input)
+        
+        output.loginSuccess.subscribe(
+            onNext: { (userId) in
+                // save userId to UserDefault
+                
+                // transition screen
+                SceneCoordinator.shared.transition(to: Scene.tabbar)
+            },
+            onError: { (error) in
+                print(error)
+            }
+        ).disposed(by: disposeBag)
+    }
+    
     private func setupTextField() {
         usernameTextField.layer.cornerRadius = 5
         passwordTextField.layer.cornerRadius = 5
@@ -52,17 +69,5 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         let passwordAttributedPlaceholder = NSAttributedString(string: Strings.password, attributes: attributes)
         usernameTextField.attributedPlaceholder = usernameAttributedPlaceholder
         passwordTextField.attributedPlaceholder = passwordAttributedPlaceholder
-    }
-    
-    private func handleAction() {
-        loginButton.rx.tap
-        .subscribe(onNext: { _ in
-            SceneCoordinator.shared.transition(to: Scene.tabbar)
-        }).disposed(by: disposeBag)
-        
-        registerButton.rx.tap
-        .subscribe(onNext: {[weak self] _ in
-            self?.testRegister()
-        }).disposed(by: disposeBag)
     }
 }

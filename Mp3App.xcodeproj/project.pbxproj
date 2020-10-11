@@ -96,7 +96,6 @@
 		0859101825234342001FE662 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF525234341001FE662 /* RxRelay.framework */; };
 		0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */; };
 		0859101C25234342001FE662 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF725234342001FE662 /* SDWebImage.framework */; };
-		087B7E7A252AF5D000E85951 /* FSPagerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 087B7E79252AF5D000E85951 /* FSPagerView.framework */; };
 		087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */; };
 		087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */; };
 		08861D692525B58C008C0628 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D662525B58C008C0628 /* Track.swift */; };
@@ -114,6 +113,8 @@
 		1845F90B252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845F90A252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift */; };
 		1845F90D252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845F90C252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift */; };
 		184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D82DF252B201400768D41 /* HomeDataSource.swift */; };
+		18EF836825334D4C00A57CEF /* AuthencationStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */; };
+		18EF836A2533533100A57CEF /* AuthencationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF83692533533100A57CEF /* AuthencationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +226,8 @@
 		1845F90A252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		1845F90C252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		184D82DF252B201400768D41 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
+		18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthencationStatusCode.swift; sourceTree = "<group>"; };
+		18EF83692533533100A57CEF /* AuthencationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthencationService.swift; sourceTree = "<group>"; };
 		5D54ECECA0FEF3A95755FE45 /* Pods-Mp3App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mp3App.release.xcconfig"; path = "Target Support Files/Pods-Mp3App/Pods-Mp3App.release.xcconfig"; sourceTree = "<group>"; };
 		69CBA874015EF3D3D6D85B25 /* Pods-Mp3App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mp3App.debug.xcconfig"; path = "Target Support Files/Pods-Mp3App/Pods-Mp3App.debug.xcconfig"; sourceTree = "<group>"; };
 		8F24C9B06933767FA92FD440 /* Pods_Mp3App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mp3App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,7 +242,6 @@
 				0859101225234342001FE662 /* ReactiveSwift.framework in Frameworks */,
 				0859100225234342001FE662 /* RxCocoa.framework in Frameworks */,
 				0859100825234342001FE662 /* Alamofire.framework in Frameworks */,
-				087B7E7A252AF5D000E85951 /* FSPagerView.framework in Frameworks */,
 				08590FFE25234342001FE662 /* RxMoya.framework in Frameworks */,
 				0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */,
 				0859100025234342001FE662 /* Moya.framework in Frameworks */,
@@ -304,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				082F49BE253038CA00E56DF2 /* FirebaseAccount.swift */,
+				18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */,
 			);
 			path = FirebaseDatabase;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				08504FA22523346E0033DED0 /* HomeServices */,
 				08861D702525C236008C0628 /* TrackService.swift */,
 				08904C232526FBCF00C57721 /* UserService.swift */,
+				18EF83692533533100A57CEF /* AuthencationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -865,7 +869,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImageMapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FSPagerView.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -888,7 +891,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SDWebImage.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SDWebImageMapKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FSPagerView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -973,6 +975,7 @@
 				08904C242526FBCF00C57721 /* UserService.swift in Sources */,
 				08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */,
 				082F49C2253043E900E56DF2 /* DatabaseQuery+Extension.swift in Sources */,
+				18EF836825334D4C00A57CEF /* AuthencationStatusCode.swift in Sources */,
 				1845F901252C7145000D0FDC /* Converter.swift in Sources */,
 				08504F1B252334550033DED0 /* ViewController.swift in Sources */,
 				08504FE92523346F0033DED0 /* Strings.swift in Sources */,
@@ -983,6 +986,7 @@
 				08504FBA2523346F0033DED0 /* SceneCoordinator.swift in Sources */,
 				1845F904252C7810000D0FDC /* AlbumsTableViewCell.swift in Sources */,
 				08504FBC2523346F0033DED0 /* Result.swift in Sources */,
+				18EF836A2533533100A57CEF /* AuthencationService.swift in Sources */,
 				08504F17252334550033DED0 /* AppDelegate.swift in Sources */,
 				08504FC02523346F0033DED0 /* NetworkManager.swift in Sources */,
 				08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */,

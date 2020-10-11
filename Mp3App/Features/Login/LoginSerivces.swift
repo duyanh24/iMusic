@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol HasLoginServices {
-    
-}
-
-struct LoginServices: HasLoginServices {
-    
+struct LoginServices: HasAuthencationService {
+    var authencationService: AuthencationService
 }

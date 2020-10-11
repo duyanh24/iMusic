@@ -19,10 +19,11 @@ struct Constants {
 
 enum ErrorMessage {
     static let notFound = "Not found"
-    static let authenticalError = "Authentical error"
     static let badRequest = "Bad request"
     static let serverError = "Server error"
     static let errorOccur = "An error occurs"
+    static let authenticalError = "Tài khoản hoặc mật khẩu không chính xác"
+    static let unknownError = "Lỗi không xác định"
 }
 
 struct APIConstants {
