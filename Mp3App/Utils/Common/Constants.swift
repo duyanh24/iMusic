@@ -22,8 +22,12 @@ enum ErrorMessage {
     static let badRequest = "Bad request"
     static let serverError = "Server error"
     static let errorOccur = "An error occurs"
-    static let authenticalError = "Tài khoản hoặc mật khẩu không chính xác"
+    static let authenticalError = "authentical error"
+    static let wrongPassword = "Mật khẩu không chính xác"
+    static let invalidEmail = "Email không đúng định dạng"
+    static let wrongEmail = "Email không chính xác"
     static let unknownError = "Lỗi không xác định"
+    static let validateError = "Tài khoản và mật khẩu phải lớn hơn 6 ký tự"
 }
 
 struct APIConstants {

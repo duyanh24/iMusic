@@ -42,28 +42,31 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = LoginViewModel.Input(email: usernameTextField.rx.text.asObservable(),
-                                         password: passwordTextField.rx.text.asObservable(),
-                                         login: loginButton.rx.tap.asObservable())
+        let loginTrigger = loginButton.rx.tap.withLatestFrom(Observable.combineLatest(usernameTextField.rx.text, passwordTextField.rx.text))
+        let input = LoginViewModel.Input(login: loginTrigger)
         
         let output = viewModel.transform(input: input)
         
-        output.loginSuccess.subscribe(
-            onNext: { (userId) in
-                // save userId to UserDefault
-                
-                // transition screen
-                SceneCoordinator.shared.transition(to: Scene.tabbar)
-            },
-            onError: { (error) in
-                print(error)
-            }
-        ).disposed(by: disposeBag)
+        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        
+        output.loginSuccess
+            .subscribe(onNext: { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .failure(let error):
+                    self.errorLabel.text = error.localizedDescription
+                case .success(let id):
+                    print(id)
+                    SceneCoordinator.shared.transition(to: Scene.tabbar)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setupTextField() {
         usernameTextField.layer.cornerRadius = 5
         passwordTextField.layer.cornerRadius = 5
+        passwordTextField.isSecureTextEntry = true
         let attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
         let usernameAttributedPlaceholder = NSAttributedString(string: Strings.username, attributes: attributes)
         let passwordAttributedPlaceholder = NSAttributedString(string: Strings.password, attributes: attributes)

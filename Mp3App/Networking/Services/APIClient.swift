@@ -31,7 +31,7 @@ class HostAPIClient {
                         case HTTPStatusCodes.NotFound.rawValue:
                             observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.notFound))
                         case HTTPStatusCodes.Unauthorized.rawValue:
-                        observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.authenticalError))
+                            observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.authenticalError))
                         case HTTPStatusCodes.BadRequest.rawValue:
                             observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.badRequest))
                         default:

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		03AB61018FF60BC3F6D528F6 /* Pods_Mp3App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F24C9B06933767FA92FD440 /* Pods_Mp3App.framework */; };
+		080FCA06253402A900523A2C /* ProgressHUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCA05253402A900523A2C /* ProgressHUB.swift */; };
+		080FCA082534041D00523A2C /* ProgressHUD+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCA072534041D00523A2C /* ProgressHUD+Rx.swift */; };
+		080FCA0B253411B200523A2C /* AccountDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCA0A253411B200523A2C /* AccountDefault.swift */; };
 		08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE02524684400A4407D /* UIViewController+Extension.swift */; };
 		08118EE32524684D00A4407D /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE22524684D00A4407D /* UIWindow+Extension.swift */; };
 		08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE42524687C00A4407D /* UIApplication+Extension.swift */; };
@@ -118,6 +121,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		080FCA05253402A900523A2C /* ProgressHUB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUB.swift; sourceTree = "<group>"; };
+		080FCA072534041D00523A2C /* ProgressHUD+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+Rx.swift"; sourceTree = "<group>"; };
+		080FCA0A253411B200523A2C /* AccountDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDefault.swift; sourceTree = "<group>"; };
 		08118EE02524684400A4407D /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		08118EE22524684D00A4407D /* UIWindow+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		08118EE42524687C00A4407D /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -264,6 +270,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080FCA092534119200523A2C /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				080FCA0A253411B200523A2C /* AccountDefault.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		08143BE1252C557A00BF3993 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +303,7 @@
 		082F49C0253043BC00E56DF2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				080FCA092534119200523A2C /* UserDefaults */,
 				082F49C6253053DC00E56DF2 /* FirebaseDatabase */,
 			);
 			path = Database;
@@ -315,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				083B0168252B0F5E00E0EAB7 /* GradientImageView.swift */,
+				080FCA05253402A900523A2C /* ProgressHUB.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -543,6 +559,7 @@
 				083880942525DE0600987813 /* Observable+Extension.swift */,
 				083B016A252B13F000E0EAB7 /* UIImageView+Extension.swift */,
 				082F49C1253043E900E56DF2 /* DatabaseQuery+Extension.swift */,
+				080FCA072534041D00523A2C /* ProgressHUD+Rx.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -998,11 +1015,14 @@
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
 				184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */,
 				08504F19252334550033DED0 /* SceneDelegate.swift in Sources */,
+				080FCA06253402A900523A2C /* ProgressHUB.swift in Sources */,
 				08861D6D2525B95C008C0628 /* TrackListRespone.swift in Sources */,
+				080FCA082534041D00523A2C /* ProgressHUD+Rx.swift in Sources */,
 				1845F90D252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift in Sources */,
 				08504FA42523346E0033DED0 /* HomeViewModel.swift in Sources */,
 				08504FF72523346F0033DED0 /* SearchServices.swift in Sources */,
 				08143BE7252C5A3400BF3993 /* ChartTableViewCell.swift in Sources */,
+				080FCA0B253411B200523A2C /* AccountDefault.swift in Sources */,
 				08143BEA252C5E0500BF3993 /* ChartTableViewCellViewModel.swift in Sources */,
 				08504FB32523346E0033DED0 /* ViewModelBased.swift in Sources */,
 				08505006252336BC0033DED0 /* LoginViewModel.swift in Sources */,

@@ -14,7 +14,7 @@ protocol HasAuthencationService {
 }
 
 struct AuthencationService {
-    func login(email: String, password: String) -> Observable<String> {
+    func login(email: String, password: String) -> Observable<Result<String, Error>> {
         return FirebaseAccount.shared.login(email: email, password: password)
     }
 }

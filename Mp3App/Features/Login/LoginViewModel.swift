@@ -15,26 +15,27 @@ class LoginViewModel: ServicesViewModel {
     private let errorTracker = ErrorTracker()
     
     func transform(input: Input) -> Output {
-        let loginSuccess: Observable<String> =  input.login
-            .withLatestFrom(Observable.combineLatest(input.email, input.password))
-            .flatMap({ [weak self] email, password -> Observable<String> in
-                guard let self = self, let email = email, let password = password else { return .empty() }
-                return self.services.authencationService.login(email: email, password: password)
-                    .trackError(self.errorTracker)
+        let activityIndicator = ActivityIndicator()
+        
+        let loginSuccess =  input.login
+            .flatMapLatest({ [weak self] email, password -> Observable<Result<String, Error>> in
+                guard let self = self, let email = email, let password = password else {
+                    return .empty()
+                }
+                return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
             })
-        return Output(loginSuccess: loginSuccess, error: errorTracker.asObservable())
+        return Output(loginSuccess: loginSuccess, error: errorTracker.asObservable(), activityIndicator: activityIndicator.asObservable())
     }
 }
 
 extension LoginViewModel {
     struct Input {
-        var email: Observable<String?>
-        var password: Observable<String?>
-        var login: Observable<Void>
+        var login: Observable<(String?, String?)>
     }
     
     struct Output {
-        var loginSuccess: Observable<String>
+        var loginSuccess: Observable<Result<String, Error>>
         var error: Observable<Error>
+        var activityIndicator: Observable<Bool>
     }
 }

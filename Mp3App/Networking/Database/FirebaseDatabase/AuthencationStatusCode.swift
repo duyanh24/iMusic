@@ -10,5 +10,7 @@ import Foundation
 
 enum AuthencationStatusCode: Int {
     case FIRAuthErrorCodeUserDisabled = 17005
+    case FIRAuthErrorCodeInvalidEmail = 17008
     case FIRAuthErrorCodeWrongPassword = 17009
+    case FIRAuthErrorCodeUserNotFound = 17011
 }

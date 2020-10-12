@@ -9,15 +9,15 @@
 import Foundation
 
 class Account: Codable {
-    var id: Int?
-    var username: String?
+    var id: String?
+    var email: String?
     var password: String?
     var imageURL: String?
     var interestedAlbums: [Int]?
     
     enum CodingKeys: String, CodingKey {
         case id
-        case username
+        case email
         case password
     }
 }

@@ -58,7 +58,8 @@ extension Scene: TargetScene {
             
         case .login:
             let loginViewModel = LoginViewModel()
-            let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel)
+            let loginServices = LoginServices(authencationService: AuthencationService())
+            let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel, andServices: loginServices)
             return .root(loginViewController)
         }
     }
