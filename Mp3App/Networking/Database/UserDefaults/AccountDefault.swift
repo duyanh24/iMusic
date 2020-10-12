@@ -8,33 +8,22 @@
 
 import Foundation
 
-struct AccountDefault {
+class AccountDefault {
+    static let shared = AccountDefault()
+    private let userSessionKey = AccountDefaultKey.userSessionKey.rawValue
+    private let userDefault = UserDefaults.standard
     
-    static let userSessionKey = "com.save.usersession"
-    private static let userDefault = UserDefaults.standard
-    
-    static func save(account: Account){
-        userDefault.set([
-            AccountDefaultKey.idkey.rawValue: account.id,
-            AccountDefaultKey.emailKey.rawValue: account.email,
-            AccountDefaultKey.passwordKey.rawValue: account.password,
-            AccountDefaultKey.imageURLKey.rawValue: account.imageURL
-        ],forKey: userSessionKey)
+    func saveStringData(data: String, key: AccountDefaultKey) {
+        userDefault.set(data, forKey: key.rawValue)
     }
     
-    static func getNameAndAddress()-> Account {
-        //return UserDetails((userDefault.value(forKey: userSessionKey) as? [String: String]) ?? [:])
-        return Account()
+    func retrieveStringData(key: AccountDefaultKey) -> String {
+        return UserDefaults.standard.string(forKey: key.rawValue) ?? ""
     }
     
-    static func clearUserData(){
-        userDefault.removeObject(forKey: userSessionKey)
+    func clearUserData(){
+        userDefault.removeObject(forKey: AccountDefaultKey.idkey.rawValue)
+        userDefault.removeObject(forKey: AccountDefaultKey.emailKey.rawValue)
+        userDefault.removeObject(forKey: AccountDefaultKey.passwordKey.rawValue)
     }
-}
-
-enum AccountDefaultKey: String {
-    case idkey = "id"
-    case emailKey = "email"
-    case passwordKey = "password"
-    case imageURLKey = "imageURL"
 }

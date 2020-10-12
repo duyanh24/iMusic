@@ -28,10 +28,15 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
         let input = SplashViewModel.Input()
         let output = viewModel.transform(input: input)
         
-        output.splashFinish
-            .drive(onNext: { _ in
+        output.loginSuccess
+        .subscribe(onNext: { result in
+            switch result {
+            case .failure:
                 SceneCoordinator.shared.transition(to: Scene.login)
-            })
-            .disposed(by: disposeBag)
+            case .success:
+                SceneCoordinator.shared.transition(to: Scene.tabbar)
+            }
+        })
+        .disposed(by: disposeBag)
     }
 }

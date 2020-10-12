@@ -53,7 +53,8 @@ extension Scene: TargetScene {
             return .tabBar(rootTabbarController)
         case .splash:
             let splashViewModel = SplashViewModel()
-            let splashViewController = SplashViewController.instantiate(withViewModel: splashViewModel)
+            let splashServices = SplashServices(authencationService: AuthencationService())
+            let splashViewController = SplashViewController.instantiate(withViewModel: splashViewModel, andServices: splashServices)
             return .root(splashViewController)
             
         case .login:

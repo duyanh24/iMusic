@@ -12,19 +12,18 @@ import RxCocoa
 
 class LoginViewModel: ServicesViewModel {
     var services: LoginServices!
-    private let errorTracker = ErrorTracker()
     
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
         let loginSuccess =  input.login
-            .flatMapLatest({ [weak self] email, password -> Observable<Result<String, Error>> in
+            .flatMapLatest({ [weak self] email, password -> Observable<Result<Void, Error>> in
                 guard let self = self, let email = email, let password = password else {
                     return .empty()
                 }
                 return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
             })
-        return Output(loginSuccess: loginSuccess, error: errorTracker.asObservable(), activityIndicator: activityIndicator.asObservable())
+        return Output(loginSuccess: loginSuccess, activityIndicator: activityIndicator.asObservable())
     }
 }
 
@@ -34,8 +33,7 @@ extension LoginViewModel {
     }
     
     struct Output {
-        var loginSuccess: Observable<Result<String, Error>>
-        var error: Observable<Error>
+        var loginSuccess: Observable<Result<Void, Error>>
         var activityIndicator: Observable<Bool>
     }
 }

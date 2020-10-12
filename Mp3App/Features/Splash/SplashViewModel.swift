@@ -10,21 +10,22 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SplashViewModel: ViewModel {
+class SplashViewModel: ServicesViewModel {
+    var services: SplashServices!
+    private let disposeBag = DisposeBag()
+    
     func transform(input: Input) -> Output {
-        let splashFinish = Observable.just(())
-            .delay(DispatchTimeInterval.seconds(3), scheduler: MainScheduler.instance)
-            .asDriver(onErrorJustReturn: ())
-        return Output(splashFinish: splashFinish)
+        let email = AccountDefault.shared.retrieveStringData(key: .emailKey)
+        let password = AccountDefault.shared.retrieveStringData(key: .passwordKey)
+        let loginSuccess = services.authencationService.login(email: email, password: password)
+        return Output(loginSuccess: loginSuccess)
     }
 }
 
 extension SplashViewModel {
-    struct Input {
-        
-    }
+    struct Input {}
     
     struct Output {
-        var splashFinish: Driver<Void>
+        var loginSuccess: Observable<Result<Void, Error>>
     }
 }

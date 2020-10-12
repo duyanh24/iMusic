@@ -85,3 +85,10 @@ enum FirebaseProperty: String {
     case password = "password"
     case id = "id"
 }
+
+enum AccountDefaultKey: String {
+    case userSessionKey = "com.save.usersession"
+    case idkey = "id"
+    case emailKey = "email"
+    case passwordKey = "password"
+}

@@ -43,9 +43,9 @@ class ProgressHUD: NSObject {
         if !isShowing {
             isShowing = true
             activityIndicatorView.startAnimating()
-            UIApplication.shared.keyWindow?.addSubview(backgroundView)
-            UIApplication.shared.keyWindow?.addSubview(activityIndicatorBackgroundView)
-            UIApplication.shared.keyWindow?.addSubview(activityIndicatorView)
+            UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(backgroundView)
+            UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(activityIndicatorBackgroundView)
+            UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(activityIndicatorView)
         }
     }
     

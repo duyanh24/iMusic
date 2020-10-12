@@ -116,6 +116,7 @@
 		1845F90B252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845F90A252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift */; };
 		1845F90D252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845F90C252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift */; };
 		184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D82DF252B201400768D41 /* HomeDataSource.swift */; };
+		189D000A253456C20052F12F /* SplashServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D0009253456C20052F12F /* SplashServices.swift */; };
 		18EF836825334D4C00A57CEF /* AuthencationStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */; };
 		18EF836A2533533100A57CEF /* AuthencationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF83692533533100A57CEF /* AuthencationService.swift */; };
 /* End PBXBuildFile section */
@@ -232,6 +233,7 @@
 		1845F90A252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		1845F90C252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		184D82DF252B201400768D41 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
+		189D0009253456C20052F12F /* SplashServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashServices.swift; sourceTree = "<group>"; };
 		18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthencationStatusCode.swift; sourceTree = "<group>"; };
 		18EF83692533533100A57CEF /* AuthencationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthencationService.swift; sourceTree = "<group>"; };
 		5D54ECECA0FEF3A95755FE45 /* Pods-Mp3App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mp3App.release.xcconfig"; path = "Target Support Files/Pods-Mp3App/Pods-Mp3App.release.xcconfig"; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 		08504F9D2523346E0033DED0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				189D0008253456AA0052F12F /* SplashServices */,
 				0850500B252337230033DED0 /* LoginServices */,
 				085050012523365A0033DED0 /* SettingServices */,
 				08504F9E2523346E0033DED0 /* SearchServices */,
@@ -765,6 +768,14 @@
 				1845F907252C7995000D0FDC /* AlbumCollectionViewCell.xib */,
 			);
 			path = Albums;
+			sourceTree = "<group>";
+		};
+		189D0008253456AA0052F12F /* SplashServices */ = {
+			isa = PBXGroup;
+			children = (
+				189D0009253456C20052F12F /* SplashServices.swift */,
+			);
+			path = SplashServices;
 			sourceTree = "<group>";
 		};
 		93A9C675FEE247E5EC9C310D /* Pods */ = {
@@ -985,6 +996,7 @@
 				08504FE82523346F0033DED0 /* Constants.swift in Sources */,
 				08505008252336C90033DED0 /* LoginViewController.swift in Sources */,
 				083880932525DDB500987813 /* ActivityIndicator.swift in Sources */,
+				189D000A253456C20052F12F /* SplashServices.swift in Sources */,
 				08504FB42523346E0033DED0 /* BaseViewController.swift in Sources */,
 				1845F908252C7995000D0FDC /* AlbumCollectionViewCell.swift in Sources */,
 				083880912525DD4F00987813 /* ErrorTracker.swift in Sources */,

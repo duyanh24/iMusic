@@ -17,9 +17,9 @@ class FirebaseAccount {
     static let shared = FirebaseAccount()
     private let reference = Database.database().reference()
     private let disposeBag = DisposeBag()
-    let loginResult = PublishSubject<Result<String, Error>>()
+    let loginResult = PublishSubject<Result<Void, Error>>()
     
-    func login(email: String, password: String) -> Observable<Result<String, Error>> {
+    func login(email: String, password: String) -> Observable<Result<Void, Error>> {
         authencationAccount(email: email, password: password)
         return loginResult
     }
@@ -45,7 +45,10 @@ class FirebaseAccount {
                     }
                 } else {
                     if let result = result {
-                        self.loginResult.onNext(.success(result.user.uid))
+                        AccountDefault.shared.saveStringData(data: result.user.uid, key: .idkey)
+                        AccountDefault.shared.saveStringData(data: email, key: .emailKey)
+                        AccountDefault.shared.saveStringData(data: password, key: .passwordKey)
+                        self.loginResult.onNext(.success(()))
                     } else {
                         self.loginResult.onNext(.failure(APIError(status_code: nil, status_message: ErrorMessage.unknownError)))
                     }
