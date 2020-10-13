@@ -49,8 +49,8 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         let output = viewModel.transform(input: input)
         
         output.isLoginEnabled.bind(to: loginButton.rx.isEnabled).disposed(by: disposeBag)
-        output.isLoginEnabled.subscribe(onNext: { [weak self] (isEnable) in
-            if isEnable {
+        output.isLoginEnabled.subscribe(onNext: { [weak self] (isLoginEnabled) in
+            if isLoginEnabled {
                 self?.loginButton.backgroundColor = .systemTeal
             } else {
                 self?.loginButton.backgroundColor = .gray
