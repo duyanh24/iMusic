@@ -16,7 +16,7 @@ class LoginViewModel: ServicesViewModel {
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
-        let isLoginEnable = Observable.combineLatest(input.email, input.password)
+        let isLoginEnabled = Observable.combineLatest(input.email, input.password)
             .map { [weak self] (email, password) -> Bool in
                 guard let self = self, let email = email, let password = password
                     else { return false }
@@ -30,7 +30,7 @@ class LoginViewModel: ServicesViewModel {
                 }
                 return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
             })
-        return Output(loginResult: loginResult, activityIndicator: activityIndicator.asObservable(), isLoginEnabled: isLoginEnable)
+        return Output(loginResult: loginResult, activityIndicator: activityIndicator.asObservable(), isLoginEnabled: isLoginEnabled)
     }
     
     func validateEmail(email: String) -> Bool {
