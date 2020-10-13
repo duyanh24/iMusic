@@ -27,7 +27,8 @@ enum ErrorMessage {
     static let invalidEmail = "Email không đúng định dạng"
     static let wrongEmail = "Email không chính xác"
     static let unknownError = "Lỗi không xác định"
-    static let validateError = "Tài khoản và mật khẩu phải lớn hơn 6 ký tự"
+    static let validateEmailError = "Tài khoản phải lớn hơn 6 ký tự"
+    static let validatePasswordError = "Mật khẩu phải lớn hơn 6 ký tự"
 }
 
 struct APIConstants {
