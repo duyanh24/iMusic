@@ -21,21 +21,21 @@ class HostAPIClient {
                             observer.onError(response)
                         } catch let error {
                             print(error)
-                            observer.onError(APIError(status_code: nil, status_message: ErrorMessage.errorOccur))
+                            observer.onError(APIError(statusCode: nil, statusMessage: ErrorMessage.errorOccur))
                         }
                     } else {
                         let statusCode = error.response?.statusCode
                         switch statusCode {
                         case HTTPStatusCodes.InternalServerError.rawValue:
-                            observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.serverError))
+                            observer.onError(APIError(statusCode: statusCode, statusMessage: ErrorMessage.serverError))
                         case HTTPStatusCodes.NotFound.rawValue:
-                            observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.notFound))
+                            observer.onError(APIError(statusCode: statusCode, statusMessage: ErrorMessage.notFound))
                         case HTTPStatusCodes.Unauthorized.rawValue:
-                        observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.authenticalError))
+                            observer.onError(APIError(statusCode: statusCode, statusMessage: ErrorMessage.authenticalError))
                         case HTTPStatusCodes.BadRequest.rawValue:
-                            observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.badRequest))
+                            observer.onError(APIError(statusCode: statusCode, statusMessage: ErrorMessage.badRequest))
                         default:
-                            observer.onError(APIError(status_code: statusCode, status_message: ErrorMessage.errorOccur))
+                            observer.onError(APIError(statusCode: statusCode, statusMessage: ErrorMessage.errorOccur))
                         }
                     }
             

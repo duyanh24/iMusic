@@ -7,15 +7,37 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 struct APIError: Error, Codable {
     var success: Bool?
-    var status_code: Int?
-    var status_message: String?
+    var statusCode: Int?
+    var statusMessage: String?
+    
+    init(statusCode: Int?, statusMessage: String?) {
+        self.statusCode = statusCode
+        self.statusMessage = statusMessage
+    }
+    
+    init(authErrorCode: AuthErrorCode) {
+        switch authErrorCode.rawValue {
+        case AuthencationStatusCode.FIRAuthErrorCodeWrongPassword.rawValue:
+            self.statusCode = AuthencationStatusCode.FIRAuthErrorCodeWrongPassword.rawValue
+            self.statusMessage = ErrorMessage.wrongPassword
+        case AuthencationStatusCode.FIRAuthErrorCodeInvalidEmail.rawValue:
+            self.statusCode = AuthencationStatusCode.FIRAuthErrorCodeInvalidEmail.rawValue
+            self.statusMessage = ErrorMessage.invalidEmail
+        case AuthencationStatusCode.FIRAuthErrorCodeUserNotFound.rawValue:
+            self.statusCode = AuthencationStatusCode.FIRAuthErrorCodeUserNotFound.rawValue
+            self.statusMessage = ErrorMessage.wrongEmail
+        default:
+            self.statusMessage = ErrorMessage.unknownError
+        }
+    }
 }
 
 extension APIError: LocalizedError {
     var errorDescription: String? {
-        return NSLocalizedString(status_message ?? ErrorMessage.errorOccur, comment: "")
+        return NSLocalizedString(statusMessage ?? ErrorMessage.errorOccur, comment: "")
     }
 }

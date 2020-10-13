@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		03AB61018FF60BC3F6D528F6 /* Pods_Mp3App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F24C9B06933767FA92FD440 /* Pods_Mp3App.framework */; };
+		080FCA06253402A900523A2C /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCA05253402A900523A2C /* ProgressHUD.swift */; };
+		080FCA082534041D00523A2C /* ProgressHUD+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCA072534041D00523A2C /* ProgressHUD+Rx.swift */; };
+		080FCA0B253411B200523A2C /* AccountDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCA0A253411B200523A2C /* AccountDefault.swift */; };
 		08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE02524684400A4407D /* UIViewController+Extension.swift */; };
 		08118EE32524684D00A4407D /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE22524684D00A4407D /* UIWindow+Extension.swift */; };
 		08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08118EE42524687C00A4407D /* UIApplication+Extension.swift */; };
@@ -19,6 +22,9 @@
 		0817DD5D252726CF007D2966 /* SlideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */; };
 		0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */; };
 		082E288C252F1F62008EE1EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 082E288B252F1F62008EE1EA /* GoogleService-Info.plist */; };
+		082F49BF253038CA00E56DF2 /* FirebaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082F49BE253038CA00E56DF2 /* FirebaseAccount.swift */; };
+		082F49C2253043E900E56DF2 /* DatabaseQuery+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082F49C1253043E900E56DF2 /* DatabaseQuery+Extension.swift */; };
+		082F49C52530445600E56DF2 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082F49C42530445600E56DF2 /* Account.swift */; };
 		083880912525DD4F00987813 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880902525DD4F00987813 /* ErrorTracker.swift */; };
 		083880932525DDB500987813 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880922525DDB500987813 /* ActivityIndicator.swift */; };
 		083880952525DE0600987813 /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083880942525DE0600987813 /* Observable+Extension.swift */; };
@@ -93,7 +99,6 @@
 		0859101825234342001FE662 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF525234341001FE662 /* RxRelay.framework */; };
 		0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */; };
 		0859101C25234342001FE662 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF725234342001FE662 /* SDWebImage.framework */; };
-		087B7E7A252AF5D000E85951 /* FSPagerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 087B7E79252AF5D000E85951 /* FSPagerView.framework */; };
 		087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */; };
 		087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */; };
 		08861D692525B58C008C0628 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D662525B58C008C0628 /* Track.swift */; };
@@ -111,9 +116,15 @@
 		1845F90B252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845F90A252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift */; };
 		1845F90D252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845F90C252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift */; };
 		184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D82DF252B201400768D41 /* HomeDataSource.swift */; };
+		189D000A253456C20052F12F /* SplashServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D0009253456C20052F12F /* SplashServices.swift */; };
+		18EF836825334D4C00A57CEF /* AuthencationStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */; };
+		18EF836A2533533100A57CEF /* AuthencationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF83692533533100A57CEF /* AuthencationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		080FCA05253402A900523A2C /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		080FCA072534041D00523A2C /* ProgressHUD+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+Rx.swift"; sourceTree = "<group>"; };
+		080FCA0A253411B200523A2C /* AccountDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDefault.swift; sourceTree = "<group>"; };
 		08118EE02524684400A4407D /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		08118EE22524684D00A4407D /* UIWindow+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		08118EE42524687C00A4407D /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -125,6 +136,9 @@
 		0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTableViewCell.swift; sourceTree = "<group>"; };
 		0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideTableViewCell.xib; sourceTree = "<group>"; };
 		082E288B252F1F62008EE1EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		082F49BE253038CA00E56DF2 /* FirebaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAccount.swift; sourceTree = "<group>"; };
+		082F49C1253043E900E56DF2 /* DatabaseQuery+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatabaseQuery+Extension.swift"; sourceTree = "<group>"; };
+		082F49C42530445600E56DF2 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		083880902525DD4F00987813 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		083880922525DDB500987813 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		083880942525DE0600987813 /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
@@ -219,6 +233,9 @@
 		1845F90A252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		1845F90C252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		184D82DF252B201400768D41 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
+		189D0009253456C20052F12F /* SplashServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashServices.swift; sourceTree = "<group>"; };
+		18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthencationStatusCode.swift; sourceTree = "<group>"; };
+		18EF83692533533100A57CEF /* AuthencationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthencationService.swift; sourceTree = "<group>"; };
 		5D54ECECA0FEF3A95755FE45 /* Pods-Mp3App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mp3App.release.xcconfig"; path = "Target Support Files/Pods-Mp3App/Pods-Mp3App.release.xcconfig"; sourceTree = "<group>"; };
 		69CBA874015EF3D3D6D85B25 /* Pods-Mp3App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mp3App.debug.xcconfig"; path = "Target Support Files/Pods-Mp3App/Pods-Mp3App.debug.xcconfig"; sourceTree = "<group>"; };
 		8F24C9B06933767FA92FD440 /* Pods_Mp3App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mp3App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,7 +250,6 @@
 				0859101225234342001FE662 /* ReactiveSwift.framework in Frameworks */,
 				0859100225234342001FE662 /* RxCocoa.framework in Frameworks */,
 				0859100825234342001FE662 /* Alamofire.framework in Frameworks */,
-				087B7E7A252AF5D000E85951 /* FSPagerView.framework in Frameworks */,
 				08590FFE25234342001FE662 /* RxMoya.framework in Frameworks */,
 				0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */,
 				0859100025234342001FE662 /* Moya.framework in Frameworks */,
@@ -256,6 +272,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080FCA092534119200523A2C /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				080FCA0A253411B200523A2C /* AccountDefault.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		08143BE1252C557A00BF3993 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,10 +302,37 @@
 			path = Slide;
 			sourceTree = "<group>";
 		};
+		082F49C0253043BC00E56DF2 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				080FCA092534119200523A2C /* UserDefaults */,
+				082F49C6253053DC00E56DF2 /* FirebaseDatabase */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		082F49C32530443400E56DF2 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				082F49C42530445600E56DF2 /* Account.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		082F49C6253053DC00E56DF2 /* FirebaseDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				082F49BE253038CA00E56DF2 /* FirebaseAccount.swift */,
+				18EF836725334D4C00A57CEF /* AuthencationStatusCode.swift */,
+			);
+			path = FirebaseDatabase;
+			sourceTree = "<group>";
+		};
 		083B0167252B0F0800E0EAB7 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				083B0168252B0F5E00E0EAB7 /* GradientImageView.swift */,
+				080FCA05253402A900523A2C /* ProgressHUD.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -442,6 +493,7 @@
 		08504F4C2523346E0033DED0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				082F49C0253043BC00E56DF2 /* Database */,
 				08504F4D2523346E0033DED0 /* Responses */,
 				08504F522523346E0033DED0 /* SampleData */,
 				08504F542523346E0033DED0 /* Services */,
@@ -508,6 +560,8 @@
 				083880922525DDB500987813 /* ActivityIndicator.swift */,
 				083880942525DE0600987813 /* Observable+Extension.swift */,
 				083B016A252B13F000E0EAB7 /* UIImageView+Extension.swift */,
+				082F49C1253043E900E56DF2 /* DatabaseQuery+Extension.swift */,
+				080FCA072534041D00523A2C /* ProgressHUD+Rx.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -549,6 +603,7 @@
 		08504F9D2523346E0033DED0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				189D0008253456AA0052F12F /* SplashServices */,
 				0850500B252337230033DED0 /* LoginServices */,
 				085050012523365A0033DED0 /* SettingServices */,
 				08504F9E2523346E0033DED0 /* SearchServices */,
@@ -556,6 +611,7 @@
 				08504FA22523346E0033DED0 /* HomeServices */,
 				08861D702525C236008C0628 /* TrackService.swift */,
 				08904C232526FBCF00C57721 /* UserService.swift */,
+				18EF83692533533100A57CEF /* AuthencationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -651,6 +707,7 @@
 		08861D642525B58C008C0628 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				082F49C32530443400E56DF2 /* Account */,
 				08861D722525D64B008C0628 /* Home */,
 				08861D652525B58C008C0628 /* Track */,
 				08861D672525B58C008C0628 /* User */,
@@ -711,6 +768,14 @@
 				1845F907252C7995000D0FDC /* AlbumCollectionViewCell.xib */,
 			);
 			path = Albums;
+			sourceTree = "<group>";
+		};
+		189D0008253456AA0052F12F /* SplashServices */ = {
+			isa = PBXGroup;
+			children = (
+				189D0009253456C20052F12F /* SplashServices.swift */,
+			);
+			path = SplashServices;
 			sourceTree = "<group>";
 		};
 		93A9C675FEE247E5EC9C310D /* Pods */ = {
@@ -832,7 +897,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SDWebImageMapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FSPagerView.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -855,7 +919,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SDWebImage.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SDWebImageMapKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FSPagerView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -910,10 +973,12 @@
 				08504FB82523346F0033DED0 /* SceneCoordinatorType.swift in Sources */,
 				08504FB22523346E0033DED0 /* BaseNavigationController.swift in Sources */,
 				08505003252336750033DED0 /* SettingServices.swift in Sources */,
+				082F49BF253038CA00E56DF2 /* FirebaseAccount.swift in Sources */,
 				08504FF52523346F0033DED0 /* Assets.swift in Sources */,
 				08504FA52523346E0033DED0 /* HomeViewController.swift in Sources */,
 				08861D712525C236008C0628 /* TrackService.swift in Sources */,
 				180E53AA252DB4B700840DF5 /* ScreenSize.swift in Sources */,
+				082F49C52530445600E56DF2 /* Account.swift in Sources */,
 				083B0169252B0F5E00E0EAB7 /* GradientImageView.swift in Sources */,
 				08504FBF2523346F0033DED0 /* APIClient.swift in Sources */,
 				0817DD5D252726CF007D2966 /* SlideTableViewCell.swift in Sources */,
@@ -931,12 +996,15 @@
 				08504FE82523346F0033DED0 /* Constants.swift in Sources */,
 				08505008252336C90033DED0 /* LoginViewController.swift in Sources */,
 				083880932525DDB500987813 /* ActivityIndicator.swift in Sources */,
+				189D000A253456C20052F12F /* SplashServices.swift in Sources */,
 				08504FB42523346E0033DED0 /* BaseViewController.swift in Sources */,
 				1845F908252C7995000D0FDC /* AlbumCollectionViewCell.swift in Sources */,
 				083880912525DD4F00987813 /* ErrorTracker.swift in Sources */,
 				08504FF82523346F0033DED0 /* MypageServices.swift in Sources */,
 				08904C242526FBCF00C57721 /* UserService.swift in Sources */,
 				08118EE52524687C00A4407D /* UIApplication+Extension.swift in Sources */,
+				082F49C2253043E900E56DF2 /* DatabaseQuery+Extension.swift in Sources */,
+				18EF836825334D4C00A57CEF /* AuthencationStatusCode.swift in Sources */,
 				1845F901252C7145000D0FDC /* Converter.swift in Sources */,
 				08504F1B252334550033DED0 /* ViewController.swift in Sources */,
 				08504FE92523346F0033DED0 /* Strings.swift in Sources */,
@@ -947,6 +1015,7 @@
 				08504FBA2523346F0033DED0 /* SceneCoordinator.swift in Sources */,
 				1845F904252C7810000D0FDC /* AlbumsTableViewCell.swift in Sources */,
 				08504FBC2523346F0033DED0 /* Result.swift in Sources */,
+				18EF836A2533533100A57CEF /* AuthencationService.swift in Sources */,
 				08504F17252334550033DED0 /* AppDelegate.swift in Sources */,
 				08504FC02523346F0033DED0 /* NetworkManager.swift in Sources */,
 				08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */,
@@ -958,11 +1027,14 @@
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
 				184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */,
 				08504F19252334550033DED0 /* SceneDelegate.swift in Sources */,
+				080FCA06253402A900523A2C /* ProgressHUD.swift in Sources */,
 				08861D6D2525B95C008C0628 /* TrackListRespone.swift in Sources */,
+				080FCA082534041D00523A2C /* ProgressHUD+Rx.swift in Sources */,
 				1845F90D252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift in Sources */,
 				08504FA42523346E0033DED0 /* HomeViewModel.swift in Sources */,
 				08504FF72523346F0033DED0 /* SearchServices.swift in Sources */,
 				08143BE7252C5A3400BF3993 /* ChartTableViewCell.swift in Sources */,
+				080FCA0B253411B200523A2C /* AccountDefault.swift in Sources */,
 				08143BEA252C5E0500BF3993 /* ChartTableViewCellViewModel.swift in Sources */,
 				08504FB32523346E0033DED0 /* ViewModelBased.swift in Sources */,
 				08505006252336BC0033DED0 /* LoginViewModel.swift in Sources */,

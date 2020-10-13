@@ -19,10 +19,15 @@ struct Constants {
 
 enum ErrorMessage {
     static let notFound = "Not found"
-    static let authenticalError = "Authentical error"
     static let badRequest = "Bad request"
     static let serverError = "Server error"
     static let errorOccur = "An error occurs"
+    static let authenticalError = "authentical error"
+    static let wrongPassword = "Mật khẩu không chính xác"
+    static let invalidEmail = "Email không đúng định dạng"
+    static let wrongEmail = "Email không chính xác"
+    static let unknownError = "Lỗi không xác định"
+    static let validateAccount = "Email và mật khẩu phải lớn hơn 6 ký tự"
 }
 
 struct APIConstants {
@@ -72,4 +77,18 @@ enum ImageSize: String {
     case medium = "-t300x300."
     case small = "-small."
     case tiny = "-tiny."
+}
+
+enum FirebaseProperty: String {
+    case users = "users"
+    case username = "username"
+    case password = "password"
+    case id = "id"
+}
+
+enum AccountDefaultKey: String {
+    case userSessionKey = "com.save.usersession"
+    case idkey = "id"
+    case emailKey = "email"
+    case passwordKey = "password"
 }

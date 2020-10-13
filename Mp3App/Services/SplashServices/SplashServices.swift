@@ -1,13 +1,13 @@
 //
-//  LoginSerivces.swift
+//  SplashServices.swift
 //  Mp3App
 //
-//  Created by AnhLD on 9/29/20.
+//  Created by Apple on 10/12/20.
 //  Copyright © 2020 AnhLD. All rights reserved.
 //
 
 import Foundation
 
-struct LoginServices: HasAuthencationService {
+struct SplashServices: HasAuthencationService {
     var authencationService: AuthencationService
 }
