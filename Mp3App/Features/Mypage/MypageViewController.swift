@@ -89,7 +89,8 @@ extension MypageViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return InterestedCellHeaderView()
+        let width = UIScreen.main.bounds.width
+        return InterestedCellHeaderView(frame: CGRect(x: 0, y: 0, width: width, height: 60))
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -9,31 +9,23 @@
 import UIKit
 
 class InterestedCellHeaderView: UIView {
-    @IBOutlet weak var view: UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        nibSetup()
+        commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        nibSetup()
+        commonInit()
     }
-
-    private func nibSetup() {
-        backgroundColor = .clear
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.translatesAutoresizingMaskIntoConstraints = true
-        addSubview(view)
-    }
-
-    private func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: String(type(of: self)), bundle: bundle)
-        let nibView = nib.instantiateWithOwner(self, options: nil).first as! UIView
-        return nibView
+    
+    private func commonInit() {
+        let viewFromXib = UINib(nibName: "InterestedCellHeaderView", bundle: .main).instantiate(withOwner: nil, options: nil).first as! UIView
+        guard let viewFromXib = Bundle.main.loadNibNamed("InterestedCellHeaderView", owner: self, options: nil)?.first as? UIView else {
+            return
+        }
+        viewFromXib.frame = self.bounds
+        addSubview(viewFromXib)
     }
 }
