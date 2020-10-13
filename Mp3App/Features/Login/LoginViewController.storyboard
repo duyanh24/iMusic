@@ -200,11 +200,11 @@
                         <viewLayoutGuide key="safeArea" id="vii-ts-FtS"/>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="6cr-SZ-Z4q" id="4DB-jc-4EX"/>
                         <outlet property="errorLabel" destination="BOs-j4-CDp" id="vO6-SG-3Rh"/>
                         <outlet property="loginButton" destination="i8E-PT-0Cm" id="s97-SF-PHe"/>
                         <outlet property="passwordTextField" destination="ccX-Du-XcB" id="r4g-sg-NTT"/>
                         <outlet property="registerButton" destination="Uvr-tI-YPj" id="ROG-9D-DPA"/>
-                        <outlet property="usernameTextField" destination="6cr-SZ-Z4q" id="4DB-jc-4EX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNG-8C-reo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

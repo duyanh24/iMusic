@@ -14,7 +14,7 @@ import RxCocoa
 
 class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
@@ -42,14 +42,24 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let loginTrigger = loginButton.rx.tap.withLatestFrom(Observable.combineLatest(usernameTextField.rx.text, passwordTextField.rx.text))
-        let input = LoginViewModel.Input(login: loginTrigger)
+        let input = LoginViewModel.Input(email: emailTextField.rx.text.asObservable(),
+                                         password: passwordTextField.rx.text.asObservable(),
+                                         login: loginButton.rx.tap.asObservable())
         
         let output = viewModel.transform(input: input)
         
+        output.loginEnable.bind(to: loginButton.rx.isEnabled).disposed(by: disposeBag)
+        output.loginEnable.subscribe(onNext: { [weak self] (isEnable) in
+            if isEnable {
+                self?.loginButton.backgroundColor = .systemTeal
+            } else {
+                self?.loginButton.backgroundColor = .gray
+            }
+        }).disposed(by: disposeBag)
+        
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
         
-        output.loginSuccess
+        output.loginResult
             .subscribe(onNext: { [weak self] result in
                 guard let self = self else { return }
                 switch result {
@@ -64,13 +74,13 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     }
     
     private func setupTextField() {
-        usernameTextField.layer.cornerRadius = 5
+        emailTextField.layer.cornerRadius = 5
         passwordTextField.layer.cornerRadius = 5
         passwordTextField.isSecureTextEntry = true
         let attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: UIColor.lightText]
         let usernameAttributedPlaceholder = NSAttributedString(string: Strings.username, attributes: attributes)
         let passwordAttributedPlaceholder = NSAttributedString(string: Strings.password, attributes: attributes)
-        usernameTextField.attributedPlaceholder = usernameAttributedPlaceholder
+        emailTextField.attributedPlaceholder = usernameAttributedPlaceholder
         passwordTextField.attributedPlaceholder = passwordAttributedPlaceholder
     }
 }

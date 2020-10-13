@@ -1,5 +1,5 @@
 //
-//  ProgressHUB.swift
+//  ProgressHUD.swift
 //  Mp3App
 //
 //  Created by AnhLD on 10/12/20.
