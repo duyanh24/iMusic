@@ -28,7 +28,7 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
         let input = SplashViewModel.Input()
         let output = viewModel.transform(input: input)
         
-        output.loginSuccess
+        output.loginResult
         .subscribe(onNext: { result in
             switch result {
             case .failure:

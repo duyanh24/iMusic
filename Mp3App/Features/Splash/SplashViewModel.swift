@@ -17,8 +17,8 @@ class SplashViewModel: ServicesViewModel {
     func transform(input: Input) -> Output {
         let email = AccountDefault.shared.retrieveStringData(key: .emailKey)
         let password = AccountDefault.shared.retrieveStringData(key: .passwordKey)
-        let loginSuccess = services.authencationService.login(email: email, password: password)
-        return Output(loginSuccess: loginSuccess)
+        let loginResult = services.authencationService.login(email: email, password: password)
+        return Output(loginResult: loginResult)
     }
 }
 
@@ -26,6 +26,6 @@ extension SplashViewModel {
     struct Input {}
     
     struct Output {
-        var loginSuccess: Observable<Result<Void, Error>>
+        var loginResult: Observable<Result<Void, Error>>
     }
 }

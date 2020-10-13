@@ -23,14 +23,14 @@ class LoginViewModel: ServicesViewModel {
                 return self.validateEmail(email: email) && self.validatePassword(password: password)
         }
         
-        let loginSuccess =  input.login.withLatestFrom(Observable.combineLatest(input.email, input.password))
+        let loginResult =  input.login.withLatestFrom(Observable.combineLatest(input.email, input.password))
             .flatMapLatest({ [weak self] email, password -> Observable<Result<Void, Error>> in
                 guard let self = self, let email = email, let password = password else {
                     return .empty()
                 }
                 return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
             })
-        return Output(loginResult: loginSuccess, activityIndicator: activityIndicator.asObservable(), loginEnable: loginEnable)
+        return Output(loginResult: loginResult, activityIndicator: activityIndicator.asObservable(), isLoginEnabled: loginEnable)
     }
     
     func validateEmail(email: String) -> Bool {
@@ -52,6 +52,6 @@ extension LoginViewModel {
     struct Output {
         var loginResult: Observable<Result<Void, Error>>
         var activityIndicator: Observable<Bool>
-        var loginEnable: Observable<Bool>
+        var isLoginEnabled: Observable<Bool>
     }
 }
