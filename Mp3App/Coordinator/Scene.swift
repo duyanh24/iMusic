@@ -38,7 +38,8 @@ extension Scene: TargetScene {
             searchNavController.tabBarItem = searchTabbarItem
             
             let mypageViewModel = MypageViewModel()
-            let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel)
+            let mypageServices = MypageServices(playlistService: PlaylistService())
+            let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel, andServices: mypageServices)
             let mypageNavController = BaseNavigationController(rootViewController: mypageViewController)
             let moreTabbarItem = UITabBarItem(title: Strings.profile, image: nil, selectedImage: nil)
             mypageNavController.tabBarItem = moreTabbarItem

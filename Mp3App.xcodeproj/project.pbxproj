@@ -99,6 +99,16 @@
 		0859101825234342001FE662 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF525234341001FE662 /* RxRelay.framework */; };
 		0859101A25234342001FE662 /* NVActivityIndicatorViewExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */; };
 		0859101C25234342001FE662 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08590FF725234342001FE662 /* SDWebImage.framework */; };
+		085D96352535966D00A9F494 /* InterestedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D96332535966D00A9F494 /* InterestedTableViewCell.swift */; };
+		085D96362535966D00A9F494 /* InterestedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D96342535966D00A9F494 /* InterestedTableViewCell.xib */; };
+		085D96382535984800A9F494 /* MypageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D96372535984800A9F494 /* MypageDataSource.swift */; };
+		085D963B25359A4300A9F494 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D963A25359A4300A9F494 /* Playlist.swift */; };
+		085D963E25359DB400A9F494 /* MypageScreenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D963D25359DB400A9F494 /* MypageScreenDataModel.swift */; };
+		085D96402535A25400A9F494 /* PlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D963F2535A25400A9F494 /* PlaylistService.swift */; };
+		085D96432535ABD800A9F494 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D96412535ABD800A9F494 /* PlaylistTableViewCell.swift */; };
+		085D96442535ABD800A9F494 /* PlaylistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D96422535ABD800A9F494 /* PlaylistTableViewCell.xib */; };
+		085D96462535B3CB00A9F494 /* InterestedCellHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D96452535B3CB00A9F494 /* InterestedCellHeaderView.swift */; };
+		085D964A2535B89500A9F494 /* InterestedCellHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D96492535B89500A9F494 /* InterestedCellHeaderView.xib */; };
 		087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */; };
 		087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */; };
 		08861D692525B58C008C0628 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D662525B58C008C0628 /* Track.swift */; };
@@ -215,6 +225,16 @@
 		08590FF525234341001FE662 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		08590FF625234341001FE662 /* NVActivityIndicatorViewExtended.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewExtended.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewExtended.framework; sourceTree = "<group>"; };
 		08590FF725234342001FE662 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
+		085D96332535966D00A9F494 /* InterestedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedTableViewCell.swift; sourceTree = "<group>"; };
+		085D96342535966D00A9F494 /* InterestedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestedTableViewCell.xib; sourceTree = "<group>"; };
+		085D96372535984800A9F494 /* MypageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageDataSource.swift; sourceTree = "<group>"; };
+		085D963A25359A4300A9F494 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		085D963D25359DB400A9F494 /* MypageScreenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageScreenDataModel.swift; sourceTree = "<group>"; };
+		085D963F2535A25400A9F494 /* PlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistService.swift; sourceTree = "<group>"; };
+		085D96412535ABD800A9F494 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
+		085D96422535ABD800A9F494 /* PlaylistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistTableViewCell.xib; sourceTree = "<group>"; };
+		085D96452535B3CB00A9F494 /* InterestedCellHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedCellHeaderView.swift; sourceTree = "<group>"; };
+		085D96492535B89500A9F494 /* InterestedCellHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestedCellHeaderView.xib; sourceTree = "<group>"; };
 		087B7E79252AF5D000E85951 /* FSPagerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSPagerView.framework; path = Carthage/Build/iOS/FSPagerView.framework; sourceTree = "<group>"; };
 		087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCollectionViewCell.swift; sourceTree = "<group>"; };
 		087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -437,9 +457,12 @@
 		08504F3A2523346D0033DED0 /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
+				085D9632253595F100A9F494 /* Playlist */,
+				085D9631253595DD00A9F494 /* Interested */,
 				08504F3B2523346D0033DED0 /* MypageViewController.storyboard */,
 				08504F3C2523346D0033DED0 /* MypageViewController.swift */,
 				08504F3D2523346D0033DED0 /* MypageViewModel.swift */,
+				085D96372535984800A9F494 /* MypageDataSource.swift */,
 			);
 			path = Mypage;
 			sourceTree = "<group>";
@@ -612,6 +635,7 @@
 				08861D702525C236008C0628 /* TrackService.swift */,
 				08904C232526FBCF00C57721 /* UserService.swift */,
 				18EF83692533533100A57CEF /* AuthencationService.swift */,
+				085D963F2535A25400A9F494 /* PlaylistService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -704,9 +728,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		085D9631253595DD00A9F494 /* Interested */ = {
+			isa = PBXGroup;
+			children = (
+				085D96332535966D00A9F494 /* InterestedTableViewCell.swift */,
+				085D96342535966D00A9F494 /* InterestedTableViewCell.xib */,
+				085D96452535B3CB00A9F494 /* InterestedCellHeaderView.swift */,
+				085D96492535B89500A9F494 /* InterestedCellHeaderView.xib */,
+			);
+			path = Interested;
+			sourceTree = "<group>";
+		};
+		085D9632253595F100A9F494 /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				085D96412535ABD800A9F494 /* PlaylistTableViewCell.swift */,
+				085D96422535ABD800A9F494 /* PlaylistTableViewCell.xib */,
+			);
+			path = Playlist;
+			sourceTree = "<group>";
+		};
+		085D963925359A3000A9F494 /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				085D963A25359A4300A9F494 /* Playlist.swift */,
+			);
+			path = Playlist;
+			sourceTree = "<group>";
+		};
+		085D963C25359DA000A9F494 /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				085D963D25359DB400A9F494 /* MypageScreenDataModel.swift */,
+			);
+			path = Mypage;
+			sourceTree = "<group>";
+		};
 		08861D642525B58C008C0628 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				085D963C25359DA000A9F494 /* Mypage */,
+				085D963925359A3000A9F494 /* Playlist */,
 				082F49C32530443400E56DF2 /* Account */,
 				08861D722525D64B008C0628 /* Home */,
 				08861D652525B58C008C0628 /* Track */,
@@ -855,13 +917,16 @@
 				08504F23252334560033DED0 /* LaunchScreen.storyboard in Resources */,
 				1845F905252C7810000D0FDC /* AlbumsTableViewCell.xib in Resources */,
 				0850500A252336D80033DED0 /* LoginViewController.storyboard in Resources */,
+				085D96442535ABD800A9F494 /* PlaylistTableViewCell.xib in Resources */,
 				1845F909252C7995000D0FDC /* AlbumCollectionViewCell.xib in Resources */,
+				085D96362535966D00A9F494 /* InterestedTableViewCell.xib in Resources */,
 				08504FAB2523346E0033DED0 /* RootTabbarController.storyboard in Resources */,
 				0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */,
 				08504FAD2523346E0033DED0 /* SearchViewController.storyboard in Resources */,
 				08504FBE2523346F0033DED0 /* PopularMoviesSample.json in Resources */,
 				082E288C252F1F62008EE1EA /* GoogleService-Info.plist in Resources */,
 				08143BE8252C5A3400BF3993 /* ChartTableViewCell.xib in Resources */,
+				085D964A2535B89500A9F494 /* InterestedCellHeaderView.xib in Resources */,
 				08504F1E252334550033DED0 /* Main.storyboard in Resources */,
 				08504FA72523346E0033DED0 /* SplashViewController.storyboard in Resources */,
 				087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */,
@@ -973,6 +1038,7 @@
 				08504FB82523346F0033DED0 /* SceneCoordinatorType.swift in Sources */,
 				08504FB22523346E0033DED0 /* BaseNavigationController.swift in Sources */,
 				08505003252336750033DED0 /* SettingServices.swift in Sources */,
+				085D96402535A25400A9F494 /* PlaylistService.swift in Sources */,
 				082F49BF253038CA00E56DF2 /* FirebaseAccount.swift in Sources */,
 				08504FF52523346F0033DED0 /* Assets.swift in Sources */,
 				08504FA52523346E0033DED0 /* HomeViewController.swift in Sources */,
@@ -1020,9 +1086,13 @@
 				08504FC02523346F0033DED0 /* NetworkManager.swift in Sources */,
 				08118EE12524684500A4407D /* UIViewController+Extension.swift in Sources */,
 				08504FA92523346E0033DED0 /* SplashViewModel.swift in Sources */,
+				085D963E25359DB400A9F494 /* MypageScreenDataModel.swift in Sources */,
+				085D96462535B3CB00A9F494 /* InterestedCellHeaderView.swift in Sources */,
 				08504FB52523346F0033DED0 /* BaseTableViewController.swift in Sources */,
+				085D96432535ABD800A9F494 /* PlaylistTableViewCell.swift in Sources */,
 				08861D6A2525B58C008C0628 /* User.swift in Sources */,
 				0817DD5725271593007D2966 /* Album.swift in Sources */,
+				085D963B25359A4300A9F494 /* Playlist.swift in Sources */,
 				0850500D252337330033DED0 /* LoginSerivces.swift in Sources */,
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
 				184D82E0252B201400768D41 /* HomeDataSource.swift in Sources */,
@@ -1038,8 +1108,10 @@
 				08143BEA252C5E0500BF3993 /* ChartTableViewCellViewModel.swift in Sources */,
 				08504FB32523346E0033DED0 /* ViewModelBased.swift in Sources */,
 				08505006252336BC0033DED0 /* LoginViewModel.swift in Sources */,
+				085D96382535984800A9F494 /* MypageDataSource.swift in Sources */,
 				08504FF92523346F0033DED0 /* HomeServices.swift in Sources */,
 				1845F90B252C7AEB000D0FDC /* AlbumsTableViewCellViewModel.swift in Sources */,
+				085D96352535966D00A9F494 /* InterestedTableViewCell.swift in Sources */,
 				08504FBD2523346F0033DED0 /* BaseSuccessResult.swift in Sources */,
 				08143BEC252C76B300BF3993 /* ChartCellHeaderView.swift in Sources */,
 				083B016B252B13F000E0EAB7 /* UIImageView+Extension.swift in Sources */,

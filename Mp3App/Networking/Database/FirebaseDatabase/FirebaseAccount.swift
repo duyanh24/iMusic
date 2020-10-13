@@ -46,4 +46,13 @@ class FirebaseAccount {
             
         }
     }
+    
+    func getAllPlaylist() -> Observable<[Playlist]> {
+        return Observable.create { observer -> Disposable in
+            let playlists = [Playlist(id: "1", playlistName: "duyanh"),Playlist(id: "2", playlistName: "duyanh2")]
+            observer.onNext(playlists)
+            observer.onCompleted()
+            return Disposables.create()
+        }
+    }
 }

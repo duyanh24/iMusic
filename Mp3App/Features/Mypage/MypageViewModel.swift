@@ -12,18 +12,37 @@ import RxCocoa
 
 class MypageViewModel: ServicesViewModel {
     var services: MypageServices!
-   
+    private let errorTracker = ErrorTracker()
+    
     func transform(input: Input) -> Output {
-        return Output()
+        let mypageDataModel = input.loadDataTrigger.flatMapLatest { [weak self] _ -> Observable<MypageScreenDataModel> in
+            guard let self = self else {
+                return .empty()
+            }
+            return self.getAllMypageData()
+        }.map({ $0.toDataSource()})
+        return Output(mypageDataModel: mypageDataModel)
     }
 }
 
 extension MypageViewModel {
     struct Input {
-        
+        var loadDataTrigger: Observable<Void>
     }
     
     struct Output {
-        
+        var mypageDataModel: Observable<[MypageSectionModel]>
+    }
+}
+
+extension MypageViewModel {
+    private func getAllMypageData() -> Observable<MypageScreenDataModel> {
+        let playlists = services.playlistService.getAllPlaylist()
+            .trackError(errorTracker)
+            .catchErrorJustReturn([])
+        let mypageScreenDataModel = playlists.map { playlists -> MypageScreenDataModel in
+            return MypageScreenDataModel(playlists: playlists)
+        }
+        return mypageScreenDataModel
     }
 }

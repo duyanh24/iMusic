@@ -32,6 +32,10 @@ struct Strings {
     static let rock = "Nhạc Rock"
     static let popular = "Phổ biến"
     
+    //mypage
+    static let library = "Thư viện"
+    static let playlist = "Playlist"
+    
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"
     static let signOut = "Đăng xuất"
