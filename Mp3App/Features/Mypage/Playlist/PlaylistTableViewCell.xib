@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,36 +19,27 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSV-SZ-Zsa">
                         <rect key="frame" x="20" y="0.0" width="292" height="64"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_playlist_offline_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-9e-aCG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_playlist_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="U5P-9e-aCG">
                                 <rect key="frame" x="0.0" y="10" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="U5P-9e-aCG" secondAttribute="height" id="Qd4-uk-yEw"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtR-Ml-9KM">
-                                <rect key="frame" x="54" y="15" width="37.5" height="17"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <rect key="frame" x="54" y="23.5" width="36" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMn-Cw-EgU">
-                                <rect key="frame" x="54" y="34.5" width="31" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="UMn-Cw-EgU" firstAttribute="leading" secondItem="U5P-9e-aCG" secondAttribute="trailing" constant="10" id="CwD-a5-OKy"/>
                             <constraint firstItem="qtR-Ml-9KM" firstAttribute="leading" secondItem="U5P-9e-aCG" secondAttribute="trailing" constant="10" id="DNQ-WW-4hY"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UMn-Cw-EgU" secondAttribute="trailing" id="DWW-p0-8fA"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qtR-Ml-9KM" secondAttribute="trailing" id="LSW-tv-LC6"/>
                             <constraint firstItem="U5P-9e-aCG" firstAttribute="centerY" secondItem="fSV-SZ-Zsa" secondAttribute="centerY" id="cU7-4w-ZBk"/>
                             <constraint firstItem="U5P-9e-aCG" firstAttribute="leading" secondItem="fSV-SZ-Zsa" secondAttribute="leading" id="e5C-yX-06B"/>
                             <constraint firstItem="U5P-9e-aCG" firstAttribute="top" secondItem="fSV-SZ-Zsa" secondAttribute="top" constant="10" id="lGm-iM-v7G"/>
-                            <constraint firstItem="qtR-Ml-9KM" firstAttribute="top" secondItem="fSV-SZ-Zsa" secondAttribute="top" constant="15" id="s4b-fG-n84"/>
-                            <constraint firstAttribute="bottom" secondItem="UMn-Cw-EgU" secondAttribute="bottom" constant="15" id="zsB-Zq-HEJ"/>
+                            <constraint firstItem="qtR-Ml-9KM" firstAttribute="centerY" secondItem="fSV-SZ-Zsa" secondAttribute="centerY" id="rp0-u5-ZBW"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -64,11 +55,12 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="playlistImageView" destination="U5P-9e-aCG" id="isR-UK-Ooa"/>
+                <outlet property="playlistLabel" destination="qtR-Ml-9KM" id="8xL-bU-iQ5"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="160.04464285714286"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="background_playlist_offline_Normal" width="320" height="120"/>
+        <image name="default_playlist_Normal" width="80" height="80"/>
     </resources>
 </document>

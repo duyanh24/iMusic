@@ -12,12 +12,12 @@ import Foundation
 import RxDataSources
 
 enum MypageSectionType {
-    case interested
+    case favourite
     case playlist
     
     var title: String? {
         switch self {
-        case .interested:
+        case .favourite:
             return Strings.library
         case .playlist:
             return Strings.playlist
@@ -27,13 +27,13 @@ enum MypageSectionType {
 
 enum MypageSectionModel {
     typealias Item = MypageSectionItem
-    case interested(type: MypageSectionType, items: [Item])
+    case favourite(type: MypageSectionType, items: [Item])
     case playlist(type: MypageSectionType, items: [Item])
 }
 
 enum MypageSectionItem {
-    case playlist(type: MypageSectionType, playlist: Playlist)
-    case interested(type: MypageSectionType, library: String)
+    case playlist(type: MypageSectionType, playlist: String)
+    case favourite(type: MypageSectionType, library: String)
     
 }
 
@@ -42,7 +42,7 @@ extension MypageSectionModel: SectionModelType {
         switch self {
         case .playlist(_, let items):
             return items.map { $0 }
-        case .interested(_, let items):
+        case .favourite(_, let items):
             return items.map { $0 }
         }
     }
@@ -51,7 +51,7 @@ extension MypageSectionModel: SectionModelType {
         switch self {
         case .playlist(let type, _):
             return type
-        case .interested(let type, _):
+        case .favourite(let type, _):
             return type
         }
     }
@@ -60,8 +60,8 @@ extension MypageSectionModel: SectionModelType {
         switch original {
         case let .playlist(type: type, items: _):
             self = .playlist(type: type, items: items)
-        case let .interested(type: type, items: _):
-            self = .interested(type: type, items: items)
+        case let .favourite(type: type, items: _):
+            self = .favourite(type: type, items: items)
         }
     }
 }

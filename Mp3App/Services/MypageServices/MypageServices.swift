@@ -8,6 +8,7 @@
 
 import Foundation
 
-struct MypageServices: HasPlaylistService {
+struct MypageServices: HasPlaylistService, HasTrackService {
     var playlistService: PlaylistService
+    var trackService: TrackService
 }

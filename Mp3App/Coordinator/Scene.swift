@@ -16,6 +16,7 @@ enum Scene {
     case splash
     case tabbar
     case login
+    case playlistDetail(playlist: String)
 }
 
 extension Scene: TargetScene {
@@ -38,7 +39,7 @@ extension Scene: TargetScene {
             searchNavController.tabBarItem = searchTabbarItem
             
             let mypageViewModel = MypageViewModel()
-            let mypageServices = MypageServices(playlistService: PlaylistService())
+            let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
             let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel, andServices: mypageServices)
             let mypageNavController = BaseNavigationController(rootViewController: mypageViewController)
             let moreTabbarItem = UITabBarItem(title: Strings.profile, image: nil, selectedImage: nil)
@@ -63,6 +64,12 @@ extension Scene: TargetScene {
             let loginServices = LoginServices(authencationService: AuthencationService())
             let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel, andServices: loginServices)
             return .root(loginViewController)
+            
+        case .playlistDetail(let playlist):
+            let playlisDetailViewModel = PlaylisDetailViewModel(playlist: playlist)
+            let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
+            let playlistDetailViewController = PlaylistDetailViewController.instantiate(withViewModel: playlisDetailViewModel, andServices: mypageServices)
+            return .push(playlistDetailViewController)
         }
     }
 }

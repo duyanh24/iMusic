@@ -40,6 +40,7 @@ extension MypageViewModel {
         let playlists = services.playlistService.getAllPlaylist()
             .trackError(errorTracker)
             .catchErrorJustReturn([])
+        
         let mypageScreenDataModel = playlists.map { playlists -> MypageScreenDataModel in
             return MypageScreenDataModel(playlists: playlists)
         }

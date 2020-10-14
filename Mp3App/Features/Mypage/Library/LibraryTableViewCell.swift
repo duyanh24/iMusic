@@ -1,5 +1,5 @@
 //
-//  PlaylistTableViewCell.swift
+//  InterestedTableViewCell.swift
 //  Mp3App
 //
 //  Created by AnhLD on 10/13/20.
@@ -10,12 +10,12 @@ import UIKit
 import Reusable
 import RxSwift
 
-class PlaylistTableViewCell: UITableViewCell, NibReusable {
-    @IBOutlet weak var playlistImageView: UIImageView!
-    @IBOutlet weak var playlistLabel: UILabel!
+class LibraryTableViewCell: UITableViewCell, NibReusable {
+    @IBOutlet weak var libraryLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
-    var viewModel: PlaylistTableViewCellViewModel!
     private var disposeBag = DisposeBag()
+    var viewModel: LibraryTableViewCellViewModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,11 +30,15 @@ class PlaylistTableViewCell: UITableViewCell, NibReusable {
     }
     
     private func setupUI() {
-        playlistImageView.layer.cornerRadius = 5
         selectionStyle = .none
+        containerView.layer.cornerRadius = 5
+        containerView.layer.shadowColor = UIColor.gray.cgColor
+        containerView.layer.shadowOpacity = 10
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowRadius = 1
     }
     
-    func configureCell(viewModel: PlaylistTableViewCellViewModel) {
+    func configureCell(viewModel: LibraryTableViewCellViewModel) {
         self.viewModel = viewModel
         bindViewModel()
     }
@@ -45,11 +49,11 @@ class PlaylistTableViewCell: UITableViewCell, NibReusable {
     }
 
     private func bindViewModel() {
-        let input = PlaylistTableViewCellViewModel.Input()
+        let input = LibraryTableViewCellViewModel.Input()
         let output = viewModel.transform(input: input)
         
-        output.playlist.subscribe(onNext: { [weak self] (playlist) in
-            self?.playlistLabel.text = playlist
+        output.library.subscribe(onNext: { [weak self] (library) in
+            self?.libraryLabel.text = library
         }).disposed(by: disposeBag)
     }
 }

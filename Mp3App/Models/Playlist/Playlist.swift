@@ -9,11 +9,9 @@
 import Foundation
 
 class Playlist {
-    var id: String?
     var playlistName: String?
     
-    init(id: String?, playlistName: String?) {
-        self.id = id
+    init(playlistName: String?) {
         self.playlistName = playlistName
     }
 }
