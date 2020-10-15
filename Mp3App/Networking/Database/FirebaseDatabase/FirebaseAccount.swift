@@ -18,6 +18,8 @@ class FirebaseAccount {
     private let reference = Database.database().reference()
     private let disposeBag = DisposeBag()
     private let loginResult = PublishSubject<Result<Void, Error>>()
+    private let playlistResult = PublishSubject<Result<[String], Error>>()
+    private let createPlaylistResult = PublishSubject<Result<Void, Error>>()
     
     func login(email: String, password: String) -> Observable<Result<Void, Error>> {
         authencationAccount(email: email, password: password)
@@ -47,24 +49,42 @@ class FirebaseAccount {
         }
     }
     
-    func getAllPlaylist() -> Observable<[String]> {
-        return Observable.create { [weak self] observer -> Disposable in
-            let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
-            
-            if userId.isEmpty {
-                observer.onError(APIError(statusCode: nil, statusMessage: ErrorMessage.notFound))
-            } else {
-                observer.onNext(["playlist1","playlist2","playlist3"])
-                self?.reference.child(FirebaseProperty.users.rawValue).child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    if let playlist = value?.allKeys as? [String] {
-                        observer.onNext(playlist)
-                    } else {
-                        observer.onError(APIError(statusCode: nil, statusMessage: ErrorMessage.unknownError))
-                    }
-                }) { (error) in
-                    observer.onError(APIError(statusCode: nil, statusMessage: error.localizedDescription))
+    func getAllPlaylist() -> Observable<Result<[String], Error>> {
+        let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
+        if userId.isEmpty {
+            playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+        } else {
+            reference.child(FirebaseProperty.users.rawValue).child(userId).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if let playlist = value?.allKeys as? [String] {
+                    print(playlist)
+                    self?.playlistResult.onNext(.success(playlist))
+                } else {
+                    self?.playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.unknownError)))
                 }
+            }) { (error) in
+                self.playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: error.localizedDescription)))
+            }
+        }
+        return playlistResult
+    }
+    
+    func createPlaylist(newPlaylist: String) -> Observable<Result<Void, Error>> {
+//        let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
+//        if userId.isEmpty {
+//            createPlaylistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+//        } else {
+//            createPlaylistResult.onNext(.success(()))
+//            Database.database().reference().child(FirebaseProperty.users.rawValue).child(userId).child(newPlaylist).setValue("")
+//        }
+//        return createPlaylistResult
+        return Observable.create { observer -> Disposable in
+            let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
+            if userId.isEmpty {
+                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+            } else {
+                observer.onNext(.success(()))
+                Database.database().reference().child(FirebaseProperty.users.rawValue).child(userId).child(newPlaylist).setValue("")
             }
             observer.onCompleted()
             return Disposables.create()
@@ -77,7 +97,6 @@ class FirebaseAccount {
             if userId.isEmpty {
                 observer.onError(APIError(statusCode: nil, statusMessage: ErrorMessage.notFound))
             } else {
-                observer.onNext(["album1","album2","album3"])
                 self?.reference.child(FirebaseProperty.users.rawValue).child(userId).child(playlist).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     if let albums = value?.allKeys as? [String] {
@@ -93,25 +112,4 @@ class FirebaseAccount {
             return Disposables.create()
         }
     }
-//    func getPlaylist() {
-//        let ref = Database.database().reference()
-//
-//        ref.child("users").child("SeXtpR45eNa3RZIkzuJTNRfuV5n2").observeSingleEvent(of: .value, with: { (snapshot) in
-//          // Get user value
-//          let value = snapshot.value as? NSDictionary
-//            let playlist = value?.allKeys
-//            print(playlist as! [String])
-//          // ...
-//          }) { (error) in
-//            print(error.localizedDescription)
-//        }
-//    }
-//
-//    func createPlaylist() {
-//        let ref = Database.database().reference()
-//                let songArray = ["Us and Them", "Get Back", "Children of the Sun"]
-//                ref.child("users").child("SeXtpR45eNa3RZIkzuJTNRfuV5n2").child("playlist3").setValue(songArray)
-//        //        ref.child("users").child("SeXtpR45eNa3RZIkzuJTNRfuV5n2").child("playlist1").setValue(songArray)
-//        //        ref.child("users").child("SeXtpR45eNa3RZIkzuJTNRfuV5n2").child("playlist2").setValue(songArray)
-//    }
 }

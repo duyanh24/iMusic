@@ -19,14 +19,6 @@ class PlaylisDetailViewModel: ServicesViewModel {
     }
     
     func transform(input: Input) -> Output {
-//        let dataSource = services.playlistService.getAlbumsFromPlaylist(playlist: playlist)
-//            .flatMapLatest { [weak self] listTrackId -> Observable<[AlbumSectionModel]> in
-//                guard let self = self else {
-//                    return .empty()
-//                }
-//                return self.getAllTrack(listTrackId: listTrackId)
-//        }
-//
         return Output()
     }
 }
@@ -36,12 +28,5 @@ extension PlaylisDetailViewModel {
     }
     
     struct Output {
-        //var dataSource: Observable<[AlbumSectionModel]>
     }
-}
-
-extension PlaylisDetailViewModel {
-//    private func getAllTrack(listTrackId: [String]) -> Observable<[AlbumSectionModel]> {
-//
-//    }
 }

@@ -35,19 +35,12 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     
     override func prepareUI() {
         super.prepareUI()
-        setupNavigationBar()
         playButton.layer.cornerRadius = playButton.frame.size.height / 2
     }
     
     private func bindViewModel() {
         let input = PlaylisDetailViewModel.Input()
         let output = viewModel.transform(input: input)
-        
-    }
-    
-    private func setupNavigationBar() {
-        navigationController?.navigationItem.backBarButtonItem?.title = ""
-        navigationController?.navigationBar.backItem?.backBarButtonItem?.image = Asset.icBackNormal.image
     }
     
     private func setupTableView() {

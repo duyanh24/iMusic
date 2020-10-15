@@ -38,12 +38,13 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        loadData()
+        setupNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,13 +57,16 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         setupTableView()
     }
     
+    private func setupNavigationBar() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
     private func bindViewModel() {
         let input = MypageViewModel.Input(loadDataTrigger: loadDataTrigger)
         let output = viewModel.transform(input: input)
         output.mypageDataModel
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
     }
     
     private func setupTableView() {
@@ -80,13 +84,13 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
                 SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlist: playlist))
                 print(playlist)
             }
-            
         }).disposed(by: disposeBag)
+        
     }
 }
 
 extension MypageViewController {
-    private func loadData() {
+    func loadData() {
         loadDataTrigger.onNext(())
     }
 }
@@ -126,7 +130,13 @@ extension MypageViewController: UITableViewDelegate {
             return nil
         case .playlist:
             let view = PlaylistCellFooterView()
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapFooter))
+            view.addGestureRecognizer(tapRecognizer)
             return view
         }
+    }
+    
+    @objc func handleTapFooter(gestureRecognizer: UIGestureRecognizer) {
+        SceneCoordinator.shared.transition(to: Scene.createPlaylist)
     }
 }

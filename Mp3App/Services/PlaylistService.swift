@@ -14,8 +14,12 @@ protocol HasPlaylistService {
 }
 
 struct PlaylistService {
-    func getAllPlaylist() -> Observable<[String]> {
+    func getAllPlaylist() -> Observable<Result<[String], Error>> {
         return FirebaseAccount.shared.getAllPlaylist()
+    }
+    
+    func createPlaylist(newPlaylist: String) -> Observable<Result<Void, Error>> {
+        return FirebaseAccount.shared.createPlaylist(newPlaylist: newPlaylist)
     }
     
     func getAlbumsFromPlaylist(playlist: String) -> Observable<[String]> {

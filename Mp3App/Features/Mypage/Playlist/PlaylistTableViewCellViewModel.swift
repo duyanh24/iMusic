@@ -24,7 +24,6 @@ class PlaylistTableViewCellViewModel: ViewModel {
 
 extension PlaylistTableViewCellViewModel {
     struct Input {
-        //var selectedPlaylistItem: Observable<IndexPath>
     }
     
     struct Output {

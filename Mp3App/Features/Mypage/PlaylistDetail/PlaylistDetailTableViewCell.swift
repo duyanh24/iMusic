@@ -21,13 +21,10 @@ class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable 
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     private func setupUI() {
@@ -50,7 +47,6 @@ class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable 
                 
         output.track
             .subscribe(onNext: { [weak self] track in
-                // show data album
                 self?.titleLabel.text = track.title
                 self?.singerLabel.text = track.user?.userName
                 guard let url = track.artworkURL else {

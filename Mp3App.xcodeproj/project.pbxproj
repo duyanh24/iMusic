@@ -115,6 +115,9 @@
 		08861D712525C236008C0628 /* TrackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D702525C236008C0628 /* TrackService.swift */; };
 		08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861D732525D65B008C0628 /* HomeScreenDataModel.swift */; };
 		08904C242526FBCF00C57721 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08904C232526FBCF00C57721 /* UserService.swift */; };
+		089E60FE253829EF00B993C7 /* CreatePlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E60FD253829EF00B993C7 /* CreatePlaylistViewController.swift */; };
+		089E610025382A0E00B993C7 /* CreatePlaylistViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */; };
+		089E610225382C3700B993C7 /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */; };
 		180E53AA252DB4B700840DF5 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E53A9252DB4B700840DF5 /* ScreenSize.swift */; };
 		1837FCDE253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837FCDD253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift */; };
 		1837FCE025375BF3009A80A3 /* LibraryTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837FCDF25375BF3009A80A3 /* LibraryTableViewCellViewModel.swift */; };
@@ -250,6 +253,9 @@
 		08861D702525C236008C0628 /* TrackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackService.swift; sourceTree = "<group>"; };
 		08861D732525D65B008C0628 /* HomeScreenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenDataModel.swift; sourceTree = "<group>"; };
 		08904C232526FBCF00C57721 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		089E60FD253829EF00B993C7 /* CreatePlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewController.swift; sourceTree = "<group>"; };
+		089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePlaylistViewController.storyboard; sourceTree = "<group>"; };
+		089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		180E53A9252DB4B700840DF5 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		1837FCDD253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		1837FCDF25375BF3009A80A3 /* LibraryTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -759,6 +765,7 @@
 		085D9632253595F100A9F494 /* Playlist */ = {
 			isa = PBXGroup;
 			children = (
+				089E60FC253829C200B993C7 /* Create */,
 				085D96412535ABD800A9F494 /* PlaylistTableViewCell.swift */,
 				085D96422535ABD800A9F494 /* PlaylistTableViewCell.xib */,
 				1837FCDD253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift */,
@@ -827,6 +834,16 @@
 				08861D732525D65B008C0628 /* HomeScreenDataModel.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		089E60FC253829C200B993C7 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				089E60FD253829EF00B993C7 /* CreatePlaylistViewController.swift */,
+				089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */,
+				089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */,
+			);
+			path = Create;
 			sourceTree = "<group>";
 		};
 		1837FCE125375E04009A80A3 /* PlaylistDetail */ = {
@@ -955,6 +972,7 @@
 				18E9F195253774680049A45B /* PlaylistDetailTableViewCell.xib in Resources */,
 				08504FAB2523346E0033DED0 /* RootTabbarController.storyboard in Resources */,
 				0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */,
+				089E610025382A0E00B993C7 /* CreatePlaylistViewController.storyboard in Resources */,
 				08504FAD2523346E0033DED0 /* SearchViewController.storyboard in Resources */,
 				08504FBE2523346F0033DED0 /* PopularMoviesSample.json in Resources */,
 				082E288C252F1F62008EE1EA /* GoogleService-Info.plist in Resources */,
@@ -1091,6 +1109,7 @@
 				083880952525DE0600987813 /* Observable+Extension.swift in Sources */,
 				087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */,
 				08504FC22523346F0033DED0 /* API.swift in Sources */,
+				089E610225382C3700B993C7 /* CreatePlaylistViewModel.swift in Sources */,
 				18E9F19A25378A6B0049A45B /* MypageCellHeaderView.swift in Sources */,
 				08504FAE2523346E0033DED0 /* SearchVIewModel.swift in Sources */,
 				08504FC12523346F0033DED0 /* HTTPStatusCodes.swift in Sources */,
@@ -1130,6 +1149,7 @@
 				085D96432535ABD800A9F494 /* PlaylistTableViewCell.swift in Sources */,
 				08861D6A2525B58C008C0628 /* User.swift in Sources */,
 				0817DD5725271593007D2966 /* Album.swift in Sources */,
+				089E60FE253829EF00B993C7 /* CreatePlaylistViewController.swift in Sources */,
 				085D963B25359A4300A9F494 /* Playlist.swift in Sources */,
 				0850500D252337330033DED0 /* LoginSerivces.swift in Sources */,
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
