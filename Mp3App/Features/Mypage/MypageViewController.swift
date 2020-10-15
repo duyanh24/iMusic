@@ -38,19 +38,21 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        setupNavigationBar()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(userLoggedIn), name: Notification.Name("UserLoggedIn"), object: nil)
+        loadData()
+        getNotificationPlaylistcreated()
     }
     
-    @objc func userLoggedIn() {
+    private func getNotificationPlaylistcreated() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name(Strings.playlistCreatedNotification), object: nil)
+    }
+    
+    @objc func reloadData() {
         loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,6 +63,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
+        setupNavigationBar()
     }
     
     private func setupNavigationBar() {

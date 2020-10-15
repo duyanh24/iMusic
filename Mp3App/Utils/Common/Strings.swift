@@ -37,6 +37,7 @@ struct Strings {
     static let playlist = "Playlist"
     static let favouriteSong = "Bài hát yêu thích"
     static let createPlaylist = "Tạo playlist mới"
+    static let playlistCreatedNotification = "playlistCreatedNotification"
     
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"

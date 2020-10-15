@@ -13,13 +13,12 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 
-class FirebaseAccount {
-    static let shared = FirebaseAccount()
+class FirebaseDatabase {
+    static let shared = FirebaseDatabase()
     private let reference = Database.database().reference()
     private let disposeBag = DisposeBag()
     private let loginResult = PublishSubject<Result<Void, Error>>()
     private let playlistResult = PublishSubject<Result<[String], Error>>()
-    private let createPlaylistResult = PublishSubject<Result<Void, Error>>()
     
     func login(email: String, password: String) -> Observable<Result<Void, Error>> {
         authencationAccount(email: email, password: password)
@@ -57,7 +56,6 @@ class FirebaseAccount {
             reference.child(FirebaseProperty.users.rawValue).child(userId).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if let playlist = value?.allKeys as? [String] {
-                    print(playlist)
                     self?.playlistResult.onNext(.success(playlist))
                 } else {
                     self?.playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.unknownError)))
@@ -70,14 +68,6 @@ class FirebaseAccount {
     }
     
     func createPlaylist(newPlaylist: String) -> Observable<Result<Void, Error>> {
-//        let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
-//        if userId.isEmpty {
-//            createPlaylistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
-//        } else {
-//            createPlaylistResult.onNext(.success(()))
-//            Database.database().reference().child(FirebaseProperty.users.rawValue).child(userId).child(newPlaylist).setValue("")
-//        }
-//        return createPlaylistResult
         return Observable.create { observer -> Disposable in
             let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
             if userId.isEmpty {
