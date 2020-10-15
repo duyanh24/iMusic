@@ -39,6 +39,12 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         super.viewDidLoad()
         bindViewModel()
         setupNavigationBar()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(userLoggedIn), name: Notification.Name("UserLoggedIn"), object: nil)
+    }
+    
+    @objc func userLoggedIn() {
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

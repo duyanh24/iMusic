@@ -90,6 +90,9 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
     func pop(animated: Bool, toRoot: Bool) {
         if let presentingViewController = currentViewController.presentingViewController {
             currentViewController.dismiss(animated: animated) {
+//                if let mypageViewController = SceneCoordinator.actualViewController(for: presentingViewController) as? MypageViewController {
+//                    mypageViewController.loadData()
+//                }
                 self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
             }
         } else if let navigationController = currentViewController.navigationController {
