@@ -48,7 +48,7 @@ class PlaylistCellFooterView: UIView {
         titleLabel.textColor = .black
         titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         titleLabel.text = Strings.createPlaylist
-        titleLabel.textColor = UIColor(red: 150/255, green: 103/255, blue: 253/255, alpha: 1)
+        titleLabel.textColor = Colors.purpleColor
         containerView.addSubview(titleLabel)
         
         titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true

@@ -33,7 +33,7 @@ enum MypageSectionModel {
 
 enum MypageSectionItem {
     case playlist(type: MypageSectionType, playlist: String)
-    case favourite(type: MypageSectionType, library: String)
+    case favourite(type: MypageSectionType, libraryTitle: String)
     
 }
 

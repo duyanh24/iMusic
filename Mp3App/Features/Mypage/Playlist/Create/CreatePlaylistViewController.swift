@@ -31,18 +31,14 @@ class CreatePlaylistViewController: BaseViewController, StoryboardBased, ViewMod
     }
     
     private func bindViewModel() {
-        let input = CreatePlaylistViewModel.Input(createPlaylist: createButton.rx.tap.asObservable(), newPlaylist: playlistTextField.rx.text.asObservable())
+        let input = CreatePlaylistViewModel.Input(createPlaylist: createButton.rx.tap.asObservable(), newPlaylistName: playlistTextField.rx.text.asObservable())
         
         let output = viewModel.transform(input: input)
         
         output.isCreatePlaylistEnabled.bind(to: createButton.rx.isEnabled).disposed(by: disposeBag)
         
         output.isCreatePlaylistEnabled.subscribe(onNext: { [weak self] isCreatePlaylistEnabled in
-            if isCreatePlaylistEnabled {
-                self?.createButton.backgroundColor = .purple
-            } else {
-                self?.createButton.backgroundColor = .gray
-            }
+            self?.createButton.backgroundColor = isCreatePlaylistEnabled ? Colors.purpleColor : .gray
         }).disposed(by: disposeBag)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)

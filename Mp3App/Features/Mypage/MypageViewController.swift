@@ -22,9 +22,9 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<MypageSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
         switch dataSource[indexPath] {
-        case .favourite(let type, let library):
+        case .favourite(let type, let libraryTitle):
             let cell = tableView.dequeueReusableCell(for: indexPath) as LibraryTableViewCell
-            let libraryTableViewCellViewModel = LibraryTableViewCellViewModel(library: library)
+            let libraryTableViewCellViewModel = LibraryTableViewCellViewModel(libraryTitle: libraryTitle)
             cell.configureCell(viewModel: libraryTableViewCellViewModel)
             return cell
         case .playlist(let type, let playlist):
@@ -37,12 +37,12 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotificationCenter()
         bindViewModel()
         loadData()
-        getNotificationPlaylistcreated()
     }
     
-    private func getNotificationPlaylistcreated() {
+    private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name(Strings.playlistCreatedNotification), object: nil)
     }
     
@@ -126,9 +126,9 @@ extension MypageViewController: UITableViewDelegate {
         let view = MypageCellHeaderView()
         switch dataSource[section] {
         case .favourite:
-            view.titleLabel.text = Strings.library
+            view.setTitle(title: Strings.library)
         case .playlist:
-            view.titleLabel.text = Strings.playlist
+            view.setTitle(title: Strings.playlist)
         }
         return view
     }

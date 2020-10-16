@@ -11,14 +11,14 @@ import RxSwift
 import RxCocoa
 
 class LibraryTableViewCellViewModel: ViewModel {
-    private let library: String
+    private let libraryTitle: String
     
-    init(library: String) {
-        self.library = library
+    init(libraryTitle: String) {
+        self.libraryTitle = libraryTitle
     }
     
     func transform(input: Input) -> Output {
-        return Output(library: .just(library))
+        return Output(libraryTitle: .just(libraryTitle))
     }
 }
 
@@ -27,6 +27,6 @@ extension LibraryTableViewCellViewModel {
     }
     
     struct Output {
-        var library: Observable<String>
+        var libraryTitle: Observable<String>
     }
 }

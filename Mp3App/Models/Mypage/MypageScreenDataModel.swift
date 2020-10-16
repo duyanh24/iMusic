@@ -9,19 +9,19 @@
 import Foundation
 
 class MypageScreenDataModel {
-    var playlists: [String] = []
+    var playlistName: [String] = []
     
-    init (playlists: [String]) {
-        self.playlists = playlists
+    init (playlistName: [String]) {
+        self.playlistName = playlistName
     }
     
     func toDataSource() -> [MypageSectionModel] {
         var sectionModels = [MypageSectionModel]()
-        sectionModels.append(.favourite(type: .favourite, items: [MypageSectionItem.favourite(type: .favourite, library: Strings.favouriteSong)]))
-        if !playlists.isEmpty {
+        sectionModels.append(.favourite(type: .favourite, items: [MypageSectionItem.favourite(type: .favourite, libraryTitle: Strings.favouriteSong)]))
+        if !playlistName.isEmpty {
             sectionModels.append(.playlist(
                 type: .playlist,
-                items: playlists.map { MypageSectionItem.playlist(type: .playlist, playlist: $0)})
+                items: playlistName.map { MypageSectionItem.playlist(type: .playlist, playlist: $0)})
             )
         }
         return sectionModels

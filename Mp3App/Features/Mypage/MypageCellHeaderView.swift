@@ -9,7 +9,7 @@
 import UIKit
 
 class MypageCellHeaderView: UIView {
-    let titleLabel = UILabel()
+    private let titleLabel = UILabel()
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -19,6 +19,10 @@ class MypageCellHeaderView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+    }
+    
+    func setTitle(title: String) {
+        titleLabel.text = title
     }
 
     private func setupView() {

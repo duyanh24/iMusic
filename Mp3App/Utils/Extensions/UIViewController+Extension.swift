@@ -96,9 +96,6 @@ extension UIViewController: UIAdaptivePresentationControllerDelegate {
         if let presentingViewController = presentingViewController {
             SceneCoordinator.shared.setCurrentViewController(viewController: presentingViewController)
         } else {
-//            if let mypageViewController = self as? MypageViewController {
-//                mypageViewController.loadData()
-//            }
             SceneCoordinator.shared.setCurrentViewController(viewController: self)
         }
     }

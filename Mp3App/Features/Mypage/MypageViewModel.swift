@@ -37,17 +37,14 @@ extension MypageViewModel {
 
 extension MypageViewModel {
     private func getAllMypageData() -> Observable<MypageScreenDataModel> {
-        let playlists = services.playlistService.getAllPlaylist()
-            .trackError(errorTracker)
-        
-        let mypageScreenDataModel = playlists.map { playlists -> MypageScreenDataModel in
-            switch playlists {
-            case .failure:
-                return MypageScreenDataModel(playlists: [])
-            case .success(let playlists):
-                return MypageScreenDataModel(playlists: playlists)
-            }
+        return services.playlistService.getAllPlaylist().trackError(errorTracker)
+            .map { playlists -> MypageScreenDataModel in
+                switch playlists {
+                case .failure:
+                    return MypageScreenDataModel(playlistName: [])
+                case .success(let playlists):
+                    return MypageScreenDataModel(playlistName: playlists)
+                }
         }
-        return mypageScreenDataModel
     }
 }

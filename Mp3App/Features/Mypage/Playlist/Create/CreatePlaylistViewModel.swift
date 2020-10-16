@@ -15,33 +15,29 @@ class CreatePlaylistViewModel: ServicesViewModel {
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
-        let isCreatePlaylistEnabled = input.newPlaylist
-            .map { [weak self] newPlaylist -> Bool in
-                guard let self = self, let newPlaylist = newPlaylist
+        let isCreatePlaylistEnabled = input.newPlaylistName
+            .map { newPlaylistName -> Bool in
+                guard let newPlaylistName = newPlaylistName
                     else { return false }
-                return self.validatePlaylist(newPlaylist: newPlaylist)
+                return !newPlaylistName.isEmpty
         }
         
-        let createPlaylistResult =  input.createPlaylist.withLatestFrom(input.newPlaylist)
-            .flatMapLatest({ [weak self] newPlaylist -> Observable<Result<Void, Error>> in
-                guard let self = self, let newPlaylist = newPlaylist else {
+        let createPlaylistResult =  input.createPlaylist.withLatestFrom(input.newPlaylistName)
+            .flatMapLatest({ [weak self] newPlaylistName -> Observable<Result<Void, Error>> in
+                guard let self = self, let newPlaylistName = newPlaylistName else {
                     return .empty()
                 }
-                return self.services.playlistService.createPlaylist(newPlaylist: newPlaylist).trackActivity(activityIndicator)
+                return self.services.playlistService.createPlaylist(newPlaylist: newPlaylistName).trackActivity(activityIndicator)
             })
 
         return Output(createPlaylistResult: createPlaylistResult, activityIndicator: activityIndicator.asObservable(), isCreatePlaylistEnabled: isCreatePlaylistEnabled)
-    }
-    
-    func validatePlaylist(newPlaylist: String) -> Bool {
-        return newPlaylist.count > 0
     }
 }
 
 extension CreatePlaylistViewModel {
     struct Input {
         var createPlaylist: Observable<Void>
-        var newPlaylist: Observable<String?>
+        var newPlaylistName: Observable<String?>
     }
     
     struct Output {

@@ -52,8 +52,8 @@ class LibraryTableViewCell: UITableViewCell, NibReusable {
         let input = LibraryTableViewCellViewModel.Input()
         let output = viewModel.transform(input: input)
         
-        output.library.subscribe(onNext: { [weak self] (library) in
-            self?.libraryLabel.text = library
+        output.libraryTitle.subscribe(onNext: { [weak self] (libraryTitle) in
+            self?.libraryLabel.text = libraryTitle
         }).disposed(by: disposeBag)
     }
 }
