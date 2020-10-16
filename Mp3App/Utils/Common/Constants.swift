@@ -22,7 +22,7 @@ enum ErrorMessage {
     static let badRequest = "Bad request"
     static let serverError = "Server error"
     static let errorOccur = "An error occurs"
-    static let authenticalError = "authentical error"
+    static let authenticalError = "Lỗi xác thực tài khoản"
     static let wrongPassword = "Mật khẩu không chính xác"
     static let invalidEmail = "Email không đúng định dạng"
     static let wrongEmail = "Email không chính xác"

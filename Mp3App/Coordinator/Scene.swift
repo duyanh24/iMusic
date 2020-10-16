@@ -16,6 +16,8 @@ enum Scene {
     case splash
     case tabbar
     case login
+    case playlistDetail(playlist: String)
+    case createPlaylist
 }
 
 extension Scene: TargetScene {
@@ -28,25 +30,26 @@ extension Scene: TargetScene {
             let homeServices = HomeServices(trackService: TrackService(), userService: UserService())
             let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel, andServices: homeServices)
             let homeNavController = BaseNavigationController(rootViewController: homeViewController)
-            let homeTabbarItem = UITabBarItem(title: Strings.home, image: nil, selectedImage: nil)
+            let homeTabbarItem = UITabBarItem(title: Strings.home, image: Asset.tabbarButtonDiscoverNormalNormal.image, selectedImage: Asset.tabbarButtonDiscoverSelectedNormal.image)
             homeNavController.tabBarItem = homeTabbarItem
             
             let searchViewModel = SearchViewModel()
             let searchViewController = SearchViewController.instantiate(withViewModel: searchViewModel)
             let searchNavController = BaseNavigationController(rootViewController: searchViewController)
-            let searchTabbarItem = UITabBarItem(title: Strings.search, image: nil, selectedImage: nil)
+            let searchTabbarItem = UITabBarItem(title: Strings.search, image: Asset.icSearchBlackNormal.image, selectedImage: Asset.icSearchBlackNormal.image)
             searchNavController.tabBarItem = searchTabbarItem
             
             let mypageViewModel = MypageViewModel()
-            let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel)
+            let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
+            let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel, andServices: mypageServices)
             let mypageNavController = BaseNavigationController(rootViewController: mypageViewController)
-            let moreTabbarItem = UITabBarItem(title: Strings.profile, image: nil, selectedImage: nil)
-            mypageNavController.tabBarItem = moreTabbarItem
+            let mypageTabbarItem = UITabBarItem(title: Strings.profile, image: Asset.tabbarButtonPersonalNormalNormal.image, selectedImage: Asset.tabbarButtonPersonalSelectedNormal.image)
+            mypageNavController.tabBarItem = mypageTabbarItem
             
             let settingViewModel = SettingViewModel()
             let settingViewController = SettingViewController.instantiate(withViewModel: settingViewModel)
             let settingNavController = BaseNavigationController(rootViewController: settingViewController)
-            let settingTabbarItem = UITabBarItem(title: Strings.settings, image: nil, selectedImage: nil)
+            let settingTabbarItem = UITabBarItem(title: Strings.settings, image: Asset.tabbarSettingsNormalNormal.image, selectedImage: Asset.tabbarSettingsSelectedNormal.image)
             settingNavController.tabBarItem = settingTabbarItem
             
             rootTabbarController.viewControllers = [homeNavController, searchNavController, mypageNavController, settingNavController]
@@ -62,6 +65,18 @@ extension Scene: TargetScene {
             let loginServices = LoginServices(authencationService: AuthencationService())
             let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel, andServices: loginServices)
             return .root(loginViewController)
+            
+        case .playlistDetail(let playlist):
+            let playlistDetailViewModel = PlaylisDetailViewModel(playlist: playlist)
+            let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
+            let playlistDetailViewController = PlaylistDetailViewController.instantiate(withViewModel: playlistDetailViewModel, andServices: mypageServices)
+            return .push(playlistDetailViewController)
+            
+        case .createPlaylist:
+            let createPlaylistViewModel = CreatePlaylistViewModel()
+            let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
+            let createPlaylistViewController = CreatePlaylistViewController.instantiate(withViewModel: createPlaylistViewModel, andServices: mypageServices)
+            return .present(createPlaylistViewController)
         }
     }
 }

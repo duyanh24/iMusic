@@ -14,6 +14,7 @@ enum APIRouter {
     case getChartTrack(kind: APIParameterKey, limit: Int, offset: Int)
     case getAlbums(kind: APIParameterKey, genre: TrackGenre, limit: Int, offset: Int)
     case getPopularUser(limit: Int, offset: Int)
+    case getTrack(trackId: String)
 }
 
 extension APIRouter: TargetType {
@@ -75,6 +76,8 @@ extension APIRouter: TargetType {
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
+        case .getTrack:
+            return .requestPlain
         }
     }
     
@@ -90,6 +93,8 @@ extension APIRouter: TargetType {
             return "/charts"
         case .getPopularUser:
             return "/users"
+        case .getTrack(let trackId):
+            return "/tracks/\(trackId)"
         }
     }
 }

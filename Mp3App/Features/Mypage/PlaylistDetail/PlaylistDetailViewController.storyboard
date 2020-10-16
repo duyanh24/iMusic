@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5on-e2-S8O">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Playlist Detail View Controller-->
+        <scene sceneID="5rj-7U-Xn4">
+            <objects>
+                <viewController id="5on-e2-S8O" customClass="PlaylistDetailViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PT1-k0-E4t">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYC-ZV-V4B">
+                                <rect key="frame" x="50" y="54" width="314" height="40"/>
+                                <color key="backgroundColor" red="0.52362823489999999" green="0.27759590740000001" blue="0.65983343120000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="JRs-0m-F9Q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="PHÁT NGẪU NHIÊN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hQQ-tg-tHC">
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="hQQ-tg-tHC" firstAttribute="top" secondItem="RYC-ZV-V4B" secondAttribute="bottom" constant="10" id="GeI-8S-Xor"/>
+                            <constraint firstItem="Zcr-aN-buV" firstAttribute="trailing" secondItem="RYC-ZV-V4B" secondAttribute="trailing" constant="50" id="PtI-fP-J7H"/>
+                            <constraint firstItem="Zcr-aN-buV" firstAttribute="trailing" secondItem="hQQ-tg-tHC" secondAttribute="trailing" id="Qa9-lB-tyh"/>
+                            <constraint firstItem="RYC-ZV-V4B" firstAttribute="leading" secondItem="Zcr-aN-buV" secondAttribute="leading" constant="50" id="Qr9-Df-2lP"/>
+                            <constraint firstItem="hQQ-tg-tHC" firstAttribute="leading" secondItem="Zcr-aN-buV" secondAttribute="leading" id="Sov-Y1-YMQ"/>
+                            <constraint firstItem="RYC-ZV-V4B" firstAttribute="top" secondItem="Zcr-aN-buV" secondAttribute="top" constant="10" id="fm1-FZ-U5Q"/>
+                            <constraint firstItem="Zcr-aN-buV" firstAttribute="bottom" secondItem="hQQ-tg-tHC" secondAttribute="bottom" id="leF-tW-wYd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zcr-aN-buV"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EwI-DE-iP2">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ZlH-C8-FaG"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="playButton" destination="RYC-ZV-V4B" id="aVf-g3-DSm"/>
+                        <outlet property="tableView" destination="hQQ-tg-tHC" id="Mzn-00-Ay4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="awj-xP-5vQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-170" y="45"/>
+        </scene>
+    </scenes>
+</document>

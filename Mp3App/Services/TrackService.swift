@@ -25,4 +25,8 @@ struct TrackService {
     func getAlbums(kind: APIParameterKey, genre: TrackGenre, limit: Int = 20, offset: Int = 0) -> Observable<TrackListResponse> {
         return HostAPIClient.performApiNetworkCall(router: .getAlbums(kind: kind, genre: genre, limit: limit, offset: offset), type: TrackListResponse.self)
     }
+    
+    func getTrack(trackId: String) -> Observable<Track> {
+        return HostAPIClient.performApiNetworkCall(router: .getTrack(trackId: trackId), type: Track.self)
+    }
 }

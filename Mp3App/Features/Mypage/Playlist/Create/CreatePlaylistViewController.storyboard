@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dfN-qE-cNi">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create Playlist View Controller-->
+        <scene sceneID="bb9-dZ-5kq">
+            <objects>
+                <viewController id="dfN-qE-cNi" customClass="CreatePlaylistViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aVZ-dH-2MX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tên playlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oyj-EK-rK1">
+                                <rect key="frame" x="20" y="74" width="374" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập tên của Playlist" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S5R-aX-wQv">
+                                <rect key="frame" x="20" y="108.5" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="CZI-Ci-Erg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tGS-pv-YUj">
+                                <rect key="frame" x="20" y="143.5" width="374" height="1"/>
+                                <color key="backgroundColor" red="0.52301096920000001" green="0.27728423479999997" blue="0.65955215690000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="eQQ-c6-sf7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntM-aM-dvy">
+                                <rect key="frame" x="40" y="802" width="334" height="40"/>
+                                <color key="backgroundColor" red="0.52301096920000001" green="0.27728423479999997" blue="0.65955215690000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="S4M-fX-v8h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="TẠO PLAYLIST">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzm-bB-V0u">
+                                <rect key="frame" x="20" y="158.5" width="374" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="GM0-lu-iLv" firstAttribute="trailing" secondItem="Wzm-bB-V0u" secondAttribute="trailing" constant="20" id="5N7-R5-Abo"/>
+                            <constraint firstItem="Wzm-bB-V0u" firstAttribute="top" secondItem="S5R-aX-wQv" secondAttribute="bottom" constant="10" id="6Nu-xW-WaK"/>
+                            <constraint firstItem="GM0-lu-iLv" firstAttribute="trailing" secondItem="Oyj-EK-rK1" secondAttribute="trailing" constant="20" id="Al8-u9-b2U"/>
+                            <constraint firstItem="tGS-pv-YUj" firstAttribute="leading" secondItem="GM0-lu-iLv" secondAttribute="leading" constant="20" id="Bdf-Sx-swE"/>
+                            <constraint firstItem="S5R-aX-wQv" firstAttribute="leading" secondItem="GM0-lu-iLv" secondAttribute="leading" constant="20" id="I4D-zN-WXj"/>
+                            <constraint firstItem="S5R-aX-wQv" firstAttribute="top" secondItem="Oyj-EK-rK1" secondAttribute="bottom" constant="20" id="Iiz-NJ-fah"/>
+                            <constraint firstItem="Wzm-bB-V0u" firstAttribute="leading" secondItem="GM0-lu-iLv" secondAttribute="leading" constant="20" id="K0P-Hn-CBF"/>
+                            <constraint firstItem="Oyj-EK-rK1" firstAttribute="leading" secondItem="GM0-lu-iLv" secondAttribute="leading" constant="20" id="PkC-h4-sFK"/>
+                            <constraint firstItem="GM0-lu-iLv" firstAttribute="trailing" secondItem="ntM-aM-dvy" secondAttribute="trailing" constant="40" id="UjK-Ve-mPz"/>
+                            <constraint firstItem="tGS-pv-YUj" firstAttribute="top" secondItem="S5R-aX-wQv" secondAttribute="bottom" constant="-5" id="Vd7-Dg-Lhm"/>
+                            <constraint firstItem="GM0-lu-iLv" firstAttribute="trailing" secondItem="tGS-pv-YUj" secondAttribute="trailing" constant="20" id="cui-mX-wX3"/>
+                            <constraint firstItem="GM0-lu-iLv" firstAttribute="bottom" secondItem="ntM-aM-dvy" secondAttribute="bottom" constant="20" id="eP7-iN-XUW"/>
+                            <constraint firstItem="ntM-aM-dvy" firstAttribute="leading" secondItem="GM0-lu-iLv" secondAttribute="leading" constant="40" id="vb3-in-OO8"/>
+                            <constraint firstItem="Oyj-EK-rK1" firstAttribute="top" secondItem="GM0-lu-iLv" secondAttribute="top" constant="30" id="wBC-mp-FO7"/>
+                            <constraint firstItem="GM0-lu-iLv" firstAttribute="trailing" secondItem="S5R-aX-wQv" secondAttribute="trailing" constant="20" id="zJV-cw-RRX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GM0-lu-iLv"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="aVZ-dH-2MX" id="LnC-B8-5CQ"/>
+                        <outlet property="createButton" destination="ntM-aM-dvy" id="dVy-e7-t9O"/>
+                        <outlet property="errorLabel" destination="Wzm-bB-V0u" id="SgH-S9-JB8"/>
+                        <outlet property="playlistTextField" destination="S5R-aX-wQv" id="wDa-zU-n1t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jqc-Ht-5HX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="343" y="-191"/>
+        </scene>
+    </scenes>
+</document>
