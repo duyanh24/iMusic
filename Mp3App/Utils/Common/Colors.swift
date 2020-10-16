@@ -11,4 +11,5 @@ import UIKit
 
 struct Colors {
     @nonobjc static let purpleColor = UIColor(red: 150/255, green: 103/255, blue: 253/255, alpha: 1)
+    @nonobjc static let loginButtonColor = UIColor(red: 14/255, green: 142/255, blue: 222/255, alpha: 1)
 }

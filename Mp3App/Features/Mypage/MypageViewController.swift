@@ -67,7 +67,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func setupNavigationBar() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.icBackNormal.image, style: .plain, target: nil, action: nil)
     }
     
     private func bindViewModel() {
@@ -139,7 +139,7 @@ extension MypageViewController: UITableViewDelegate {
         case .playlist:
             let playlistCellFooterView = PlaylistCellFooterView()
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapFooter))
-            view.addGestureRecognizer(tapRecognizer)
+            playlistCellFooterView.addGestureRecognizer(tapRecognizer)
             return playlistCellFooterView
         }
     }

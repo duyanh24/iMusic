@@ -18,6 +18,7 @@
 		08143BE8252C5A3400BF3993 /* ChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08143BE6252C5A3400BF3993 /* ChartTableViewCell.xib */; };
 		08143BEA252C5E0500BF3993 /* ChartTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08143BE9252C5E0500BF3993 /* ChartTableViewCellViewModel.swift */; };
 		08143BEC252C76B300BF3993 /* ChartCellHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08143BEB252C76B300BF3993 /* ChartCellHeaderView.swift */; };
+		08150D78253989F200E165B5 /* InputValidateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08150D77253989F200E165B5 /* InputValidateHelper.swift */; };
 		0817DD5725271593007D2966 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5625271593007D2966 /* Album.swift */; };
 		0817DD5D252726CF007D2966 /* SlideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */; };
 		0817DD5E252726CF007D2966 /* SlideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */; };
@@ -154,6 +155,7 @@
 		08143BE6252C5A3400BF3993 /* ChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartTableViewCell.xib; sourceTree = "<group>"; };
 		08143BE9252C5E0500BF3993 /* ChartTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		08143BEB252C76B300BF3993 /* ChartCellHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCellHeaderView.swift; sourceTree = "<group>"; };
+		08150D77253989F200E165B5 /* InputValidateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidateHelper.swift; sourceTree = "<group>"; };
 		0817DD5625271593007D2966 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		0817DD5B252726CF007D2966 /* SlideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTableViewCell.swift; sourceTree = "<group>"; };
 		0817DD5C252726CF007D2966 /* SlideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideTableViewCell.xib; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 			children = (
 				1845F900252C7145000D0FDC /* Converter.swift */,
 				180E53A9252DB4B700840DF5 /* ScreenSize.swift */,
+				08150D77253989F200E165B5 /* InputValidateHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1122,6 +1125,7 @@
 				08505008252336C90033DED0 /* LoginViewController.swift in Sources */,
 				083880932525DDB500987813 /* ActivityIndicator.swift in Sources */,
 				189D000A253456C20052F12F /* SplashServices.swift in Sources */,
+				08150D78253989F200E165B5 /* InputValidateHelper.swift in Sources */,
 				08504FB42523346E0033DED0 /* BaseViewController.swift in Sources */,
 				1845F908252C7995000D0FDC /* AlbumCollectionViewCell.swift in Sources */,
 				083880912525DD4F00987813 /* ErrorTracker.swift in Sources */,

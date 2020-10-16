@@ -21,7 +21,7 @@ class AccountDefault {
         return UserDefaults.standard.string(forKey: key.rawValue) ?? ""
     }
     
-    func clearUserData(){
+    func clearUserData() {
         userDefault.removeObject(forKey: AccountDefaultKey.idkey.rawValue)
         userDefault.removeObject(forKey: AccountDefaultKey.emailKey.rawValue)
         userDefault.removeObject(forKey: AccountDefaultKey.passwordKey.rawValue)

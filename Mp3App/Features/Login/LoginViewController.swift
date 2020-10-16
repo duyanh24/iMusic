@@ -17,7 +17,8 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var passwordErrorLabel: UILabel!
+    @IBOutlet weak var emailErrorLabel: UILabel!
     
     var viewModel: LoginViewModel!
     private let disposeBag = DisposeBag()
@@ -50,11 +51,8 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         
         output.isLoginEnabled.bind(to: loginButton.rx.isEnabled).disposed(by: disposeBag)
         output.isLoginEnabled.subscribe(onNext: { [weak self] (isLoginEnabled) in
-            if isLoginEnabled {
-                self?.loginButton.backgroundColor = .systemTeal
-            } else {
-                self?.loginButton.backgroundColor = .gray
-            }
+            self?.loginButton.backgroundColor = isLoginEnabled ? Colors.loginButtonColor : Colors.loginButtonColor.withAlphaComponent(0.2)
+            self?.loginButton.setTitleColor(isLoginEnabled ? .white : UIColor.white.withAlphaComponent(0.3), for: .normal)
         }).disposed(by: disposeBag)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
@@ -64,13 +62,15 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 guard let self = self else { return }
                 switch result {
                 case .failure(let error):
-                    self.errorLabel.text = error.localizedDescription
-                case .success(let id):
-                    print(id)
+                    self.showErrorAlert(message: error.localizedDescription, completion: {})
+                case .success:
                     SceneCoordinator.shared.transition(to: Scene.tabbar)
                 }
             })
             .disposed(by: disposeBag)
+        
+        output.emailValidateError.bind(to: emailErrorLabel.rx.text).disposed(by: disposeBag)
+        output.passwordValidateError.bind(to: passwordErrorLabel.rx.text).disposed(by: disposeBag)
     }
     
     private func setupTextField() {

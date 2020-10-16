@@ -47,7 +47,8 @@ extension Scene: TargetScene {
             mypageNavController.tabBarItem = mypageTabbarItem
             
             let settingViewModel = SettingViewModel()
-            let settingViewController = SettingViewController.instantiate(withViewModel: settingViewModel)
+            let settingServices = SettingServices(authencationService: AuthencationService())
+            let settingViewController = SettingViewController.instantiate(withViewModel: settingViewModel, andServices: settingServices)
             let settingNavController = BaseNavigationController(rootViewController: settingViewController)
             let settingTabbarItem = UITabBarItem(title: Strings.settings, image: Asset.tabbarSettingsNormalNormal.image, selectedImage: Asset.tabbarSettingsSelectedNormal.image)
             settingNavController.tabBarItem = settingTabbarItem
