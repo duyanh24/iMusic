@@ -82,7 +82,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         tableView.delegate = self
         tableView.register(cellType: LibraryTableViewCell.self)
         tableView.register(cellType: PlaylistTableViewCell.self)
-        tableView.rx.itemSelected.subscribe(onNext: { [weak self] (indexPath) in
+        tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             guard let self = self else {
                 return
             }
@@ -94,7 +94,6 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
                 print(playlist)
             }
         }).disposed(by: disposeBag)
-        
     }
 }
 
@@ -138,10 +137,10 @@ extension MypageViewController: UITableViewDelegate {
         case .favourite:
             return nil
         case .playlist:
-            let view = PlaylistCellFooterView()
+            let playlistCellFooterView = PlaylistCellFooterView()
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapFooter))
             view.addGestureRecognizer(tapRecognizer)
-            return view
+            return playlistCellFooterView
         }
     }
     
