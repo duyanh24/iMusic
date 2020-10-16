@@ -43,8 +43,8 @@ extension Scene: TargetScene {
             let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
             let mypageViewController = MypageViewController.instantiate(withViewModel: mypageViewModel, andServices: mypageServices)
             let mypageNavController = BaseNavigationController(rootViewController: mypageViewController)
-            let moreTabbarItem = UITabBarItem(title: Strings.profile, image: Asset.tabbarButtonPersonalNormalNormal.image, selectedImage: Asset.tabbarButtonPersonalSelectedNormal.image)
-            mypageNavController.tabBarItem = moreTabbarItem
+            let mypageTabbarItem = UITabBarItem(title: Strings.profile, image: Asset.tabbarButtonPersonalNormalNormal.image, selectedImage: Asset.tabbarButtonPersonalSelectedNormal.image)
+            mypageNavController.tabBarItem = mypageTabbarItem
             
             let settingViewModel = SettingViewModel()
             let settingViewController = SettingViewController.instantiate(withViewModel: settingViewModel)

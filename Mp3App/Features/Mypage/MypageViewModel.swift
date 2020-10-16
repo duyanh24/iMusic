@@ -41,9 +41,9 @@ extension MypageViewModel {
             .map { playlists -> MypageScreenDataModel in
                 switch playlists {
                 case .failure:
-                    return MypageScreenDataModel(playlistName: [])
+                    return MypageScreenDataModel(playlistNames: [])
                 case .success(let playlists):
-                    return MypageScreenDataModel(playlistName: playlists)
+                    return MypageScreenDataModel(playlistNames: playlists)
                 }
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 import RxSwift
 
-class LibraryTableViewCell: UITableViewCell, NibReusable {
+class LibraryTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var libraryLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
