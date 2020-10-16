@@ -67,9 +67,9 @@ extension Scene: TargetScene {
             return .root(loginViewController)
             
         case .playlistDetail(let playlist):
-            let playlisDetailViewModel = PlaylisDetailViewModel(playlist: playlist)
+            let playlistDetailViewModel = PlaylisDetailViewModel(playlist: playlist)
             let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
-            let playlistDetailViewController = PlaylistDetailViewController.instantiate(withViewModel: playlisDetailViewModel, andServices: mypageServices)
+            let playlistDetailViewController = PlaylistDetailViewController.instantiate(withViewModel: playlistDetailViewModel, andServices: mypageServices)
             return .push(playlistDetailViewController)
             
         case .createPlaylist:
