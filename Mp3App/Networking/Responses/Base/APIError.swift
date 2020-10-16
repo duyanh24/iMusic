@@ -24,9 +24,6 @@ struct APIError: Error, Codable {
         case AuthencationStatusCode.FIRAuthErrorCodeWrongPassword.rawValue:
             self.statusCode = AuthencationStatusCode.FIRAuthErrorCodeWrongPassword.rawValue
             self.statusMessage = ErrorMessage.wrongPassword
-        case AuthencationStatusCode.FIRAuthErrorCodeInvalidEmail.rawValue:
-            self.statusCode = AuthencationStatusCode.FIRAuthErrorCodeInvalidEmail.rawValue
-            self.statusMessage = ErrorMessage.invalidEmail
         case AuthencationStatusCode.FIRAuthErrorCodeUserNotFound.rawValue:
             self.statusCode = AuthencationStatusCode.FIRAuthErrorCodeUserNotFound.rawValue
             self.statusMessage = ErrorMessage.wrongEmail

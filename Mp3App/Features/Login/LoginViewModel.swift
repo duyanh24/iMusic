@@ -28,17 +28,30 @@ class LoginViewModel: ServicesViewModel {
                 guard let self = self, let email = email, let password = password else {
                     return .empty()
                 }
-                return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
+                if self.isValidEmail(email: email) {
+                    return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
+                } else {
+                    return Observable.create { observer -> Disposable in
+                        observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.invalidEmail)))
+                        observer.onCompleted()
+                        return Disposables.create()
+                    }
+                }
             })
         return Output(loginResult: loginResult, activityIndicator: activityIndicator.asObservable(), isLoginEnabled: isLoginEnabled)
     }
     
-    func validateEmail(email: String) -> Bool {
+    private func validateEmail(email: String) -> Bool {
         return email.count > 6
     }
     
-    func validatePassword(password: String) -> Bool {
+    private func validatePassword(password: String) -> Bool {
         return password.count > 6
+    }
+    
+    private func isValidEmail(email: String) -> Bool {
+        let regularExpressionForEmail = Strings.regularExpressionForEmail
+        return NSPredicate(format: Strings.emailFormat, regularExpressionForEmail).evaluate(with: email)
     }
 }
 
