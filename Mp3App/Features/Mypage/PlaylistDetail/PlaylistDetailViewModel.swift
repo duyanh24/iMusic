@@ -8,18 +8,23 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class PlaylisDetailViewModel: ServicesViewModel {
     var services: MypageServices!
     private let errorTracker = ErrorTracker()
-    private var playlist: String
+    private var playlistName: String
     
-    init(playlist: String) {
-        self.playlist = playlist
-    }
+    init(playlistName: String) {
+        self.playlistName = playlistName    }
     
     func transform(input: Input) -> Output {
-        return Output()
+        let activityIndicator = ActivityIndicator()
+        
+        let dataSource = getTracksFromPlaylist().map { tracks -> [TrackSectionModel] in
+            return [TrackSectionModel(model: "", items: tracks)]
+        }.trackActivity(activityIndicator)
+        return Output(dataSource: dataSource, playlistName: .just(playlistName), activityIndicator: activityIndicator.asObservable())
     }
 }
 
@@ -28,5 +33,22 @@ extension PlaylisDetailViewModel {
     }
     
     struct Output {
+        var dataSource: Observable<[TrackSectionModel]>
+        var playlistName: Observable<String>
+        var activityIndicator: Observable<Bool>
+    }
+}
+
+extension PlaylisDetailViewModel {
+    private func getTracksFromPlaylist() -> Observable<[Track]> {
+        return services.playlistService.getTracksFromPlaylist(playlistName: playlistName).trackError(errorTracker)
+            .map { result -> [Track] in
+                switch result {
+                case .failure:
+                    return []
+                case .success(let tracks):
+                    return tracks
+                }
+        }
     }
 }

@@ -36,11 +36,23 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     override func prepareUI() {
         super.prepareUI()
         playButton.layer.cornerRadius = playButton.frame.size.height / 2
+        setupTableView()
     }
     
     private func bindViewModel() {
         let input = PlaylisDetailViewModel.Input()
         let output = viewModel.transform(input: input)
+        
+        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        
+        output.playlistName.subscribe(onNext: { [weak self] playlistName in
+            self?.title = playlistName
+        })
+        .disposed(by: disposeBag)
+        
+        output.dataSource
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
     
     private func setupTableView() {

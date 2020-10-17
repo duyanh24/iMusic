@@ -89,11 +89,11 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
             switch self.dataSource[indexPath] {
             case .favourite(_, let library):
                 print(library)
-            case .playlist(_, let playlist):
-                SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlist: playlist))
-                print(playlist)
+            case .playlist(_, let playlistName):
+                SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlistName: playlistName))
             }
         }).disposed(by: disposeBag)
+        setupLongPressGesture()
     }
 }
 
@@ -139,12 +139,30 @@ extension MypageViewController: UITableViewDelegate {
         case .playlist:
             let playlistCellFooterView = PlaylistCellFooterView()
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapFooter))
-            view.addGestureRecognizer(tapRecognizer)
+            playlistCellFooterView.addGestureRecognizer(tapRecognizer)
             return playlistCellFooterView
         }
     }
     
     @objc func handleTapFooter(gestureRecognizer: UIGestureRecognizer) {
         SceneCoordinator.shared.transition(to: Scene.createPlaylist)
+    }
+}
+
+extension MypageViewController: UIGestureRecognizerDelegate {
+    private func setupLongPressGesture() {
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MypageViewController.handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 1.0
+        longPressGesture.delegate = self
+        self.tableView.addGestureRecognizer(longPressGesture)
+    }
+
+    @objc func handleLongPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
+            let touchPoint = longPressGestureRecognizer.location(in: self.view)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                print(indexPath)
+            }
+        }
     }
 }

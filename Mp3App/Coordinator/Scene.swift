@@ -16,7 +16,7 @@ enum Scene {
     case splash
     case tabbar
     case login
-    case playlistDetail(playlist: String)
+    case playlistDetail(playlistName: String)
     case createPlaylist
 }
 
@@ -66,8 +66,8 @@ extension Scene: TargetScene {
             let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel, andServices: loginServices)
             return .root(loginViewController)
             
-        case .playlistDetail(let playlist):
-            let playlistDetailViewModel = PlaylisDetailViewModel(playlist: playlist)
+        case .playlistDetail(let playlistName):
+            let playlistDetailViewModel = PlaylisDetailViewModel(playlistName: playlistName)
             let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService())
             let playlistDetailViewController = PlaylistDetailViewController.instantiate(withViewModel: playlistDetailViewModel, andServices: mypageServices)
             return .push(playlistDetailViewController)

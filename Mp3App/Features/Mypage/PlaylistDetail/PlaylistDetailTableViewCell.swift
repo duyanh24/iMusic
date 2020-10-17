@@ -13,7 +13,7 @@ import Reusable
 class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var singerLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     var viewModel: PlaylistDetailCellViewModel!
     private var disposeBag = DisposeBag()
@@ -28,6 +28,7 @@ class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable 
     }
     
     private func setupUI() {
+        selectionStyle = .none
         albumImageView.layer.cornerRadius = 5
     }
     
@@ -48,7 +49,7 @@ class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable 
         output.track
             .subscribe(onNext: { [weak self] track in
                 self?.titleLabel.text = track.title
-                self?.singerLabel.text = track.user?.userName
+                self?.descriptionLabel.text = track.description
                 guard let url = track.artworkURL else {
                     return
                 }
