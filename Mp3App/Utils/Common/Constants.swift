@@ -81,6 +81,11 @@ enum ImageSize: String {
 
 enum FirebaseProperty: String {
     case users = "users"
+    case favourite = "favourite"
+    case playlist = "playlist"
+    case title = "title"
+    case description = "description"
+    case artworkURL = "url_image"
     case username = "username"
     case password = "password"
     case id = "id"

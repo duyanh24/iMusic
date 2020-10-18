@@ -87,8 +87,8 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
                 return
             }
             switch self.dataSource[indexPath] {
-            case .favourite(_, let library):
-                print(library)
+            case .favourite:
+                SceneCoordinator.shared.transition(to: Scene.libraryDetail)
             case .playlist(_, let playlistName):
                 SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlistName: playlistName))
             }
@@ -152,7 +152,7 @@ extension MypageViewController: UITableViewDelegate {
 extension MypageViewController: UIGestureRecognizerDelegate {
     private func setupLongPressGesture() {
         let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MypageViewController.handleLongPress(_:)))
-        longPressGesture.minimumPressDuration = 1.0
+        longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         self.tableView.addGestureRecognizer(longPressGesture)
     }
@@ -161,8 +161,29 @@ extension MypageViewController: UIGestureRecognizerDelegate {
         if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
             let touchPoint = longPressGestureRecognizer.location(in: self.view)
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                print(indexPath)
+                switch dataSource[indexPath] {
+                case .favourite(_, let library):
+                    print(library)
+                case .playlist(_, let playlistName):
+                    showActionSheet (playlistName: playlistName)
+                }
             }
         }
+    }
+    
+    func showActionSheet (playlistName: String) {
+        let actionSheet = UIAlertController (title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        actionSheet.addAction (
+            UIAlertAction (title: playlistName, style: UIAlertAction.Style.destructive, handler: nil)
+        )
+        actionSheet.addAction (
+            UIAlertAction (title: "Xoá", style: UIAlertAction.Style.default, handler: {(action) -> Void in
+            })
+        )
+        actionSheet.addAction (
+            UIAlertAction (title: "Chỉnh sửa", style: UIAlertAction.Style.default, handler: {(action) -> Void in
+            })
+        )
+        self.present (actionSheet, animated: true, completion: nil)
     }
 }
