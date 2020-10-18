@@ -172,10 +172,8 @@ extension MypageViewController: UIGestureRecognizerDelegate {
     }
     
     func showActionSheet (playlistName: String) {
-        let actionSheet = UIAlertController (title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        actionSheet.addAction (
-            UIAlertAction (title: playlistName, style: UIAlertAction.Style.destructive, handler: nil)
-        )
+        
+        let actionSheet = UIAlertController (title: playlistName, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         actionSheet.addAction (
             UIAlertAction (title: "Xoá", style: UIAlertAction.Style.default, handler: {(action) -> Void in
             })

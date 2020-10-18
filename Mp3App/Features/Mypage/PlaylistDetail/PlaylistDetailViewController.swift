@@ -16,6 +16,7 @@ typealias TrackSectionModel = SectionModel<String, Track>
 class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var notificationLabel: UILabel!
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
@@ -36,6 +37,8 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     override func prepareUI() {
         super.prepareUI()
         playButton.layer.cornerRadius = playButton.frame.size.height / 2
+        playButton.isHidden = true
+        notificationLabel.isHidden = true
         setupTableView()
     }
     
@@ -49,6 +52,13 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
             self?.title = playlistName
         })
         .disposed(by: disposeBag)
+        
+        output.dataSource.subscribe(onNext: { dataSource in
+            if let checkNullDataSource = dataSource.first?.items.isEmpty {
+                self.playButton.isHidden = checkNullDataSource
+                self.notificationLabel.isHidden = !checkNullDataSource
+            }
+        }).disposed(by: disposeBag)
         
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))

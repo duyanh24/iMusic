@@ -15,6 +15,7 @@ import RxDataSources
 class LibraryDetailViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var notificationLabel: UILabel!
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
@@ -36,6 +37,8 @@ class LibraryDetailViewController: BaseViewController, StoryboardBased, ViewMode
         super.prepareUI()
         playButton.layer.cornerRadius = playButton.frame.size.height / 2
         title = Strings.favouriteSong
+        playButton.isHidden = true
+        notificationLabel.isHidden = true
         setupTableView()
     }
     
@@ -44,6 +47,13 @@ class LibraryDetailViewController: BaseViewController, StoryboardBased, ViewMode
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        
+        output.dataSource.subscribe(onNext: { dataSource in
+            if let checkNullDataSource = dataSource.first?.items.isEmpty {
+                self.playButton.isHidden = checkNullDataSource
+                self.notificationLabel.isHidden = !checkNullDataSource
+            }
+        }).disposed(by: disposeBag)
         
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
