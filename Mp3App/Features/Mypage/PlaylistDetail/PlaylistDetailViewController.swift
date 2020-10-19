@@ -32,7 +32,6 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.icBackNormal.image, style: .plain, target: nil, action: nil)
     }
     
     override func prepareUI() {
