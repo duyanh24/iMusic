@@ -87,13 +87,13 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
                 return
             }
             switch self.dataSource[indexPath] {
-            case .favourite(_, let library):
-                print(library)
-            case .playlist(_, let playlist):
-                SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlist: playlist))
-                print(playlist)
+            case .favourite:
+                SceneCoordinator.shared.transition(to: Scene.libraryDetail)
+            case .playlist(_, let playlistName):
+                SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlistName: playlistName))
             }
         }).disposed(by: disposeBag)
+        setupLongPressGesture()
     }
 }
 
@@ -146,5 +146,42 @@ extension MypageViewController: UITableViewDelegate {
     
     @objc func handleTapFooter(gestureRecognizer: UIGestureRecognizer) {
         SceneCoordinator.shared.transition(to: Scene.createPlaylist)
+    }
+}
+
+extension MypageViewController: UIGestureRecognizerDelegate {
+    private func setupLongPressGesture() {
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MypageViewController.handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delegate = self
+        self.tableView.addGestureRecognizer(longPressGesture)
+    }
+
+    @objc func handleLongPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
+            let touchPoint = longPressGestureRecognizer.location(in: self.view)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                switch dataSource[indexPath] {
+                case .favourite(_, let library):
+                    print(library)
+                case .playlist(_, let playlistName):
+                    showActionSheet (playlistName: playlistName)
+                }
+            }
+        }
+    }
+    
+    func showActionSheet (playlistName: String) {
+        
+        let actionSheet = UIAlertController (title: playlistName, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        actionSheet.addAction (
+            UIAlertAction (title: "Xoá", style: UIAlertAction.Style.default, handler: {(action) -> Void in
+            })
+        )
+        actionSheet.addAction (
+            UIAlertAction (title: "Chỉnh sửa", style: UIAlertAction.Style.default, handler: {(action) -> Void in
+            })
+        )
+        self.present (actionSheet, animated: true, completion: nil)
     }
 }

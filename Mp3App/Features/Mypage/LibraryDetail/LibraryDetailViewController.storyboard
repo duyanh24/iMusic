@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5cx-C8-tbF">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Library Detail View Controller-->
+        <scene sceneID="rVN-sk-0Ef">
+            <objects>
+                <viewController id="5cx-C8-tbF" customClass="LibraryDetailViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y1d-T6-oux">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bbn-1Y-Rxy">
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-v1-idD">
+                                <rect key="frame" x="20" y="54" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.52362823489999999" green="0.27759590740000001" blue="0.65983343120000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="YDZ-sR-GQZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="PHÁT NGẪU NHIÊN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Không có bài hát trong danh sách yêu thích Tìm bài hát để thêm vào danh sách của bạn" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEJ-gp-gc4">
+                                <rect key="frame" x="67" y="56" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WZp-IP-Iaa"/>
+                                    <constraint firstAttribute="width" constant="280" id="uQY-a8-0Lg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cEJ-gp-gc4" firstAttribute="top" secondItem="RoQ-UU-uIy" secondAttribute="top" constant="12" id="J7s-wF-hKe"/>
+                            <constraint firstItem="9e8-v1-idD" firstAttribute="leading" secondItem="RoQ-UU-uIy" secondAttribute="leading" constant="20" id="Kv6-Zj-YGo"/>
+                            <constraint firstItem="RoQ-UU-uIy" firstAttribute="bottom" secondItem="bbn-1Y-Rxy" secondAttribute="bottom" id="Sgx-KZ-KUo"/>
+                            <constraint firstItem="bbn-1Y-Rxy" firstAttribute="leading" secondItem="RoQ-UU-uIy" secondAttribute="leading" id="edc-Rb-myW"/>
+                            <constraint firstAttribute="trailing" secondItem="bbn-1Y-Rxy" secondAttribute="trailing" id="fMG-SO-mcD"/>
+                            <constraint firstItem="cEJ-gp-gc4" firstAttribute="centerX" secondItem="RoQ-UU-uIy" secondAttribute="centerX" id="gAc-nw-oYF"/>
+                            <constraint firstItem="9e8-v1-idD" firstAttribute="top" secondItem="RoQ-UU-uIy" secondAttribute="top" constant="10" id="jz6-Q7-FWZ"/>
+                            <constraint firstItem="RoQ-UU-uIy" firstAttribute="trailing" secondItem="9e8-v1-idD" secondAttribute="trailing" constant="20" id="zQh-ol-ZwJ"/>
+                            <constraint firstItem="bbn-1Y-Rxy" firstAttribute="top" secondItem="9e8-v1-idD" secondAttribute="bottom" constant="10" id="zuP-UM-0o4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RoQ-UU-uIy"/>
+                    </view>
+                    <connections>
+                        <outlet property="notificationLabel" destination="cEJ-gp-gc4" id="7fs-Xr-bDn"/>
+                        <outlet property="playButton" destination="9e8-v1-idD" id="wQr-mk-1rG"/>
+                        <outlet property="tableView" destination="bbn-1Y-Rxy" id="1PI-FC-eR7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JXl-FM-uK3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-20" y="126"/>
+        </scene>
+    </scenes>
+</document>

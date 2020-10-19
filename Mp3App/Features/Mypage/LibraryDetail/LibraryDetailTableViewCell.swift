@@ -1,21 +1,21 @@
 //
-//  PlaylistDetailTableViewCell.swift
+//  LibraryDetailTableViewCell.swift
 //  Mp3App
 //
-//  Created by Apple on 10/15/20.
+//  Created by Apple on 10/18/20.
 //  Copyright © 2020 AnhLD. All rights reserved.
 //
 
 import UIKit
-import RxSwift
 import Reusable
+import RxSwift
 
-class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
+class LibraryDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var viewModel: PlaylistDetailCellViewModel!
+    var viewModel: LibraryDetailCellViewModel!
     private var disposeBag = DisposeBag()
     
     override func awakeFromNib() {
@@ -32,7 +32,7 @@ class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable 
         albumImageView.layer.cornerRadius = 5
     }
     
-    func configureCell(viewModel: PlaylistDetailCellViewModel) {
+    func configureCell(viewModel: LibraryDetailCellViewModel) {
         self.viewModel = viewModel
         bindViewModel()
     }
@@ -43,7 +43,7 @@ class PlaylistDetailTableViewCell: UITableViewCell, ViewModelBased, NibReusable 
     }
 
     private func bindViewModel() {
-        let input = PlaylistDetailCellViewModel.Input()
+        let input = LibraryDetailCellViewModel.Input()
         let output = viewModel.transform(input: input)
                 
         output.track
