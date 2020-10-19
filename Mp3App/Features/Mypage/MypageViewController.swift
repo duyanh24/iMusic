@@ -71,12 +71,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         output.mypageDataModel
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-    }
-    
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.register(cellType: LibraryTableViewCell.self)
-        tableView.register(cellType: PlaylistTableViewCell.self)
+        
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             guard let self = self else {
                 return
@@ -88,6 +83,12 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
                 SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlistName: playlistName))
             }
         }).disposed(by: disposeBag)
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.register(cellType: LibraryTableViewCell.self)
+        tableView.register(cellType: PlaylistTableViewCell.self)
     }
 }
 
