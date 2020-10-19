@@ -17,4 +17,8 @@ struct AuthencationService {
     func login(email: String, password: String) -> Observable<Result<Void, Error>> {
         return FirebaseDatabase.shared.login(email: email, password: password)
     }
+    
+    func logout() {
+        return AccountDefault.shared.clearUserData()
+    }
 }

@@ -17,10 +17,19 @@ class LoginViewModel: ServicesViewModel {
         let activityIndicator = ActivityIndicator()
         
         let isLoginEnabled = Observable.combineLatest(input.email, input.password)
-            .map { [weak self] (email, password) -> Bool in
-                guard let self = self, let email = email, let password = password
+            .map { email, password -> Bool in
+                guard let email = email, let password = password
                     else { return false }
-                return self.validateEmail(email: email) && self.validatePassword(password: password)
+                
+                return InputValidateHelper.validate(type: .email, input: email) && InputValidateHelper.validate(type: .password, input: password)
+        }
+        
+        let emailValidateError = input.email.skip(1).map {
+            InputValidateHelper.validate(type: .email, input: $0)
+        }
+        
+        let passwordValidateError = input.password.skip(1).map {
+            InputValidateHelper.validate(type: .password, input: $0)
         }
         
         let loginResult =  input.login.withLatestFrom(Observable.combineLatest(input.email, input.password))
@@ -30,15 +39,7 @@ class LoginViewModel: ServicesViewModel {
                 }
                 return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
             })
-        return Output(loginResult: loginResult, activityIndicator: activityIndicator.asObservable(), isLoginEnabled: isLoginEnabled)
-    }
-    
-    func validateEmail(email: String) -> Bool {
-        return email.count > 6
-    }
-    
-    func validatePassword(password: String) -> Bool {
-        return password.count > 6
+        return Output(loginResult: loginResult, activityIndicator: activityIndicator.asObservable(), isLoginEnabled: isLoginEnabled, emailValidateError: emailValidateError, passwordValidateError: passwordValidateError)
     }
 }
 
@@ -53,5 +54,7 @@ extension LoginViewModel {
         var loginResult: Observable<Result<Void, Error>>
         var activityIndicator: Observable<Bool>
         var isLoginEnabled: Observable<Bool>
+        var emailValidateError: Observable<String>
+        var passwordValidateError: Observable<String>
     }
 }

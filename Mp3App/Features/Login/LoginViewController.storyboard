@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bF4-E1-ne3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WSq-if-QEA">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="514"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="479"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1k-gs-oCq">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="309"/>
@@ -42,10 +43,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTA-6v-lyA">
-                                                <rect key="frame" x="0.0" y="309" width="414" height="205"/>
+                                                <rect key="frame" x="0.0" y="309" width="414" height="170"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xcb-dx-R2j">
-                                                        <rect key="frame" x="20" y="0.0" width="374" height="205"/>
+                                                        <rect key="frame" x="20" y="0.0" width="374" height="170"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPC-7F-FBs" userLabel="a">
                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="35"/>
@@ -79,13 +80,15 @@
                                                                     <constraint firstItem="96M-9r-tfR" firstAttribute="leading" secondItem="6cr-SZ-Z4q" secondAttribute="leading" id="xsQ-S8-Wjb"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNt-xK-Pjh">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcI-oJ-cnC">
                                                                 <rect key="frame" x="0.0" y="35" width="374" height="15"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="15" id="xsV-kL-0Mi"/>
+                                                                    <constraint firstAttribute="height" constant="15" id="iNW-vR-MfR"/>
                                                                 </constraints>
-                                                            </view>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Duv-Y5-wvu" userLabel="b">
                                                                 <rect key="frame" x="0.0" y="50" width="374" height="35"/>
                                                                 <subviews>
@@ -126,20 +129,23 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOs-j4-CDp">
-                                                                <rect key="frame" x="0.0" y="100" width="374" height="50"/>
+                                                                <rect key="frame" x="0.0" y="100" width="374" height="15"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="15" id="uv5-GJ-leV"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXv-NM-pUu">
-                                                                <rect key="frame" x="0.0" y="150" width="374" height="15"/>
+                                                                <rect key="frame" x="0.0" y="115" width="374" height="15"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="15" id="TzA-WC-3g8"/>
                                                                 </constraints>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8E-PT-0Cm">
-                                                                <rect key="frame" x="0.0" y="165" width="374" height="40"/>
+                                                                <rect key="frame" x="0.0" y="130" width="374" height="40"/>
                                                                 <color key="backgroundColor" red="0.05587876588" green="0.55545514819999997" blue="0.87277698520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="FIn-hI-vBp"/>
@@ -200,9 +206,10 @@
                         <viewLayoutGuide key="safeArea" id="vii-ts-FtS"/>
                     </view>
                     <connections>
+                        <outlet property="emailErrorLabel" destination="xcI-oJ-cnC" id="QaN-IN-C5O"/>
                         <outlet property="emailTextField" destination="6cr-SZ-Z4q" id="4DB-jc-4EX"/>
-                        <outlet property="errorLabel" destination="BOs-j4-CDp" id="vO6-SG-3Rh"/>
                         <outlet property="loginButton" destination="i8E-PT-0Cm" id="s97-SF-PHe"/>
+                        <outlet property="passwordErrorLabel" destination="BOs-j4-CDp" id="vO6-SG-3Rh"/>
                         <outlet property="passwordTextField" destination="ccX-Du-XcB" id="r4g-sg-NTT"/>
                         <outlet property="registerButton" destination="Uvr-tI-YPj" id="ROG-9D-DPA"/>
                     </connections>

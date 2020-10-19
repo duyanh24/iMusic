@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol HasSettingServices {
-    
-}
-
-struct SettingServices: HasSettingServices {
-    
+struct SettingServices: HasAuthencationService {
+    var authencationService: AuthencationService
 }

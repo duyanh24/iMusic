@@ -56,9 +56,12 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showErrorAlert(title: String? = nil, message: String, actionTitle: String = Strings.OK, completion: @escaping() -> Void) {
+    func showErrorAlert(title: String? = nil, message: String, actionTitle: String = Strings.OK, completion: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .cancel, handler: { _ in
+            guard let completion = completion else {
+                return
+            }
             completion()
         }))
         present(alert, animated: true, completion: nil)

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S6O-N7-l5A">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,14 +26,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4k-NB-wPS">
+                                <rect key="frame" x="20" y="54" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="KRC-kg-nFv"/>
+                                </constraints>
+                                <state key="normal" title="Logout"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="E3W-J6-WN6" firstAttribute="centerX" secondItem="iGd-Bm-2yV" secondAttribute="centerX" id="JAC-kc-ChP"/>
+                            <constraint firstItem="j4k-NB-wPS" firstAttribute="leading" secondItem="iGd-Bm-2yV" secondAttribute="leading" constant="20" id="Pa1-eP-ABG"/>
                             <constraint firstItem="E3W-J6-WN6" firstAttribute="centerY" secondItem="iGd-Bm-2yV" secondAttribute="centerY" id="QTS-Ey-Kk1"/>
+                            <constraint firstItem="j4k-NB-wPS" firstAttribute="top" secondItem="iGd-Bm-2yV" secondAttribute="top" constant="10" id="UIj-k2-Dav"/>
+                            <constraint firstItem="iGd-Bm-2yV" firstAttribute="trailing" secondItem="j4k-NB-wPS" secondAttribute="trailing" constant="20" id="sOI-MN-LkN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iGd-Bm-2yV"/>
                     </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="j4k-NB-wPS" id="yUj-qN-hHT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ti-ZZ-Jke" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
