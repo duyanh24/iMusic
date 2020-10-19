@@ -62,7 +62,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 guard let self = self else { return }
                 switch result {
                 case .failure(let error):
-                    self.showErrorAlert(message: error.localizedDescription, completion: {})
+                    self.showErrorAlert(message: error.localizedDescription, completion: nil)
                 case .success:
                     SceneCoordinator.shared.transition(to: Scene.tabbar)
                 }

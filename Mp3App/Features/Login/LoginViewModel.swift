@@ -37,7 +37,6 @@ class LoginViewModel: ServicesViewModel {
                 guard let self = self, let email = email, let password = password else {
                     return .empty()
                 }
-               // return .empty()
                 return self.services.authencationService.login(email: email, password: password).trackActivity(activityIndicator)
             })
         return Output(loginResult: loginResult, activityIndicator: activityIndicator.asObservable(), isLoginEnabled: isLoginEnabled, emailValidateError: emailValidateError, passwordValidateError: passwordValidateError)
