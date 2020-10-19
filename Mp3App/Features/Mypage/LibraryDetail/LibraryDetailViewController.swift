@@ -1,32 +1,31 @@
 //
-//  PlaylistDetailViewController.swift
+//  LibraryDetailViewController.swift
 //  Mp3App
 //
-//  Created by Apple on 10/14/20.
+//  Created by Apple on 10/18/20.
 //  Copyright © 2020 AnhLD. All rights reserved.
 //
 
 import UIKit
 import RxSwift
+import RxCocoa
 import Reusable
 import RxDataSources
 
-typealias TrackSectionModel = SectionModel<String, Track>
-
-class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewModelBased {
+class LibraryDetailViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var notificationLabel: UILabel!
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
-            let cell = tableView.dequeueReusableCell(for: indexPath) as PlaylistDetailTableViewCell
-            let playlistDetailCellViewModel = PlaylistDetailCellViewModel(track: track)
-            cell.configureCell(viewModel: playlistDetailCellViewModel)
+            let cell = tableView.dequeueReusableCell(for: indexPath) as LibraryDetailTableViewCell
+            let libraryDetailCellViewModel = LibraryDetailCellViewModel(track: track)
+            cell.configureCell(viewModel: libraryDetailCellViewModel)
             return cell
     })
     
-    var viewModel: PlaylistDetailViewModel!
+    var viewModel: LibraryDetailViewModel!
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -37,21 +36,17 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     override func prepareUI() {
         super.prepareUI()
         playButton.layer.cornerRadius = playButton.frame.size.height / 2
+        title = Strings.favouriteSong
         playButton.isHidden = true
         notificationLabel.isHidden = true
         setupTableView()
     }
     
     private func bindViewModel() {
-        let input = PlaylistDetailViewModel.Input()
+        let input = LibraryDetailViewModel.Input()
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
-        
-        output.playlistName.subscribe(onNext: { [weak self] playlistName in
-            self?.title = playlistName
-        })
-        .disposed(by: disposeBag)
         
         output.dataSource.subscribe(onNext: { [weak self] dataSource in
             self?.playButton.isHidden = dataSource.first?.items.isEmpty ?? true
@@ -65,11 +60,11 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.register(cellType: PlaylistDetailTableViewCell.self)
+        tableView.register(cellType: LibraryDetailTableViewCell.self)
     }
 }
 
-extension PlaylistDetailViewController: UITableViewDelegate {
+extension LibraryDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }

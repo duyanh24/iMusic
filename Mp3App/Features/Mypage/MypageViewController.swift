@@ -63,11 +63,6 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
-        setupNavigationBar()
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.icBackNormal.image, style: .plain, target: nil, action: nil)
     }
     
     private func bindViewModel() {
@@ -76,24 +71,24 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         output.mypageDataModel
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
+            guard let self = self else {
+                return
+            }
+            switch self.dataSource[indexPath] {
+            case .favourite:
+                SceneCoordinator.shared.transition(to: Scene.libraryDetail)
+            case .playlist(_, let playlistName):
+                SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlistName: playlistName))
+            }
+        }).disposed(by: disposeBag)
     }
     
     private func setupTableView() {
         tableView.delegate = self
         tableView.register(cellType: LibraryTableViewCell.self)
         tableView.register(cellType: PlaylistTableViewCell.self)
-        tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
-            guard let self = self else {
-                return
-            }
-            switch self.dataSource[indexPath] {
-            case .favourite(_, let library):
-                print(library)
-            case .playlist(_, let playlist):
-                SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlist: playlist))
-                print(playlist)
-            }
-        }).disposed(by: disposeBag)
     }
 }
 
