@@ -48,9 +48,9 @@ class LibraryDetailViewController: BaseViewController, StoryboardBased, ViewMode
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
         
-        output.dataSource.subscribe(onNext: { dataSource in
-            self.playButton.isHidden = dataSource.first?.items.isEmpty ?? true
-            self.notificationLabel.isHidden = !(dataSource.first?.items.isEmpty ?? true)
+        output.dataSource.subscribe(onNext: { [weak self] dataSource in
+            self?.playButton.isHidden = dataSource.first?.items.isEmpty ?? true
+            self?.notificationLabel.isHidden = !(dataSource.first?.items.isEmpty ?? true)
         }).disposed(by: disposeBag)
         
         output.dataSource

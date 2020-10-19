@@ -53,9 +53,9 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
         })
         .disposed(by: disposeBag)
         
-        output.dataSource.subscribe(onNext: { dataSource in
-            self.playButton.isHidden = dataSource.first?.items.isEmpty ?? true
-            self.notificationLabel.isHidden = !(dataSource.first?.items.isEmpty ?? true)
+        output.dataSource.subscribe(onNext: { [weak self] dataSource in
+            self?.playButton.isHidden = dataSource.first?.items.isEmpty ?? true
+            self?.notificationLabel.isHidden = !(dataSource.first?.items.isEmpty ?? true)
         }).disposed(by: disposeBag)
         
         output.dataSource
