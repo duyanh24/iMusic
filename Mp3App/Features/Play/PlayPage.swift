@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
+import Reusable
 
-class PlayPage: UIView {
-    @IBOutlet var containerView: UIView!
+class PlayPage: UIView, NibOwnerLoadable {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -22,8 +22,7 @@ class PlayPage: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed("PlayPage", owner: self, options: nil)
-        containerView.fixInView(self)
+        loadNibContent()
         setupUI()
     }
     

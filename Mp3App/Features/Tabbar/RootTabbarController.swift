@@ -32,6 +32,8 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     private func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerAction))
         playerView.addGestureRecognizer(panGesture)
+        panGesture.maximumNumberOfTouches = 1
+        panGesture.delegate = self
     }
     
     @objc func panGestureRecognizerAction(gesture: UIPanGestureRecognizer) {
@@ -51,39 +53,40 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                     playerView.frame.origin.y += translation.y
                     tabBar.frame.origin.y -= translation.y * (tabBar.frame.height/contentHeight)
                 }
-                print("tabbar frame = \(tabBar.frame.origin.y)")
-                //                        playerViewController.miniPlayerView.alpha = 1 - miniPlayerPercentage
-                //                        playerViewController.contentView.alpha = fullPlayerContentPercentage
-                //view.alpha = containerY / contentHeight
+                self.selectedViewController?.view.alpha = containerY / contentHeight
                 gesture.setTranslation(.zero, in: view)
             }
         case .ended:
             let velocity = gesture.velocity(in: view)
             if velocity.y > 0 {
-                //self.isStatusBarHidden = false
                 UIView.animate(withDuration: 0.3, animations: {
                     self.playerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
-                    //                            self.playerViewController.miniPlayerView.alpha = 1
-                    //                            self.playerViewController.contentView.alpha = 0
+                    self.selectedViewController?.view.alpha = 1
                     self.tabBar.frame.origin.y = self.tabbarY
-                }) { _ in
-                    //                            self.playerViewController.miniPlayerView.enableInteraction(true)
-                    //                            print("end gesture frame = \(self.tabBar.frame.origin.y)")
-                }
+                })
             } else {
-                //self.isStatusBarHidden = true
                 UIView.animate(withDuration: 0.3, animations: {
                     self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
-                    //                            self.playerViewController.miniPlayerView.alpha = 0
-                    //                            self.playerViewController.contentView.alpha = 1
+                    self.selectedViewController?.view.alpha = 0
                     self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
-                }) { _ in
-                    //                            self.playerViewController.miniPlayerView.enableInteraction(false)
-                    print("tabbar frame = \(self.tabBar.frame.height)")
-                }
+                })
             }
         default:
             break
         }
+    }
+}
+
+extension RootTabbarController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let gesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            return true
+        }
+        let velocity = gesture.velocity(in: playerView)
+        return abs(velocity.x) < abs(velocity.y)
     }
 }

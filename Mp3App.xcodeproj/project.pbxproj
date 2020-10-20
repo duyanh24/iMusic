@@ -493,8 +493,6 @@
 			children = (
 				08504F342523346D0033DED0 /* RootTabbarController.swift */,
 				08504F352523346D0033DED0 /* RootTabbarController.storyboard */,
-				0898B7D9253D749300E555DA /* PlayerView.swift */,
-				0898B7DB253D74BD00E555DA /* PlayerView.xib */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -875,6 +873,8 @@
 		0898B7DD253D88BC00E555DA /* Play */ = {
 			isa = PBXGroup;
 			children = (
+				0898B7D9253D749300E555DA /* PlayerView.swift */,
+				0898B7DB253D74BD00E555DA /* PlayerView.xib */,
 				0898B7DE253D88DE00E555DA /* PlayPage.swift */,
 				0898B7E0253D88EF00E555DA /* PlayPage.xib */,
 				0898B7E2253D898600E555DA /* InforPage.swift */,

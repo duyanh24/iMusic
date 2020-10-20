@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import Reusable
 
-class InforPage: UIView {
-    @IBOutlet var containerView: UIView!
+class InforPage: UIView, NibOwnerLoadable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,8 +22,7 @@ class InforPage: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed("InforPage", owner: self, options: nil)
-        containerView.fixInView(self)
+        loadNibContent()
         setupUI()
     }
     
