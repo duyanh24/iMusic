@@ -1,5 +1,5 @@
 //
-//  InforPage.swift
+//  PlayPage.swift
 //  Mp3App
 //
 //  Created by AnhLD on 10/19/20.
@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class InforPage: UIView, NibOwnerLoadable {
+class AudioPlayerView: UIView, NibOwnerLoadable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

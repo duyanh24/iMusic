@@ -10,20 +10,22 @@ import UIKit
 import Reusable
 
 class RootTabbarController: UITabBarController, StoryboardBased {
-    
     private var tabbarY: CGFloat!
     private let miniPlayerHeight: CGFloat = 52
     var playerView: PlayerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPlayView()
+        setupPlayerView()
         setupPanGesture()
         tabBar.isTranslucent = false
     }
     
-    private func setupPlayView() {
-        playerView = PlayerView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + miniPlayerHeight))
+    private func setupPlayerView() {
+        playerView = PlayerView(frame: CGRect(x: 0,
+                                              y: UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight,
+                                              width: UIScreen.main.bounds.width,
+                                              height: UIScreen.main.bounds.height + miniPlayerHeight))
         view.addSubview(playerView)
         view.bringSubviewToFront(tabBar)
         tabbarY = tabBar.frame.origin.y
@@ -40,20 +42,22 @@ class RootTabbarController: UITabBarController, StoryboardBased {
         let translation = gesture.translation(in: view)
         let contentHeight = UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight
         switch gesture.state {
+        case .began:
+            playerView.isScrollEnabled(value: false)
         case .changed:
-            let containerY = playerView.frame.origin.y
-            if containerY <= contentHeight {
-                if containerY + translation.y < 0 - miniPlayerHeight {
+            let playerViewY = playerView.frame.origin.y
+            if playerViewY <= contentHeight {
+                if playerViewY + translation.y < 0 - miniPlayerHeight {
                     playerView.frame.origin.y = view.bounds.origin.y - miniPlayerHeight
                     tabBar.frame.origin.y = tabbarY + tabBar.frame.height
-                } else if containerY + translation.y > contentHeight {
+                } else if playerViewY + translation.y > contentHeight {
                     playerView.frame.origin.y = contentHeight
                     tabBar.frame.origin.y = tabbarY
                 } else {
                     playerView.frame.origin.y += translation.y
                     tabBar.frame.origin.y -= translation.y * (tabBar.frame.height/contentHeight)
                 }
-                self.selectedViewController?.view.alpha = containerY / contentHeight
+                selectedViewController?.view.alpha = playerViewY / contentHeight
                 gesture.setTranslation(.zero, in: view)
             }
         case .ended:
@@ -71,6 +75,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                     self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
                 })
             }
+            playerView.isScrollEnabled(value: true)
         default:
             break
         }

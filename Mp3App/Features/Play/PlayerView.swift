@@ -10,12 +10,12 @@ import UIKit
 import Reusable
 
 class PlayerView: UIView, NibOwnerLoadable {
-    @IBOutlet var containerView: UIView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var topContentStrackView: UIStackView!
-    
-    private var heightOfTopView: CGFloat!
+    @IBOutlet weak var topContentStackView: UIStackView!
+    @IBOutlet weak var audioPlayerView: AudioPlayerView!
+    @IBOutlet weak var trackInformationView: TrackInformationView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,36 +34,16 @@ class PlayerView: UIView, NibOwnerLoadable {
     
     private func setupUI() {
         trackImageView.layer.cornerRadius = trackImageView.frame.size.height / 2
-        heightOfTopView = topContentStrackView.frame.size.height
         setupScrollView()
-        
     }
     
-    func setupScrollView() {
-        scrollView.delegate = self
-        scrollView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height - heightOfTopView)
-        scrollView.contentSize = CGSize(width: containerView.frame.width * CGFloat(2), height: containerView.frame.height - heightOfTopView)
-        scrollView.isPagingEnabled = true
-         
-        let playPage = PlayPage(frame: CGRect(x: containerView.frame.width, y: 0, width: containerView.frame.width, height: containerView.frame.height - heightOfTopView))
-        let inforPage = InforPage(frame: CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height - heightOfTopView))
-        scrollView.addSubview(inforPage)
-        scrollView.addSubview(playPage)
-        scrollView.contentOffset.x = containerView.frame.width
-        
+    private func setupScrollView() {
+        scrollView.layoutIfNeeded()
+        let contentOffset = CGPoint(x: frame.width, y: 0.0)
+        scrollView.setContentOffset(contentOffset, animated: false)
     }
-}
-
-extension PlayerView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y != 0 {
-            scrollView.contentOffset.y = 0
-        }
-        if scrollView.contentOffset.x < 0 {
-            scrollView.contentOffset.x = 0
-        }
-        if scrollView.contentOffset.x > containerView.frame.width {
-            scrollView.contentOffset.x = containerView.frame.width
-        }
+    
+    func isScrollEnabled(value: Bool) {
+        scrollView.isScrollEnabled = value
     }
 }
