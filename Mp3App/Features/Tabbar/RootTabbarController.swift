@@ -43,7 +43,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
         let contentHeight = UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight
         switch gesture.state {
         case .began:
-            playerView.isScrollEnabled(value: false)
+            playerView.isScrollEnabled = false
         case .changed:
             let playerViewY = playerView.frame.origin.y
             if playerViewY <= contentHeight {
@@ -75,7 +75,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                     self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
                 })
             }
-            playerView.isScrollEnabled(value: true)
+            playerView.isScrollEnabled = true
         default:
             break
         }

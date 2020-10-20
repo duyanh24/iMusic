@@ -17,6 +17,12 @@ class PlayerView: UIView, NibOwnerLoadable {
     @IBOutlet weak var audioPlayerView: AudioPlayerView!
     @IBOutlet weak var trackInformationView: TrackInformationView!
     
+    var isScrollEnabled: Bool = true {
+        didSet {
+            scrollView.isScrollEnabled = isScrollEnabled
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -41,9 +47,5 @@ class PlayerView: UIView, NibOwnerLoadable {
         scrollView.layoutIfNeeded()
         let contentOffset = CGPoint(x: frame.width, y: 0.0)
         scrollView.setContentOffset(contentOffset, animated: false)
-    }
-    
-    func isScrollEnabled(value: Bool) {
-        scrollView.isScrollEnabled = value
     }
 }
