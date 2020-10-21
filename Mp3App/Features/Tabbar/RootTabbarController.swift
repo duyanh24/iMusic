@@ -16,14 +16,18 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBar.isTranslucent = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupPlayerView()
         setupPanGesture()
-        tabBar.isTranslucent = false
     }
     
     private func setupPlayerView() {
         playerView = PlayerView(frame: CGRect(x: 0,
-                                              y: UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight,
+                                              y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
                                               width: UIScreen.main.bounds.width,
                                               height: UIScreen.main.bounds.height + miniPlayerHeight))
         view.addSubview(playerView)
