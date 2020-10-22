@@ -8,6 +8,8 @@
 
 import UIKit
 import Reusable
+import RxSwift
+import RxCocoa
 
 class PlayerView: UIView, NibOwnerLoadable {
     @IBOutlet weak var containerView: UIView!
@@ -16,6 +18,13 @@ class PlayerView: UIView, NibOwnerLoadable {
     @IBOutlet weak var topContentStackView: UIStackView!
     @IBOutlet weak var audioPlayerView: AudioPlayerView!
     @IBOutlet weak var trackInformationView: TrackInformationView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var controlPlayerView: UIView!
+    @IBOutlet weak var containerBottomView: UIView!
+    @IBOutlet weak var slider: CustomSlider!
+    
+    private let disposeBag = DisposeBag()
+    private var controlPlayerViewY: CGFloat = 0
     
     var isScrollEnabled: Bool = true {
         didSet {
@@ -39,13 +48,49 @@ class PlayerView: UIView, NibOwnerLoadable {
     }
     
     private func setupUI() {
-        trackImageView.layer.cornerRadius = trackImageView.frame.size.height / 2
+        setupTrackImageView()
         setupScrollView()
+        setupPageControl()
+        setupSlider()
+        setupControlPlayerView()
+    }
+    
+    private func setupTrackImageView() {
+        trackImageView.layer.cornerRadius = trackImageView.frame.size.height / 2
     }
     
     private func setupScrollView() {
+        scrollView.delegate = self
         scrollView.layoutIfNeeded()
         let contentOffset = CGPoint(x: frame.width, y: 0.0)
         scrollView.setContentOffset(contentOffset, animated: false)
+        scrollView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    private func setupPageControl() {
+        pageControl.numberOfPages = 2
+        pageControl.hidesForSinglePage = true
+        pageControl.currentPage = 1
+    }
+    
+    private func setupSlider() {
+        slider.maximumValue = 247
+        slider.minimumValue = 0
+    }
+    
+    private func setupControlPlayerView() {
+        controlPlayerView.layoutIfNeeded()
+        controlPlayerViewY = frame.height - controlPlayerView.frame.size.height - ScreenSize.getBottomSafeArea()
+    }
+}
+
+extension PlayerView: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentPage = scrollView.contentOffset.x / frame.size.width
+        pageControl.currentPage = Int(currentPage)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (frame.width - scrollView.contentOffset.x) / frame.width
     }
 }

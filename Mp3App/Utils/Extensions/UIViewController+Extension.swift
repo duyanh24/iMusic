@@ -26,19 +26,14 @@ extension UIViewController {
 
 extension UIViewController {
     func getTabbarHeight() -> CGFloat {
+        if let tabBarController = self as? UITabBarController {
+            return tabBarController.tabBar.frame.height
+        }
         if let controller = self.tabBarController {
-            if #available(iOS 11, *), let keyWindow = UIApplication.shared.currentWindow {
-                return controller.tabBar.frame.height - keyWindow.safeAreaInsets.bottom
-            } else {
-                return controller.tabBar.frame.height
-            }
+            return controller.tabBar.frame.height
         }
         if let navController = self.navigationController, let tabbarController = navController.tabBarController {
-            if #available(iOS 11, *), let keyWindow = UIApplication.shared.currentWindow {
-                return tabbarController.tabBar.frame.height - keyWindow.safeAreaInsets.bottom
-            } else {
-                return tabbarController.tabBar.frame.height
-            }
+            return tabbarController.tabBar.frame.height
         }
         return 0
     }
