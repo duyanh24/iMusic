@@ -48,11 +48,15 @@ class PlayerView: UIView, NibOwnerLoadable {
     }
     
     private func setupUI() {
-        trackImageView.layer.cornerRadius = trackImageView.frame.size.height / 2
+        setupTrackImageView()
         setupScrollView()
         setupPageControl()
         setupSlider()
         setupControlPlayerView()
+    }
+    
+    private func setupTrackImageView() {
+        trackImageView.layer.cornerRadius = trackImageView.frame.size.height / 2
     }
     
     private func setupScrollView() {
