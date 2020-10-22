@@ -25,9 +25,7 @@ class CustomSlider: UISlider {
         label.textColor = UIColor.white
         label.textAlignment = .center
         thumbView.addSubview(label)
-        let thumb = thumbImage(radius: thumbRadius)
-        setThumbImage(thumb, for: .highlighted)
-        setThumbImage(thumb, for: .normal)
+        updateThumbImage()
     }
 
     private func thumbImage(radius: CGFloat) -> UIImage {
@@ -45,10 +43,14 @@ class CustomSlider: UISlider {
         return newRect
     }
     
-    func setProgressTime(time: String) {
-        label.text = time
+    private func updateThumbImage() {
         let thumb = thumbImage(radius: thumbRadius)
         setThumbImage(thumb, for: .highlighted)
         setThumbImage(thumb, for: .normal)
+    }
+    
+    func setProgressTime(time: String) {
+        label.text = time
+        updateThumbImage()
     }
 }

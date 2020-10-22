@@ -25,7 +25,6 @@ class PlayerView: UIView, NibOwnerLoadable {
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
-    private let bottomSafeArea = UIApplication.shared.currentWindow?.safeAreaInsets.bottom ?? 0
     
     var isScrollEnabled: Bool = true {
         didSet {
@@ -51,13 +50,9 @@ class PlayerView: UIView, NibOwnerLoadable {
     private func setupUI() {
         trackImageView.layer.cornerRadius = trackImageView.frame.size.height / 2
         setupScrollView()
-        pageControl.numberOfPages = 2
-        pageControl.hidesForSinglePage = true
-        pageControl.currentPage = 1
-        controlPlayerView.layoutIfNeeded()
-        
-        controlPlayerViewY = frame.height - controlPlayerView.frame.size.height - bottomSafeArea
+        setupPageControl()
         setupSlider()
+        setupControlPlayerView()
     }
     
     private func setupScrollView() {
@@ -68,9 +63,20 @@ class PlayerView: UIView, NibOwnerLoadable {
         scrollView.contentInsetAdjustmentBehavior = .never
     }
     
+    private func setupPageControl() {
+        pageControl.numberOfPages = 2
+        pageControl.hidesForSinglePage = true
+        pageControl.currentPage = 1
+    }
+    
     private func setupSlider() {
         slider.maximumValue = 247
         slider.minimumValue = 0
+    }
+    
+    private func setupControlPlayerView() {
+        controlPlayerView.layoutIfNeeded()
+        controlPlayerViewY = frame.height - controlPlayerView.frame.size.height - ScreenSize.getBottomSafeArea()
     }
 }
 
@@ -81,6 +87,6 @@ extension PlayerView: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + bottomSafeArea) * (frame.width - scrollView.contentOffset.x) / frame.width
+        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (frame.width - scrollView.contentOffset.x) / frame.width
     }
 }

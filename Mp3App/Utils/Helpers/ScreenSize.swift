@@ -17,4 +17,8 @@ class ScreenSize {
             return UIApplication.shared.statusBarFrame.height
         }
     }
+    
+    static func getBottomSafeArea() -> CGFloat {
+        return UIApplication.shared.currentWindow?.safeAreaInsets.bottom ?? 0
+    }
 }

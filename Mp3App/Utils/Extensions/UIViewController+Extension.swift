@@ -26,8 +26,8 @@ extension UIViewController {
 
 extension UIViewController {
     func getTabbarHeight() -> CGFloat {
-        if let tabbarController = self as? UITabBarController {
-            return tabbarController.tabBar.frame.height
+        if let tabBarController = self as? UITabBarController {
+            return tabBarController.tabBar.frame.height
         }
         if let controller = self.tabBarController {
             return controller.tabBar.frame.height
