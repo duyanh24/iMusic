@@ -84,7 +84,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     }
     
     private func setupTableView() {
-        //tableView.contentInsetAdjustmentBehavior = .never
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
         tableView.register(cellType: SlideTableViewCell.self)
         tableView.register(cellType: AlbumsTableViewCell.self)

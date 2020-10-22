@@ -53,7 +53,7 @@ class ChartTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
         
         output.albumData.drive(onNext: { [weak self] (album) in
             self?.albumLabel.text = album.track?.title
-            self?.singerLabel.text = album.track?.user?.userName
+            self?.singerLabel.text = album.track?.user?.username
             guard let url = album.track?.artworkURL else {
                 return
             }

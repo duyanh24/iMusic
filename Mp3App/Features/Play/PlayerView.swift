@@ -11,7 +11,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class PlayerView: UIView, NibOwnerLoadable {
+class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -25,11 +25,16 @@ class PlayerView: UIView, NibOwnerLoadable {
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
+    var viewModel: PlayerViewModel!
     
     var isScrollEnabled: Bool = true {
         didSet {
             scrollView.isScrollEnabled = isScrollEnabled
         }
+    }
+    
+    var isTableviewOnTop: Bool {
+        return trackInformationView.isTableViewOnTop
     }
     
     override init(frame: CGRect) {
@@ -53,6 +58,23 @@ class PlayerView: UIView, NibOwnerLoadable {
         setupPageControl()
         setupSlider()
         setupControlPlayerView()
+    }
+    
+    func configureViewModel(viewModel: PlayerViewModel) {
+        self.viewModel = viewModel
+        bindViewModel()
+    }
+    
+    private func bindViewModel() {
+        let input = PlayerViewModel.Input()
+        let output = viewModel.transform(input: input)
+        output.playlist.subscribe(onNext: { [weak self] tracks in
+            var tracksTransform: [Track] = []
+            tracksTransform.append(tracks[0])
+            tracksTransform.append(contentsOf: tracks)
+            self?.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracksTransform))
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTrackImageView() {
