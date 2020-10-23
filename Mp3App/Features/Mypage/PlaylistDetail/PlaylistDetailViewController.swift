@@ -58,6 +58,8 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
             self?.notificationLabel.isHidden = !(dataSource.first?.items.isEmpty ?? true)
         }).disposed(by: disposeBag)
         
+        output.showPlayerView.subscribe().disposed(by: disposeBag)
+        
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

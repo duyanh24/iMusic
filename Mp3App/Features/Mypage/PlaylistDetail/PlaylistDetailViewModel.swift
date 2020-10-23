@@ -14,25 +14,23 @@ class PlaylistDetailViewModel: ServicesViewModel {
     var services: MypageServices!
     private let errorTracker = ErrorTracker()
     private var playlistName: String
-    private var tracks: [Track] = []
-    private let disposeBag = DisposeBag()
     
     init(playlistName: String) {
         self.playlistName = playlistName
     }
     
     func transform(input: Input) -> Output {
-        input.playButton.subscribe(onNext: { [weak self] _ in
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Strings.PlayerNotification), object: nil, userInfo: [Strings.tracks : self?.tracks ?? []])
-        }).disposed(by: disposeBag)
-    
         let activityIndicator = ActivityIndicator()
         
-        let dataSource = getTracksFromPlaylist().map { [weak self] tracks -> [TrackSectionModel] in
-            self?.tracks = tracks
+        let tracks = getTracksFromPlaylist()
+        let showPlayerView = input.playButton.withLatestFrom(tracks).do(onNext: { trackList in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.PlayerNotification), object: nil, userInfo: [Strings.tracks: trackList])
+            }).mapToVoid()
+        
+        let dataSource = tracks.map { tracks -> [TrackSectionModel] in
             return [TrackSectionModel(model: "", items: tracks)]
         }.trackActivity(activityIndicator)
-        return Output(dataSource: dataSource, playlistName: .just(playlistName), activityIndicator: activityIndicator.asObservable())
+        return Output(dataSource: dataSource, playlistName: .just(playlistName), activityIndicator: activityIndicator.asObservable(), showPlayerView: showPlayerView)
     }
 }
 
@@ -45,6 +43,7 @@ extension PlaylistDetailViewModel {
         var dataSource: Observable<[TrackSectionModel]>
         var playlistName: Observable<String>
         var activityIndicator: Observable<Bool>
+        var showPlayerView: Observable<Void>
     }
 }
 

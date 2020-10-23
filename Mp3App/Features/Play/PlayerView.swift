@@ -11,6 +11,10 @@ import Reusable
 import RxSwift
 import RxCocoa
 
+protocol PlayerViewDelegate: class {
+    
+}
+
 class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var trackImageView: UIImageView!
@@ -67,13 +71,15 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = PlayerViewModel.Input(hidePlayerViewButton: hideButton.rx.tap.asObservable())
+        let input = PlayerViewModel.Input()
         let output = viewModel.transform(input: input)
         output.playlist.subscribe(onNext: { [weak self] tracks in
-            var tracksTransform: [Track] = []
-            tracksTransform.append(tracks[0])
-            tracksTransform.append(contentsOf: tracks)
-            self?.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracksTransform))
+            if !tracks.isEmpty {
+                var tracksTransform: [Track] = []
+                tracksTransform.append(tracks[0])
+                tracksTransform.append(contentsOf: tracks)
+                self?.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracksTransform))
+            }
         })
         .disposed(by: disposeBag)
     }
@@ -121,5 +127,11 @@ extension PlayerView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (frame.width - scrollView.contentOffset.x) / frame.width
+    }
+}
+
+extension Reactive where Base: PlayerView {
+    var hide: ControlEvent<Void> {
+        return base.hideButton.rx.tap
     }
 }

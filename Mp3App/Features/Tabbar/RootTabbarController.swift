@@ -16,9 +16,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     private let miniPlayerHeight: CGFloat = 52
     var playerView: PlayerView!
     
-    private var hidePlayerViewTrigger = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
-    private var tracksPlayer = PublishSubject<[Track]>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +34,14 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                                               y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
                                               width: UIScreen.main.bounds.width,
                                               height: UIScreen.main.bounds.height + miniPlayerHeight))
-        let playerViewModel = PlayerViewModel(hidePlayerViewClicked: hidePlayerViewTrigger, tracksPlayer: tracksPlayer)
+        let playerViewModel = PlayerViewModel(tracksPlayer: [])
         playerViewModel.services = PlayerServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
         playerView.configureViewModel(viewModel: playerViewModel)
         view.addSubview(playerView)
         view.bringSubviewToFront(tabBar)
         tabbarY = tabBar.frame.origin.y
         
-        hidePlayerViewTrigger.subscribe(onNext: { [weak self] _ in
+        playerView.rx.hide.subscribe(onNext: { [weak self] _ in
             guard let tabbarY = self?.tabbarY, let miniPlayerHeight = self?.miniPlayerHeight else {
                 return
             }
@@ -53,8 +51,8 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                 self?.tabBar.frame.origin.y = tabbarY
                 self?.playerView.scrollToPlayerPage()
             })
-            
         }).disposed(by: disposeBag)
+        
         setupNotificationCenter()
     }
     
@@ -69,7 +67,9 @@ class RootTabbarController: UITabBarController, StoryboardBased {
             self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
         })
         guard let tracks = notification.userInfo?[Strings.tracks] as? [Track] else { return }
-        tracksPlayer.onNext(tracks)
+        
+        let playerViewModel = PlayerViewModel(tracksPlayer: tracks)
+        playerView.configureViewModel(viewModel: playerViewModel)
     }
     
     private func setupPanGesture() {
