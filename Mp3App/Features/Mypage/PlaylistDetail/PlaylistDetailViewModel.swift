@@ -14,14 +14,22 @@ class PlaylistDetailViewModel: ServicesViewModel {
     var services: MypageServices!
     private let errorTracker = ErrorTracker()
     private var playlistName: String
+    private var tracks: [Track] = []
+    private let disposeBag = DisposeBag()
     
     init(playlistName: String) {
-        self.playlistName = playlistName    }
+        self.playlistName = playlistName
+    }
     
     func transform(input: Input) -> Output {
+        input.playButton.subscribe(onNext: { [weak self] _ in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Strings.PlayerNotification), object: nil, userInfo: [Strings.tracks : self?.tracks ?? []])
+        }).disposed(by: disposeBag)
+    
         let activityIndicator = ActivityIndicator()
         
-        let dataSource = getTracksFromPlaylist().map { tracks -> [TrackSectionModel] in
+        let dataSource = getTracksFromPlaylist().map { [weak self] tracks -> [TrackSectionModel] in
+            self?.tracks = tracks
             return [TrackSectionModel(model: "", items: tracks)]
         }.trackActivity(activityIndicator)
         return Output(dataSource: dataSource, playlistName: .just(playlistName), activityIndicator: activityIndicator.asObservable())
@@ -30,6 +38,7 @@ class PlaylistDetailViewModel: ServicesViewModel {
 
 extension PlaylistDetailViewModel {
     struct Input {
+        var playButton: Observable<Void>
     }
     
     struct Output {

@@ -22,6 +22,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var controlPlayerView: UIView!
     @IBOutlet weak var containerBottomView: UIView!
     @IBOutlet weak var slider: CustomSlider!
+    @IBOutlet weak var hideButton: UIButton!
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
@@ -66,7 +67,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = PlayerViewModel.Input()
+        let input = PlayerViewModel.Input(hidePlayerViewButton: hideButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         output.playlist.subscribe(onNext: { [weak self] tracks in
             var tracksTransform: [Track] = []
@@ -87,6 +88,12 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         let contentOffset = CGPoint(x: frame.width, y: 0.0)
         scrollView.setContentOffset(contentOffset, animated: false)
         scrollView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    func scrollToPlayerPage() {
+        let contentOffset = CGPoint(x: frame.width, y: 0.0)
+        scrollView.setContentOffset(contentOffset, animated: false)
+        pageControl.currentPage = 1
     }
     
     private func setupPageControl() {

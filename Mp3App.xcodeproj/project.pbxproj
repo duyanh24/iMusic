@@ -134,6 +134,7 @@
 		08D7AD7C254164E2007D77C3 /* TrackInforCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D7AD7A254164E2007D77C3 /* TrackInforCell.xib */; };
 		08D7AD7F254168F2007D77C3 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7AD7D254168F2007D77C3 /* TrackCell.swift */; };
 		08D7AD80254168F2007D77C3 /* TrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D7AD7E254168F2007D77C3 /* TrackCell.xib */; };
+		08D83E782542AD440044667C /* PlayerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D83E772542AD440044667C /* PlayerServices.swift */; };
 		180E53AA252DB4B700840DF5 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E53A9252DB4B700840DF5 /* ScreenSize.swift */; };
 		1837FCDE253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837FCDD253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift */; };
 		1837FCE025375BF3009A80A3 /* LibraryTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837FCDF25375BF3009A80A3 /* LibraryTableViewCellViewModel.swift */; };
@@ -296,6 +297,7 @@
 		08D7AD7A254164E2007D77C3 /* TrackInforCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackInforCell.xib; sourceTree = "<group>"; };
 		08D7AD7D254168F2007D77C3 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 		08D7AD7E254168F2007D77C3 /* TrackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackCell.xib; sourceTree = "<group>"; };
+		08D83E772542AD440044667C /* PlayerServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerServices.swift; sourceTree = "<group>"; };
 		180E53A9252DB4B700840DF5 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		1837FCDD253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		1837FCDF25375BF3009A80A3 /* LibraryTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 		08504F9D2523346E0033DED0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				08D83E762542A6A90044667C /* PlayerServices */,
 				189D0008253456AA0052F12F /* SplashServices */,
 				0850500B252337230033DED0 /* LoginServices */,
 				085050012523365A0033DED0 /* SettingServices */,
@@ -934,6 +937,14 @@
 				08832BBA25416BFB00E56718 /* TrackInformationViewModel.swift */,
 			);
 			path = TrackInfor;
+			sourceTree = "<group>";
+		};
+		08D83E762542A6A90044667C /* PlayerServices */ = {
+			isa = PBXGroup;
+			children = (
+				08D83E772542AD440044667C /* PlayerServices.swift */,
+			);
+			path = PlayerServices;
 			sourceTree = "<group>";
 		};
 		1837FCE125375E04009A80A3 /* PlaylistDetail */ = {
@@ -1286,6 +1297,7 @@
 				08504FF72523346F0033DED0 /* SearchServices.swift in Sources */,
 				08143BE7252C5A3400BF3993 /* ChartTableViewCell.swift in Sources */,
 				08832BC22541723B00E56718 /* TrackInforCellViewModel.swift in Sources */,
+				08D83E782542AD440044667C /* PlayerServices.swift in Sources */,
 				080FCA0B253411B200523A2C /* AccountDefault.swift in Sources */,
 				08143BEA252C5E0500BF3993 /* ChartTableViewCellViewModel.swift in Sources */,
 				08504FB32523346E0033DED0 /* ViewModelBased.swift in Sources */,

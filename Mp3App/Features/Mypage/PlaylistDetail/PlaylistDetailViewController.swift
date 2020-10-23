@@ -43,7 +43,7 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     }
     
     private func bindViewModel() {
-        let input = PlaylistDetailViewModel.Input()
+        let input = PlaylistDetailViewModel.Input(playButton: playButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)

@@ -43,7 +43,7 @@ class LibraryDetailViewController: BaseViewController, StoryboardBased, ViewMode
     }
     
     private func bindViewModel() {
-        let input = LibraryDetailViewModel.Input()
+        let input = LibraryDetailViewModel.Input(playButton: playButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)

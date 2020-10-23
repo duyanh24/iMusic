@@ -13,11 +13,18 @@ import RxCocoa
 class LibraryDetailViewModel: ServicesViewModel {
     var services: MypageServices!
     private let errorTracker = ErrorTracker()
+    private var tracks: [Track] = []
+    private let disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
+        input.playButton.subscribe(onNext: { [weak self] _ in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Strings.PlayerNotification), object: nil, userInfo: [Strings.tracks : self?.tracks ?? []])
+        }).disposed(by: disposeBag)
+        
         let activityIndicator = ActivityIndicator()
         
-        let dataSource = getTracksFromFavourite().map { tracks -> [TrackSectionModel] in
+        let dataSource = getTracksFromFavourite().map { [weak self] tracks -> [TrackSectionModel] in
+            self?.tracks = tracks
             return [TrackSectionModel(model: "", items: tracks)]
         }.trackActivity(activityIndicator)
         
@@ -27,6 +34,7 @@ class LibraryDetailViewModel: ServicesViewModel {
 
 extension LibraryDetailViewModel {
     struct Input {
+        var playButton: Observable<Void>
     }
     
     struct Output {

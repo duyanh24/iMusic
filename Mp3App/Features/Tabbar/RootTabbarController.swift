@@ -8,11 +8,17 @@
 
 import UIKit
 import Reusable
+import RxSwift
+import RxCocoa
 
 class RootTabbarController: UITabBarController, StoryboardBased {
     private var tabbarY: CGFloat!
     private let miniPlayerHeight: CGFloat = 52
     var playerView: PlayerView!
+    
+    private var hidePlayerViewTrigger = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    private var tracksPlayer = PublishSubject<[Track]>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +36,40 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                                               y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
                                               width: UIScreen.main.bounds.width,
                                               height: UIScreen.main.bounds.height + miniPlayerHeight))
-        let playerViewModel = PlayerViewModel()
-        playerViewModel.services = MypageServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
+        let playerViewModel = PlayerViewModel(hidePlayerViewClicked: hidePlayerViewTrigger, tracksPlayer: tracksPlayer)
+        playerViewModel.services = PlayerServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
         playerView.configureViewModel(viewModel: playerViewModel)
         view.addSubview(playerView)
         view.bringSubviewToFront(tabBar)
         tabbarY = tabBar.frame.origin.y
+        
+        hidePlayerViewTrigger.subscribe(onNext: { [weak self] _ in
+            guard let tabbarY = self?.tabbarY, let miniPlayerHeight = self?.miniPlayerHeight else {
+                return
+            }
+            UIView.animate(withDuration: 0.2, animations: {
+                self?.playerView.frame.origin.y = tabbarY - miniPlayerHeight
+                self?.selectedViewController?.view.alpha = 1
+                self?.tabBar.frame.origin.y = tabbarY
+                self?.playerView.scrollToPlayerPage()
+            })
+            
+        }).disposed(by: disposeBag)
+        setupNotificationCenter()
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.PlayerNotification), object: nil)
+    }
+    
+    @objc func showPlayer(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
+            self.selectedViewController?.view.alpha = 0
+            self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
+        })
+        guard let tracks = notification.userInfo?[Strings.tracks] as? [Track] else { return }
+        tracksPlayer.onNext(tracks)
     }
     
     private func setupPanGesture() {
@@ -48,6 +82,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     @objc func panGestureRecognizerAction(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         let contentHeight = UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight
+        if playerView.frame.origin.y > 0 - miniPlayerHeight {
             switch gesture.state {
             case .began:
                 playerView.isScrollEnabled = false
@@ -75,6 +110,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                         self.selectedViewController?.view.alpha = 1
                         self.tabBar.frame.origin.y = self.tabbarY
                     })
+                    playerView.scrollToPlayerPage()
                 } else {
                     UIView.animate(withDuration: 0.3, animations: {
                         self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
@@ -86,7 +122,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
             default:
                 break
             }
-        
+        }
     }
 }
 

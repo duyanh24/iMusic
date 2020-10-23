@@ -14,6 +14,7 @@
                 <outlet property="containerBottomView" destination="vJt-db-jAc" id="fab-5v-DSQ"/>
                 <outlet property="containerView" destination="kcK-Vb-0Hk" id="Vnn-9L-iPz"/>
                 <outlet property="controlPlayerView" destination="36b-4U-uzj" id="uZH-wd-5NA"/>
+                <outlet property="hideButton" destination="x3Q-Wb-Bo8" id="3lF-tS-vQL"/>
                 <outlet property="pageControl" destination="XCC-Q4-EGn" id="LML-lI-nPe"/>
                 <outlet property="scrollView" destination="2Vg-Bk-hgh" id="2bN-ga-iHM"/>
                 <outlet property="slider" destination="Mte-p1-JJ7" id="QHH-xj-y42"/>
@@ -125,12 +126,21 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3Q-Wb-Bo8">
+                                    <rect key="frame" x="15" y="35" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="76w-fN-sub"/>
+                                        <constraint firstAttribute="width" constant="30" id="MYn-QT-EQn"/>
+                                    </constraints>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="GwB-L4-iVT" firstAttribute="leading" secondItem="VaA-y8-Dql" secondAttribute="trailing" constant="20" id="F4h-OA-Kmp"/>
                                 <constraint firstItem="VaA-y8-Dql" firstAttribute="leading" secondItem="9wL-3P-IxB" secondAttribute="leading" constant="20" id="Fxg-5S-uDv"/>
                                 <constraint firstAttribute="bottom" secondItem="GwB-L4-iVT" secondAttribute="bottom" id="Q5Y-9s-zjQ"/>
+                                <constraint firstItem="x3Q-Wb-Bo8" firstAttribute="leading" secondItem="9wL-3P-IxB" secondAttribute="leading" constant="15" id="dTb-ae-QeS"/>
+                                <constraint firstAttribute="bottom" secondItem="x3Q-Wb-Bo8" secondAttribute="bottom" constant="5" id="frV-BK-mlc"/>
                                 <constraint firstAttribute="bottom" secondItem="VaA-y8-Dql" secondAttribute="bottom" constant="5" id="jNx-B5-85Y"/>
                                 <constraint firstItem="RHU-wG-ut2" firstAttribute="leading" secondItem="VaA-y8-Dql" secondAttribute="trailing" constant="20" id="kYs-0e-0Sg"/>
                                 <constraint firstItem="GwB-L4-iVT" firstAttribute="top" secondItem="RHU-wG-ut2" secondAttribute="bottom" constant="5" id="r06-3f-qj6"/>
