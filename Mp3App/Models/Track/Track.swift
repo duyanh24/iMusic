@@ -16,6 +16,7 @@ struct Track: Codable {
     var description: String?
     var streamable: Bool?
     var streamURL: String?
+    var genre: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -25,5 +26,6 @@ struct Track: Codable {
         case description
         case streamable
         case streamURL = "stream_url"
+        case genre
     }
 }

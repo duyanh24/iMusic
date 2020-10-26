@@ -11,7 +11,11 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class PlayerView: UIView, NibOwnerLoadable {
+protocol PlayerViewDelegate: class {
+    
+}
+
+class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -22,14 +26,20 @@ class PlayerView: UIView, NibOwnerLoadable {
     @IBOutlet weak var controlPlayerView: UIView!
     @IBOutlet weak var containerBottomView: UIView!
     @IBOutlet weak var slider: CustomSlider!
+    @IBOutlet weak var hideButton: UIButton!
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
+    var viewModel: PlayerViewModel!
     
     var isScrollEnabled: Bool = true {
         didSet {
             scrollView.isScrollEnabled = isScrollEnabled
         }
+    }
+    
+    var isTableviewOnTop: Bool {
+        return trackInformationView.isTableViewOnTop
     }
     
     override init(frame: CGRect) {
@@ -55,6 +65,25 @@ class PlayerView: UIView, NibOwnerLoadable {
         setupControlPlayerView()
     }
     
+    func configureViewModel(viewModel: PlayerViewModel) {
+        self.viewModel = viewModel
+        bindViewModel()
+    }
+    
+    private func bindViewModel() {
+        let input = PlayerViewModel.Input()
+        let output = viewModel.transform(input: input)
+        output.playlist.subscribe(onNext: { [weak self] tracks in
+            if !tracks.isEmpty {
+                var tracksTransform: [Track] = []
+                tracksTransform.append(tracks[0])
+                tracksTransform.append(contentsOf: tracks)
+                self?.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracksTransform))
+            }
+        })
+        .disposed(by: disposeBag)
+    }
+    
     private func setupTrackImageView() {
         trackImageView.layer.cornerRadius = trackImageView.frame.size.height / 2
     }
@@ -65,6 +94,12 @@ class PlayerView: UIView, NibOwnerLoadable {
         let contentOffset = CGPoint(x: frame.width, y: 0.0)
         scrollView.setContentOffset(contentOffset, animated: false)
         scrollView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    func scrollToPlayerPage() {
+        let contentOffset = CGPoint(x: frame.width, y: 0.0)
+        scrollView.setContentOffset(contentOffset, animated: false)
+        pageControl.currentPage = 1
     }
     
     private func setupPageControl() {
@@ -92,5 +127,11 @@ extension PlayerView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (frame.width - scrollView.contentOffset.x) / frame.width
+    }
+}
+
+extension Reactive where Base: PlayerView {
+    var hide: ControlEvent<Void> {
+        return base.hideButton.rx.tap
     }
 }

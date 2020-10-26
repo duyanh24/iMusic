@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="height" constant="40" id="YDZ-sR-GQZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="PHÁT NGẪU NHIÊN">
+                                <state key="normal" title="PHÁT TẤT CẢ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>

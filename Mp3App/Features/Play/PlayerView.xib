@@ -14,6 +14,7 @@
                 <outlet property="containerBottomView" destination="vJt-db-jAc" id="fab-5v-DSQ"/>
                 <outlet property="containerView" destination="kcK-Vb-0Hk" id="Vnn-9L-iPz"/>
                 <outlet property="controlPlayerView" destination="36b-4U-uzj" id="uZH-wd-5NA"/>
+                <outlet property="hideButton" destination="x3Q-Wb-Bo8" id="3lF-tS-vQL"/>
                 <outlet property="pageControl" destination="XCC-Q4-EGn" id="LML-lI-nPe"/>
                 <outlet property="scrollView" destination="2Vg-Bk-hgh" id="2bN-ga-iHM"/>
                 <outlet property="slider" destination="Mte-p1-JJ7" id="QHH-xj-y42"/>
@@ -125,12 +126,21 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3Q-Wb-Bo8">
+                                    <rect key="frame" x="15" y="35" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="76w-fN-sub"/>
+                                        <constraint firstAttribute="width" constant="30" id="MYn-QT-EQn"/>
+                                    </constraints>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="GwB-L4-iVT" firstAttribute="leading" secondItem="VaA-y8-Dql" secondAttribute="trailing" constant="20" id="F4h-OA-Kmp"/>
                                 <constraint firstItem="VaA-y8-Dql" firstAttribute="leading" secondItem="9wL-3P-IxB" secondAttribute="leading" constant="20" id="Fxg-5S-uDv"/>
                                 <constraint firstAttribute="bottom" secondItem="GwB-L4-iVT" secondAttribute="bottom" id="Q5Y-9s-zjQ"/>
+                                <constraint firstItem="x3Q-Wb-Bo8" firstAttribute="leading" secondItem="9wL-3P-IxB" secondAttribute="leading" constant="15" id="dTb-ae-QeS"/>
+                                <constraint firstAttribute="bottom" secondItem="x3Q-Wb-Bo8" secondAttribute="bottom" constant="5" id="frV-BK-mlc"/>
                                 <constraint firstAttribute="bottom" secondItem="VaA-y8-Dql" secondAttribute="bottom" constant="5" id="jNx-B5-85Y"/>
                                 <constraint firstItem="RHU-wG-ut2" firstAttribute="leading" secondItem="VaA-y8-Dql" secondAttribute="trailing" constant="20" id="kYs-0e-0Sg"/>
                                 <constraint firstItem="GwB-L4-iVT" firstAttribute="top" secondItem="RHU-wG-ut2" secondAttribute="bottom" constant="5" id="r06-3f-qj6"/>
@@ -147,20 +157,20 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubO-10-CrB">
-                    <rect key="frame" x="0.0" y="142" width="414" height="720"/>
+                    <rect key="frame" x="0.0" y="142" width="414" height="541"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vg-Bk-hgh">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="541"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5Wo-Fm-exG">
-                                    <rect key="frame" x="0.0" y="0.0" width="828" height="720"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="828" height="541"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGK-5b-ELh" customClass="TrackInformationView" customModule="Mp3App" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="541"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uoc-0b-qKm" customClass="AudioPlayerView" customModule="Mp3App" customModuleProvider="target">
-                                            <rect key="frame" x="414" y="0.0" width="414" height="720"/>
+                                            <rect key="frame" x="414" y="0.0" width="414" height="541"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
@@ -187,10 +197,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36b-4U-uzj">
-                    <rect key="frame" x="0.0" y="673" width="414" height="189"/>
+                    <rect key="frame" x="0.0" y="703" width="414" height="159"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJt-db-jAc">
-                            <rect key="frame" x="0.0" y="139" width="414" height="50"/>
+                            <rect key="frame" x="0.0" y="109" width="414" height="50"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_heart_white_20_20_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="VV9-Nh-cPi">
                                     <rect key="frame" x="20" y="12.5" width="25" height="25"/>
@@ -228,7 +238,7 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qcT-oU-dg0">
-                            <rect key="frame" x="20" y="60" width="374" height="59"/>
+                            <rect key="frame" x="20" y="30" width="374" height="59"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5lX-Ar-hyC">
                                     <rect key="frame" x="0.0" y="0.0" width="59" height="59"/>
@@ -343,7 +353,7 @@
                             </subviews>
                         </stackView>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-p1-JJ7" customClass="CustomSlider" customModule="Mp3App" customModuleProvider="target">
-                            <rect key="frame" x="18" y="0.0" width="378" height="31"/>
+                            <rect key="frame" x="18" y="0.0" width="378" height="1"/>
                             <color key="minimumTrackTintColor" red="0.53866553309999998" green="0.27624678609999997" blue="0.6784849167" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="maximumTrackTintColor" red="0.81341868640000003" green="0.81729781629999998" blue="0.80958580970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="thumbTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -380,7 +390,7 @@
                 <constraint firstItem="Y2G-xQ-y0k" firstAttribute="leading" secondItem="hKW-fz-R1g" secondAttribute="leading" id="R1x-Kd-fO4"/>
                 <constraint firstAttribute="trailing" secondItem="3tw-Ah-PUq" secondAttribute="trailing" id="Zri-4O-FpV"/>
                 <constraint firstItem="3tw-Ah-PUq" firstAttribute="leading" secondItem="kcK-Vb-0Hk" secondAttribute="leading" id="c0g-a2-fiN"/>
-                <constraint firstItem="hKW-fz-R1g" firstAttribute="bottom" secondItem="ubO-10-CrB" secondAttribute="bottom" id="hHR-rV-kp4"/>
+                <constraint firstItem="36b-4U-uzj" firstAttribute="top" secondItem="ubO-10-CrB" secondAttribute="bottom" constant="20" id="hHR-rV-kp4"/>
                 <constraint firstItem="ubO-10-CrB" firstAttribute="leading" secondItem="hKW-fz-R1g" secondAttribute="leading" id="rK8-5J-KAJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

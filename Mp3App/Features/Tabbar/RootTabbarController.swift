@@ -8,11 +8,15 @@
 
 import UIKit
 import Reusable
+import RxSwift
+import RxCocoa
 
 class RootTabbarController: UITabBarController, StoryboardBased {
     private var tabbarY: CGFloat!
     private let miniPlayerHeight: CGFloat = 52
     var playerView: PlayerView!
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +34,42 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                                               y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
                                               width: UIScreen.main.bounds.width,
                                               height: UIScreen.main.bounds.height + miniPlayerHeight))
+        let playerViewModel = PlayerViewModel(tracksPlayer: [])
+        playerViewModel.services = PlayerServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
+        playerView.configureViewModel(viewModel: playerViewModel)
         view.addSubview(playerView)
         view.bringSubviewToFront(tabBar)
         tabbarY = tabBar.frame.origin.y
+        
+        playerView.rx.hide.subscribe(onNext: { [weak self] _ in
+            guard let tabbarY = self?.tabbarY, let miniPlayerHeight = self?.miniPlayerHeight else {
+                return
+            }
+            UIView.animate(withDuration: 0.2, animations: {
+                self?.playerView.frame.origin.y = tabbarY - miniPlayerHeight
+                self?.selectedViewController?.view.alpha = 1
+                self?.tabBar.frame.origin.y = tabbarY
+                self?.playerView.scrollToPlayerPage()
+            })
+        }).disposed(by: disposeBag)
+        
+        setupNotificationCenter()
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.PlayerNotification), object: nil)
+    }
+    
+    @objc func showPlayer(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
+            self.selectedViewController?.view.alpha = 0
+            self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
+        })
+        guard let tracks = notification.userInfo?[Strings.tracks] as? [Track] else { return }
+        
+        let playerViewModel = PlayerViewModel(tracksPlayer: tracks)
+        playerView.configureViewModel(viewModel: playerViewModel)
     }
     
     private func setupPanGesture() {
@@ -45,43 +82,46 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     @objc func panGestureRecognizerAction(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         let contentHeight = UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight
-        switch gesture.state {
-        case .began:
-            playerView.isScrollEnabled = false
-        case .changed:
-            let playerViewY = playerView.frame.origin.y
-            if playerViewY <= contentHeight {
-                if playerViewY + translation.y < 0 - miniPlayerHeight {
-                    playerView.frame.origin.y = view.bounds.origin.y - miniPlayerHeight
-                    tabBar.frame.origin.y = tabbarY + tabBar.frame.height
-                } else if playerViewY + translation.y > contentHeight {
-                    playerView.frame.origin.y = contentHeight
-                    tabBar.frame.origin.y = tabbarY
-                } else {
-                    playerView.frame.origin.y += translation.y
-                    tabBar.frame.origin.y -= translation.y * (tabBar.frame.height/contentHeight)
+        if playerView.frame.origin.y > 0 - miniPlayerHeight {
+            switch gesture.state {
+            case .began:
+                playerView.isScrollEnabled = false
+            case .changed:
+                let playerViewY = playerView.frame.origin.y
+                if playerViewY <= contentHeight {
+                    if playerViewY + translation.y < 0 - miniPlayerHeight {
+                        playerView.frame.origin.y = view.bounds.origin.y - miniPlayerHeight
+                        tabBar.frame.origin.y = tabbarY + tabBar.frame.height
+                    } else if playerViewY + translation.y > contentHeight {
+                        playerView.frame.origin.y = contentHeight
+                        tabBar.frame.origin.y = tabbarY
+                    } else {
+                        playerView.frame.origin.y += translation.y
+                        tabBar.frame.origin.y -= translation.y * (tabBar.frame.height/contentHeight)
+                    }
+                    selectedViewController?.view.alpha = playerViewY / contentHeight
+                    gesture.setTranslation(.zero, in: view)
                 }
-                selectedViewController?.view.alpha = playerViewY / contentHeight
-                gesture.setTranslation(.zero, in: view)
+            case .ended:
+                let velocity = gesture.velocity(in: view)
+                if velocity.y > 0 {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.playerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
+                        self.selectedViewController?.view.alpha = 1
+                        self.tabBar.frame.origin.y = self.tabbarY
+                    })
+                    playerView.scrollToPlayerPage()
+                } else {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
+                        self.selectedViewController?.view.alpha = 0
+                        self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
+                    })
+                }
+                playerView.isScrollEnabled = true
+            default:
+                break
             }
-        case .ended:
-            let velocity = gesture.velocity(in: view)
-            if velocity.y > 0 {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.playerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
-                    self.selectedViewController?.view.alpha = 1
-                    self.tabBar.frame.origin.y = self.tabbarY
-                })
-            } else {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
-                    self.selectedViewController?.view.alpha = 0
-                    self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
-                })
-            }
-            playerView.isScrollEnabled = true
-        default:
-            break
         }
     }
 }

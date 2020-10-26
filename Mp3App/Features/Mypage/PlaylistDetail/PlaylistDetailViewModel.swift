@@ -16,26 +16,34 @@ class PlaylistDetailViewModel: ServicesViewModel {
     private var playlistName: String
     
     init(playlistName: String) {
-        self.playlistName = playlistName    }
+        self.playlistName = playlistName
+    }
     
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
-        let dataSource = getTracksFromPlaylist().map { tracks -> [TrackSectionModel] in
+        let tracks = getTracksFromPlaylist()
+        let showPlayerView = input.playButton.withLatestFrom(tracks).do(onNext: { trackList in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.PlayerNotification), object: nil, userInfo: [Strings.tracks: trackList])
+            }).mapToVoid()
+        
+        let dataSource = tracks.map { tracks -> [TrackSectionModel] in
             return [TrackSectionModel(model: "", items: tracks)]
         }.trackActivity(activityIndicator)
-        return Output(dataSource: dataSource, playlistName: .just(playlistName), activityIndicator: activityIndicator.asObservable())
+        return Output(dataSource: dataSource, playlistName: .just(playlistName), activityIndicator: activityIndicator.asObservable(), showPlayerView: showPlayerView)
     }
 }
 
 extension PlaylistDetailViewModel {
     struct Input {
+        var playButton: Observable<Void>
     }
     
     struct Output {
         var dataSource: Observable<[TrackSectionModel]>
         var playlistName: Observable<String>
         var activityIndicator: Observable<Bool>
+        var showPlayerView: Observable<Void>
     }
 }
 

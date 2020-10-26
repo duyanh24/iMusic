@@ -17,21 +17,28 @@ class LibraryDetailViewModel: ServicesViewModel {
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
+        let tracks = getTracksFromFavourite()
+        let showPlayerView = input.playButton.withLatestFrom(tracks).do(onNext: { trackList in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.PlayerNotification), object: nil, userInfo: [Strings.tracks: trackList])
+            }).mapToVoid()
+        
         let dataSource = getTracksFromFavourite().map { tracks -> [TrackSectionModel] in
             return [TrackSectionModel(model: "", items: tracks)]
         }.trackActivity(activityIndicator)
         
-        return Output(dataSource: dataSource, activityIndicator: activityIndicator.asObservable())
+        return Output(dataSource: dataSource, activityIndicator: activityIndicator.asObservable(), showPlayerView: showPlayerView)
     }
 }
 
 extension LibraryDetailViewModel {
     struct Input {
+        var playButton: Observable<Void>
     }
     
     struct Output {
         var dataSource: Observable<[TrackSectionModel]>
         var activityIndicator: Observable<Bool>
+        var showPlayerView: Observable<Void>
     }
 }
 
