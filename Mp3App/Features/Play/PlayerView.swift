@@ -11,10 +11,6 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-protocol PlayerViewDelegate: class {
-    
-}
-
 class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var trackImageView: UIImageView!
@@ -27,10 +23,13 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var containerBottomView: UIView!
     @IBOutlet weak var slider: CustomSlider!
     @IBOutlet weak var hideButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
     var viewModel: PlayerViewModel!
+    private var duration = 0
     
     var isScrollEnabled: Bool = true {
         didSet {
@@ -71,7 +70,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = PlayerViewModel.Input()
+        let input = PlayerViewModel.Input(nextButton: nextButton.rx.tap.asObservable(), playButton: playButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         output.playlist.subscribe(onNext: { [weak self] tracks in
             if !tracks.isEmpty {
@@ -80,6 +79,21 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
                 tracksTransform.append(contentsOf: tracks)
                 self?.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracksTransform))
             }
+        })
+        .disposed(by: disposeBag)
+        
+        output.nextTrack.subscribe().disposed(by: disposeBag)
+        output.playTrack.subscribe().disposed(by: disposeBag)
+        
+        output.duration.subscribe(onNext: { [weak self] duration in
+            self?.duration = duration
+            self?.slider.maximumValue = Float(duration)
+        })
+        .disposed(by: disposeBag)
+        
+        output.currentTime.subscribe(onNext: { [weak self] currentTime in
+            self?.slider.value = Float(currentTime)
+            self?.setupThumbSlider(currentValue: currentTime, maxValue: self?.duration ?? 0)
         })
         .disposed(by: disposeBag)
     }
@@ -111,6 +125,16 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     private func setupSlider() {
         slider.maximumValue = 247
         slider.minimumValue = 0
+    }
+    
+    private func setupThumbSlider(currentValue: Int, maxValue: Int) {
+        slider.setProgressTime(time: stringFromTimeInterval(interval: currentValue) + " / " + stringFromTimeInterval(interval: maxValue))
+    }
+    
+    func stringFromTimeInterval(interval: Int) -> String {
+        let seconds = interval % 60
+        let minutes = (interval / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
     
     private func setupControlPlayerView() {

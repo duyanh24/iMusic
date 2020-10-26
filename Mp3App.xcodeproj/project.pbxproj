@@ -136,6 +136,7 @@
 		08D7AD80254168F2007D77C3 /* TrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D7AD7E254168F2007D77C3 /* TrackCell.xib */; };
 		08D83E782542AD440044667C /* PlayerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D83E772542AD440044667C /* PlayerServices.swift */; };
 		180E53AA252DB4B700840DF5 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E53A9252DB4B700840DF5 /* ScreenSize.swift */; };
+		18173C4D2546C9E600D8FDAF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18173C4C2546C9E600D8FDAF /* Player.swift */; };
 		1837FCDE253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837FCDD253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift */; };
 		1837FCE025375BF3009A80A3 /* LibraryTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837FCDF25375BF3009A80A3 /* LibraryTableViewCellViewModel.swift */; };
 		1837FCE325375EE5009A80A3 /* PlaylistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837FCE225375EE5009A80A3 /* PlaylistDetailViewController.swift */; };
@@ -299,6 +300,7 @@
 		08D7AD7E254168F2007D77C3 /* TrackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackCell.xib; sourceTree = "<group>"; };
 		08D83E772542AD440044667C /* PlayerServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerServices.swift; sourceTree = "<group>"; };
 		180E53A9252DB4B700840DF5 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		18173C4C2546C9E600D8FDAF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		1837FCDD253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		1837FCDF25375BF3009A80A3 /* LibraryTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		1837FCE225375EE5009A80A3 /* PlaylistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewController.swift; sourceTree = "<group>"; };
@@ -909,6 +911,7 @@
 			isa = PBXGroup;
 			children = (
 				08D7AD78254164B9007D77C3 /* TrackInfor */,
+				18173C4C2546C9E600D8FDAF /* Player.swift */,
 				08D6EE2E2541769A00D7006F /* PlayerViewModel.swift */,
 				0898B7D9253D749300E555DA /* PlayerView.swift */,
 				0898B7DB253D74BD00E555DA /* PlayerView.xib */,
@@ -1296,6 +1299,7 @@
 				08504FA42523346E0033DED0 /* HomeViewModel.swift in Sources */,
 				08504FF72523346F0033DED0 /* SearchServices.swift in Sources */,
 				08143BE7252C5A3400BF3993 /* ChartTableViewCell.swift in Sources */,
+				18173C4D2546C9E600D8FDAF /* Player.swift in Sources */,
 				08832BC22541723B00E56718 /* TrackInforCellViewModel.swift in Sources */,
 				08D83E782542AD440044667C /* PlayerServices.swift in Sources */,
 				080FCA0B253411B200523A2C /* AccountDefault.swift in Sources */,
