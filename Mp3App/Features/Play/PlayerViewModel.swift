@@ -13,40 +13,54 @@ import RxCocoa
 class PlayerViewModel: ServicesViewModel {
     var services: PlayerServices!
     private let errorTracker = ErrorTracker()
-    private var tracksPlayer: [Track]
-    
-    init(tracksPlayer: [Track]) {
-        self.tracksPlayer = tracksPlayer
-    }
     
     func transform(input: Input) -> Output {
-        Player.tracks = tracksPlayer
-        Player.startPlayTracks()
+        let startPlayTracks = input.tracks.do(onNext: { tracks in
+            Player.shared.tracks = tracks
+            Player.shared.startPlayTracks()
+        }).mapToVoid()
         
         let nextTrack = input.nextButton.do(onNext: { _ in
-            Player.nextTrack()
+            Player.shared.nextTrack()
         }).mapToVoid()
         
         let playTrack = input.playButton.do(onNext: { _ in
-            Player.playTrack()
-            print("ok")
+            Player.shared.playTrack()
         }).mapToVoid()
         
-        return Output(playlist: .just(tracksPlayer), nextTrack: nextTrack, playTrack: playTrack, currentTime: Player.currentTime, duration: Player.duration)
+        let prevTrack = input.prevButton.do(onNext: { _ in
+            Player.shared.prevTrack()
+        }).mapToVoid()
+        
+        return Output(playlist: input.tracks,
+                      nextTrack: nextTrack,
+                      prevTrack: prevTrack,
+                      playTrack: playTrack,
+                      currentTime: Player.shared.currentTime,
+                      duration: Player.shared.duration,
+                      startPlayTracks: startPlayTracks,
+                      isPlaying: Player.shared.isPlayingTrigger,
+                      currentTrack: Player.shared.currentTrack)
     }
 }
 
 extension PlayerViewModel {
     struct Input {
+        var prevButton: Observable<Void>
         var nextButton: Observable<Void>
         var playButton: Observable<Void>
+        var tracks: Observable<[Track]>
     }
     
     struct Output {
         var playlist: Observable<[Track]>
         var nextTrack: Observable<Void>
+        var prevTrack: Observable<Void>
         var playTrack: Observable<Void>
         var currentTime: Observable<Int>
         var duration: Observable<Int>
+        var startPlayTracks: Observable<Void>
+        var isPlaying: Observable<Bool>
+        var currentTrack: Observable<Track>
     }
 }

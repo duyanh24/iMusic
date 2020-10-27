@@ -24,10 +24,19 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var slider: CustomSlider!
     @IBOutlet weak var hideButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playImageView: UIImageView!
+    @IBOutlet weak var titeLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleMiniPlayerLabel: UILabel!
+    @IBOutlet weak var descriptionMiniPlayerLabel: UILabel!
+    @IBOutlet weak var miniPlayerImageView: UIImageView!
+    @IBOutlet weak var miniPlayerSlider: UISlider!
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
+    private var tracks = PublishSubject<[Track]>()
     var viewModel: PlayerViewModel!
     private var duration = 0
     
@@ -60,8 +69,11 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         setupTrackImageView()
         setupScrollView()
         setupPageControl()
-        setupSlider()
         setupControlPlayerView()
+    }
+
+    func setTracks(tracks: [Track]) {
+        self.tracks.onNext(tracks)
     }
     
     func configureViewModel(viewModel: PlayerViewModel) {
@@ -70,29 +82,46 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = PlayerViewModel.Input(nextButton: nextButton.rx.tap.asObservable(), playButton: playButton.rx.tap.asObservable())
+        let input = PlayerViewModel.Input(prevButton: prevButton.rx.tap.asObservable(), nextButton: nextButton.rx.tap.asObservable(), playButton: playButton.rx.tap.asObservable(), tracks: tracks)
         let output = viewModel.transform(input: input)
         output.playlist.subscribe(onNext: { [weak self] tracks in
-            if !tracks.isEmpty {
-                var tracksTransform: [Track] = []
-                tracksTransform.append(tracks[0])
-                tracksTransform.append(contentsOf: tracks)
-                self?.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracksTransform))
+            guard let self = self, let firstItem = tracks.first else {
+                return
+            }
+            self.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: [firstItem] + tracks))
+        })
+        .disposed(by: disposeBag)
+        
+        output.startPlayTracks.subscribe().disposed(by: disposeBag)
+        output.nextTrack.subscribe().disposed(by: disposeBag)
+        output.playTrack.subscribe().disposed(by: disposeBag)
+        output.prevTrack.subscribe().disposed(by: disposeBag)
+        
+        output.currentTrack.subscribe(onNext: { [weak self] track in
+            self?.setupContent(track: track)
+        })
+        .disposed(by: disposeBag)
+        
+        output.isPlaying.subscribe(onNext: { [weak self] isPlaying in
+            if isPlaying {
+                self?.playImageView.image = Asset.pause64Normal.image
+                self?.audioPlayerView.rotateImageView()
+            } else {
+                self?.playImageView.image = Asset.play64Normal.image
             }
         })
         .disposed(by: disposeBag)
         
-        output.nextTrack.subscribe().disposed(by: disposeBag)
-        output.playTrack.subscribe().disposed(by: disposeBag)
-        
         output.duration.subscribe(onNext: { [weak self] duration in
             self?.duration = duration
             self?.slider.maximumValue = Float(duration)
+            self?.miniPlayerSlider.maximumValue = Float(duration)
         })
         .disposed(by: disposeBag)
         
         output.currentTime.subscribe(onNext: { [weak self] currentTime in
             self?.slider.value = Float(currentTime)
+            self?.miniPlayerSlider.value = Float(currentTime)
             self?.setupThumbSlider(currentValue: currentTime, maxValue: self?.duration ?? 0)
         })
         .disposed(by: disposeBag)
@@ -122,24 +151,25 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         pageControl.currentPage = 1
     }
     
-    private func setupSlider() {
-        slider.maximumValue = 247
-        slider.minimumValue = 0
-    }
-    
     private func setupThumbSlider(currentValue: Int, maxValue: Int) {
-        slider.setProgressTime(time: stringFromTimeInterval(interval: currentValue) + " / " + stringFromTimeInterval(interval: maxValue))
-    }
-    
-    func stringFromTimeInterval(interval: Int) -> String {
-        let seconds = interval % 60
-        let minutes = (interval / 60) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
+        slider.setProgressTime(time: Converter.stringFromTimeInterval(interval: currentValue) + " / " + Converter.stringFromTimeInterval(interval: maxValue))
     }
     
     private func setupControlPlayerView() {
         controlPlayerView.layoutIfNeeded()
         controlPlayerViewY = frame.height - controlPlayerView.frame.size.height - ScreenSize.getBottomSafeArea()
+    }
+    
+    private func setupContent(track: Track) {
+        titeLabel.text = track.title
+        titleMiniPlayerLabel.text = track.title
+        descriptionLabel.text = track.description
+        descriptionMiniPlayerLabel.text = track.description
+        guard let url = track.artworkURL else {
+            return
+        }
+        audioPlayerView.setupDiskImage(url: url)
+        miniPlayerImageView.setImage(stringURL: url)
     }
 }
 

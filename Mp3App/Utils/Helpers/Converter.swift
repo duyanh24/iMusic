@@ -22,4 +22,10 @@ class Converter {
         }
         return imgURL.replacingOccurrences(of: originalSize.rawValue, with: desireSize.rawValue)
     }
+    
+    static func stringFromTimeInterval(interval: Int) -> String {
+        let seconds = interval % 60
+        let minutes = (interval / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
 }
