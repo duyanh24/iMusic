@@ -15,6 +15,7 @@ class TrackCell: UITableViewCell, NibReusable, ViewModelBased {
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
+    @IBOutlet weak var playImageView: UIImageView!
     
     var viewModel: TrackCellViewModel!
     private var disposeBag = DisposeBag()
@@ -59,5 +60,13 @@ class TrackCell: UITableViewCell, NibReusable, ViewModelBased {
             self?.trackImageView?.setImage(stringURL: url)
         })
         .disposed(by: disposeBag)
+    }
+    
+    func hidePlayImageView() {
+        playImageView.isHidden = true
+    }
+    
+    func showPlayImageView() {
+        playImageView.isHidden = false
     }
 }

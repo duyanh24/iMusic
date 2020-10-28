@@ -44,4 +44,23 @@ extension UIImageView {
         self.sd_imageTransition = .fade
         self.sd_setImage(with: URL(string: stringURL))
     }
+    
+    func rotate(duration: Double = 15) {
+        if layer.animation(forKey: Strings.rotationAnimationKey) == nil {
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+            
+            rotationAnimation.fromValue = 0.0
+            rotationAnimation.toValue = Float.pi * 2.0
+            rotationAnimation.duration = duration
+            rotationAnimation.repeatCount = Float.infinity
+            
+            layer.add(rotationAnimation, forKey: Strings.rotationAnimationKey)
+        }
+    }
+    
+    func stopRotating() {
+        if layer.animation(forKey: Strings.rotationAnimationKey) != nil {
+            layer.removeAnimation(forKey: Strings.rotationAnimationKey)
+        }
+    }
 }

@@ -12,13 +12,29 @@ import RxCocoa
 
 class TrackInformationViewModel: ViewModel {
     private let tracks: [Track]
+    private let currentTrack: Track?
     
-    init(tracks: [Track]) {
+    init(tracks: [Track], currentTrack: Track?) {
         self.tracks = tracks
+        self.currentTrack = currentTrack
     }
     
     func transform(input: Input) -> Output {
-        return Output(dataSource: .just([TrackSectionModel(model: "", items: tracks)]))
+        if let currentTrack = currentTrack {
+            let tracksTransform = tracks.map ({ track -> Track in
+                if track.id == currentTrack.id {
+                    var trackTransform = track
+                    trackTransform.isPlaying = true
+                    return trackTransform
+                }
+                return track
+            })
+            return Output(dataSource: .just([TrackSectionModel(model: "", items: [currentTrack] + tracksTransform)]))
+        }
+        guard let firstItem = tracks.first else {
+            return Output(dataSource: .just([TrackSectionModel(model: "", items: tracks)]))
+        }
+        return Output(dataSource: .just([TrackSectionModel(model: "", items: [firstItem] + tracks)]))
     }
 }
 

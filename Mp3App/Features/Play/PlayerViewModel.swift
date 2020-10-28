@@ -32,7 +32,7 @@ class PlayerViewModel: ServicesViewModel {
             Player.shared.prevTrack()
         }).mapToVoid()
         
-        return Output(playlist: input.tracks,
+        return Output(playList: Observable.combineLatest(input.tracks, Player.shared.currentTrack),
                       nextTrack: nextTrack,
                       prevTrack: prevTrack,
                       playTrack: playTrack,
@@ -53,7 +53,7 @@ extension PlayerViewModel {
     }
     
     struct Output {
-        var playlist: Observable<[Track]>
+        var playList: Observable<([Track], Track)>
         var nextTrack: Observable<Void>
         var prevTrack: Observable<Void>
         var playTrack: Observable<Void>

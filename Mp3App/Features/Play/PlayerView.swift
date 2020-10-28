@@ -33,6 +33,8 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var descriptionMiniPlayerLabel: UILabel!
     @IBOutlet weak var miniPlayerImageView: UIImageView!
     @IBOutlet weak var miniPlayerSlider: UISlider!
+    @IBOutlet weak var miniPlayButton: UIButton!
+    @IBOutlet weak var miniNextButton: UIButton!
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
@@ -70,6 +72,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         setupScrollView()
         setupPageControl()
         setupControlPlayerView()
+        
     }
 
     func setTracks(tracks: [Track]) {
@@ -82,15 +85,15 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = PlayerViewModel.Input(prevButton: prevButton.rx.tap.asObservable(), nextButton: nextButton.rx.tap.asObservable(), playButton: playButton.rx.tap.asObservable(), tracks: tracks)
+        let input = PlayerViewModel.Input(prevButton: prevButton.rx.tap.asObservable(),
+                                          nextButton: nextButton.rx.tap.asObservable().merge(with: miniNextButton.rx.tap.asObservable()),
+                                          playButton: playButton.rx.tap.asObservable().merge(with: miniPlayButton.rx.tap.asObservable()),
+                                          tracks: tracks)
         let output = viewModel.transform(input: input)
-        output.playlist.subscribe(onNext: { [weak self] tracks in
-            guard let self = self, let firstItem = tracks.first else {
-                return
-            }
-            self.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: [firstItem] + tracks))
-        })
-        .disposed(by: disposeBag)
+        
+        output.playList.subscribe(onNext: { tracks, currentTrack in
+                self.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracks, currentTrack: currentTrack))
+        }).disposed(by: disposeBag)
         
         output.startPlayTracks.subscribe().disposed(by: disposeBag)
         output.nextTrack.subscribe().disposed(by: disposeBag)
@@ -103,12 +106,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         .disposed(by: disposeBag)
         
         output.isPlaying.subscribe(onNext: { [weak self] isPlaying in
-            if isPlaying {
-                self?.playImageView.image = Asset.pause64Normal.image
-                self?.audioPlayerView.rotateImageView()
-            } else {
-                self?.playImageView.image = Asset.play64Normal.image
-            }
+            self?.setupRotation(isPlaying: isPlaying)
         })
         .disposed(by: disposeBag)
         
@@ -120,9 +118,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         .disposed(by: disposeBag)
         
         output.currentTime.subscribe(onNext: { [weak self] currentTime in
-            self?.slider.value = Float(currentTime)
-            self?.miniPlayerSlider.value = Float(currentTime)
-            self?.setupThumbSlider(currentValue: currentTime, maxValue: self?.duration ?? 0)
+            self?.setupSliderValue(currentTime: Float(currentTime))
         })
         .disposed(by: disposeBag)
     }
@@ -160,6 +156,12 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         controlPlayerViewY = frame.height - controlPlayerView.frame.size.height - ScreenSize.getBottomSafeArea()
     }
     
+    private func setupSliderValue(currentTime: Float) {
+        slider.value = currentTime
+        miniPlayerSlider.value = currentTime
+        setupThumbSlider(currentValue: Int(currentTime), maxValue: duration)
+    }
+    
     private func setupContent(track: Track) {
         titeLabel.text = track.title
         titleMiniPlayerLabel.text = track.title
@@ -170,6 +172,29 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         }
         audioPlayerView.setupDiskImage(url: url)
         miniPlayerImageView.setImage(stringURL: url)
+    }
+    
+    private func setupRotation(isPlaying: Bool) {
+        if isPlaying {
+            playImageView.image = Asset.pause64Normal.image
+            miniPlayButton.setImage(Asset.icPauseNormal.image, for: .normal)
+            audioPlayerView.rotateImageView()
+            miniPlayerImageView.rotate()
+        } else {
+            playImageView.image = Asset.play64Normal.image
+            miniPlayButton.setImage(Asset.icPlayNormalBlack.image, for: .normal)
+            miniPlayButton.tintColor = .black
+            audioPlayerView.stopRotateImageView()
+            miniPlayerImageView.stopRotating()
+        }
+    }
+
+    @IBAction func touchUpSlider(_ sender: Any) {
+        print("end")
+    }
+    
+    @IBAction func touchDownSlider(_ sender: Any) {
+        print("begin")
     }
 }
 

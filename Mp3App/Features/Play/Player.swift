@@ -25,12 +25,19 @@ class Player {
     var currentTrack = PublishSubject<Track>()
     
     func startPlayTracks() {
+        resetData()
         if !tracks.isEmpty {
             guard let track = tracks.first else {
                 return
             }
             startTracks(track: track)
         }
+    }
+    
+    private func resetData() {
+        player = nil
+        currentTrackIndex = 0
+        isPlaying = false
     }
     
     private func startTracks(track: Track) {
@@ -50,6 +57,10 @@ class Player {
             if self.player.currentItem?.status == .readyToPlay {
                 let time = CMTimeGetSeconds(self.player.currentTime())
                 self.currentTime.onNext(Int(time))
+                
+                if time >= durationInSeconds - 1 {
+                    self.nextTrack()
+                }
             }
         }
         
@@ -60,6 +71,7 @@ class Player {
     }
     
     func prevTrack() {
+        //player.seek(to: CMTime(seconds: Double(150), preferredTimescale: 1))
         currentTrackIndex == 0 ? (currentTrackIndex = tracks.count - 1) : (currentTrackIndex -= 1)
         player.pause()
         startTracks(track: tracks[currentTrackIndex])
