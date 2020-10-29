@@ -25,11 +25,19 @@ class PlayerViewModel: ServicesViewModel {
         }).mapToVoid()
         
         let playTrack = input.playButton.do(onNext: { _ in
-            Player.shared.playTrack()
+            Player.shared.playContinue()
         }).mapToVoid()
         
         let prevTrack = input.prevButton.do(onNext: { _ in
             Player.shared.prevTrack()
+        }).mapToVoid()
+        
+        let seekTrack = input.seekValueSlider.do(onNext: { value in
+            Player.shared.seek(seconds: value)
+        }).mapToVoid()
+        
+        let randomMode = input.randomModeButton.do(onNext: { _ in
+            Player.shared.setupRandomMode()
         }).mapToVoid()
         
         return Output(playList: Observable.combineLatest(input.tracks, Player.shared.currentTrack),
@@ -40,7 +48,10 @@ class PlayerViewModel: ServicesViewModel {
                       duration: Player.shared.duration,
                       startPlayTracks: startPlayTracks,
                       isPlaying: Player.shared.isPlayingTrigger,
-                      currentTrack: Player.shared.currentTrack)
+                      currentTrack: Player.shared.currentTrack,
+                      seekTrack: seekTrack,
+                      randomMode: randomMode,
+                      isRandomModeSelected: Player.shared.randomMode.asObservable())
     }
 }
 
@@ -49,7 +60,9 @@ extension PlayerViewModel {
         var prevButton: Observable<Void>
         var nextButton: Observable<Void>
         var playButton: Observable<Void>
+        var randomModeButton: Observable<Void>
         var tracks: Observable<[Track]>
+        var seekValueSlider: Observable<Float>
     }
     
     struct Output {
@@ -62,5 +75,8 @@ extension PlayerViewModel {
         var startPlayTracks: Observable<Void>
         var isPlaying: Observable<Bool>
         var currentTrack: Observable<Track>
+        var seekTrack: Observable<Void>
+        var randomMode: Observable<Void>
+        var isRandomModeSelected: Observable<Bool>
     }
 }

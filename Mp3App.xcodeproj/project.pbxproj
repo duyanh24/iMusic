@@ -911,9 +911,9 @@
 			isa = PBXGroup;
 			children = (
 				08D7AD78254164B9007D77C3 /* TrackInfor */,
-				18173C4C2546C9E600D8FDAF /* Player.swift */,
 				08D6EE2E2541769A00D7006F /* PlayerViewModel.swift */,
 				0898B7D9253D749300E555DA /* PlayerView.swift */,
+				18173C4C2546C9E600D8FDAF /* Player.swift */,
 				0898B7DB253D74BD00E555DA /* PlayerView.xib */,
 				0898B7DE253D88DE00E555DA /* AudioPlayerView.swift */,
 				0898B7E0253D88EF00E555DA /* AudioPlayerView.xib */,

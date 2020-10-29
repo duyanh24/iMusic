@@ -64,7 +64,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.PlayerNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.playerNotification), object: nil)
     }
     
     @objc func showPlayer(_ notification: Notification) {

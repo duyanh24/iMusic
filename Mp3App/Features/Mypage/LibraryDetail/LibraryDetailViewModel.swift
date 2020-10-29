@@ -19,7 +19,7 @@ class LibraryDetailViewModel: ServicesViewModel {
         
         let tracks = getTracksFromFavourite()
         let showPlayerView = input.playButton.withLatestFrom(tracks).do(onNext: { trackList in
-            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.PlayerNotification), object: nil, userInfo: [Strings.tracks: trackList])
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: trackList])
             }).mapToVoid()
         
         let dataSource = getTracksFromFavourite().map { tracks -> [TrackSectionModel] in

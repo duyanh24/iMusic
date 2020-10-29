@@ -79,6 +79,12 @@ class TrackInformationView: UIView, NibOwnerLoadable, ViewModelBased {
         tableView.delegate = self
         tableView.register(cellType: TrackInforCell.self)
         tableView.register(cellType: TrackCell.self)
+        
+        tableView.rx.itemSelected.subscribe(onNext: { indexPath in
+            if indexPath.row != 0 {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.selectedTrackItem), object: nil, userInfo: [Strings.index: indexPath.row - 1])
+            }
+        }).disposed(by: disposeBag)
     }
 }
 

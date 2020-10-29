@@ -40,8 +40,11 @@ struct Strings {
     
     //notification
     static let playlistCreatedNotification = "playlistCreatedNotification"
-    static let PlayerNotification = "PlayerNotification"
+    static let playerNotification = "PlayerNotification"
     static let tracks = "tracks"
+    static let selectedTrackItem = "selectedTrackItem"
+    static let index = "index"
+    
 
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"

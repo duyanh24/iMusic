@@ -26,6 +26,8 @@
                 <outlet property="playButton" destination="Jo9-AW-44m" id="aCt-we-8Ch"/>
                 <outlet property="playImageView" destination="49F-Tn-J8E" id="O8n-wS-elT"/>
                 <outlet property="prevButton" destination="Rjj-zL-caY" id="LqP-5M-ROl"/>
+                <outlet property="randomButton" destination="2mv-fa-Etx" id="mKH-nd-pd3"/>
+                <outlet property="randomModeImageView" destination="e7S-vW-acZ" id="zsN-RS-FDK"/>
                 <outlet property="scrollView" destination="2Vg-Bk-hgh" id="2bN-ga-iHM"/>
                 <outlet property="slider" destination="Mte-p1-JJ7" id="QHH-xj-y42"/>
                 <outlet property="titeLabel" destination="RHU-wG-ut2" id="x2B-m6-IB0"/>
@@ -357,7 +359,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDP-o3-6KM">
                                     <rect key="frame" x="315" y="0.0" width="59" height="59"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="e7S-vW-acZ">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shuffle_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="e7S-vW-acZ">
                                             <rect key="frame" x="15" y="15" width="29.5" height="29.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="e7S-vW-acZ" secondAttribute="height" id="6IM-kl-AmW"/>
@@ -385,6 +387,7 @@
                             <connections>
                                 <action selector="touchDownSlider:" destination="-1" eventType="touchDown" id="zK0-UQ-xNt"/>
                                 <action selector="touchUpSlider:" destination="-1" eventType="touchUpInside" id="gEX-oL-aEG"/>
+                                <action selector="valueChangedSlider:" destination="-1" eventType="valueChanged" id="l8T-L4-y4t"/>
                             </connections>
                         </slider>
                     </subviews>
@@ -440,6 +443,6 @@
         <image name="playPre_Normal" width="24" height="24"/>
         <image name="player_background_normal_Normal" width="320" height="568"/>
         <image name="player_button_repeat_normal_Normal" width="24" height="24"/>
-        <image name="repeat_Normal" width="24" height="24"/>
+        <image name="shuffle_Normal" width="24" height="24"/>
     </resources>
 </document>

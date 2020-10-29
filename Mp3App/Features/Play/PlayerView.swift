@@ -35,12 +35,16 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var miniPlayerSlider: UISlider!
     @IBOutlet weak var miniPlayButton: UIButton!
     @IBOutlet weak var miniNextButton: UIButton!
+    @IBOutlet weak var randomButton: UIButton!
+    @IBOutlet weak var randomModeImageView: UIImageView!
     
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
     private var tracks = PublishSubject<[Track]>()
     var viewModel: PlayerViewModel!
     private var duration = 0
+    private let seekValueSlider = PublishSubject<Float>()
+    private var isChangingSlider = false
     
     var isScrollEnabled: Bool = true {
         didSet {
@@ -88,7 +92,9 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         let input = PlayerViewModel.Input(prevButton: prevButton.rx.tap.asObservable(),
                                           nextButton: nextButton.rx.tap.asObservable().merge(with: miniNextButton.rx.tap.asObservable()),
                                           playButton: playButton.rx.tap.asObservable().merge(with: miniPlayButton.rx.tap.asObservable()),
-                                          tracks: tracks)
+                                          randomModeButton: randomButton.rx.tap.asObservable(),
+                                          tracks: tracks,
+                                          seekValueSlider: seekValueSlider)
         let output = viewModel.transform(input: input)
         
         output.playList.subscribe(onNext: { tracks, currentTrack in
@@ -99,6 +105,8 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         output.nextTrack.subscribe().disposed(by: disposeBag)
         output.playTrack.subscribe().disposed(by: disposeBag)
         output.prevTrack.subscribe().disposed(by: disposeBag)
+        output.seekTrack.subscribe().disposed(by: disposeBag)
+        output.randomMode.subscribe().disposed(by: disposeBag)
         
         output.currentTrack.subscribe(onNext: { [weak self] track in
             self?.setupContent(track: track)
@@ -118,7 +126,17 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         .disposed(by: disposeBag)
         
         output.currentTime.subscribe(onNext: { [weak self] currentTime in
-            self?.setupSliderValue(currentTime: Float(currentTime))
+            guard let isChangingSlider = self?.isChangingSlider else {
+                return
+            }
+            if !isChangingSlider {
+                self?.setupSliderValue(currentTime: Float(currentTime))
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        output.isRandomModeSelected.subscribe(onNext: { [weak self] isRandomModeSelected in
+            isRandomModeSelected ? (self?.randomModeImageView.image = Asset.playerButtonShuffleActiveNormal.image) : (self?.randomModeImageView.image = Asset.playerButtonShuffleNormalNormal.image)
         })
         .disposed(by: disposeBag)
     }
@@ -190,11 +208,16 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     }
 
     @IBAction func touchUpSlider(_ sender: Any) {
-        print("end")
+        seekValueSlider.onNext(slider.value)
+        isChangingSlider = false
     }
     
     @IBAction func touchDownSlider(_ sender: Any) {
-        print("begin")
+        isChangingSlider = true
+    }
+    
+    @IBAction func valueChangedSlider(_ sender: Any) {
+        setupSliderValue(currentTime: slider.value)
     }
 }
 
