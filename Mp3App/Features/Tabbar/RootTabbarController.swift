@@ -23,10 +23,6 @@ class RootTabbarController: UITabBarController, StoryboardBased {
         super.viewDidLoad()
         tabBar.isTranslucent = false
         createObserver()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         setupPlayerView()
         setupPanGesture()
     }

@@ -16,48 +16,48 @@ class PlayerViewModel: ServicesViewModel {
     
     func transform(input: Input) -> Output {
         let startPlayTracks = input.tracks.do(onNext: { tracks in
-            Player.shared.tracks = tracks
-            Player.shared.startPlayTracks()
+            TrackPlayer.shared.tracks = tracks
+            TrackPlayer.shared.startPlayTracks()
         }).mapToVoid()
         
         let nextTrack = input.nextButton.do(onNext: { _ in
-            Player.shared.nextTrack()
+            TrackPlayer.shared.nextTrack()
         }).mapToVoid()
         
         let playTrack = input.playButton.do(onNext: { _ in
-            Player.shared.playContinue()
+            TrackPlayer.shared.playContinue()
         }).mapToVoid()
         
         let prevTrack = input.prevButton.do(onNext: { _ in
-            Player.shared.prevTrack()
+            TrackPlayer.shared.prevTrack()
         }).mapToVoid()
         
         let seekTrack = input.seekValueSlider.do(onNext: { value in
-            Player.shared.seek(seconds: value)
+            TrackPlayer.shared.seek(seconds: value)
         }).mapToVoid()
         
         let randomMode = input.randomModeButton.do(onNext: { _ in
-            Player.shared.setupRandomMode()
+            TrackPlayer.shared.setupRandomMode()
         }).mapToVoid()
         
         let repeatMode = input.repeatModeButton.do(onNext: { _ in
-            Player.shared.setupRepeatMode()
+            TrackPlayer.shared.setupRepeatMode()
         }).mapToVoid()
         
-        return Output(playList: Observable.combineLatest(input.tracks, Player.shared.currentTrack),
+        return Output(playList: Observable.combineLatest(input.tracks, TrackPlayer.shared.currentTrack),
                       nextTrack: nextTrack,
                       prevTrack: prevTrack,
                       playTrack: playTrack,
-                      currentTime: Player.shared.currentTime,
-                      duration: Player.shared.duration,
+                      currentTime: TrackPlayer.shared.currentTime,
+                      duration: TrackPlayer.shared.duration,
                       startPlayTracks: startPlayTracks,
-                      isPlaying: Player.shared.isPlayingTrigger,
-                      currentTrack: Player.shared.currentTrack.asObservable(),
+                      isPlaying: TrackPlayer.shared.isPlayingTrigger,
+                      currentTrack: TrackPlayer.shared.currentTrack.asObservable(),
                       seekTrack: seekTrack,
                       randomMode: randomMode,
-                      isRandomModeSelected: Player.shared.randomMode.asObservable(),
+                      isRandomModeSelected: TrackPlayer.shared.randomMode.asObservable(),
                       repeatMode: repeatMode,
-                      isRepeatModeSelected: Player.shared.repeatMode.asObservable())
+                      isRepeatModeSelected: TrackPlayer.shared.repeatMode.asObservable())
     }
 }
 

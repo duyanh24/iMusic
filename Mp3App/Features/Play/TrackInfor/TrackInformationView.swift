@@ -23,17 +23,12 @@ class TrackInformationView: UIView, NibOwnerLoadable, ViewModelBased {
                 cell.configureCell(viewModel: trackInforCellViewModel)
                 return cell
             }
-            
             let cell = tableView.dequeueReusableCell(for: indexPath) as TrackCell
             let trackCellViewModel = TrackCellViewModel(track: track)
             cell.configureCell(viewModel: trackCellViewModel)
-            if track.isPlaying {
-                cell.showPlayImageView()
-            } else {
-                cell.hidePlayImageView()
-            }
+            track.isPlaying ? cell.showPlayImageView() : cell.hidePlayImageView()
             return cell
-    })
+    })  
     
     var isTableViewOnTop: Bool {
         return tableView.contentOffset.y <= 0
