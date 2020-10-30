@@ -25,7 +25,7 @@ class TrackPlayer {
     private var player: AVPlayer?
     private var currentTrackIndex = 0
     private var isPlaying = false
-    private var tracksPlayed = [Int]()
+    private var tracksPlayedId = [Int]()
     
     func startPlayTracks() {
         resetData()
@@ -42,15 +42,15 @@ class TrackPlayer {
         player = nil
         currentTrackIndex = 0
         isPlaying = false
-        tracksPlayed = []
+        tracksPlayedId = []
     }
     
     private func startTracks(track: Track) {
         guard let id = track.id else {
             return
         }
-        if !tracksPlayed.contains(id) {
-            tracksPlayed.append(id)
+        if !tracksPlayedId.contains(id) {
+            tracksPlayedId.append(id)
         }
         let trackLink = String(format: APIURL.APIStream, id)
         guard let url = URL.init(string: trackLink) else {
@@ -159,14 +159,14 @@ class TrackPlayer {
     }
     
     private func getRandomTrack(isAutoNext: Bool = false) -> Track? {
-        if !isAutoNext && tracksPlayed.count == tracks.count {
-            tracksPlayed = []
+        if !isAutoNext && tracksPlayedId.count == tracks.count {
+            tracksPlayedId = []
         }
         let randomTrack = tracks.filter {
             guard let id = $0.id else {
                 return true
             }
-            return !tracksPlayed.contains(id)
+            return !tracksPlayedId.contains(id)
         }.randomElement()
         guard let track = randomTrack else {
             return nil
