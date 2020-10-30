@@ -40,6 +40,10 @@ class PlayerViewModel: ServicesViewModel {
             Player.shared.setupRandomMode()
         }).mapToVoid()
         
+        let repeatMode = input.repeatModeButton.do(onNext: { _ in
+            Player.shared.setupRepeatMode()
+        }).mapToVoid()
+        
         return Output(playList: Observable.combineLatest(input.tracks, Player.shared.currentTrack),
                       nextTrack: nextTrack,
                       prevTrack: prevTrack,
@@ -48,10 +52,12 @@ class PlayerViewModel: ServicesViewModel {
                       duration: Player.shared.duration,
                       startPlayTracks: startPlayTracks,
                       isPlaying: Player.shared.isPlayingTrigger,
-                      currentTrack: Player.shared.currentTrack,
+                      currentTrack: Player.shared.currentTrack.asObservable(),
                       seekTrack: seekTrack,
                       randomMode: randomMode,
-                      isRandomModeSelected: Player.shared.randomMode.asObservable())
+                      isRandomModeSelected: Player.shared.randomMode.asObservable(),
+                      repeatMode: repeatMode,
+                      isRepeatModeSelected: Player.shared.repeatMode.asObservable())
     }
 }
 
@@ -61,12 +67,13 @@ extension PlayerViewModel {
         var nextButton: Observable<Void>
         var playButton: Observable<Void>
         var randomModeButton: Observable<Void>
+        var repeatModeButton: Observable<Void>
         var tracks: Observable<[Track]>
         var seekValueSlider: Observable<Float>
     }
     
     struct Output {
-        var playList: Observable<([Track], Track)>
+        var playList: Observable<([Track], Track?)>
         var nextTrack: Observable<Void>
         var prevTrack: Observable<Void>
         var playTrack: Observable<Void>
@@ -74,9 +81,11 @@ extension PlayerViewModel {
         var duration: Observable<Int>
         var startPlayTracks: Observable<Void>
         var isPlaying: Observable<Bool>
-        var currentTrack: Observable<Track>
+        var currentTrack: Observable<Track?>
         var seekTrack: Observable<Void>
         var randomMode: Observable<Void>
         var isRandomModeSelected: Observable<Bool>
+        var repeatMode: Observable<Void>
+        var isRepeatModeSelected: Observable<Bool>
     }
 }

@@ -37,11 +37,13 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var miniNextButton: UIButton!
     @IBOutlet weak var randomButton: UIButton!
     @IBOutlet weak var randomModeImageView: UIImageView!
+    @IBOutlet weak var repeatModeButton: UIButton!
+    @IBOutlet weak var repeatModeImageView: UIImageView!
     
+    var viewModel: PlayerViewModel!
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
     private var tracks = PublishSubject<[Track]>()
-    var viewModel: PlayerViewModel!
     private var duration = 0
     private let seekValueSlider = PublishSubject<Float>()
     private var isChangingSlider = false
@@ -93,6 +95,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
                                           nextButton: nextButton.rx.tap.asObservable().merge(with: miniNextButton.rx.tap.asObservable()),
                                           playButton: playButton.rx.tap.asObservable().merge(with: miniPlayButton.rx.tap.asObservable()),
                                           randomModeButton: randomButton.rx.tap.asObservable(),
+                                          repeatModeButton: repeatModeButton.rx.tap.asObservable(),
                                           tracks: tracks,
                                           seekValueSlider: seekValueSlider)
         let output = viewModel.transform(input: input)
@@ -107,8 +110,12 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         output.prevTrack.subscribe().disposed(by: disposeBag)
         output.seekTrack.subscribe().disposed(by: disposeBag)
         output.randomMode.subscribe().disposed(by: disposeBag)
+        output.repeatMode.subscribe().disposed(by: disposeBag)
         
         output.currentTrack.subscribe(onNext: { [weak self] track in
+            guard let track = track else {
+                return
+            }
             self?.setupContent(track: track)
         })
         .disposed(by: disposeBag)
@@ -137,6 +144,11 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         
         output.isRandomModeSelected.subscribe(onNext: { [weak self] isRandomModeSelected in
             isRandomModeSelected ? (self?.randomModeImageView.image = Asset.playerButtonShuffleActiveNormal.image) : (self?.randomModeImageView.image = Asset.playerButtonShuffleNormalNormal.image)
+        })
+        .disposed(by: disposeBag)
+        
+        output.isRepeatModeSelected.subscribe(onNext: { [weak self] isRepeatModeSelected in
+            isRepeatModeSelected ? (self?.repeatModeImageView.image = Asset.playerButtonRepeatoneActiveNormal.image) : (self?.repeatModeImageView.image = Asset.playerButtonRepeatNormalNormal.image)
         })
         .disposed(by: disposeBag)
     }

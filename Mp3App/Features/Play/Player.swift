@@ -14,12 +14,13 @@ import RxCocoa
 class Player {
     static let shared = Player()
     
-    let isPlayingTrigger = BehaviorSubject<Bool>(value: false)
     var tracks = [Track]()
-    var currentTime = PublishSubject<Int>()
-    var duration = PublishSubject<Int>()
-    var currentTrack = PublishSubject<Track>()
-    var randomMode = BehaviorRelay<Bool>(value: false)
+    let isPlayingTrigger = BehaviorSubject<Bool>(value: false)
+    let currentTime = PublishSubject<Int>()
+    let duration = PublishSubject<Int>()
+    let currentTrack = BehaviorRelay<Track?>(value: nil)
+    let randomMode = BehaviorRelay<Bool>(value: false)
+    let repeatMode = BehaviorRelay<Bool>(value: false)
     
     private var player: AVPlayer!
     private var currentTrackIndex = 0
@@ -48,12 +49,10 @@ class Player {
         guard let id = track.id else {
             return
         }
-        
-        if !played.indices.contains(id) {
+        if !played.contains(id) {
             played.append(id)
         }
-        
-        let trackLink = "https://api.soundcloud.com/tracks/\(id)/stream?client_id=18a54722bf90fb2d9723570ccefa02b3"
+        let trackLink = "\(Constants.baseURLstream)\(id)/\(Constants.stream)?\(Constants.clientId)=\(Constants.APIKey)"
         guard let url = URL.init(string: trackLink) else {
             return
         }
@@ -75,7 +74,7 @@ class Player {
                 }
             }
         }
-        currentTrack.onNext(track)
+        currentTrack.accept(track)
         player.play()
         isPlaying = true
         isPlayingTrigger.onNext(isPlaying)
@@ -95,11 +94,17 @@ class Player {
     }
     
     func nextTrack(isAutoNext: Bool = false) {
-        if randomMode.value {
-            if let track = getRandomTrack(isAutoNext: isAutoNext) {
+        if repeatMode.value, var currentTrack = currentTrack.value {
+            if !currentTrack.isRepeated {
+                currentTrack.isRepeated = true
                 player = nil
-                startTracks(track: track)
+                startTracks(track: currentTrack)
+                return
             }
+        }
+        if randomMode.value, let track = getRandomTrack(isAutoNext: isAutoNext) {
+            player = nil
+            startTracks(track: track)
         } else if currentTrackIndex != tracks.count - 1 {
             currentTrackIndex += 1
             player = nil
@@ -124,6 +129,10 @@ class Player {
     
     func setupRandomMode() {
         randomMode.value ? randomMode.accept(false) : randomMode.accept(true)
+    }
+    
+    func setupRepeatMode() {
+        repeatMode.value ? repeatMode.accept(false) : repeatMode.accept(true)
     }
     
     func seek(seconds: Float) {

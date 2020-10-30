@@ -28,6 +28,8 @@
                 <outlet property="prevButton" destination="Rjj-zL-caY" id="LqP-5M-ROl"/>
                 <outlet property="randomButton" destination="2mv-fa-Etx" id="mKH-nd-pd3"/>
                 <outlet property="randomModeImageView" destination="e7S-vW-acZ" id="zsN-RS-FDK"/>
+                <outlet property="repeatModeButton" destination="AZJ-g3-p1R" id="PNi-H3-WSa"/>
+                <outlet property="repeatModeImageView" destination="zda-KV-fTc" id="7ot-yq-AvM"/>
                 <outlet property="scrollView" destination="2Vg-Bk-hgh" id="2bN-ga-iHM"/>
                 <outlet property="slider" destination="Mte-p1-JJ7" id="QHH-xj-y42"/>
                 <outlet property="titeLabel" destination="RHU-wG-ut2" id="x2B-m6-IB0"/>

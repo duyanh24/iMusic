@@ -910,13 +910,12 @@
 		0898B7DD253D88BC00E555DA /* Play */ = {
 			isa = PBXGroup;
 			children = (
+				08AA78FD254BEC4A00CF32E3 /* Audio */,
 				08D7AD78254164B9007D77C3 /* TrackInfor */,
 				08D6EE2E2541769A00D7006F /* PlayerViewModel.swift */,
 				0898B7D9253D749300E555DA /* PlayerView.swift */,
 				18173C4C2546C9E600D8FDAF /* Player.swift */,
 				0898B7DB253D74BD00E555DA /* PlayerView.xib */,
-				0898B7DE253D88DE00E555DA /* AudioPlayerView.swift */,
-				0898B7E0253D88EF00E555DA /* AudioPlayerView.xib */,
 			);
 			path = Play;
 			sourceTree = "<group>";
@@ -929,6 +928,15 @@
 				089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */,
 			);
 			path = Create;
+			sourceTree = "<group>";
+		};
+		08AA78FD254BEC4A00CF32E3 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0898B7DE253D88DE00E555DA /* AudioPlayerView.swift */,
+				0898B7E0253D88EF00E555DA /* AudioPlayerView.xib */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		08D7AD78254164B9007D77C3 /* TrackInfor */ = {

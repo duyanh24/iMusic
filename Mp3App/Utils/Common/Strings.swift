@@ -45,7 +45,6 @@ struct Strings {
     static let selectedTrackItem = "selectedTrackItem"
     static let index = "index"
     
-
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"
     static let signOut = "Đăng xuất"
