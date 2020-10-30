@@ -10,7 +10,8 @@ import UIKit
 import Reusable
 
 class AudioPlayerView: UIView, NibOwnerLoadable {
-    
+    @IBOutlet weak var diskImageView: UIImageView!
+       
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -27,6 +28,19 @@ class AudioPlayerView: UIView, NibOwnerLoadable {
     }
     
     private func setupUI() {
-        
+        diskImageView.layer.cornerRadius = diskImageView.frame.size.height / 2
+    }
+    
+    func setupDiskImage(url: String) {
+        let imageCropURL = Converter.changeImageURLSize(imgURL: url, desireSize: .crop)
+        diskImageView.setImage(stringURL: imageCropURL)
+    }
+    
+    func rotateImageView() {
+        diskImageView.rotate()
+    }
+    
+    func stopRotateImageView() {
+        diskImageView.stopRotating()
     }
 }

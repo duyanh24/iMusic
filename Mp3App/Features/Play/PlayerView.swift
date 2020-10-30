@@ -11,10 +11,6 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-protocol PlayerViewDelegate: class {
-    
-}
-
 class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var trackImageView: UIImageView!
@@ -27,10 +23,30 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var containerBottomView: UIView!
     @IBOutlet weak var slider: CustomSlider!
     @IBOutlet weak var hideButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var prevButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playImageView: UIImageView!
+    @IBOutlet weak var titeLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleMiniPlayerLabel: UILabel!
+    @IBOutlet weak var descriptionMiniPlayerLabel: UILabel!
+    @IBOutlet weak var miniPlayerImageView: UIImageView!
+    @IBOutlet weak var miniPlayerSlider: UISlider!
+    @IBOutlet weak var miniPlayButton: UIButton!
+    @IBOutlet weak var miniNextButton: UIButton!
+    @IBOutlet weak var randomButton: UIButton!
+    @IBOutlet weak var randomModeImageView: UIImageView!
+    @IBOutlet weak var repeatModeButton: UIButton!
+    @IBOutlet weak var repeatModeImageView: UIImageView!
     
+    var viewModel: PlayerViewModel!
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
-    var viewModel: PlayerViewModel!
+    private var tracks = PublishSubject<[Track]>()
+    private var duration = 0
+    private let seekValueSlider = PublishSubject<Float>()
+    private var isChangingSlider = false
     
     var isScrollEnabled: Bool = true {
         didSet {
@@ -61,8 +77,12 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         setupTrackImageView()
         setupScrollView()
         setupPageControl()
-        setupSlider()
         setupControlPlayerView()
+        
+    }
+
+    func setTracks(tracks: [Track]) {
+        self.tracks.onNext(tracks)
     }
     
     func configureViewModel(viewModel: PlayerViewModel) {
@@ -71,15 +91,64 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = PlayerViewModel.Input()
+        let input = PlayerViewModel.Input(prevButton: prevButton.rx.tap.asObservable(),
+                                          nextButton: nextButton.rx.tap.asObservable().merge(with: miniNextButton.rx.tap.asObservable()),
+                                          playButton: playButton.rx.tap.asObservable().merge(with: miniPlayButton.rx.tap.asObservable()),
+                                          randomModeButton: randomButton.rx.tap.asObservable(),
+                                          repeatModeButton: repeatModeButton.rx.tap.asObservable(),
+                                          tracks: tracks,
+                                          seekValueSlider: seekValueSlider)
         let output = viewModel.transform(input: input)
-        output.playlist.subscribe(onNext: { [weak self] tracks in
-            if !tracks.isEmpty {
-                var tracksTransform: [Track] = []
-                tracksTransform.append(tracks[0])
-                tracksTransform.append(contentsOf: tracks)
-                self?.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracksTransform))
+        
+        output.playList.subscribe(onNext: { tracks, currentTrack in
+                self.trackInformationView.configureViewModel(viewModel: TrackInformationViewModel(tracks: tracks, currentTrack: currentTrack))
+        }).disposed(by: disposeBag)
+        
+        output.startPlayTracks.subscribe().disposed(by: disposeBag)
+        output.nextTrack.subscribe().disposed(by: disposeBag)
+        output.playTrack.subscribe().disposed(by: disposeBag)
+        output.prevTrack.subscribe().disposed(by: disposeBag)
+        output.seekTrack.subscribe().disposed(by: disposeBag)
+        output.randomMode.subscribe().disposed(by: disposeBag)
+        output.repeatMode.subscribe().disposed(by: disposeBag)
+        
+        output.currentTrack.subscribe(onNext: { [weak self] track in
+            guard let track = track else {
+                return
             }
+            self?.setupContent(track: track)
+        })
+        .disposed(by: disposeBag)
+        
+        output.isPlaying.subscribe(onNext: { [weak self] isPlaying in
+            self?.setupRotation(isPlaying: isPlaying)
+        })
+        .disposed(by: disposeBag)
+        
+        output.duration.subscribe(onNext: { [weak self] duration in
+            self?.duration = duration
+            self?.slider.maximumValue = Float(duration)
+            self?.miniPlayerSlider.maximumValue = Float(duration)
+        })
+        .disposed(by: disposeBag)
+        
+        output.currentTime.subscribe(onNext: { [weak self] currentTime in
+            guard let isChangingSlider = self?.isChangingSlider else {
+                return
+            }
+            if !isChangingSlider {
+                self?.setupSliderValue(currentTime: Float(currentTime))
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        output.isRandomModeSelected.subscribe(onNext: { [weak self] isRandomModeSelected in
+            isRandomModeSelected ? (self?.randomModeImageView.image = Asset.playerButtonShuffleActiveNormal.image) : (self?.randomModeImageView.image = Asset.playerButtonShuffleNormalNormal.image)
+        })
+        .disposed(by: disposeBag)
+        
+        output.isRepeatModeSelected.subscribe(onNext: { [weak self] isRepeatModeSelected in
+            isRepeatModeSelected ? (self?.repeatModeImageView.image = Asset.playerButtonRepeatoneActiveNormal.image) : (self?.repeatModeImageView.image = Asset.playerButtonRepeatNormalNormal.image)
         })
         .disposed(by: disposeBag)
     }
@@ -108,14 +177,59 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         pageControl.currentPage = 1
     }
     
-    private func setupSlider() {
-        slider.maximumValue = 247
-        slider.minimumValue = 0
+    private func setupThumbSlider(currentValue: Int, maxValue: Int) {
+        slider.setProgressTime(time: Converter.stringFromTimeInterval(interval: currentValue) + " / " + Converter.stringFromTimeInterval(interval: maxValue))
     }
     
     private func setupControlPlayerView() {
         controlPlayerView.layoutIfNeeded()
         controlPlayerViewY = frame.height - controlPlayerView.frame.size.height - ScreenSize.getBottomSafeArea()
+    }
+    
+    private func setupSliderValue(currentTime: Float) {
+        slider.value = currentTime
+        miniPlayerSlider.value = currentTime
+        setupThumbSlider(currentValue: Int(currentTime), maxValue: duration)
+    }
+    
+    private func setupContent(track: Track) {
+        titeLabel.text = track.title
+        titleMiniPlayerLabel.text = track.title
+        descriptionLabel.text = track.description
+        descriptionMiniPlayerLabel.text = track.description
+        guard let url = track.artworkURL else {
+            return
+        }
+        audioPlayerView.setupDiskImage(url: url)
+        miniPlayerImageView.setImage(stringURL: url)
+    }
+    
+    private func setupRotation(isPlaying: Bool) {
+        if isPlaying {
+            playImageView.image = Asset.pause64Normal.image
+            miniPlayButton.setImage(Asset.icPauseNormal.image, for: .normal)
+            audioPlayerView.rotateImageView()
+            miniPlayerImageView.rotate()
+        } else {
+            playImageView.image = Asset.play64Normal.image
+            miniPlayButton.setImage(Asset.icPlayNormalBlack.image, for: .normal)
+            miniPlayButton.tintColor = .black
+            audioPlayerView.stopRotateImageView()
+            miniPlayerImageView.stopRotating()
+        }
+    }
+
+    @IBAction func touchUpSlider(_ sender: Any) {
+        seekValueSlider.onNext(slider.value)
+        isChangingSlider = false
+    }
+    
+    @IBAction func touchDownSlider(_ sender: Any) {
+        isChangingSlider = true
+    }
+    
+    @IBAction func valueChangedSlider(_ sender: Any) {
+        setupSliderValue(currentTime: slider.value)
     }
 }
 

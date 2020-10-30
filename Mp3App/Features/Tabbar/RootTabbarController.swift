@@ -17,16 +17,18 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     var playerView: PlayerView!
     
     private let disposeBag = DisposeBag()
+    private var isTabbarShow = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.isTranslucent = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        createObserver()
         setupPlayerView()
         setupPanGesture()
+    }
+    
+    private func createObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     private func setupPlayerView() {
@@ -34,7 +36,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                                               y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
                                               width: UIScreen.main.bounds.width,
                                               height: UIScreen.main.bounds.height + miniPlayerHeight))
-        let playerViewModel = PlayerViewModel(tracksPlayer: [])
+        let playerViewModel = PlayerViewModel()
         playerViewModel.services = PlayerServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
         playerView.configureViewModel(viewModel: playerViewModel)
         view.addSubview(playerView)
@@ -50,6 +52,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                 self?.selectedViewController?.view.alpha = 1
                 self?.tabBar.frame.origin.y = tabbarY
                 self?.playerView.scrollToPlayerPage()
+                self?.isTabbarShow = true
             })
         }).disposed(by: disposeBag)
         
@@ -57,7 +60,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.PlayerNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.playerNotification), object: nil)
     }
     
     @objc func showPlayer(_ notification: Notification) {
@@ -65,11 +68,10 @@ class RootTabbarController: UITabBarController, StoryboardBased {
             self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
             self.selectedViewController?.view.alpha = 0
             self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
+            self.isTabbarShow = false
         })
         guard let tracks = notification.userInfo?[Strings.tracks] as? [Track] else { return }
-        
-        let playerViewModel = PlayerViewModel(tracksPlayer: tracks)
-        playerView.configureViewModel(viewModel: playerViewModel)
+        playerView.setTracks(tracks: tracks)
     }
     
     private func setupPanGesture() {
@@ -109,6 +111,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                         self.playerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
                         self.selectedViewController?.view.alpha = 1
                         self.tabBar.frame.origin.y = self.tabbarY
+                        self.isTabbarShow = true
                     })
                     playerView.scrollToPlayerPage()
                 } else {
@@ -116,6 +119,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                         self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
                         self.selectedViewController?.view.alpha = 0
                         self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
+                        self.isTabbarShow = false
                     })
                 }
                 playerView.isScrollEnabled = true
@@ -123,6 +127,12 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                 break
             }
         }
+    }
+}
+
+extension RootTabbarController {
+    @objc private func willEnterForeground() {
+        isTabbarShow ? (tabBar.frame.origin.y = tabbarY) : (tabBar.frame.origin.y = tabbarY + tabBar.frame.height)
     }
 }
 

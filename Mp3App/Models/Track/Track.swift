@@ -17,6 +17,8 @@ struct Track: Codable {
     var streamable: Bool?
     var streamURL: String?
     var genre: String?
+    var isPlaying = false
+    var isRepeated = false
 
     enum CodingKeys: String, CodingKey {
         case id

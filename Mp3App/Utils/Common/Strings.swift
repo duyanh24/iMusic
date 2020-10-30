@@ -40,9 +40,11 @@ struct Strings {
     
     //notification
     static let playlistCreatedNotification = "playlistCreatedNotification"
-    static let PlayerNotification = "PlayerNotification"
+    static let playerNotification = "PlayerNotification"
     static let tracks = "tracks"
-
+    static let selectedTrackItem = "selectedTrackItem"
+    static let index = "index"
+    
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"
     static let signOut = "Đăng xuất"
@@ -54,4 +56,7 @@ struct Strings {
     static let simpleDateFormat = "yyyy-MM-DD"
     static let regularExpressionForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     static let emailFormat = "SELF MATCHES %@"
+    
+    //rotation
+    static let rotationAnimationKey = "rotationanimationkey"
 }

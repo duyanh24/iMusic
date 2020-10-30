@@ -21,6 +21,7 @@ class CustomSlider: UISlider {
         thumbView.backgroundColor = Colors.sliderColor
         thumbView.layer.borderWidth = 0.4
         thumbView.layer.borderColor = UIColor.darkGray.cgColor
+        label.text = "00:00 / 00:00"
         label.font = label.font.withSize(11)
         label.textColor = UIColor.white
         label.textAlignment = .center
@@ -45,8 +46,8 @@ class CustomSlider: UISlider {
     
     private func updateThumbImage() {
         let thumb = thumbImage(radius: thumbRadius)
-        setThumbImage(thumb, for: .highlighted)
         setThumbImage(thumb, for: .normal)
+        setThumbImage(thumb, for: .highlighted)
     }
     
     func setProgressTime(time: String) {

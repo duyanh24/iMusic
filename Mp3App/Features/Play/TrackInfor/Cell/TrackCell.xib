@@ -38,16 +38,26 @@
                                 <color key="textColor" red="0.62501472229999999" green="0.64630973339999997" blue="0.69776517149999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carplay_song_ico_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="7Mo-Je-NMt">
+                                <rect key="frame" x="263" y="15" width="37" height="37"/>
+                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7Mo-Je-NMt" secondAttribute="height" id="qrW-mE-dLf"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NYp-xN-HmI" firstAttribute="leading" secondItem="Jvf-sk-o55" secondAttribute="trailing" constant="10" id="A9H-RM-1Km"/>
                             <constraint firstAttribute="bottom" secondItem="2b4-Es-xhc" secondAttribute="bottom" constant="12" id="F4A-go-A1o"/>
                             <constraint firstItem="2b4-Es-xhc" firstAttribute="leading" secondItem="Jvf-sk-o55" secondAttribute="trailing" constant="10" id="Pj8-tn-AXY"/>
+                            <constraint firstAttribute="bottom" secondItem="7Mo-Je-NMt" secondAttribute="bottom" constant="15" id="Qys-H8-N23"/>
+                            <constraint firstItem="7Mo-Je-NMt" firstAttribute="top" secondItem="grg-l7-Lye" secondAttribute="top" constant="15" id="RIe-lT-dMq"/>
                             <constraint firstItem="Jvf-sk-o55" firstAttribute="leading" secondItem="grg-l7-Lye" secondAttribute="leading" id="Uy7-Vk-AcA"/>
                             <constraint firstItem="Jvf-sk-o55" firstAttribute="top" secondItem="grg-l7-Lye" secondAttribute="top" constant="10" id="ePc-kn-AML"/>
                             <constraint firstAttribute="trailing" secondItem="2b4-Es-xhc" secondAttribute="trailing" constant="30" id="hzb-ha-poC"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NYp-xN-HmI" secondAttribute="trailing" constant="30" id="iUn-Zu-vY9"/>
+                            <constraint firstAttribute="trailing" secondItem="7Mo-Je-NMt" secondAttribute="trailing" constant="10" id="ljc-QF-tY9"/>
                             <constraint firstAttribute="bottom" secondItem="Jvf-sk-o55" secondAttribute="bottom" constant="10" id="mVy-7m-aqf"/>
                             <constraint firstItem="NYp-xN-HmI" firstAttribute="top" secondItem="grg-l7-Lye" secondAttribute="top" constant="12" id="teg-vG-yPw"/>
                         </constraints>
@@ -64,6 +74,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="playImageView" destination="7Mo-Je-NMt" id="gY4-fk-vcK"/>
                 <outlet property="singerLabel" destination="2b4-Es-xhc" id="sfB-rW-Qgk"/>
                 <outlet property="titleLabel" destination="NYp-xN-HmI" id="qfF-NM-YcT"/>
                 <outlet property="trackImageView" destination="Jvf-sk-o55" id="slV-XF-40F"/>
@@ -73,5 +84,6 @@
     </objects>
     <resources>
         <image name="Artboard_Normal" width="100" height="100"/>
+        <image name="carplay_song_ico_Normal" width="100" height="100"/>
     </resources>
 </document>
