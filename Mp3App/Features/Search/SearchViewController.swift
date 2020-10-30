@@ -12,9 +12,16 @@ import RxCocoa
 import Reusable
 
 class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased {
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var label: UILabel!
+    
     var viewModel: SearchViewModel!
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.rx.text.subscribe(onNext: { value in
+            self.label.text = value
+        }).disposed(by: disposeBag)
     }
 }

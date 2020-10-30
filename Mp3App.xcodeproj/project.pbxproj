@@ -128,6 +128,8 @@
 		089E610025382A0E00B993C7 /* CreatePlaylistViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */; };
 		089E610225382C3700B993C7 /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */; };
 		08ACE0D22540275F00E48571 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ACE0D12540275F00E48571 /* CustomSlider.swift */; };
+		08C7C75A254C129D00AC7A34 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7C759254C129D00AC7A34 /* SearchService.swift */; };
+		08C7C75C254C137500AC7A34 /* SearchRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7C75B254C137500AC7A34 /* SearchRespone.swift */; };
 		08D6EE2F2541769A00D7006F /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6EE2E2541769A00D7006F /* PlayerViewModel.swift */; };
 		08D6EE3125417DD900D7006F /* TrackCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6EE3025417DD900D7006F /* TrackCellViewModel.swift */; };
 		08D7AD7B254164E2007D77C3 /* TrackInforCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7AD79254164E2007D77C3 /* TrackInforCell.swift */; };
@@ -292,6 +294,8 @@
 		089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePlaylistViewController.storyboard; sourceTree = "<group>"; };
 		089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		08ACE0D12540275F00E48571 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		08C7C759254C129D00AC7A34 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		08C7C75B254C137500AC7A34 /* SearchRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRespone.swift; sourceTree = "<group>"; };
 		08D6EE2E2541769A00D7006F /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		08D6EE3025417DD900D7006F /* TrackCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCellViewModel.swift; sourceTree = "<group>"; };
 		08D7AD79254164E2007D77C3 /* TrackInforCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInforCell.swift; sourceTree = "<group>"; };
@@ -718,6 +722,7 @@
 				18EF83692533533100A57CEF /* AuthencationService.swift */,
 				085D963F2535A25400A9F494 /* PlaylistService.swift */,
 				18DE7429253C40610081FA40 /* LibraryService.swift */,
+				08C7C759254C129D00AC7A34 /* SearchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -895,6 +900,7 @@
 			isa = PBXGroup;
 			children = (
 				08861D6C2525B95C008C0628 /* TrackListRespone.swift */,
+				08C7C75B254C137500AC7A34 /* SearchRespone.swift */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -1251,6 +1257,7 @@
 				083880952525DE0600987813 /* Observable+Extension.swift in Sources */,
 				087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */,
 				08504FC22523346F0033DED0 /* API.swift in Sources */,
+				08C7C75C254C137500AC7A34 /* SearchRespone.swift in Sources */,
 				089E610225382C3700B993C7 /* CreatePlaylistViewModel.swift in Sources */,
 				18E9F19A25378A6B0049A45B /* MypageCellHeaderView.swift in Sources */,
 				08504FAE2523346E0033DED0 /* SearchVIewModel.swift in Sources */,
@@ -1294,6 +1301,7 @@
 				08861D6A2525B58C008C0628 /* User.swift in Sources */,
 				0817DD5725271593007D2966 /* Album.swift in Sources */,
 				089E60FE253829EF00B993C7 /* CreatePlaylistViewController.swift in Sources */,
+				08C7C75A254C129D00AC7A34 /* SearchService.swift in Sources */,
 				085D963B25359A4300A9F494 /* Playlist.swift in Sources */,
 				0850500D252337330033DED0 /* LoginSerivces.swift in Sources */,
 				08504FA82523346E0033DED0 /* SplashViewController.swift in Sources */,
