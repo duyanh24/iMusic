@@ -105,7 +105,8 @@ class TrackPlayer {
     func nextTrack(isAutoNext: Bool = false) {
         if player == nil {
             return
-        } else {
+        }
+        if player != nil && !isAutoNext {
             player = nil
         }
         if repeatMode.value, var currentTrack = currentTrack.value {
