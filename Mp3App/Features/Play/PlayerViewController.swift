@@ -11,8 +11,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 
-class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
-    @IBOutlet weak var containerView: UIView!
+class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topContentStackView: UIStackView!
@@ -40,6 +39,8 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     @IBOutlet weak var repeatModeButton: UIButton!
     @IBOutlet weak var repeatModeImageView: UIImageView!
     
+    private var isViewDidAppear = false
+    
     var viewModel: PlayerViewModel!
     private let disposeBag = DisposeBag()
     private var controlPlayerViewY: CGFloat = 0
@@ -58,36 +59,29 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
         return trackInformationView.isTableViewOnTop
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindViewModel()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !isViewDidAppear {
+            setupScrollView()
+            setupControlPlayerView()
+            audioPlayerView.setCornerRadius()
+            isViewDidAppear = true
+        }
     }
     
-    private func commonInit() {
-        loadNibContent()
-        setupUI()
-    }
-    
-    private func setupUI() {
+    override func prepareUI() {
+        super.prepareUI()
         setupTrackImageView()
-        setupScrollView()
         setupPageControl()
-        setupControlPlayerView()
-        
     }
 
     func setTracks(tracks: [Track]) {
         self.tracks.onNext(tracks)
-    }
-    
-    func configureViewModel(viewModel: PlayerViewModel) {
-        self.viewModel = viewModel
-        bindViewModel()
     }
     
     private func bindViewModel() {
@@ -160,13 +154,13 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     private func setupScrollView() {
         scrollView.delegate = self
         scrollView.layoutIfNeeded()
-        let contentOffset = CGPoint(x: frame.width, y: 0.0)
+        let contentOffset = CGPoint(x: view.bounds.width, y: 0.0)
         scrollView.setContentOffset(contentOffset, animated: false)
         scrollView.contentInsetAdjustmentBehavior = .never
     }
     
     func scrollToPlayerPage() {
-        let contentOffset = CGPoint(x: frame.width, y: 0.0)
+        let contentOffset = CGPoint(x: view.bounds.width, y: 0.0)
         scrollView.setContentOffset(contentOffset, animated: false)
         pageControl.currentPage = 1
     }
@@ -183,7 +177,7 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
     
     private func setupControlPlayerView() {
         controlPlayerView.layoutIfNeeded()
-        controlPlayerViewY = frame.height - controlPlayerView.frame.size.height - ScreenSize.getBottomSafeArea()
+        controlPlayerViewY = view.bounds.height - controlPlayerView.frame.size.height - ScreenSize.getBottomSafeArea()
     }
     
     private func setupSliderValue(currentTime: Float) {
@@ -218,33 +212,31 @@ class PlayerView: UIView, NibOwnerLoadable, ViewModelBased {
             miniPlayerImageView.stopRotating()
         }
     }
-
-    @IBAction func touchUpSlider(_ sender: Any) {
-        seekValueSlider.onNext(slider.value)
-        isChangingSlider = false
-    }
-    
-    @IBAction func touchDownSlider(_ sender: Any) {
-        isChangingSlider = true
-    }
     
     @IBAction func valueChangedSlider(_ sender: Any) {
         setupSliderValue(currentTime: slider.value)
     }
+    @IBAction func touchDownSlider(_ sender: Any) {
+        isChangingSlider = true
+    }
+    @IBAction func touchUpSlider(_ sender: Any) {
+        seekValueSlider.onNext(slider.value)
+        isChangingSlider = false
+    }
 }
 
-extension PlayerView: UIScrollViewDelegate {
+extension PlayerViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let currentPage = scrollView.contentOffset.x / frame.size.width
+        let currentPage = scrollView.contentOffset.x / view.bounds.size.width
         pageControl.currentPage = Int(currentPage)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (frame.width - scrollView.contentOffset.x) / frame.width
+        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (view.bounds.width - scrollView.contentOffset.x) / view.bounds.width
     }
 }
 
-extension Reactive where Base: PlayerView {
+extension Reactive where Base: PlayerViewController {
     var hide: ControlEvent<Void> {
         return base.hideButton.rx.tap
     }

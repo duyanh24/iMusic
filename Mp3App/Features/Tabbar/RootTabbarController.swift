@@ -14,32 +14,50 @@ import RxCocoa
 class RootTabbarController: UITabBarController, StoryboardBased {
     private var tabbarY: CGFloat!
     private let miniPlayerHeight: CGFloat = 52
-    var playerView: PlayerView!
+    var playerView: PlayerViewController!
+    private let containerView = UIView()
     
     private let disposeBag = DisposeBag()
     private var isTabbarShow = true
     
+    override var shouldAutomaticallyForwardAppearanceMethods: Bool {
+        return true
+    }
+    
+    override func loadView() {
+        super.loadView()
+        createPlayerView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.isTranslucent = false
-        createObserver()
-        setupPlayerView()
+        setupNotificationCenter()
         setupPanGesture()
     }
     
-    private func createObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupPlayerView()
+    }
+    
+    private func createPlayerView() {
+        let playerViewModel = PlayerViewModel()
+        let services = PlayerServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
+        playerView = PlayerViewController.instantiate(withViewModel: playerViewModel, andServices: services)
     }
     
     private func setupPlayerView() {
-        playerView = PlayerView(frame: CGRect(x: 0,
-                                              y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
-                                              width: UIScreen.main.bounds.width,
-                                              height: UIScreen.main.bounds.height + miniPlayerHeight))
-        let playerViewModel = PlayerViewModel()
-        playerViewModel.services = PlayerServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
-        playerView.configureViewModel(viewModel: playerViewModel)
-        view.addSubview(playerView)
+        containerView.frame = CGRect(x: 0,
+                                     y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
+                                     width: UIScreen.main.bounds.width,
+                                     height: UIScreen.main.bounds.height + miniPlayerHeight)
+        view.addSubview(containerView)
+        addChild(playerView)
+        playerView.view.frame = containerView.bounds
+        containerView.addSubview(playerView.view)
+        playerView.didMove(toParent: self)
+        
         view.bringSubviewToFront(tabBar)
         tabbarY = tabBar.frame.origin.y
         
@@ -48,24 +66,23 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                 return
             }
             UIView.animate(withDuration: 0.2, animations: {
-                self?.playerView.frame.origin.y = tabbarY - miniPlayerHeight
+                self?.containerView.frame.origin.y = tabbarY - miniPlayerHeight
                 self?.selectedViewController?.view.alpha = 1
                 self?.tabBar.frame.origin.y = tabbarY
                 self?.playerView.scrollToPlayerPage()
                 self?.isTabbarShow = true
             })
         }).disposed(by: disposeBag)
-        
-        setupNotificationCenter()
     }
     
     private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.playerNotification), object: nil)
     }
     
     @objc func showPlayer(_ notification: Notification) {
         UIView.animate(withDuration: 0.3, animations: {
-            self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
+            self.containerView.frame.origin.y = 0 - self.miniPlayerHeight
             self.selectedViewController?.view.alpha = 0
             self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
             self.isTabbarShow = false
@@ -76,7 +93,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     
     private func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerAction))
-        playerView.addGestureRecognizer(panGesture)
+        containerView.addGestureRecognizer(panGesture)
         panGesture.maximumNumberOfTouches = 1
         panGesture.delegate = self
     }
@@ -84,31 +101,31 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     @objc func panGestureRecognizerAction(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         let contentHeight = UIScreen.main.bounds.height - tabBar.frame.height - miniPlayerHeight
-        if playerView.frame.origin.y > 0 - miniPlayerHeight {
+        if containerView.frame.origin.y > 0 - miniPlayerHeight {
             switch gesture.state {
             case .began:
                 playerView.isScrollEnabled = false
             case .changed:
-                let playerViewY = playerView.frame.origin.y
-                if playerViewY <= contentHeight {
-                    if playerViewY + translation.y < 0 - miniPlayerHeight {
-                        playerView.frame.origin.y = view.bounds.origin.y - miniPlayerHeight
+                let containerViewY = containerView.frame.origin.y
+                if containerViewY <= contentHeight {
+                    if containerViewY + translation.y < 0 - miniPlayerHeight {
+                        containerView.frame.origin.y = view.bounds.origin.y - miniPlayerHeight
                         tabBar.frame.origin.y = tabbarY + tabBar.frame.height
-                    } else if playerViewY + translation.y > contentHeight {
-                        playerView.frame.origin.y = contentHeight
+                    } else if containerViewY + translation.y > contentHeight {
+                        containerView.frame.origin.y = contentHeight
                         tabBar.frame.origin.y = tabbarY
                     } else {
-                        playerView.frame.origin.y += translation.y
+                        containerView.frame.origin.y += translation.y
                         tabBar.frame.origin.y -= translation.y * (tabBar.frame.height/contentHeight)
                     }
-                    selectedViewController?.view.alpha = playerViewY / contentHeight
+                    selectedViewController?.view.alpha = containerViewY / contentHeight
                     gesture.setTranslation(.zero, in: view)
                 }
             case .ended:
                 let velocity = gesture.velocity(in: view)
                 if velocity.y > 0 {
                     UIView.animate(withDuration: 0.3, animations: {
-                        self.playerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
+                        self.containerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
                         self.selectedViewController?.view.alpha = 1
                         self.tabBar.frame.origin.y = self.tabbarY
                         self.isTabbarShow = true
@@ -116,7 +133,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
                     playerView.scrollToPlayerPage()
                 } else {
                     UIView.animate(withDuration: 0.3, animations: {
-                        self.playerView.frame.origin.y = 0 - self.miniPlayerHeight
+                        self.containerView.frame.origin.y = 0 - self.miniPlayerHeight
                         self.selectedViewController?.view.alpha = 0
                         self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
                         self.isTabbarShow = false
@@ -145,7 +162,7 @@ extension RootTabbarController: UIGestureRecognizerDelegate {
         guard let gesture = gestureRecognizer as? UIPanGestureRecognizer else {
             return true
         }
-        let velocity = gesture.velocity(in: playerView)
+        let velocity = gesture.velocity(in: containerView)
         return abs(velocity.x) < abs(velocity.y)
     }
 }
