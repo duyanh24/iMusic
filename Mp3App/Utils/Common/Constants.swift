@@ -15,12 +15,9 @@ struct APIURL {
 }
 
 struct Constants {
-    static let APIKey = "18a54722bf90fb2d9723570ccefa02b3"
+    static let APIKey = "c4c979fd6f241b5b30431d722af212e8"
     static let passwordMaxLength = 15
     static let passwordMinLength = 6
-    static let stream = "stream"
-    static let tracks = "tracks"
-    static let clientId = "client_id"
 }
 
 enum ErrorMessage {
@@ -68,6 +65,7 @@ enum APIParameterKey: String {
     case clientId = "client_id"
     case top = "top"
     case genre = "genre"
+    case keyWord = "q"
 }
 
 enum TrackGenre: String {

@@ -35,7 +35,8 @@ extension Scene: TargetScene {
             homeNavController.tabBarItem = homeTabbarItem
             
             let searchViewModel = SearchViewModel()
-            let searchViewController = SearchViewController.instantiate(withViewModel: searchViewModel)
+            let searchServices = SearchServices(searchService: SearchService())
+            let searchViewController = SearchViewController.instantiate(withViewModel: searchViewModel, andServices: searchServices)
             let searchNavController = BaseNavigationController(rootViewController: searchViewController)
             let searchTabbarItem = UITabBarItem(title: Strings.search, image: Asset.icSearchBlackNormal.image, selectedImage: Asset.icSearchBlackNormal.image)
             searchNavController.tabBarItem = searchTabbarItem

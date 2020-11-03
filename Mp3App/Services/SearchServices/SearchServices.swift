@@ -8,10 +8,7 @@
 
 import Foundation
 
-protocol HasSearchServices {
-    
+struct SearchServices: HasSearchService {
+    var searchService: SearchService
 }
 
-struct SearchServices: HasSearchServices {
-    
-}

@@ -8,11 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerView" customModule="Mp3App" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
             <connections>
                 <outlet property="audioPlayerView" destination="Uoc-0b-qKm" id="YD6-3m-tdP"/>
                 <outlet property="containerBottomView" destination="vJt-db-jAc" id="fab-5v-DSQ"/>
-                <outlet property="containerView" destination="kcK-Vb-0Hk" id="Vnn-9L-iPz"/>
                 <outlet property="controlPlayerView" destination="36b-4U-uzj" id="uZH-wd-5NA"/>
                 <outlet property="descriptionLabel" destination="GwB-L4-iVT" id="td3-44-8c7"/>
                 <outlet property="descriptionMiniPlayerLabel" destination="hMa-VC-wge" id="rmK-px-Kbt"/>
@@ -37,6 +36,7 @@
                 <outlet property="topContentStackView" destination="Y2G-xQ-y0k" id="kUf-uI-Y0H"/>
                 <outlet property="trackImageView" destination="MnK-tB-VkM" id="Uh4-1Z-g4n"/>
                 <outlet property="trackInformationView" destination="dGK-5b-ELh" id="B8w-PZ-5Bb"/>
+                <outlet property="view" destination="kcK-Vb-0Hk" id="XqH-EB-giP"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

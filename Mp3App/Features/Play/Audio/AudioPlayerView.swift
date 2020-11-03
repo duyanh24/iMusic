@@ -24,11 +24,10 @@ class AudioPlayerView: UIView, NibOwnerLoadable {
     
     private func commonInit() {
         loadNibContent()
-        setupUI()
     }
     
-    private func setupUI() {
-        diskImageView.layer.cornerRadius = diskImageView.frame.size.height / 2
+    func setCornerRadius() {
+        diskImageView.layer.cornerRadius = diskImageView.bounds.size.height / 2
     }
     
     func setupDiskImage(url: String) {
