@@ -15,7 +15,7 @@ struct APIURL {
 }
 
 struct Constants {
-    static let APIKey = "a25e51780f7f86af0afa91f241d091f8"
+    static let APIKey = "c4c979fd6f241b5b30431d722af212e8"
     static let passwordMaxLength = 15
     static let passwordMinLength = 6
 }
