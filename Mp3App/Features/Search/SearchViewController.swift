@@ -12,12 +12,14 @@ import RxCocoa
 import Reusable
 
 class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased {
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchTextField: CustomTextField!
     @IBOutlet weak var resultContainerView: UIView!
     
     var viewModel: SearchViewModel!
     private let disposeBag = DisposeBag()
     private let resultController = ResultViewController()
+    
+    private var keywordTrigger = PublishSubject<String>()
     
     override func loadView() {
         super.loadView()
@@ -41,7 +43,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func prepareUI() {
         super.prepareUI()
-        setupSearchBar()
+        setupSearchTextField()
     }
     
     private func setupResultView() {
@@ -52,18 +54,20 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         resultContainerView.isHidden = true
     }
     
-    private func setupSearchBar() {
-        searchBar.backgroundColor = .none
-        searchBar.placeholder = Strings.searchPlaceholder
-        searchBar.searchBarStyle = .minimal
+    private func setupSearchTextField() {
+        searchTextField.layer.cornerRadius = 20
     }
     
     private func bindViewModel() {
-        let keyword = searchBar.rx.text.asObservable()
+        let keyword = searchTextField.rx.text.asObservable()
             .distinctUntilChanged()
             .debounce(DispatchTimeInterval.milliseconds(200), scheduler: MainScheduler.instance)
             .compactMap { $0 }
             .filter { !$0.replacingOccurrences(of: " ", with: "").isEmpty }
+        
+        keyword.subscribe(onNext: {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "NotificationSearch"), object: nil, userInfo: ["keyword": $0])
+        }).disposed(by: disposeBag)
         
         let input = SearchViewModel.Input(keyWord: keyword)
         let output = viewModel.transform(input: input)
@@ -72,7 +76,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
             print($0)
         }).disposed(by: disposeBag)
         
-        searchBar.rx.text.subscribe(onNext: { [weak self] text in
+        searchTextField.rx.text.subscribe(onNext: { [weak self] text in
             guard let text = text else {
                 self?.resultContainerView.isHidden = true
                 return

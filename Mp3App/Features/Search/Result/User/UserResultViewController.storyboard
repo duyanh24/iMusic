@@ -16,17 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Tc-PW-RJq">
-                                <rect key="frame" x="10" y="54" width="37" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oca-aH-OSy">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="3Tc-PW-RJq" firstAttribute="top" secondItem="Oe5-tT-VpN" secondAttribute="top" constant="10" id="9GM-dw-ey6"/>
-                            <constraint firstItem="3Tc-PW-RJq" firstAttribute="leading" secondItem="Oe5-tT-VpN" secondAttribute="leading" constant="10" id="Nwt-u1-7Db"/>
+                            <constraint firstItem="oca-aH-OSy" firstAttribute="top" secondItem="Oe5-tT-VpN" secondAttribute="top" id="3dm-0v-L6z"/>
+                            <constraint firstItem="Oe5-tT-VpN" firstAttribute="trailing" secondItem="oca-aH-OSy" secondAttribute="trailing" id="ap7-Fs-AGL"/>
+                            <constraint firstItem="Oe5-tT-VpN" firstAttribute="bottom" secondItem="oca-aH-OSy" secondAttribute="bottom" id="ggg-tS-pNO"/>
+                            <constraint firstItem="oca-aH-OSy" firstAttribute="leading" secondItem="Oe5-tT-VpN" secondAttribute="leading" id="kks-Bx-uUl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oe5-tT-VpN"/>
                     </view>

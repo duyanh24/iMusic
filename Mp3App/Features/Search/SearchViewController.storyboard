@@ -16,39 +16,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="SV9-Cb-AiY">
-                                <rect key="frame" x="10" y="54" width="394" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="cHj-6j-GRY"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Prc-xW-Eot">
-                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tìm kiếm bài hát, ca sĩ, playlist" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4O0-D5-2aj" customClass="CustomTextField" customModule="Mp3App" customModuleProvider="target">
+                                <rect key="frame" x="20" y="54" width="374" height="40"/>
+                                <color key="backgroundColor" red="0.9523469806" green="0.95248371359999995" blue="0.95231705899999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="9UA-uQ-8Fs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="Ugj-Hx-sKf">
+                                <rect key="frame" x="30" y="64" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="3dT-0Z-bGW"/>
+                                    <constraint firstAttribute="height" constant="20" id="Jze-4d-gBq"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Prc-xW-Eot" firstAttribute="top" secondItem="SV9-Cb-AiY" secondAttribute="bottom" constant="10" id="9fi-FZ-JQ0"/>
+                            <constraint firstItem="4O0-D5-2aj" firstAttribute="top" secondItem="Sc0-h5-sWg" secondAttribute="top" constant="10" id="4wG-eD-N2b"/>
+                            <constraint firstItem="Ugj-Hx-sKf" firstAttribute="leading" secondItem="Sc0-h5-sWg" secondAttribute="leading" constant="30" id="C9i-p5-AvL"/>
                             <constraint firstItem="Prc-xW-Eot" firstAttribute="leading" secondItem="Sc0-h5-sWg" secondAttribute="leading" id="Cd2-PP-MZW"/>
-                            <constraint firstAttribute="trailing" secondItem="SV9-Cb-AiY" secondAttribute="trailing" constant="10" id="KKj-cc-9im"/>
                             <constraint firstItem="Sc0-h5-sWg" firstAttribute="trailing" secondItem="Prc-xW-Eot" secondAttribute="trailing" id="Ptu-kj-wpA"/>
-                            <constraint firstItem="SV9-Cb-AiY" firstAttribute="top" secondItem="Sc0-h5-sWg" secondAttribute="top" constant="10" id="RFw-LX-Pzd"/>
+                            <constraint firstItem="4O0-D5-2aj" firstAttribute="leading" secondItem="Sc0-h5-sWg" secondAttribute="leading" constant="20" id="UYt-ef-f9I"/>
                             <constraint firstItem="Sc0-h5-sWg" firstAttribute="bottom" secondItem="Prc-xW-Eot" secondAttribute="bottom" id="Ufn-vx-Jrb"/>
-                            <constraint firstItem="SV9-Cb-AiY" firstAttribute="leading" secondItem="Sc0-h5-sWg" secondAttribute="leading" constant="10" id="qDB-u7-KMc"/>
+                            <constraint firstItem="Ugj-Hx-sKf" firstAttribute="centerY" secondItem="4O0-D5-2aj" secondAttribute="centerY" id="agb-t3-i6R"/>
+                            <constraint firstItem="Prc-xW-Eot" firstAttribute="top" secondItem="4O0-D5-2aj" secondAttribute="bottom" constant="10" id="jAU-BD-rmA"/>
+                            <constraint firstItem="Sc0-h5-sWg" firstAttribute="trailing" secondItem="4O0-D5-2aj" secondAttribute="trailing" constant="20" id="yjQ-uc-K3P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Sc0-h5-sWg"/>
                     </view>
                     <connections>
                         <outlet property="resultContainerView" destination="Prc-xW-Eot" id="ZQz-bJ-JIK"/>
-                        <outlet property="searchBar" destination="SV9-Cb-AiY" id="eIy-68-Wer"/>
+                        <outlet property="searchTextField" destination="4O0-D5-2aj" id="F1d-D0-R9O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ueZ-Xf-aDi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110" y="-247"/>
+            <point key="canvasLocation" x="-110.14492753623189" y="-247.09821428571428"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="search_Normal" width="16" height="16"/>
+    </resources>
 </document>
