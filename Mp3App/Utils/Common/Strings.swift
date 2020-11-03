@@ -32,6 +32,9 @@ struct Strings {
     static let rock = "Nhạc Rock"
     static let popular = "Phổ biến"
     
+    //search
+    static let searchPlaceholder = "Tìm kiếm bài hát, ca sĩ, playlist"
+    
     //mypage
     static let library = "Thư viện"
     static let playlist = "Playlist"
