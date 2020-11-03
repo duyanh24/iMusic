@@ -152,11 +152,12 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func setupScrollView() {
+        scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.delegate = self
         scrollView.layoutIfNeeded()
         let contentOffset = CGPoint(x: view.bounds.width, y: 0.0)
         scrollView.setContentOffset(contentOffset, animated: false)
-        scrollView.contentInsetAdjustmentBehavior = .never
+        
     }
     
     func scrollToPlayerPage() {

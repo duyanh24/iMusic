@@ -96,6 +96,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
         containerView.addGestureRecognizer(panGesture)
         panGesture.maximumNumberOfTouches = 1
         panGesture.delegate = self
+        panGesture.cancelsTouchesInView = false
     }
     
     @objc func panGestureRecognizerAction(gesture: UIPanGestureRecognizer) {

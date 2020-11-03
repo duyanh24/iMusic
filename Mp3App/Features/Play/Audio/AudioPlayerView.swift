@@ -24,16 +24,6 @@ class AudioPlayerView: UIView, NibOwnerLoadable {
     
     private func commonInit() {
         loadNibContent()
-        setupUI()
-    }
-    
-    private func setupUI() {
-        
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
     }
     
     func setCornerRadius() {
