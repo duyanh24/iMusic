@@ -12,20 +12,27 @@ import RxCocoa
 import XLPagerTabStrip
 
 class ResultViewController: ButtonBarPagerTabStripViewController {
+    
+    private let allResultViewController = AllResultViewController.instantiate()
+    private var trackResultViewController = TrackResultViewController.instantiate()
+    private let userResultViewController = UserResultViewController.instantiate()
+    private let playlistResultViewController = PlaylistResultViewController.instantiate()
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         setupButtonBar()
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let allResultViewController = AllResultViewController.instantiate()
-        let trackResultViewController = TrackResultViewController.instantiate()
-        let userResultViewController = UserResultViewController.instantiate()
-        let playlistResultViewController = PlaylistResultViewController.instantiate()
+        setupViewController()
         return [allResultViewController, trackResultViewController, userResultViewController, playlistResultViewController]
+    }
+    
+    private func setupViewController() {
+        let trackResultViewModel = TrackResultViewModel()
+        let searchServices = SearchServices(searchService: SearchService())
+        trackResultViewController = TrackResultViewController.instantiate(withViewModel: trackResultViewModel, andServices: searchServices)
     }
     
     private func setupButtonBar() {
@@ -36,5 +43,9 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         settings.style.selectedBarHeight = 2
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.buttonBarHeight = 40
+    }
+    
+    func setKeyword(keyword: String) {
+        trackResultViewController.setkeyword(keyword: keyword)
     }
 }

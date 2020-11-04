@@ -66,7 +66,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
             .filter { !$0.replacingOccurrences(of: " ", with: "").isEmpty }
         
         keyword.subscribe(onNext: {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "NotificationSearch"), object: nil, userInfo: ["keyword": $0])
+            self.resultController.setKeyword(keyword: $0)
         }).disposed(by: disposeBag)
         
         let input = SearchViewModel.Input(keyWord: keyword)
@@ -81,7 +81,9 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
                 self?.resultContainerView.isHidden = true
                 return
             }
-            self?.resultContainerView.isHidden = text.replacingOccurrences(of: " ", with: "").isEmpty
+            if !text.replacingOccurrences(of: " ", with: "").isEmpty {
+                self?.resultContainerView.isHidden = false
+            }
         })
         .disposed(by: disposeBag)
     }

@@ -14,7 +14,7 @@ protocol HasSearchService {
 }
 
 struct SearchService {
-    func searchTrack(keyWord: String) -> Observable<SearchRespone> {
-        return HostAPIClient.performApiNetworkCall(router: .searchTrack(keyWord: keyWord), type: SearchRespone.self)
+    func searchTrack(keyword: String) -> Observable<SearchRespone> {
+        return HostAPIClient.performApiNetworkCall(router: .searchTrack(keyWord: keyword), type: SearchRespone.self)
     }
 }

@@ -18,7 +18,7 @@ class SearchViewModel: ServicesViewModel {
             guard let self = self else {
                 return .empty()
             }
-            return self.services.searchService.searchTrack(keyWord: keyWord).map {($0.tracks ?? [])}
+            return self.services.searchService.searchTrack(keyword: keyWord).map {($0.tracks ?? [])}
         }
         return Output(tracks: tracks)
     }
