@@ -59,6 +59,9 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func bindViewModel() {
+        let input = SearchViewModel.Input()
+        let output = viewModel.transform(input: input)
+        
         let keyword = searchTextField.rx.text.asObservable()
             .distinctUntilChanged()
             .debounce(DispatchTimeInterval.milliseconds(200), scheduler: MainScheduler.instance)
@@ -67,13 +70,6 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         
         keyword.subscribe(onNext: {
             self.resultController.setKeyword(keyword: $0)
-        }).disposed(by: disposeBag)
-        
-        let input = SearchViewModel.Input(keyWord: keyword)
-        let output = viewModel.transform(input: input)
-        
-        output.tracks.subscribe(onNext: {
-            print($0)
         }).disposed(by: disposeBag)
         
         searchTextField.rx.text.subscribe(onNext: { [weak self] text in

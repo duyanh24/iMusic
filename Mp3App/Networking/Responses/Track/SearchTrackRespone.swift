@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SearchRespone: Codable {
+struct SearchTrackRespone: Codable {
     var tracks: [Track]?
     
     enum CodingKeys: String, CodingKey {

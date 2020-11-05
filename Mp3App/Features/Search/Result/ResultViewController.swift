@@ -13,10 +13,10 @@ import XLPagerTabStrip
 
 class ResultViewController: ButtonBarPagerTabStripViewController {
     
-    private let allResultViewController = AllResultViewController.instantiate()
+    private var allResultViewController = AllResultViewController.instantiate()
     private var trackResultViewController = TrackResultViewController.instantiate()
-    private let userResultViewController = UserResultViewController.instantiate()
-    private let playlistResultViewController = PlaylistResultViewController.instantiate()
+    private var userResultViewController = UserResultViewController.instantiate()
+    private var playlistResultViewController = PlaylistResultViewController.instantiate()
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -33,6 +33,12 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         let trackResultViewModel = TrackResultViewModel()
         let searchServices = SearchServices(searchService: SearchService())
         trackResultViewController = TrackResultViewController.instantiate(withViewModel: trackResultViewModel, andServices: searchServices)
+        
+        let userResultViewModel = UserResultViewModel()
+        userResultViewController = UserResultViewController.instantiate(withViewModel: userResultViewModel, andServices: searchServices)
+        
+        let playlistResultViewModel = PlaylistResultViewModel()
+        playlistResultViewController = PlaylistResultViewController.instantiate(withViewModel: playlistResultViewModel, andServices: searchServices)
     }
     
     private func setupButtonBar() {
@@ -47,5 +53,7 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     
     func setKeyword(keyword: String) {
         trackResultViewController.setkeyword(keyword: keyword)
+        userResultViewController.setkeyword(keyword: keyword)
+        playlistResultViewController.setkeyword(keyword: keyword)
     }
 }

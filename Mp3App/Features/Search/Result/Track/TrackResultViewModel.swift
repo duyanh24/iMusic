@@ -17,11 +17,10 @@ class TrackResultViewModel: ServicesViewModel {
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
-        let dataSource = input.searchTrack.distinctUntilChanged().flatMapLatest { [weak self] keyword -> Observable<SearchRespone> in
+        let dataSource = input.searchTrack.distinctUntilChanged().flatMapLatest { [weak self] keyword -> Observable<SearchTrackRespone> in
             guard let self = self else {
                 return .empty()
             }
-            print("test : \(keyword)")
             return self.searchTrack(keyword: keyword)
         }.map { searchRespone -> [TrackSectionModel] in
             return [TrackSectionModel(model: "", items: searchRespone.tracks ?? [])]
@@ -43,7 +42,7 @@ extension TrackResultViewModel {
 }
 
 extension TrackResultViewModel {
-    private func searchTrack(keyword: String) -> Observable<SearchRespone> {
-        return services.searchService.searchTrack(keyword: keyword).trackError(errorTracker)
+    private func searchTrack(keyword: String) -> Observable<SearchTrackRespone> {
+        return services.searchService.searchTracks(keyword: keyword).trackError(errorTracker)
     }
 }

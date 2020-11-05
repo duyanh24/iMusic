@@ -24,9 +24,10 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
-            let cell = tableView.dequeueReusableCell(for: indexPath) as LibraryDetailTableViewCell
-            let libraryDetailCellViewModel = LibraryDetailCellViewModel(track: track)
-            cell.configureCell(viewModel: libraryDetailCellViewModel)
+            let cell = tableView.dequeueReusableCell(for: indexPath) as TrackResultCell
+            
+            let trackResultCellViewModel = TrackResultCellViewModel(track: track)
+            cell.configureCell(viewModel: trackResultCellViewModel)
             return cell
     })
     
@@ -70,6 +71,8 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
             }
         }).disposed(by: disposeBag)
         
+        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        
         output.dataSource
         .bind(to: tableView.rx.items(dataSource: dataSource))
         .disposed(by: disposeBag)
@@ -77,7 +80,7 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.register(cellType: LibraryDetailTableViewCell.self)
+        tableView.register(cellType: TrackResultCell.self)
     }
 }
 

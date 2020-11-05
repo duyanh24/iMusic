@@ -15,7 +15,9 @@ enum APIRouter {
     case getAlbums(kind: APIParameterKey, genre: TrackGenre, limit: Int, offset: Int)
     case getPopularUser(limit: Int, offset: Int)
     case getTrack(trackId: String)
-    case searchTrack(keyWord: String)
+    case searchTracks(keyword: String)
+    case searchUsers(keyword: String)
+    case searchPlaylists(keyword: String)
 }
 
 extension APIRouter: TargetType {
@@ -79,8 +81,18 @@ extension APIRouter: TargetType {
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
         case .getTrack:
             return .requestPlain
-        case .searchTrack(let keyWord):
-            bodyParameters = [APIParameterKey.keyWord.rawValue: keyWord,
+        case .searchTracks(let keyword):
+            bodyParameters = [APIParameterKey.keyWord.rawValue: keyword,
+                              APIParameterKey.clientId.rawValue: Constants.APIKey]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: bodyParameters, encoding: encoding)
+        case .searchUsers(let keyword):
+            bodyParameters = [APIParameterKey.keyWord.rawValue: keyword,
+                              APIParameterKey.clientId.rawValue: Constants.APIKey]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: bodyParameters, encoding: encoding)
+        case .searchPlaylists(let keyword):
+            bodyParameters = [APIParameterKey.keyWord.rawValue: keyword,
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
@@ -101,8 +113,12 @@ extension APIRouter: TargetType {
             return "/users"
         case .getTrack(let trackId):
             return "/tracks/\(trackId)"
-        case .searchTrack:
+        case .searchTracks:
             return "/search/tracks"
+        case .searchUsers:
+            return "/search/users"
+        case .searchPlaylists:
+            return "/search/playlists"
         }
     }
 }

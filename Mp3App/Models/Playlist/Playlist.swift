@@ -8,10 +8,14 @@
 
 import Foundation
 
-class Playlist {
-    var name: String?
-    
-    init(name: String?) {
-        self.name = name
+struct Playlist: Codable {
+    var id: Int?
+    var title: String?
+    var user: User?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case user
     }
 }
