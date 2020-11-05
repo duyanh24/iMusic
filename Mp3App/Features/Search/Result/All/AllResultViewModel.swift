@@ -28,10 +28,6 @@ class AllResultViewModel: ServicesViewModel {
             return self.searchAll(keyword: keyword)
         }.map { $0.toDataSource() }.trackActivity(activityIndicator)
         
-        dataSource.subscribe(onNext: {
-            print($0)
-        }).disposed(by: disposeBag)
-        
         return Output(dataSource: dataSource, activityIndicator: activityIndicator.asObservable())
     }
 }

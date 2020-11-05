@@ -20,10 +20,19 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rất tiếc không có kết quả phù hợp!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8X-17-9Ib">
+                                <rect key="frame" x="30" y="443" width="354" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="oca-aH-OSy" firstAttribute="top" secondItem="Oe5-tT-VpN" secondAttribute="top" id="3dm-0v-L6z"/>
+                            <constraint firstItem="O8X-17-9Ib" firstAttribute="centerY" secondItem="Oe5-tT-VpN" secondAttribute="centerY" id="5oL-Ks-klN"/>
+                            <constraint firstItem="O8X-17-9Ib" firstAttribute="leading" secondItem="Oe5-tT-VpN" secondAttribute="leading" constant="30" id="83z-AO-0Qu"/>
+                            <constraint firstItem="O8X-17-9Ib" firstAttribute="centerX" secondItem="Oe5-tT-VpN" secondAttribute="centerX" id="ahb-pZ-tjI"/>
                             <constraint firstItem="Oe5-tT-VpN" firstAttribute="trailing" secondItem="oca-aH-OSy" secondAttribute="trailing" id="ap7-Fs-AGL"/>
                             <constraint firstItem="Oe5-tT-VpN" firstAttribute="bottom" secondItem="oca-aH-OSy" secondAttribute="bottom" id="ggg-tS-pNO"/>
                             <constraint firstItem="oca-aH-OSy" firstAttribute="leading" secondItem="Oe5-tT-VpN" secondAttribute="leading" id="kks-Bx-uUl"/>
@@ -31,6 +40,7 @@
                         <viewLayoutGuide key="safeArea" id="Oe5-tT-VpN"/>
                     </view>
                     <connections>
+                        <outlet property="notificationLabel" destination="O8X-17-9Ib" id="2bT-GA-vxa"/>
                         <outlet property="tableView" destination="oca-aH-OSy" id="u6h-3e-TyB"/>
                     </connections>
                 </viewController>

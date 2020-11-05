@@ -15,6 +15,7 @@ import XLPagerTabStrip
 
 class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var notificationLabel: UILabel!
     
     var viewModel: TrackResultViewModel!
     private let disposeBag = DisposeBag()
@@ -48,6 +49,7 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
+        notificationLabel.isHidden = true
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -75,6 +77,15 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
         
         output.dataSource
         .bind(to: tableView.rx.items(dataSource: dataSource))
+        .disposed(by: disposeBag)
+        
+        output.dataSource.subscribe(onNext: { [weak self] data in
+            guard let isEmpty = data.first?.items.isEmpty else {
+                self?.notificationLabel.isHidden = false
+                return
+            }
+            self?.notificationLabel.isHidden = !isEmpty
+        })
         .disposed(by: disposeBag)
     }
     

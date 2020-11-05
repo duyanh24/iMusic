@@ -15,6 +15,7 @@ import RxDataSources
 
 class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var notificationLabel: UILabel!
     
     var viewModel: AllResultViewModel!
     private let disposeBag = DisposeBag()
@@ -62,6 +63,7 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
+        notificationLabel.isHidden = true
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -88,6 +90,11 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        output.dataSource.subscribe(onNext: { [weak self] data in
+            self?.notificationLabel.isHidden = !data.isEmpty
+        })
+        .disposed(by: disposeBag)
         
         //output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
     }

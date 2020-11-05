@@ -17,6 +17,7 @@ typealias UserSectionModel = SectionModel<String, User>
 
 class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var notificationLabel: UILabel!
     
     var viewModel: UserResultViewModel!
     private let disposeBag = DisposeBag()
@@ -49,6 +50,7 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
+        notificationLabel.isHidden = true
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -77,6 +79,15 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        output.dataSource.subscribe(onNext: { [weak self] data in
+            guard let isEmpty = data.first?.items.isEmpty else {
+                self?.notificationLabel.isHidden = false
+                return
+            }
+            self?.notificationLabel.isHidden = !isEmpty
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
