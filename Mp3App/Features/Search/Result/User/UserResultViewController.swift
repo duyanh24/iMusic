@@ -27,7 +27,6 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>(
         configureCell: { _, tableView, indexPath, user in
             let cell = tableView.dequeueReusableCell(for: indexPath) as UserResultCell
-            
             let userResultCellViewModel = UserResultCellViewModel(user: user)
             cell.configureCell(viewModel: userResultCellViewModel)
             return cell
@@ -53,7 +52,7 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Nghệ sĩ")
+        return IndicatorInfo(title: Strings.artist)
     }
     
     func setkeyword(keyword: String) {
@@ -83,12 +82,13 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
     private func setupTableView() {
         tableView.delegate = self
         tableView.register(cellType: UserResultCell.self)
+        tableView.contentInset.bottom = 50
     }
 }
 
 extension UserResultViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 70
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

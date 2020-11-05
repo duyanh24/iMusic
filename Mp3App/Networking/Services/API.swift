@@ -18,6 +18,7 @@ enum APIRouter {
     case searchTracks(keyword: String)
     case searchUsers(keyword: String)
     case searchPlaylists(keyword: String)
+    case searchAll(keyword: String)
 }
 
 extension APIRouter: TargetType {
@@ -96,6 +97,11 @@ extension APIRouter: TargetType {
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
+        case .searchAll(let keyword):
+            bodyParameters = [APIParameterKey.keyWord.rawValue: keyword,
+                              APIParameterKey.clientId.rawValue: Constants.APIKey]
+            encoding = URLEncoding.default
+            return .requestParameters(parameters: bodyParameters, encoding: encoding)
         }
     }
     
@@ -119,6 +125,8 @@ extension APIRouter: TargetType {
             return "/search/users"
         case .searchPlaylists:
             return "/search/playlists"
+        case .searchAll:
+            return "/search"
         }
     }
 }

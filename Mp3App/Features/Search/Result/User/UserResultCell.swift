@@ -30,7 +30,7 @@ class UserResultCell: UITableViewCell, ViewModelBased, NibReusable {
     
     private func setupUI() {
         selectionStyle = .none
-        albumImageView.layer.cornerRadius = 5
+        albumImageView.layer.cornerRadius = 25
     }
     
     func configureCell(viewModel: UserResultCellViewModel) {

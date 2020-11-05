@@ -22,6 +22,7 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         setupButtonBar()
         super.viewDidLoad()
+        setupNotificationCenter()
     }
     
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -39,6 +40,9 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         
         let playlistResultViewModel = PlaylistResultViewModel()
         playlistResultViewController = PlaylistResultViewController.instantiate(withViewModel: playlistResultViewModel, andServices: searchServices)
+        
+        let allResultViewModel = AllResultViewModel()
+        allResultViewController = AllResultViewController.instantiate(withViewModel: allResultViewModel, andServices: searchServices)
     }
     
     private func setupButtonBar() {
@@ -55,5 +59,15 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         trackResultViewController.setkeyword(keyword: keyword)
         userResultViewController.setkeyword(keyword: keyword)
         playlistResultViewController.setkeyword(keyword: keyword)
+        allResultViewController.setKeyword(keyword: keyword)
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.ChangeTabSearch), object: nil)
+    }
+    
+    @objc func showPlayer(_ notification: Notification) {
+        guard let index = notification.userInfo?[Strings.index] as? Int else { return }
+        self.moveToViewController(at: index)
     }
 }

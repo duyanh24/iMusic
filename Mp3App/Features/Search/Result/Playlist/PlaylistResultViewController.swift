@@ -53,7 +53,7 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Playlist")
+        return IndicatorInfo(title: Strings.playlist)
     }
     
     func setkeyword(keyword: String) {
@@ -83,12 +83,13 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
     private func setupTableView() {
         tableView.delegate = self
         tableView.register(cellType: PlaylistResultCell.self)
+        tableView.contentInset.bottom = 50
     }
 }
 
 extension PlaylistResultViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 70
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

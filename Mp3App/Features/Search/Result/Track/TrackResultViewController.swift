@@ -51,7 +51,7 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Bài hát")
+        return IndicatorInfo(title: Strings.track)
     }
     
     func setkeyword(keyword: String) {
@@ -81,12 +81,13 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     private func setupTableView() {
         tableView.delegate = self
         tableView.register(cellType: TrackResultCell.self)
+        tableView.contentInset.bottom = 50
     }
 }
 
 extension TrackResultViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 70
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

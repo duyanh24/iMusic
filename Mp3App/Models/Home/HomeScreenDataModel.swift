@@ -9,13 +9,13 @@
 import Foundation
 
 class HomeScreenDataModel {
-    var popularAlbums: [Album] = []
-    var electronicAlbums: [Album] = []
-    var hiphopAlbums: [Album] = []
-    var rockAlbums: [Album] = []
-    var classicalAlbums: [Album] = []
-    var chartTracks: [Album] = []
-    var popularUsers: [User] = []
+    var popularAlbums = [Album]()
+    var electronicAlbums = [Album]()
+    var hiphopAlbums = [Album]()
+    var rockAlbums = [Album]()
+    var classicalAlbums = [Album]()
+    var chartTracks = [Album]()
+    var popularUsers = [User]()
     
     init (popularAlbums: [Album], electronicAlbums: [Album], hiphopAlbums: [Album], rockAlbums: [Album], classicalAlbums: [Album], chartTracks: [Album], popularUsers: [User]) {
         self.popularAlbums = popularAlbums
@@ -53,12 +53,12 @@ class HomeScreenDataModel {
         }
         if !rockAlbums.isEmpty {
             sectionModels.append(.rockAlbums(type: .rockAlbums,
-                                               items: [.albumsDefault(type: .rockAlbums, albums: rockAlbums.compactMap { $0 })])
+                                            items: [.albumsDefault(type: .rockAlbums, albums: rockAlbums.compactMap { $0 })])
             )
         }
         if !classicalAlbums.isEmpty {
             sectionModels.append(.classicalAlbums(type: .classicalAlbums,
-                                               items: [.albumsDefault(type: .classicalAlbums, albums: classicalAlbums.compactMap { $0 })])
+                                                  items: [.albumsDefault(type: .classicalAlbums, albums: classicalAlbums.compactMap { $0 })])
             )
         }
         
