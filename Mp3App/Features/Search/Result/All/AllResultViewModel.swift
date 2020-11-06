@@ -13,7 +13,6 @@ import RxCocoa
 class AllResultViewModel: ServicesViewModel {
     var services: SearchServices!
     private let errorTracker = ErrorTracker()
-    let disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()

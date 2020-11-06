@@ -12,7 +12,6 @@ import RxCocoa
 import XLPagerTabStrip
 
 class ResultViewController: ButtonBarPagerTabStripViewController {
-    
     private var allResultViewController = AllResultViewController.instantiate()
     private var trackResultViewController = TrackResultViewController.instantiate()
     private var userResultViewController = UserResultViewController.instantiate()
@@ -68,6 +67,6 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     
     @objc func showPlayer(_ notification: Notification) {
         guard let index = notification.userInfo?[Strings.index] as? Int else { return }
-        self.moveToViewController(at: index)
+        moveToViewController(at: index)
     }
 }

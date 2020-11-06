@@ -18,11 +18,10 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     var viewModel: SearchViewModel!
     private let disposeBag = DisposeBag()
     private let resultController = ResultViewController()
-    
     private var keywordTrigger = PublishSubject<String>()
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupResultView()
     }
     
@@ -68,8 +67,8 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
             .compactMap { $0 }
             .filter { !$0.replacingOccurrences(of: " ", with: "").isEmpty }
         
-        keyword.subscribe(onNext: {
-            self.resultController.setKeyword(keyword: $0)
+        keyword.subscribe(onNext: { [weak self] keyword in
+            self?.resultController.setKeyword(keyword: keyword)
         }).disposed(by: disposeBag)
         
         searchTextField.rx.text.subscribe(onNext: { [weak self] text in

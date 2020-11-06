@@ -27,7 +27,7 @@ class ResultCellFooterView: UIView {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.backgroundColor = Colors.purpleColor
         containerView.layer.cornerRadius = 15
-        self.addSubview(containerView)
+        addSubview(containerView)
         
         containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true

@@ -25,7 +25,7 @@ class ResultCellHeaderView: UIView {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.backgroundColor = .white
-        self.addSubview(containerView)
+        addSubview(containerView)
         
         containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
         containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true

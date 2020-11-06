@@ -69,7 +69,7 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
     }
     
     func setKeyword(keyword: String) {
-        self.keywordTrigger.accept(keyword)
+        keywordTrigger.accept(keyword)
     }
     
     func bindViewModel() {
@@ -86,13 +86,15 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         }).disposed(by: disposeBag)
         
         output.dataSource
+            .do(onNext: { [weak self] data in
+                guard let isEmpty = data.first?.items.isEmpty else {
+                    self?.notificationLabel.isHidden = false
+                    return
+                }
+                self?.notificationLabel.isHidden = !isEmpty
+            })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
-        output.dataSource.subscribe(onNext: { [weak self] data in
-            self?.notificationLabel.isHidden = !data.isEmpty
-        })
-        .disposed(by: disposeBag)
     }
     private func setupTableView() {
         tableView.delegate = self

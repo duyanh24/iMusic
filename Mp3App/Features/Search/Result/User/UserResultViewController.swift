@@ -77,17 +77,15 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
         
         output.dataSource
+            .do(onNext: { [weak self] data in
+                guard let isEmpty = data.first?.items.isEmpty else {
+                    self?.notificationLabel.isHidden = false
+                    return
+                }
+                self?.notificationLabel.isHidden = !isEmpty
+            })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
-        output.dataSource.subscribe(onNext: { [weak self] data in
-            guard let isEmpty = data.first?.items.isEmpty else {
-                self?.notificationLabel.isHidden = false
-                return
-            }
-            self?.notificationLabel.isHidden = !isEmpty
-        })
-        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
