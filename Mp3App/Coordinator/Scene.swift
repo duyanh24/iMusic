@@ -19,6 +19,7 @@ enum Scene {
     case playlistDetail(playlistName: String)
     case createPlaylist
     case libraryDetail
+    case tracks(tracks: [Track], title: String)
 }
 
 extension Scene: TargetScene {
@@ -86,6 +87,11 @@ extension Scene: TargetScene {
             let mypageServices = MypageServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
             let libraryDetailViewController = LibraryDetailViewController.instantiate(withViewModel: libraryDetailViewModel, andServices: mypageServices)
             return .push(libraryDetailViewController)
+            
+        case .tracks((let tracks, let title)):
+            let tracksViewModel = TracksViewModel(tracks: tracks, title: title)
+            let tracksViewController = TracksViewController.instantiate(withViewModel: tracksViewModel)
+            return .push(tracksViewController)
         }
     }
 }

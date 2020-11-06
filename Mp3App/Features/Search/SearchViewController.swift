@@ -22,12 +22,13 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupResultView()
+//        setupResultView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        setupResultView()
     }
     
     override func viewWillAppear(_ animated: Bool) {

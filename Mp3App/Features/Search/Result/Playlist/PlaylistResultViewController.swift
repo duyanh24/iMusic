@@ -84,6 +84,21 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(Playlist.self).subscribe(onNext: { playlist in
+            print(playlist)
+            let tracks = playlist.tracks?.filter({ track -> Bool in
+                guard let streamable = track.streamable else {
+                    return false
+                }
+                if !streamable || track.title == nil || track.artworkURL == nil {
+                    return false
+                }
+                return true
+            })
+            SceneCoordinator.shared.transition(to: Scene.tracks(tracks: tracks ?? [], title: playlist.title ?? ""))
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
