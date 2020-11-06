@@ -17,7 +17,7 @@ class AllResultViewModel: ServicesViewModel {
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
-        let dataSource = input.searchAll.skip(1).distinctUntilChanged().flatMapLatest { [weak self] keyword -> Observable<SearchDataModel> in
+        let dataSource = input.searchAll.distinctUntilChanged().flatMapLatest { [weak self] keyword -> Observable<SearchDataModel> in
             guard let self = self else {
                 return .empty()
             }

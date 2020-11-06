@@ -22,8 +22,14 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
     var viewModel: PlaylistResultViewModel!
     private let disposeBag = DisposeBag()
     private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisible = BehaviorRelay<Bool>(value: false)
+    private let isViewControllerVisibleTrigger = BehaviorRelay<Bool>(value: false)
     private let searchPlaylistTrigger = PublishSubject<String>()
+    
+    var isViewControllerVisible: Bool = false {
+        didSet {
+            isViewControllerVisibleTrigger.accept(isViewControllerVisible)
+        }
+    }
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<PlaylistSectionModel>(
         configureCell: { _, tableView, indexPath, playlist in
@@ -37,15 +43,6 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        isViewControllerVisible.accept(true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        isViewControllerVisible.accept(false)
     }
     
     override func prepareUI() {
@@ -66,7 +63,7 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
         let input = PlaylistResultViewModel.Input(searchPlaylist: searchPlaylistTrigger)
         let output = viewModel.transform(input: input)
         
-        Observable.combineLatest(isViewControllerVisible, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
+        Observable.combineLatest(isViewControllerVisibleTrigger, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
             guard let self = self else {
                 return
             }

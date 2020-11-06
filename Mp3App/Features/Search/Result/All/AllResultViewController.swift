@@ -20,8 +20,14 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
     var viewModel: AllResultViewModel!
     private let disposeBag = DisposeBag()
     private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisible = BehaviorRelay<Bool>(value: false)
+    private let isViewControllerVisibleTrigger = BehaviorRelay<Bool>(value: false)
     private let searchAllTrigger = PublishSubject<String>()
+    
+    var isViewControllerVisible: Bool = false {
+        didSet {
+            isViewControllerVisibleTrigger.accept(isViewControllerVisible)
+        }
+    }
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
@@ -49,15 +55,6 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        isViewControllerVisible.accept(true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        isViewControllerVisible.accept(false)
-    }
-    
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
@@ -76,7 +73,7 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         let input = AllResultViewModel.Input(searchAll: searchAllTrigger)
         let output = viewModel.transform(input: input)
         
-        Observable.combineLatest(isViewControllerVisible, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
+        Observable.combineLatest(isViewControllerVisibleTrigger, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
             guard let self = self else {
                 return
             }
@@ -96,6 +93,7 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
+    
     private func setupTableView() {
         tableView.delegate = self
         tableView.register(cellType: UserResultCell.self)

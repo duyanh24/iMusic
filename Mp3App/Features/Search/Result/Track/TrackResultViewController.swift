@@ -20,8 +20,14 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     var viewModel: TrackResultViewModel!
     private let disposeBag = DisposeBag()
     private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisible = BehaviorRelay<Bool>(value: false)
+    private let isViewControllerVisibleTrigger = BehaviorRelay<Bool>(value: false)
     private let searchTrackTrigger = PublishSubject<String>()
+    
+    var isViewControllerVisible: Bool = false {
+        didSet {
+            isViewControllerVisibleTrigger.accept(isViewControllerVisible)
+        }
+    }
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
@@ -34,15 +40,6 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        isViewControllerVisible.accept(true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        isViewControllerVisible.accept(false)
     }
     
     override func prepareUI() {
@@ -63,7 +60,7 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
         let input = TrackResultViewModel.Input(searchTrack: searchTrackTrigger)
         let output = viewModel.transform(input: input)
         
-        Observable.combineLatest(isViewControllerVisible, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
+        Observable.combineLatest(isViewControllerVisibleTrigger, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
             guard let self = self else {
                 return
             }
