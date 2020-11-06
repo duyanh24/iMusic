@@ -19,6 +19,7 @@ struct Track: Codable {
     var genre: String?
     var isPlaying = false
     var isRepeated = false
+    var kind: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -29,5 +30,6 @@ struct Track: Codable {
         case streamable
         case streamURL = "stream_url"
         case genre
+        case kind
     }
 }

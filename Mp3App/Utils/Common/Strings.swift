@@ -32,6 +32,13 @@ struct Strings {
     static let rock = "Nhạc Rock"
     static let popular = "Phổ biến"
     
+    //search
+    static let searchPlaceholder = "Tìm kiếm bài hát, ca sĩ, playlist"
+    static let track = "Bài hát"
+    static let artist = "Nghệ sĩ"
+    static let more = "Xem thêm"
+    static let all = "Tất cả"
+    
     //mypage
     static let library = "Thư viện"
     static let playlist = "Playlist"
@@ -44,6 +51,7 @@ struct Strings {
     static let tracks = "tracks"
     static let selectedTrackItem = "selectedTrackItem"
     static let index = "index"
+    static let ChangeTabSearch = "ChangeTabSearch"
     
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"

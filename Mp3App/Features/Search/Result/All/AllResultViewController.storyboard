@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8RP-ry-vYJ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--All Result View Controller-->
+        <scene sceneID="Hwm-dI-ruQ">
+            <objects>
+                <viewController id="8RP-ry-vYJ" customClass="AllResultViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zct-Eg-f8o">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Jt3-k4-Jo9">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rất tiếc không có kết quả phù hợp!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPR-Ge-F8j">
+                                <rect key="frame" x="30" y="443" width="354" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="b99-ZF-MKC" firstAttribute="bottom" secondItem="Jt3-k4-Jo9" secondAttribute="bottom" id="75J-YZ-Xgs"/>
+                            <constraint firstItem="b99-ZF-MKC" firstAttribute="trailing" secondItem="Jt3-k4-Jo9" secondAttribute="trailing" id="88c-mT-AHv"/>
+                            <constraint firstItem="hPR-Ge-F8j" firstAttribute="centerY" secondItem="b99-ZF-MKC" secondAttribute="centerY" id="SU6-zs-H9K"/>
+                            <constraint firstItem="hPR-Ge-F8j" firstAttribute="centerX" secondItem="b99-ZF-MKC" secondAttribute="centerX" id="Vtc-rT-saQ"/>
+                            <constraint firstItem="Jt3-k4-Jo9" firstAttribute="top" secondItem="b99-ZF-MKC" secondAttribute="top" id="WYm-fn-LJP"/>
+                            <constraint firstItem="hPR-Ge-F8j" firstAttribute="leading" secondItem="b99-ZF-MKC" secondAttribute="leading" constant="30" id="bU5-mT-NZr"/>
+                            <constraint firstItem="Jt3-k4-Jo9" firstAttribute="leading" secondItem="b99-ZF-MKC" secondAttribute="leading" id="bcL-nY-YcR"/>
+                            <constraint firstItem="Jt3-k4-Jo9" firstAttribute="centerX" secondItem="b99-ZF-MKC" secondAttribute="centerX" id="kj8-lU-9P6"/>
+                            <constraint firstItem="Jt3-k4-Jo9" firstAttribute="centerY" secondItem="b99-ZF-MKC" secondAttribute="centerY" id="vPx-v9-daz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="b99-ZF-MKC"/>
+                    </view>
+                    <connections>
+                        <outlet property="notificationLabel" destination="hPR-Ge-F8j" id="lR4-7W-68d"/>
+                        <outlet property="tableView" destination="Jt3-k4-Jo9" id="3JI-l3-umc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cVA-S3-Puk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="452" y="-279"/>
+        </scene>
+    </scenes>
+</document>

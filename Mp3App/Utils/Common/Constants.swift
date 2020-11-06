@@ -15,7 +15,7 @@ struct APIURL {
 }
 
 struct Constants {
-    static let APIKey = "c4c979fd6f241b5b30431d722af212e8"
+    static let APIKey = "a25e51780f7f86af0afa91f241d091f8"
     static let passwordMaxLength = 15
     static let passwordMinLength = 6
 }
@@ -31,6 +31,7 @@ enum ErrorMessage {
     static let wrongEmail = "Email không chính xác"
     static let unknownError = "Lỗi không xác định"
     static let passwordNotInRangeError = "Mật khẩu phải từ %d đến %d ký tự"
+    static let WrongTypeData = "Wrong type for Data"
 }
 
 struct APIConstants {

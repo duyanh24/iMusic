@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H4r-eA-8CA">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--User Result View Controller-->
+        <scene sceneID="eHa-Pf-s0p">
+            <objects>
+                <viewController id="H4r-eA-8CA" customClass="UserResultViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="buQ-CH-M85">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oca-aH-OSy">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rất tiếc không có kết quả phù hợp!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8X-17-9Ib">
+                                <rect key="frame" x="30" y="443" width="354" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="oca-aH-OSy" firstAttribute="top" secondItem="Oe5-tT-VpN" secondAttribute="top" id="3dm-0v-L6z"/>
+                            <constraint firstItem="O8X-17-9Ib" firstAttribute="centerY" secondItem="Oe5-tT-VpN" secondAttribute="centerY" id="5oL-Ks-klN"/>
+                            <constraint firstItem="O8X-17-9Ib" firstAttribute="leading" secondItem="Oe5-tT-VpN" secondAttribute="leading" constant="30" id="83z-AO-0Qu"/>
+                            <constraint firstItem="O8X-17-9Ib" firstAttribute="centerX" secondItem="Oe5-tT-VpN" secondAttribute="centerX" id="ahb-pZ-tjI"/>
+                            <constraint firstItem="Oe5-tT-VpN" firstAttribute="trailing" secondItem="oca-aH-OSy" secondAttribute="trailing" id="ap7-Fs-AGL"/>
+                            <constraint firstItem="Oe5-tT-VpN" firstAttribute="bottom" secondItem="oca-aH-OSy" secondAttribute="bottom" id="ggg-tS-pNO"/>
+                            <constraint firstItem="oca-aH-OSy" firstAttribute="leading" secondItem="Oe5-tT-VpN" secondAttribute="leading" id="kks-Bx-uUl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Oe5-tT-VpN"/>
+                    </view>
+                    <connections>
+                        <outlet property="notificationLabel" destination="O8X-17-9Ib" id="2bT-GA-vxa"/>
+                        <outlet property="tableView" destination="oca-aH-OSy" id="u6h-3e-TyB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lRr-4T-Onh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="503" y="-117"/>
+        </scene>
+    </scenes>
+</document>
