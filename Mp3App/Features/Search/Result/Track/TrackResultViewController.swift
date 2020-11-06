@@ -26,7 +26,6 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
             let cell = tableView.dequeueReusableCell(for: indexPath) as TrackResultCell
-            
             let trackResultCellViewModel = TrackResultCellViewModel(track: track)
             cell.configureCell(viewModel: trackResultCellViewModel)
             return cell

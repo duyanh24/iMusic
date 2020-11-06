@@ -31,6 +31,7 @@ enum ErrorMessage {
     static let wrongEmail = "Email không chính xác"
     static let unknownError = "Lỗi không xác định"
     static let passwordNotInRangeError = "Mật khẩu phải từ %d đến %d ký tự"
+    static let WrongTypeData = "Wrong type for Data"
 }
 
 struct APIConstants {

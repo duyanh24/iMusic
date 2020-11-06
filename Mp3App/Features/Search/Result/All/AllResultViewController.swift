@@ -26,7 +26,6 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
         switch dataSource[indexPath] {
-            
         case .track(let type, let track):
             let cell = tableView.dequeueReusableCell(for: indexPath) as TrackResultCell
             let trackResultCellViewModel = TrackResultCellViewModel(track: track)
@@ -37,7 +36,6 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
             let playlistResultCellViewModel = PlaylistResultCellViewModel(playlist: playlist)
             cell.configureCell(viewModel: playlistResultCellViewModel)
             return cell
-            
         case .user(let type, let user):
             let cell = tableView.dequeueReusableCell(for: indexPath) as UserResultCell
             let userResultCellViewModel = UserResultCellViewModel(user: user)
@@ -95,8 +93,6 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
             self?.notificationLabel.isHidden = !data.isEmpty
         })
         .disposed(by: disposeBag)
-        
-        //output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
     }
     private func setupTableView() {
         tableView.delegate = self

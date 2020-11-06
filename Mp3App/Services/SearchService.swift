@@ -26,7 +26,7 @@ struct SearchService {
         return HostAPIClient.performApiNetworkCall(router: .searchPlaylists(keyword: keyword), type: SearchPlaylistRespone.self)
     }
     
-    func searchAll(keyword: String) -> Observable<SearchAllRespone> {
-        return HostAPIClient.performApiNetworkCall(router: .searchAll(keyword: keyword), type: SearchAllRespone.self)
+    func searchAll(keyword: String) -> Observable<SearchDataRespone> {
+        return HostAPIClient.performApiNetworkCall(router: .searchAll(keyword: keyword), type: SearchDataRespone.self)
     }
 }

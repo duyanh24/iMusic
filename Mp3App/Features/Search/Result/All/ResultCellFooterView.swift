@@ -9,7 +9,6 @@
 import UIKit
 
 class ResultCellFooterView: UIView {
-    
     private let label = UILabel()
     private var currentSection = 0
 

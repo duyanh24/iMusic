@@ -9,7 +9,6 @@
 import UIKit
 
 class ResultCellHeaderView: UIView {
-    
     private let label = UILabel()
 
     public required init?(coder aDecoder: NSCoder) {

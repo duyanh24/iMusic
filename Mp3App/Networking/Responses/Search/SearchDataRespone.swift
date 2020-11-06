@@ -1,5 +1,5 @@
 //
-//  SearchAllRespone.swift
+//  SearchDataRespone.swift
 //  Mp3App
 //
 //  Created by AnhLD on 11/5/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SearchAllRespone: Codable {
+struct SearchDataRespone: Codable {
     var data: [DataSearch]?
     
     enum CodingKeys: String, CodingKey {
@@ -42,7 +42,7 @@ enum DataSearch: Codable {
             self = .track(data)
             return
         }
-        throw DecodingError.typeMismatch(DataSearch.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Data"))
+        throw DecodingError.typeMismatch(DataSearch.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: ErrorMessage.WrongTypeData))
     }
 
     func encode(to encoder: Encoder) throws {
