@@ -21,6 +21,9 @@ class PlaylistResultViewModel: ServicesViewModel {
             guard let self = self else {
                 return .empty()
             }
+            if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
+                return .empty()
+            }
             return self.searchPlaylists(keyword: keyword)
         }.map { searchUserRespone -> [PlaylistSectionModel] in
             return [PlaylistSectionModel(model: "", items: searchUserRespone.playlists ?? [])]

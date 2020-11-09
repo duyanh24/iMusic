@@ -19,15 +19,7 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
     
     var viewModel: AllResultViewModel!
     private let disposeBag = DisposeBag()
-    private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisibleTrigger = BehaviorRelay<Bool>(value: false)
-    private let searchAllTrigger = PublishSubject<String>()
-    
-    var isViewControllerVisible: Bool = false {
-        didSet {
-            isViewControllerVisibleTrigger.accept(isViewControllerVisible)
-        }
-    }
+    private let keywordTrigger = BehaviorSubject<String>(value: "")
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
@@ -65,22 +57,13 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         return IndicatorInfo(title: Strings.all)
     }
     
-    func setKeyword(keyword: String) {
-        keywordTrigger.accept(keyword)
+    func search(keyword: String) {
+        keywordTrigger.onNext(keyword)
     }
     
-    func bindViewModel() {
-        let input = AllResultViewModel.Input(searchAll: searchAllTrigger)
+    private func bindViewModel() {
+        let input = AllResultViewModel.Input(searchAll: keywordTrigger)
         let output = viewModel.transform(input: input)
-        
-        Observable.combineLatest(isViewControllerVisibleTrigger, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
-            guard let self = self else {
-                return
-            }
-            if isViewControllerVisible {
-                self.searchAllTrigger.onNext(keyword)
-            }
-        }).disposed(by: disposeBag)
         
         output.dataSource
             .do(onNext: { [weak self] data in

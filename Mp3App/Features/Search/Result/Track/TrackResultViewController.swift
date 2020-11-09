@@ -19,15 +19,7 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
     
     var viewModel: TrackResultViewModel!
     private let disposeBag = DisposeBag()
-    private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisibleTrigger = BehaviorRelay<Bool>(value: false)
-    private let searchTrackTrigger = PublishSubject<String>()
-    
-    var isViewControllerVisible: Bool = false {
-        didSet {
-            isViewControllerVisibleTrigger.accept(isViewControllerVisible)
-        }
-    }
+    private let keywordTrigger = BehaviorSubject<String>(value: "")
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
@@ -52,22 +44,13 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
         return IndicatorInfo(title: Strings.track)
     }
     
-    func setkeyword(keyword: String) {
-        keywordTrigger.accept(keyword)
+    func search(keyword: String) {
+        keywordTrigger.onNext(keyword)
     }
     
-    func bindViewModel() {
-        let input = TrackResultViewModel.Input(searchTrack: searchTrackTrigger)
+    private func bindViewModel() {
+        let input = TrackResultViewModel.Input(searchTrack: keywordTrigger)
         let output = viewModel.transform(input: input)
-        
-        Observable.combineLatest(isViewControllerVisibleTrigger, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
-            guard let self = self else {
-                return
-            }
-            if isViewControllerVisible {
-                self.searchTrackTrigger.onNext(keyword)
-            }
-        }).disposed(by: disposeBag)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
         

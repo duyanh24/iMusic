@@ -21,15 +21,7 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
     
     var viewModel: PlaylistResultViewModel!
     private let disposeBag = DisposeBag()
-    private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisibleTrigger = BehaviorRelay<Bool>(value: false)
-    private let searchPlaylistTrigger = PublishSubject<String>()
-    
-    var isViewControllerVisible: Bool = false {
-        didSet {
-            isViewControllerVisibleTrigger.accept(isViewControllerVisible)
-        }
-    }
+    private let keywordTrigger = BehaviorSubject<String>(value: "")
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<PlaylistSectionModel>(
         configureCell: { _, tableView, indexPath, playlist in
@@ -55,22 +47,13 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
         return IndicatorInfo(title: Strings.playlist)
     }
     
-    func setkeyword(keyword: String) {
-        keywordTrigger.accept(keyword)
+    func search(keyword: String) {
+        keywordTrigger.onNext(keyword)
     }
     
-    func bindViewModel() {
-        let input = PlaylistResultViewModel.Input(searchPlaylist: searchPlaylistTrigger)
+    private func bindViewModel() {
+        let input = PlaylistResultViewModel.Input(searchPlaylist: keywordTrigger)
         let output = viewModel.transform(input: input)
-        
-        Observable.combineLatest(isViewControllerVisibleTrigger, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
-            guard let self = self else {
-                return
-            }
-            if isViewControllerVisible {
-                self.searchPlaylistTrigger.onNext(keyword)
-            }
-        }).disposed(by: disposeBag)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
         

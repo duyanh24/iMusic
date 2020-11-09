@@ -21,15 +21,7 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
     
     var viewModel: UserResultViewModel!
     private let disposeBag = DisposeBag()
-    private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisibleTrigger = BehaviorRelay<Bool>(value: false)
-    private let searchUserTrigger = PublishSubject<String>()
-    
-    var isViewControllerVisible: Bool = false {
-        didSet {
-            isViewControllerVisibleTrigger.accept(isViewControllerVisible)
-        }
-    }
+    private let keywordTrigger = BehaviorSubject<String>(value: "")
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>(
         configureCell: { _, tableView, indexPath, user in
@@ -54,22 +46,13 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
         return IndicatorInfo(title: Strings.artist)
     }
     
-    func setkeyword(keyword: String) {
-        self.keywordTrigger.accept(keyword)
+    func search(keyword: String) {
+        self.keywordTrigger.onNext(keyword)
     }
     
-    func bindViewModel() {
-        let input = UserResultViewModel.Input(searchUser: searchUserTrigger)
+    private func bindViewModel() {
+        let input = UserResultViewModel.Input(searchUser: keywordTrigger)
         let output = viewModel.transform(input: input)
-        
-        Observable.combineLatest(isViewControllerVisibleTrigger, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
-            guard let self = self else {
-                return
-            }
-            if isViewControllerVisible {
-                self.searchUserTrigger.onNext(keyword)
-            }
-        }).disposed(by: disposeBag)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
         
@@ -113,4 +96,3 @@ extension UserResultViewController: UITableViewDelegate {
         return nil
     }
 }
-

@@ -21,6 +21,9 @@ class TrackResultViewModel: ServicesViewModel {
             guard let self = self else {
                 return .empty()
             }
+            if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
+                return .empty()
+            }
             return self.searchTrack(keyword: keyword)
         }.map { searchRespone -> [TrackSectionModel] in
             return [TrackSectionModel(model: "", items: searchRespone.tracks ?? [])]

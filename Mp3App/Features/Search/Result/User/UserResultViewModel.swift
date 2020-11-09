@@ -21,6 +21,9 @@ class UserResultViewModel: ServicesViewModel {
             guard let self = self else {
                 return .empty()
             }
+            if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
+                return .empty()
+            }
             return self.searchUsers(keyword: keyword)
         }.map { searchUserRespone -> [UserSectionModel] in
             return [UserSectionModel(model: "", items: searchUserRespone.users ?? [])]
