@@ -86,7 +86,6 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
             .disposed(by: disposeBag)
         
         tableView.rx.modelSelected(Playlist.self).subscribe(onNext: { playlist in
-            print(playlist)
             let tracks = playlist.tracks?.filter({ track -> Bool in
                 guard let streamable = track.streamable else {
                     return false

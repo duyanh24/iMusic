@@ -117,28 +117,28 @@ extension AllResultViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = ResultCellHeaderView()
+        let resultCellHeaderView = ResultCellHeaderView()
         switch dataSource[section] {
         case .track:
-            view.setTitle(title: Strings.track)
+            resultCellHeaderView.setTitle(title: Strings.track)
         case .playlist:
-            view.setTitle(title: Strings.playlist)
+            resultCellHeaderView.setTitle(title: Strings.playlist)
         case .user:
-            view.setTitle(title: Strings.artist)
+            resultCellHeaderView.setTitle(title: Strings.artist)
         }
-        return view
+        return resultCellHeaderView
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = ResultCellFooterView()
+        let resultCellFooterView = ResultCellFooterView()
         switch dataSource[section] {
         case .track:
-            view.setSection(currentSection: 1)
+            resultCellFooterView.setSection(currentSection: 1)
         case .user:
-            view.setSection(currentSection: 2)
+            resultCellFooterView.setSection(currentSection: 2)
         case .playlist:
-            view.setSection(currentSection: 3)
+            resultCellFooterView.setSection(currentSection: 3)
         }
-        return view
+        return resultCellFooterView
     }
 }

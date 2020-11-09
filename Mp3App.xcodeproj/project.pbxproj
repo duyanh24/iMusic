@@ -152,6 +152,10 @@
 		089E610025382A0E00B993C7 /* CreatePlaylistViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */; };
 		089E610225382C3700B993C7 /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */; };
 		08ACE0D22540275F00E48571 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ACE0D12540275F00E48571 /* CustomSlider.swift */; };
+		08C20AF32558D7B2007691E6 /* SearchHistoryDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C20AF22558D7B2007691E6 /* SearchHistoryDefault.swift */; };
+		08C20AF92558DD5F007691E6 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C20AF72558DD5F007691E6 /* SearchHistoryCell.swift */; };
+		08C20AFA2558DD5F007691E6 /* SearchHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C20AF82558DD5F007691E6 /* SearchHistoryCell.xib */; };
+		08C20AFC2558E32F007691E6 /* SearchHistoryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C20AFB2558E32F007691E6 /* SearchHistoryHeaderCell.swift */; };
 		08C7C75A254C129D00AC7A34 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7C759254C129D00AC7A34 /* SearchService.swift */; };
 		08C7C75C254C137500AC7A34 /* SearchTrackRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7C75B254C137500AC7A34 /* SearchTrackRespone.swift */; };
 		08D6EE2F2541769A00D7006F /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6EE2E2541769A00D7006F /* PlayerViewModel.swift */; };
@@ -355,6 +359,10 @@
 		089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePlaylistViewController.storyboard; sourceTree = "<group>"; };
 		089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		08ACE0D12540275F00E48571 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		08C20AF22558D7B2007691E6 /* SearchHistoryDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDefault.swift; sourceTree = "<group>"; };
+		08C20AF72558DD5F007691E6 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
+		08C20AF82558DD5F007691E6 /* SearchHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHistoryCell.xib; sourceTree = "<group>"; };
+		08C20AFB2558E32F007691E6 /* SearchHistoryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryHeaderCell.swift; sourceTree = "<group>"; };
 		08C7C759254C129D00AC7A34 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		08C7C75B254C137500AC7A34 /* SearchTrackRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTrackRespone.swift; sourceTree = "<group>"; };
 		08D6EE2E2541769A00D7006F /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
@@ -448,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				080FCA0A253411B200523A2C /* AccountDefault.swift */,
+				08C20AF22558D7B2007691E6 /* SearchHistoryDefault.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -500,7 +509,7 @@
 				0824D110255136CE00F16F94 /* Playlist */,
 				0824D10F255136C400F16F94 /* User */,
 				0824D10E255136B900F16F94 /* Track */,
-				0824D10C2551366D00F16F94 /* ResultViewController.swift */,
+				08C20AF42558DD0D007691E6 /* SearchHistory */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -690,6 +699,7 @@
 				08504F372523346D0033DED0 /* SearchViewController.swift */,
 				08504F392523346D0033DED0 /* SearchViewModel.swift */,
 				08504F382523346D0033DED0 /* SearchViewController.storyboard */,
+				0824D10C2551366D00F16F94 /* ResultViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1120,6 +1130,16 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		08C20AF42558DD0D007691E6 /* SearchHistory */ = {
+			isa = PBXGroup;
+			children = (
+				08C20AF72558DD5F007691E6 /* SearchHistoryCell.swift */,
+				08C20AF82558DD5F007691E6 /* SearchHistoryCell.xib */,
+				08C20AFB2558E32F007691E6 /* SearchHistoryHeaderCell.swift */,
+			);
+			path = SearchHistory;
+			sourceTree = "<group>";
+		};
 		08D7AD78254164B9007D77C3 /* TrackInfor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1296,6 +1316,7 @@
 				08504FAD2523346E0033DED0 /* SearchViewController.storyboard in Resources */,
 				08504FBE2523346F0033DED0 /* PopularMoviesSample.json in Resources */,
 				082E288C252F1F62008EE1EA /* GoogleService-Info.plist in Resources */,
+				08C20AFA2558DD5F007691E6 /* SearchHistoryCell.xib in Resources */,
 				08143BE8252C5A3400BF3993 /* ChartTableViewCell.xib in Resources */,
 				1837FCE525375F0A009A80A3 /* PlaylistDetailViewController.storyboard in Resources */,
 				0824D11D2551438E00F16F94 /* AllResultViewController.storyboard in Resources */,
@@ -1453,6 +1474,7 @@
 				08504FAE2523346E0033DED0 /* SearchViewModel.swift in Sources */,
 				08504FC12523346F0033DED0 /* HTTPStatusCodes.swift in Sources */,
 				08504FB12523346E0033DED0 /* MypageViewModel.swift in Sources */,
+				08C20AFC2558E32F007691E6 /* SearchHistoryHeaderCell.swift in Sources */,
 				08504FE82523346F0033DED0 /* Constants.swift in Sources */,
 				08505008252336C90033DED0 /* LoginViewController.swift in Sources */,
 				0824D12925515AF500F16F94 /* CustomTextField.swift in Sources */,
@@ -1517,6 +1539,7 @@
 				1891F81E2554094800B625DE /* PlaylistResultCellViewModel.swift in Sources */,
 				080FCA082534041D00523A2C /* ProgressHUD+Rx.swift in Sources */,
 				1891F8132554057A00B625DE /* SearchUserRespone.swift in Sources */,
+				08C20AF92558DD5F007691E6 /* SearchHistoryCell.swift in Sources */,
 				1845F90D252C7B0E000D0FDC /* AlbumCollectionViewCellViewModel.swift in Sources */,
 				1837FCDE253754D7009A80A3 /* PlaylistTableViewCellViewModel.swift in Sources */,
 				08504FA42523346E0033DED0 /* HomeViewModel.swift in Sources */,
@@ -1532,6 +1555,7 @@
 				18E9F19C2537950C0049A45B /* PlaylistCellFooterView.swift in Sources */,
 				18DE7425253C3CC40081FA40 /* LibraryDetailTableViewCell.swift in Sources */,
 				08832BBB25416BFB00E56718 /* TrackInformationViewModel.swift in Sources */,
+				08C20AF32558D7B2007691E6 /* SearchHistoryDefault.swift in Sources */,
 				08505006252336BC0033DED0 /* LoginViewModel.swift in Sources */,
 				0824D114255136F100F16F94 /* UserResultViewController.swift in Sources */,
 				085D96382535984800A9F494 /* MypageDataSource.swift in Sources */,

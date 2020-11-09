@@ -29,4 +29,11 @@ struct SearchService {
     func searchAll(keyword: String) -> Observable<SearchDataRespone> {
         return HostAPIClient.performApiNetworkCall(router: .searchAll(keyword: keyword), type: SearchDataRespone.self)
     }
+    
+    func saveSearchHistory(keyword: String) {
+        let oldHistory = SearchHistoryDefault.shared.retrieveData(key: .searchHistory)
+        var newHistory = oldHistory.filter { $0 != keyword }
+        newHistory.insert(keyword, at: 0)
+        SearchHistoryDefault.shared.saveData(data: newHistory, key: .searchHistory)
+    }
 }

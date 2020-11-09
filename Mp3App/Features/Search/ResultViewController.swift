@@ -74,10 +74,10 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.ChangeTabSearch), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveViewController(_:)), name: Notification.Name(Strings.changeTabSearch), object: nil)
     }
     
-    @objc func showPlayer(_ notification: Notification) {
+    @objc func moveViewController(_ notification: Notification) {
         guard let index = notification.userInfo?[Strings.index] as? Int else { return }
         moveToViewController(at: index)
     }
