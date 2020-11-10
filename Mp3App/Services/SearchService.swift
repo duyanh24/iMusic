@@ -14,16 +14,16 @@ protocol HasSearchService {
 }
 
 struct SearchService {
-    func searchTracks(keyword: String) -> Observable<SearchTrackRespone> {
-        return HostAPIClient.performApiNetworkCall(router: .searchTracks(keyword: keyword), type: SearchTrackRespone.self)
+    func searchTracks(keyword: String, offset: Int, limit: Int = 15) -> Observable<SearchTrackRespone> {
+        return HostAPIClient.performApiNetworkCall(router: .searchTracks(keyword: keyword, offset: offset, litmit: limit), type: SearchTrackRespone.self)
     }
     
-    func searchUsers(keyword: String) -> Observable<SearchUserRespone> {
-        return HostAPIClient.performApiNetworkCall(router: .searchUsers(keyword: keyword), type: SearchUserRespone.self)
+    func searchUsers(keyword: String, offset: Int, limit: Int = 15) -> Observable<SearchUserRespone> {
+        return HostAPIClient.performApiNetworkCall(router: .searchUsers(keyword: keyword, offset: offset, litmit: limit), type: SearchUserRespone.self)
     }
     
-    func searchPlaylists(keyword: String) -> Observable<SearchPlaylistRespone> {
-        return HostAPIClient.performApiNetworkCall(router: .searchPlaylists(keyword: keyword), type: SearchPlaylistRespone.self)
+    func searchPlaylists(keyword: String, offset: Int, limit: Int = 15) -> Observable<SearchPlaylistRespone> {
+        return HostAPIClient.performApiNetworkCall(router: .searchPlaylists(keyword: keyword, offset: offset, litmit: limit), type: SearchPlaylistRespone.self)
     }
     
     func searchAll(keyword: String) -> Observable<SearchDataRespone> {

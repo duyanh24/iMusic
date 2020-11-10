@@ -24,8 +24,8 @@ class AllResultViewModel: ServicesViewModel {
             if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
                 return .empty()
             }
-            return self.searchAll(keyword: keyword)
-        }.map { $0.toDataSource() }.trackActivity(activityIndicator)
+            return self.searchAll(keyword: keyword).trackActivity(activityIndicator)
+        }.map { $0.toDataSource() }
         
         return Output(dataSource: dataSource, activityIndicator: activityIndicator.asObservable())
     }

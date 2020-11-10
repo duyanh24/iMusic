@@ -65,6 +65,8 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         let input = AllResultViewModel.Input(searchAll: keywordTrigger)
         let output = viewModel.transform(input: input)
         
+        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        
         output.dataSource
             .do(onNext: { [weak self] data in
                 guard let isEmpty = data.first?.items.isEmpty else {

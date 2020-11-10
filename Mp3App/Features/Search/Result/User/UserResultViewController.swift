@@ -22,6 +22,9 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
     var viewModel: UserResultViewModel!
     private let disposeBag = DisposeBag()
     private let keywordTrigger = BehaviorSubject<String>(value: "")
+    private let loadMoreTrigger = PublishSubject<Void>()
+    private var isLoadMoreEnabled = true
+    private let startLoadingOffset = CGFloat(20.0)
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>(
         configureCell: { _, tableView, indexPath, user in
@@ -51,12 +54,19 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
     }
     
     private func bindViewModel() {
-        let input = UserResultViewModel.Input(searchUser: keywordTrigger)
+        let input = UserResultViewModel.Input(searchUser: keywordTrigger, loadMore: loadMoreTrigger)
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.loadData.subscribe().disposed(by: disposeBag)
+        output.loadMoreData.subscribe().disposed(by: disposeBag)
         
-        output.dataSource
+        output.isLoadMoreEnabled.subscribe(onNext: { [weak self] isLoadMoreEnabled in
+            self?.isLoadMoreEnabled = isLoadMoreEnabled
+        })
+        .disposed(by: disposeBag)
+        
+        output.dataSource.skip(1)
             .do(onNext: { [weak self] data in
                 guard let isEmpty = data.first?.items.isEmpty else {
                     self?.notificationLabel.isHidden = false
@@ -66,6 +76,16 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        tableView.rx.contentOffset.subscribe(onNext: { [weak self] contentOffset in
+            self?.loadMore(contentOffset: contentOffset)
+        }).disposed(by: disposeBag)
+    }
+    
+    private func loadMore(contentOffset: CGPoint) {
+        if contentOffset.y + tableView.frame.size.height + startLoadingOffset > tableView.contentSize.height && isLoadMoreEnabled {
+            loadMoreTrigger.onNext(())
+        }
     }
     
     private func setupTableView() {
