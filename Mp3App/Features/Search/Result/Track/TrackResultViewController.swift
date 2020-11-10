@@ -13,7 +13,7 @@ import Reusable
 import RxDataSources
 import XLPagerTabStrip
 
-class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
+class TrackResultViewController: BaseResultViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var notificationLabel: UILabel!
     
@@ -47,7 +47,7 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
         return IndicatorInfo(title: Strings.track)
     }
     
-    func search(keyword: String) {
+    override func search(keyword: String) {
         keywordTrigger.onNext(keyword)
     }
     

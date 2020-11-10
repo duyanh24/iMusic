@@ -16,13 +16,15 @@ class HomeViewModel: ServicesViewModel {
     var collectionViewContentOffsetDictionary: [HomeSectionType: CGPoint] = [:]
     
     func transform(input: Input) -> Output {
+        let activityIndicator = ActivityIndicator()
+        
         let homeDataModel = input.loadDataTrigger.flatMapLatest { [weak self] _ -> Observable<HomeScreenDataModel> in
             guard let self = self else {
                 return .empty()
             }
-            return self.getAllHomeData()
+            return self.getAllHomeData().trackActivity(activityIndicator)
         }.map({ $0.toDataSource()})
-        return Output(homeDataModel: homeDataModel)
+        return Output(homeDataModel: homeDataModel, activityIndicator: activityIndicator.asObservable())
     }
 }
 
@@ -33,6 +35,7 @@ extension HomeViewModel {
     
     struct Output {
         var homeDataModel: Observable<[HomeSectionModel]>
+        var activityIndicator: Observable<Bool>
     }
 }
 

@@ -127,6 +127,7 @@
 		085D96442535ABD800A9F494 /* PlaylistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D96422535ABD800A9F494 /* PlaylistTableViewCell.xib */; };
 		087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */; };
 		087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */; };
+		087D47F0255A8B7000C86C28 /* BaseResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D47EF255A8B7000C86C28 /* BaseResultViewController.swift */; };
 		08825F9D25554C080068E865 /* TracksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08825F9C25554C080068E865 /* TracksViewController.swift */; };
 		08825F9F25554C160068E865 /* TracksViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08825F9E25554C160068E865 /* TracksViewController.storyboard */; };
 		08825FA125554C250068E865 /* TracksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08825FA025554C250068E865 /* TracksViewModel.swift */; };
@@ -334,6 +335,7 @@
 		087B7E79252AF5D000E85951 /* FSPagerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSPagerView.framework; path = Carthage/Build/iOS/FSPagerView.framework; sourceTree = "<group>"; };
 		087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCollectionViewCell.swift; sourceTree = "<group>"; };
 		087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideCollectionViewCell.xib; sourceTree = "<group>"; };
+		087D47EF255A8B7000C86C28 /* BaseResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResultViewController.swift; sourceTree = "<group>"; };
 		08825F9C25554C080068E865 /* TracksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksViewController.swift; sourceTree = "<group>"; };
 		08825F9E25554C160068E865 /* TracksViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TracksViewController.storyboard; sourceTree = "<group>"; };
 		08825FA025554C250068E865 /* TracksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksViewModel.swift; sourceTree = "<group>"; };
@@ -751,6 +753,7 @@
 			children = (
 				08504F442523346D0033DED0 /* BaseViewController.swift */,
 				08504F452523346D0033DED0 /* BaseTableViewController.swift */,
+				087D47EF255A8B7000C86C28 /* BaseResultViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1463,6 +1466,7 @@
 				08504FFE252335B60033DED0 /* SettingViewController.swift in Sources */,
 				18E9F194253774680049A45B /* PlaylistDetailTableViewCell.swift in Sources */,
 				08504FFC252335A10033DED0 /* SettingViewModel.swift in Sources */,
+				087D47F0255A8B7000C86C28 /* BaseResultViewController.swift in Sources */,
 				08504FAA2523346E0033DED0 /* RootTabbarController.swift in Sources */,
 				083880952525DE0600987813 /* Observable+Extension.swift in Sources */,
 				087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */,

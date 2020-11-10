@@ -15,7 +15,7 @@ import XLPagerTabStrip
 
 typealias PlaylistSectionModel = SectionModel<String, Playlist>
 
-class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
+class PlaylistResultViewController: BaseResultViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var notificationLabel: UILabel!
     
@@ -50,7 +50,7 @@ class PlaylistResultViewController: BaseViewController, StoryboardBased, ViewMod
         return IndicatorInfo(title: Strings.playlist)
     }
     
-    func search(keyword: String) {
+    override func search(keyword: String) {
         keywordTrigger.onNext(keyword)
     }
     

@@ -15,7 +15,7 @@ import XLPagerTabStrip
 
 typealias UserSectionModel = SectionModel<String, User>
 
-class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
+class UserResultViewController: BaseResultViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var notificationLabel: UILabel!
     
@@ -49,7 +49,7 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
         return IndicatorInfo(title: Strings.artist)
     }
     
-    func search(keyword: String) {
+    override func search(keyword: String) {
         self.keywordTrigger.onNext(keyword)
     }
     

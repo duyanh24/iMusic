@@ -16,6 +16,7 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     private var trackResultViewController = TrackResultViewController.instantiate()
     private var userResultViewController = UserResultViewController.instantiate()
     private var playlistResultViewController = PlaylistResultViewController.instantiate()
+    private var listViewControllers = [BaseResultViewController]()
     private var keyword = ""
 
     override func viewDidLoad() {
@@ -47,6 +48,8 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         
         let allResultViewModel = AllResultViewModel()
         allResultViewController = AllResultViewController.instantiate(withViewModel: allResultViewModel, andServices: searchServices)
+        
+        listViewControllers = [allResultViewController, trackResultViewController, userResultViewController, playlistResultViewController]
     }
     
     func setKeyword(keyword: String) {
@@ -55,18 +58,7 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     }
     
     private func search(keyword: String, index: Int) {
-        switch index {
-        case 0:
-            allResultViewController.search(keyword: keyword)
-        case 1:
-            trackResultViewController.search(keyword: keyword)
-        case 2:
-            userResultViewController.search(keyword: keyword)
-        case 3:
-            playlistResultViewController.search(keyword: keyword)
-        default:
-            break
-        }
+        listViewControllers[index].search(keyword: keyword)
     }
     
     private func setupNotificationCenter() {
@@ -81,7 +73,7 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         setupViewController()
-        return [allResultViewController, trackResultViewController, userResultViewController, playlistResultViewController]
+        return listViewControllers
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
