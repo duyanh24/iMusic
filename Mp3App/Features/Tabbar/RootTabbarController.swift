@@ -10,6 +10,7 @@ import UIKit
 import Reusable
 import RxSwift
 import RxCocoa
+import MaterialComponents.MaterialBottomSheet
 
 class RootTabbarController: UITabBarController, StoryboardBased {
     private var tabbarY: CGFloat!
@@ -78,6 +79,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.playerNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showTrackOption(_:)), name: Notification.Name(Strings.ShowTrackOption), object: nil)
     }
     
     @objc func showPlayer(_ notification: Notification) {
@@ -89,6 +91,14 @@ class RootTabbarController: UITabBarController, StoryboardBased {
         })
         guard let tracks = notification.userInfo?[Strings.tracks] as? [Track] else { return }
         playerView.setTracks(tracks: tracks)
+    }
+    
+    @objc func showTrackOption(_ notification: Notification) {
+        guard let track = notification.userInfo?[Strings.tracks] as? Track else { return }
+        let trackBottomSheetViewModel = TrackBottomSheetViewModel(track: track)
+        let trackBottomSheetViewController = TrackBottomSheetViewController.instantiate(withViewModel: trackBottomSheetViewModel)
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: trackBottomSheetViewController)
+        present(bottomSheet, animated: true, completion: nil)
     }
     
     private func setupPanGesture() {

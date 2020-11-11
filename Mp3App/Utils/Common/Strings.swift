@@ -58,7 +58,7 @@ struct Strings {
     static let index = "index"
     static let changeTabSearch = "ChangeTabSearch"
     static let deleteSearchHistory = "deleteSearchHistory"
-    
+    static let ShowTrackOption = "ShowTrackOption"
     
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"
