@@ -106,8 +106,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k7G-SK-koR">
                                                 <rect key="frame" x="0.0" y="130" width="414" height="50"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Opr-ky-08s">
-                                                        <rect key="frame" x="20" y="14" width="25" height="22.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_like_grey_16_16_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="Opr-ky-08s">
+                                                        <rect key="frame" x="20" y="12.5" width="25" height="25"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="ZNV-Vj-1oT"/>
@@ -202,6 +202,8 @@
                         <outlet property="addToFavouriteButton" destination="b8I-NE-kPf" id="23L-AM-1g2"/>
                         <outlet property="addToPlaylistButton" destination="Th1-pY-4oF" id="6NJ-bp-WQ9"/>
                         <outlet property="containerView" destination="Jrr-Lv-Ndz" id="Ip7-35-0Ya"/>
+                        <outlet property="favouriteImageView" destination="Opr-ky-08s" id="tpx-b2-1mD"/>
+                        <outlet property="favouriteLabel" destination="MsS-OM-FKS" id="gAH-Hq-CqA"/>
                         <outlet property="playButton" destination="fd7-Ll-ijQ" id="MIT-zA-hIf"/>
                         <outlet property="singerLabel" destination="UkJ-af-nsO" id="2d0-iX-vq0"/>
                         <outlet property="titleLabel" destination="mxy-qc-m9r" id="NLo-je-UHZ"/>
@@ -214,8 +216,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="ic_add_to_playlist_black_18_Normal" width="18" height="18"/>
+        <image name="ic_like_grey_16_16_Normal" width="16" height="16"/>
         <image name="play" catalog="system" width="120" height="128"/>
     </resources>
 </document>

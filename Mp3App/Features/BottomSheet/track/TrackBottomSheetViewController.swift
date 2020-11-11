@@ -19,6 +19,8 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var addToFavouriteButton: UIButton!
     @IBOutlet weak var addToPlaylistButton: UIButton!
+    @IBOutlet weak var favouriteLabel: UILabel!
+    @IBOutlet weak var favouriteImageView: UIImageView!
     
     var viewModel: TrackBottomSheetViewModel!
     private let disposeBag = DisposeBag()
@@ -35,7 +37,7 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
     }
     
     private func bindViewModel() {
-        let input = TrackBottomSheetViewModel.Input()
+        let input = TrackBottomSheetViewModel.Input(addTrackToFavouriteButton: addToFavouriteButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         
         output.track
@@ -48,5 +50,26 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
             self?.trackImageView.setImage(stringURL: url)
         })
         .disposed(by: disposeBag)
+        
+        output.addTrackToFavouriteResult.subscribe(onNext: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                self.showErrorAlert(message: error.localizedDescription, completion: nil)
+            case .success:
+                self.dismiss(animated: true, completion: nil)
+            }
+        }).disposed(by: disposeBag)
+        
+        output.isTrackAlreadyExistsInFavorites.subscribe(onNext: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let value):
+                value ? (self.favouriteLabel.text = "Xoá khỏi danh sách yêu thích") : (self.favouriteLabel.text = "Thêm vào danh sách yêu thích")
+                value ? (self.favouriteImageView.image = Asset.feedLikeSelectedIcoNormal.image) : (self.favouriteImageView.image = Asset.icLikeGrey1616Normal.image)
+            }
+        }).disposed(by: disposeBag)
     }
 }

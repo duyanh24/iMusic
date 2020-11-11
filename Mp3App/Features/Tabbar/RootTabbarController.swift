@@ -96,7 +96,8 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     @objc func showTrackOption(_ notification: Notification) {
         guard let track = notification.userInfo?[Strings.tracks] as? Track else { return }
         let trackBottomSheetViewModel = TrackBottomSheetViewModel(track: track)
-        let trackBottomSheetViewController = TrackBottomSheetViewController.instantiate(withViewModel: trackBottomSheetViewModel)
+        let services = MypageServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())
+        let trackBottomSheetViewController = TrackBottomSheetViewController.instantiate(withViewModel: trackBottomSheetViewModel, andServices: services)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: trackBottomSheetViewController)
         present(bottomSheet, animated: true, completion: nil)
     }
