@@ -17,15 +17,15 @@ class AllResultViewModel: ServicesViewModel {
     func transform(input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         
-        let dataSource = input.searchAll.skip(1).distinctUntilChanged().flatMapLatest { [weak self] keyword -> Observable<SearchDataModel> in
+        let dataSource = input.searchAll.distinctUntilChanged().flatMapLatest { [weak self] keyword -> Observable<SearchDataModel> in
             guard let self = self else {
                 return .empty()
             }
             if keyword.replacingOccurrences(of: " ", with: "").isEmpty {
                 return .empty()
             }
-            return self.searchAll(keyword: keyword)
-        }.map { $0.toDataSource() }.trackActivity(activityIndicator)
+            return self.searchAll(keyword: keyword).trackActivity(activityIndicator)
+        }.map { $0.toDataSource() }
         
         return Output(dataSource: dataSource, activityIndicator: activityIndicator.asObservable())
     }

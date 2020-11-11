@@ -81,6 +81,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         output.homeDataModel
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
     }
     
     private func setupTableView() {

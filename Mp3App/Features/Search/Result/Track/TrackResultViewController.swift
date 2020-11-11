@@ -13,15 +13,16 @@ import Reusable
 import RxDataSources
 import XLPagerTabStrip
 
-class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
+class TrackResultViewController: BaseResultViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var notificationLabel: UILabel!
     
     var viewModel: TrackResultViewModel!
     private let disposeBag = DisposeBag()
-    private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisible = BehaviorRelay<Bool>(value: false)
-    private let searchTrackTrigger = PublishSubject<String>()
+    private let keywordTrigger = BehaviorSubject<String>(value: "")
+    private let loadMoreTrigger = PublishSubject<Void>()
+    private var isLoadMoreEnabled = true
+    private let startLoadingOffset = CGFloat(20.0)
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
@@ -36,15 +37,6 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
         bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        isViewControllerVisible.accept(true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        isViewControllerVisible.accept(false)
-    }
-    
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
@@ -55,35 +47,43 @@ class TrackResultViewController: BaseViewController, StoryboardBased, ViewModelB
         return IndicatorInfo(title: Strings.track)
     }
     
-    func setkeyword(keyword: String) {
-        keywordTrigger.accept(keyword)
+    override func search(keyword: String) {
+        keywordTrigger.onNext(keyword)
     }
     
-    func bindViewModel() {
-        let input = TrackResultViewModel.Input(searchTrack: searchTrackTrigger)
+    private func bindViewModel() {
+        let input = TrackResultViewModel.Input(searchTrack: keywordTrigger, loadMore: loadMoreTrigger)
         let output = viewModel.transform(input: input)
         
-        Observable.combineLatest(isViewControllerVisible, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
-            guard let self = self else {
-                return
-            }
-            if isViewControllerVisible {
-                self.searchTrackTrigger.onNext(keyword)
-            }
-        }).disposed(by: disposeBag)
-        
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.loadData.subscribe().disposed(by: disposeBag)
+        output.loadMoreData.subscribe().disposed(by: disposeBag)
+        output.isLoadMoreEnabled.subscribe(onNext: { [weak self] isLoadMoreEnabled in
+            self?.isLoadMoreEnabled = isLoadMoreEnabled
+        })
+        .disposed(by: disposeBag)
         
-        output.dataSource
+        output.dataSource.skip(1)
             .do(onNext: { [weak self] data in
                 guard let isEmpty = data.first?.items.isEmpty else {
                     self?.notificationLabel.isHidden = false
                     return
                 }
+                self?.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
                 self?.notificationLabel.isHidden = !isEmpty
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        tableView.rx.contentOffset.subscribe(onNext: { [weak self] contentOffset in
+            self?.loadMore(contentOffset: contentOffset)
+        }).disposed(by: disposeBag)
+    }
+    
+    private func loadMore(contentOffset: CGPoint) {
+        if contentOffset.y + tableView.frame.size.height + startLoadingOffset > tableView.contentSize.height && isLoadMoreEnabled {
+            loadMoreTrigger.onNext(())
+        }
     }
     
     private func setupTableView() {

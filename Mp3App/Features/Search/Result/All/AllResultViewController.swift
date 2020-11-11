@@ -13,15 +13,13 @@ import XLPagerTabStrip
 import Reusable
 import RxDataSources
 
-class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
+class AllResultViewController: BaseResultViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var notificationLabel: UILabel!
     
     var viewModel: AllResultViewModel!
     private let disposeBag = DisposeBag()
-    private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisible = BehaviorRelay<Bool>(value: false)
-    private let searchAllTrigger = PublishSubject<String>()
+    private let keywordTrigger = BehaviorSubject<String>(value: "")
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
@@ -49,15 +47,6 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        isViewControllerVisible.accept(true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        isViewControllerVisible.accept(false)
-    }
-    
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
@@ -68,22 +57,15 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
         return IndicatorInfo(title: Strings.all)
     }
     
-    func setKeyword(keyword: String) {
-        keywordTrigger.accept(keyword)
+    override func search(keyword: String) {
+        keywordTrigger.onNext(keyword)
     }
     
-    func bindViewModel() {
-        let input = AllResultViewModel.Input(searchAll: searchAllTrigger)
+    private func bindViewModel() {
+        let input = AllResultViewModel.Input(searchAll: keywordTrigger)
         let output = viewModel.transform(input: input)
         
-        Observable.combineLatest(isViewControllerVisible, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
-            guard let self = self else {
-                return
-            }
-            if isViewControllerVisible {
-                self.searchAllTrigger.onNext(keyword)
-            }
-        }).disposed(by: disposeBag)
+        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
         
         output.dataSource
             .do(onNext: { [weak self] data in
@@ -96,6 +78,7 @@ class AllResultViewController: BaseViewController, StoryboardBased, ViewModelBas
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
+    
     private func setupTableView() {
         tableView.delegate = self
         tableView.register(cellType: UserResultCell.self)
@@ -119,28 +102,28 @@ extension AllResultViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = ResultCellHeaderView()
+        let resultCellHeaderView = ResultCellHeaderView()
         switch dataSource[section] {
         case .track:
-            view.setTitle(title: Strings.track)
+            resultCellHeaderView.setTitle(title: Strings.track)
         case .playlist:
-            view.setTitle(title: Strings.playlist)
+            resultCellHeaderView.setTitle(title: Strings.playlist)
         case .user:
-            view.setTitle(title: Strings.artist)
+            resultCellHeaderView.setTitle(title: Strings.artist)
         }
-        return view
+        return resultCellHeaderView
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = ResultCellFooterView()
+        let resultCellFooterView = ResultCellFooterView()
         switch dataSource[section] {
         case .track:
-            view.setSection(currentSection: 1)
+            resultCellFooterView.setSection(currentSection: 1)
         case .user:
-            view.setSection(currentSection: 2)
+            resultCellFooterView.setSection(currentSection: 2)
         case .playlist:
-            view.setSection(currentSection: 3)
+            resultCellFooterView.setSection(currentSection: 3)
         }
-        return view
+        return resultCellFooterView
     }
 }

@@ -52,6 +52,6 @@ class ResultCellFooterView: UIView {
     }
     
     @objc func handleTapFooter(gestureRecognizer: UIGestureRecognizer) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.ChangeTabSearch), object: nil, userInfo: [Strings.index: currentSection])
+        NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.changeTabSearch), object: nil, userInfo: [Strings.index: currentSection])
     }
 }

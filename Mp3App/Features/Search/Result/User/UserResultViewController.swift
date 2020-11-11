@@ -15,15 +15,16 @@ import XLPagerTabStrip
 
 typealias UserSectionModel = SectionModel<String, User>
 
-class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
+class UserResultViewController: BaseResultViewController, StoryboardBased, ViewModelBased, IndicatorInfoProvider {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var notificationLabel: UILabel!
     
     var viewModel: UserResultViewModel!
     private let disposeBag = DisposeBag()
-    private let keywordTrigger = BehaviorRelay<String>(value: "")
-    private let isViewControllerVisible = BehaviorRelay<Bool>(value: false)
-    private let searchUserTrigger = PublishSubject<String>()
+    private let keywordTrigger = BehaviorSubject<String>(value: "")
+    private let loadMoreTrigger = PublishSubject<Void>()
+    private var isLoadMoreEnabled = true
+    private let startLoadingOffset = CGFloat(20.0)
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>(
         configureCell: { _, tableView, indexPath, user in
@@ -38,15 +39,6 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
         bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        isViewControllerVisible.accept(true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        isViewControllerVisible.accept(false)
-    }
-    
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
@@ -57,26 +49,24 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
         return IndicatorInfo(title: Strings.artist)
     }
     
-    func setkeyword(keyword: String) {
-        self.keywordTrigger.accept(keyword)
+    override func search(keyword: String) {
+        self.keywordTrigger.onNext(keyword)
     }
     
-    func bindViewModel() {
-        let input = UserResultViewModel.Input(searchUser: searchUserTrigger)
+    private func bindViewModel() {
+        let input = UserResultViewModel.Input(searchUser: keywordTrigger, loadMore: loadMoreTrigger)
         let output = viewModel.transform(input: input)
         
-        Observable.combineLatest(isViewControllerVisible, keywordTrigger).subscribe(onNext: { [weak self] isViewControllerVisible, keyword  in
-            guard let self = self else {
-                return
-            }
-            if isViewControllerVisible {
-                self.searchUserTrigger.onNext(keyword)
-            }
-        }).disposed(by: disposeBag)
-        
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.loadData.subscribe().disposed(by: disposeBag)
+        output.loadMoreData.subscribe().disposed(by: disposeBag)
         
-        output.dataSource
+        output.isLoadMoreEnabled.subscribe(onNext: { [weak self] isLoadMoreEnabled in
+            self?.isLoadMoreEnabled = isLoadMoreEnabled
+        })
+        .disposed(by: disposeBag)
+        
+        output.dataSource.skip(1)
             .do(onNext: { [weak self] data in
                 guard let isEmpty = data.first?.items.isEmpty else {
                     self?.notificationLabel.isHidden = false
@@ -86,6 +76,16 @@ class UserResultViewController: BaseViewController, StoryboardBased, ViewModelBa
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        tableView.rx.contentOffset.subscribe(onNext: { [weak self] contentOffset in
+            self?.loadMore(contentOffset: contentOffset)
+        }).disposed(by: disposeBag)
+    }
+    
+    private func loadMore(contentOffset: CGPoint) {
+        if contentOffset.y + tableView.frame.size.height + startLoadingOffset > tableView.contentSize.height && isLoadMoreEnabled {
+            loadMoreTrigger.onNext(())
+        }
     }
     
     private func setupTableView() {
@@ -116,4 +116,3 @@ extension UserResultViewController: UITableViewDelegate {
         return nil
     }
 }
-

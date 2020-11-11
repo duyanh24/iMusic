@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2b4-Es-xhc">
-                                <rect key="frame" x="57" y="40.5" width="223" height="14.5"/>
+                                <rect key="frame" x="57" y="40.5" width="203" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.62501472229999999" green="0.64630973339999997" blue="0.69776517149999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -55,8 +55,8 @@
                             <constraint firstItem="7Mo-Je-NMt" firstAttribute="top" secondItem="grg-l7-Lye" secondAttribute="top" constant="15" id="RIe-lT-dMq"/>
                             <constraint firstItem="Jvf-sk-o55" firstAttribute="leading" secondItem="grg-l7-Lye" secondAttribute="leading" id="Uy7-Vk-AcA"/>
                             <constraint firstItem="Jvf-sk-o55" firstAttribute="top" secondItem="grg-l7-Lye" secondAttribute="top" constant="10" id="ePc-kn-AML"/>
-                            <constraint firstAttribute="trailing" secondItem="2b4-Es-xhc" secondAttribute="trailing" constant="30" id="hzb-ha-poC"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NYp-xN-HmI" secondAttribute="trailing" constant="30" id="iUn-Zu-vY9"/>
+                            <constraint firstAttribute="trailing" secondItem="2b4-Es-xhc" secondAttribute="trailing" constant="50" id="hzb-ha-poC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NYp-xN-HmI" secondAttribute="trailing" constant="50" id="iUn-Zu-vY9"/>
                             <constraint firstAttribute="trailing" secondItem="7Mo-Je-NMt" secondAttribute="trailing" constant="10" id="ljc-QF-tY9"/>
                             <constraint firstAttribute="bottom" secondItem="Jvf-sk-o55" secondAttribute="bottom" constant="10" id="mVy-7m-aqf"/>
                             <constraint firstItem="NYp-xN-HmI" firstAttribute="top" secondItem="grg-l7-Lye" secondAttribute="top" constant="12" id="teg-vG-yPw"/>

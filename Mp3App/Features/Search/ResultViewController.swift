@@ -16,7 +16,8 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     private var trackResultViewController = TrackResultViewController.instantiate()
     private var userResultViewController = UserResultViewController.instantiate()
     private var playlistResultViewController = PlaylistResultViewController.instantiate()
-    private let disposeBag = DisposeBag()
+    private var listViewControllers = [BaseResultViewController]()
+    private var keyword = ""
 
     override func viewDidLoad() {
         setupButtonBar()
@@ -24,9 +25,14 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         setupNotificationCenter()
     }
     
-    override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        setupViewController()
-        return [allResultViewController, trackResultViewController, userResultViewController, playlistResultViewController]
+    private func setupButtonBar() {
+        settings.style.selectedBarBackgroundColor = Colors.purpleColor
+        settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarBackgroundColor = .white
+        settings.style.selectedBarHeight = 2
+        settings.style.buttonBarItemBackgroundColor = .white
+        settings.style.buttonBarHeight = 40
     }
     
     private func setupViewController() {
@@ -42,31 +48,41 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         
         let allResultViewModel = AllResultViewModel()
         allResultViewController = AllResultViewController.instantiate(withViewModel: allResultViewModel, andServices: searchServices)
-    }
-    
-    private func setupButtonBar() {
-        settings.style.selectedBarBackgroundColor = Colors.purpleColor
-        settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        settings.style.buttonBarItemTitleColor = .black
-        settings.style.buttonBarBackgroundColor = .white
-        settings.style.selectedBarHeight = 2
-        settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.buttonBarHeight = 40
+        
+        listViewControllers = [allResultViewController, trackResultViewController, userResultViewController, playlistResultViewController]
     }
     
     func setKeyword(keyword: String) {
-        trackResultViewController.setkeyword(keyword: keyword)
-        userResultViewController.setkeyword(keyword: keyword)
-        playlistResultViewController.setkeyword(keyword: keyword)
-        allResultViewController.setKeyword(keyword: keyword)
+        self.keyword = keyword
+        search(keyword: keyword, index: currentIndex)
+    }
+    
+    private func search(keyword: String, index: Int) {
+        listViewControllers[index].search(keyword: keyword)
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(showPlayer(_:)), name: Notification.Name(Strings.ChangeTabSearch), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveViewController(_:)), name: Notification.Name(Strings.changeTabSearch), object: nil)
     }
     
-    @objc func showPlayer(_ notification: Notification) {
+    @objc func moveViewController(_ notification: Notification) {
         guard let index = notification.userInfo?[Strings.index] as? Int else { return }
         moveToViewController(at: index)
+        search(keyword: keyword, index: index)
+    }
+    
+    override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        setupViewController()
+        return listViewControllers
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        moveToViewController(at: indexPath.row)
+        search(keyword: keyword, index: indexPath.row)
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentPage = scrollView.contentOffset.x / view.bounds.size.width
+        search(keyword: keyword, index: Int(currentPage))
     }
 }

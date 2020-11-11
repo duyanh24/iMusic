@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="47" id="KGk-i7-Jjw" customClass="SearchHistoryCell" customModule="Mp3App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zVU-Ir-wWM">
+                        <rect key="frame" x="20" y="0.0" width="280" height="47"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mm_search_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="Vzf-Rd-obc">
+                                <rect key="frame" x="0.0" y="12" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Vzf-Rd-obc" secondAttribute="height" id="dcV-vC-ERs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0G-Wl-aHJ">
+                                <rect key="frame" x="33" y="15" width="35.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="e0G-Wl-aHJ" secondAttribute="trailing" id="0Fq-0e-saf"/>
+                            <constraint firstItem="Vzf-Rd-obc" firstAttribute="leading" secondItem="zVU-Ir-wWM" secondAttribute="leading" id="11t-tH-qfN"/>
+                            <constraint firstAttribute="bottom" secondItem="Vzf-Rd-obc" secondAttribute="bottom" constant="12" id="5fl-Ch-6FK"/>
+                            <constraint firstItem="e0G-Wl-aHJ" firstAttribute="centerY" secondItem="zVU-Ir-wWM" secondAttribute="centerY" id="Quo-ZY-8HO"/>
+                            <constraint firstItem="Vzf-Rd-obc" firstAttribute="top" secondItem="zVU-Ir-wWM" secondAttribute="top" constant="12" id="Sry-QO-PJL"/>
+                            <constraint firstItem="e0G-Wl-aHJ" firstAttribute="leading" secondItem="Vzf-Rd-obc" secondAttribute="trailing" constant="10" id="Wi9-ZA-9Oy"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="zVU-Ir-wWM" secondAttribute="bottom" id="Bmp-vA-2P7"/>
+                    <constraint firstAttribute="trailing" secondItem="zVU-Ir-wWM" secondAttribute="trailing" constant="20" id="bNV-bX-ssF"/>
+                    <constraint firstItem="zVU-Ir-wWM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="gIc-as-rSL"/>
+                    <constraint firstItem="zVU-Ir-wWM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jNI-O9-04p"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="historyLabel" destination="e0G-Wl-aHJ" id="R5u-oB-cSh"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="153.68303571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_mm_search_Normal" width="15" height="15"/>
+    </resources>
+</document>

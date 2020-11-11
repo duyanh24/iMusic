@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l2G-Rz-vkt">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tracks View Controller-->
+        <scene sceneID="ZtB-HD-ayd">
+            <objects>
+                <viewController id="l2G-Rz-vkt" customClass="TracksViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="liE-XG-Qzx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zmr-wm-ueq">
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bW2-4D-aR4">
+                                <rect key="frame" x="50" y="54" width="314" height="40"/>
+                                <color key="backgroundColor" red="0.52362823489999999" green="0.27759590740000001" blue="0.65983343120000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Shw-jR-BuX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="PHÁT TẤT CẢ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Không có bài hát trong danh sách này" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-eN-FRc">
+                                <rect key="frame" x="67" y="56" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="2zX-3l-hlz"/>
+                                    <constraint firstAttribute="height" constant="40" id="ieS-ch-KxE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ag1-1v-nEV" firstAttribute="bottom" secondItem="zmr-wm-ueq" secondAttribute="bottom" id="Bmh-GR-qNX"/>
+                            <constraint firstItem="bW2-4D-aR4" firstAttribute="leading" secondItem="ag1-1v-nEV" secondAttribute="leading" constant="50" id="Qkj-uH-rxI"/>
+                            <constraint firstItem="zmr-wm-ueq" firstAttribute="top" secondItem="bW2-4D-aR4" secondAttribute="bottom" constant="10" id="VlH-8c-2mt"/>
+                            <constraint firstItem="bW2-4D-aR4" firstAttribute="top" secondItem="ag1-1v-nEV" secondAttribute="top" constant="10" id="XCg-M3-AuK"/>
+                            <constraint firstItem="zmr-wm-ueq" firstAttribute="leading" secondItem="ag1-1v-nEV" secondAttribute="leading" id="dIf-n5-t3x"/>
+                            <constraint firstItem="ag1-1v-nEV" firstAttribute="trailing" secondItem="bW2-4D-aR4" secondAttribute="trailing" constant="50" id="eA5-n1-e3T"/>
+                            <constraint firstItem="b7s-eN-FRc" firstAttribute="centerX" secondItem="ag1-1v-nEV" secondAttribute="centerX" id="pBh-oL-wOL"/>
+                            <constraint firstAttribute="trailing" secondItem="zmr-wm-ueq" secondAttribute="trailing" id="wXT-qC-hXe"/>
+                            <constraint firstItem="b7s-eN-FRc" firstAttribute="top" secondItem="ag1-1v-nEV" secondAttribute="top" constant="12" id="wjK-cg-7yt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ag1-1v-nEV"/>
+                    </view>
+                    <connections>
+                        <outlet property="notificationLabel" destination="b7s-eN-FRc" id="Ugp-X5-OIe"/>
+                        <outlet property="playButton" destination="bW2-4D-aR4" id="IkM-gn-hF8"/>
+                        <outlet property="tableView" destination="zmr-wm-ueq" id="qxJ-vm-yZO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TJC-FF-rF4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="446" y="-230"/>
+        </scene>
+    </scenes>
+</document>

@@ -43,6 +43,11 @@
                                 <rect key="frame" x="0.0" y="104" width="414" height="758"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wMG-RN-o1W">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -56,12 +61,17 @@
                             <constraint firstItem="4O0-D5-2aj" firstAttribute="leading" secondItem="Sc0-h5-sWg" secondAttribute="leading" constant="20" id="UYt-ef-f9I"/>
                             <constraint firstItem="Sc0-h5-sWg" firstAttribute="bottom" secondItem="Prc-xW-Eot" secondAttribute="bottom" id="Ufn-vx-Jrb"/>
                             <constraint firstItem="Ugj-Hx-sKf" firstAttribute="centerY" secondItem="4O0-D5-2aj" secondAttribute="centerY" id="agb-t3-i6R"/>
+                            <constraint firstItem="Sc0-h5-sWg" firstAttribute="trailing" secondItem="wMG-RN-o1W" secondAttribute="trailing" id="cjV-Ak-5XT"/>
+                            <constraint firstItem="wMG-RN-o1W" firstAttribute="leading" secondItem="Sc0-h5-sWg" secondAttribute="leading" id="hZa-E4-XU8"/>
                             <constraint firstItem="Prc-xW-Eot" firstAttribute="top" secondItem="4O0-D5-2aj" secondAttribute="bottom" constant="10" id="jAU-BD-rmA"/>
+                            <constraint firstItem="Sc0-h5-sWg" firstAttribute="bottom" secondItem="wMG-RN-o1W" secondAttribute="bottom" id="yZY-2l-Uif"/>
                             <constraint firstItem="Sc0-h5-sWg" firstAttribute="trailing" secondItem="4O0-D5-2aj" secondAttribute="trailing" constant="20" id="yjQ-uc-K3P"/>
+                            <constraint firstItem="wMG-RN-o1W" firstAttribute="top" secondItem="4O0-D5-2aj" secondAttribute="bottom" id="zvE-iT-vvL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Sc0-h5-sWg"/>
                     </view>
                     <connections>
+                        <outlet property="historyTableView" destination="wMG-RN-o1W" id="CzX-EZ-I5K"/>
                         <outlet property="resultContainerView" destination="Prc-xW-Eot" id="ZQz-bJ-JIK"/>
                         <outlet property="searchTextField" destination="4O0-D5-2aj" id="F1d-D0-R9O"/>
                     </connections>

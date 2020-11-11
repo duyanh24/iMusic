@@ -102,3 +102,8 @@ enum AccountDefaultKey: String {
     case emailKey = "email"
     case passwordKey = "password"
 }
+
+enum SearchHistoryDefaulttKey: String {
+    case userSessionKey = "com.save.usersession"
+    case searchHistory = "searchHistory"
+}

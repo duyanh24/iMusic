@@ -10,24 +10,33 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Reusable
+import RxDataSources
+
+typealias HistorySectionModel = SectionModel<String, String>
 
 class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var searchTextField: CustomTextField!
     @IBOutlet weak var resultContainerView: UIView!
+    @IBOutlet weak var historyTableView: UITableView!
     
     var viewModel: SearchViewModel!
     private let disposeBag = DisposeBag()
     private let resultController = ResultViewController()
     private var keywordTrigger = PublishSubject<String>()
+    private let clearHistoryTrigger = PublishSubject<Void>()
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupResultView()
-    }
+    private lazy var historyDataSource = RxTableViewSectionedReloadDataSource<HistorySectionModel>(
+        configureCell: { _, tableView, indexPath, value in
+            let cell = tableView.dequeueReusableCell(for: indexPath) as SearchHistoryCell
+            cell.setHistoryLabel(value: value)
+            return cell
+    })
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        setupResultView()
+        setupNotificationCenter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +52,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     override func prepareUI() {
         super.prepareUI()
         setupSearchTextField()
+        setupTableView()
     }
     
     private func setupResultView() {
@@ -58,17 +68,21 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func bindViewModel() {
-        let input = SearchViewModel.Input()
+        let keyword = searchTextField.rx.text.asObservable()
+        .distinctUntilChanged()
+        .debounce(DispatchTimeInterval.milliseconds(200), scheduler: MainScheduler.instance)
+        .compactMap { $0 }
+        .filter { !$0.replacingOccurrences(of: " ", with: "").isEmpty }
+        
+        let input = SearchViewModel.Input(keyword: keyword, showHistory: searchTextField.rx.text.asObservable(), clearHistory: clearHistoryTrigger)
         let output = viewModel.transform(input: input)
         
-        let keyword = searchTextField.rx.text.asObservable()
-            .distinctUntilChanged()
-            .debounce(DispatchTimeInterval.milliseconds(200), scheduler: MainScheduler.instance)
-            .compactMap { $0 }
-            .filter { !$0.replacingOccurrences(of: " ", with: "").isEmpty }
+        output.saveHistory.subscribe().disposed(by: disposeBag)
+        output.clearHistory.subscribe().disposed(by: disposeBag)
         
         keyword.subscribe(onNext: { [weak self] keyword in
             self?.resultController.setKeyword(keyword: keyword)
+            self?.historyTableView.isHidden = true
         }).disposed(by: disposeBag)
         
         searchTextField.rx.text.subscribe(onNext: { [weak self] text in
@@ -81,5 +95,66 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
             }
         })
         .disposed(by: disposeBag)
+        
+        output.historyDataSource
+        .do(onNext: { [weak self] data in
+            guard let isEmpty = data.first?.items.isEmpty else {
+                self?.historyTableView.isHidden = true
+                return
+            }
+            self?.historyTableView.isHidden = isEmpty
+        })
+        .bind(to: historyTableView.rx.items(dataSource: historyDataSource))
+        .disposed(by: disposeBag)
+        
+        historyTableView.rx.modelSelected(String.self).subscribe(onNext: { [weak self] value in
+            self?.searchTextField.rx.text.onNext(value)
+            self?.searchTextField.sendActions(for: .valueChanged)
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    private func setupTableView() {
+        historyTableView.delegate = self
+        historyTableView.register(cellType: SearchHistoryCell.self)
+        historyTableView.contentInset.bottom = 50
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showDeleteSearchHistoryMessage(_:)), name: Notification.Name(Strings.deleteSearchHistory), object: nil)
+    }
+    
+    @objc func showDeleteSearchHistoryMessage(_ notification: Notification) {
+        self.showConfirmMessage(title: Strings.deleteSearchHistoryMessage, message: "", confirmTitle: Strings.confirm, cancelTitle: Strings.cancel) { [weak self] selectedCase in
+            if selectedCase == .confirm {
+                self?.clearHistoryTrigger.onNext(())
+                self?.searchTextField.rx.text.onNext("")
+                self?.searchTextField.sendActions(for: .valueChanged)
+                self?.resultContainerView.isHidden = true
+            } 
+        }
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let searchHistoryHeaderCell = SearchHistoryHeaderCell()
+        return searchHistoryHeaderCell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
     }
 }

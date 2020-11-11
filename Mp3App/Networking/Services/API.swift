@@ -15,9 +15,9 @@ enum APIRouter {
     case getAlbums(kind: APIParameterKey, genre: TrackGenre, limit: Int, offset: Int)
     case getPopularUser(limit: Int, offset: Int)
     case getTrack(trackId: String)
-    case searchTracks(keyword: String)
-    case searchUsers(keyword: String)
-    case searchPlaylists(keyword: String)
+    case searchTracks(keyword: String, offset: Int, litmit: Int)
+    case searchUsers(keyword: String, offset: Int, litmit: Int)
+    case searchPlaylists(keyword: String, offset: Int, litmit: Int)
     case searchAll(keyword: String)
 }
 
@@ -82,18 +82,24 @@ extension APIRouter: TargetType {
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
         case .getTrack:
             return .requestPlain
-        case .searchTracks(let keyword):
+        case .searchTracks(let keyword, let offset, let limit):
             bodyParameters = [APIParameterKey.keyWord.rawValue: keyword,
+                              APIParameterKey.offset.rawValue: offset,
+                              APIParameterKey.limit.rawValue: limit,
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
-        case .searchUsers(let keyword):
+        case .searchUsers(let keyword, let offset, let limit):
             bodyParameters = [APIParameterKey.keyWord.rawValue: keyword,
+                              APIParameterKey.offset.rawValue: offset,
+                              APIParameterKey.limit.rawValue: limit,
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)
-        case .searchPlaylists(let keyword):
+        case .searchPlaylists(let keyword, let offset, let limit):
             bodyParameters = [APIParameterKey.keyWord.rawValue: keyword,
+                              APIParameterKey.offset.rawValue: offset,
+                              APIParameterKey.limit.rawValue: limit,
                               APIParameterKey.clientId.rawValue: Constants.APIKey]
             encoding = URLEncoding.default
             return .requestParameters(parameters: bodyParameters, encoding: encoding)

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="TracksDetailCell" customModule="Mp3App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="326" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="326" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-O5-SC8">
+                        <rect key="frame" x="20" y="0.0" width="286" height="80"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xzj-d7-bNO">
+                                <rect key="frame" x="0.0" y="10" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xzj-d7-bNO" secondAttribute="height" id="jC3-vA-ohG"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaJ-kg-p3i">
+                                <rect key="frame" x="70" y="15" width="37" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQX-ee-zyX">
+                                <rect key="frame" x="70" y="53.5" width="31" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXW-CS-JOU">
+                                <rect key="frame" x="240" y="20" width="36" height="40"/>
+                                <state key="normal" image="accessory_more_black_normal_Normal"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="BXW-CS-JOU" secondAttribute="trailing" constant="10" id="0wM-xg-GWO"/>
+                            <constraint firstItem="LaJ-kg-p3i" firstAttribute="top" secondItem="nNy-O5-SC8" secondAttribute="top" constant="15" id="8KU-72-tWO"/>
+                            <constraint firstItem="BXW-CS-JOU" firstAttribute="centerY" secondItem="nNy-O5-SC8" secondAttribute="centerY" id="8Kd-9Y-geB"/>
+                            <constraint firstAttribute="bottom" secondItem="dQX-ee-zyX" secondAttribute="bottom" constant="12" id="B2q-dK-iyq"/>
+                            <constraint firstItem="xzj-d7-bNO" firstAttribute="top" secondItem="nNy-O5-SC8" secondAttribute="top" constant="10" id="BDH-u2-IqR"/>
+                            <constraint firstItem="xzj-d7-bNO" firstAttribute="centerY" secondItem="nNy-O5-SC8" secondAttribute="centerY" id="I5G-gf-oaS"/>
+                            <constraint firstItem="dQX-ee-zyX" firstAttribute="leading" secondItem="xzj-d7-bNO" secondAttribute="trailing" constant="10" id="JaQ-ek-Bxu"/>
+                            <constraint firstItem="BXW-CS-JOU" firstAttribute="top" secondItem="nNy-O5-SC8" secondAttribute="top" constant="20" id="PFd-z2-Axb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dQX-ee-zyX" secondAttribute="trailing" constant="30" id="QKG-IN-lW6"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LaJ-kg-p3i" secondAttribute="trailing" constant="40" id="d3m-m6-Dem"/>
+                            <constraint firstItem="xzj-d7-bNO" firstAttribute="leading" secondItem="nNy-O5-SC8" secondAttribute="leading" id="e1I-1f-3ER"/>
+                            <constraint firstItem="LaJ-kg-p3i" firstAttribute="leading" secondItem="xzj-d7-bNO" secondAttribute="trailing" constant="10" id="eyR-F4-U1u"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="nNy-O5-SC8" secondAttribute="trailing" constant="20" id="6g8-XZ-dYz"/>
+                    <constraint firstAttribute="bottom" secondItem="nNy-O5-SC8" secondAttribute="bottom" id="Mxo-sp-bkL"/>
+                    <constraint firstItem="nNy-O5-SC8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sVg-x8-cA2"/>
+                    <constraint firstItem="nNy-O5-SC8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="zXH-5g-vdA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="albumImageView" destination="xzj-d7-bNO" id="bZM-Zz-FSE"/>
+                <outlet property="descriptionLabel" destination="dQX-ee-zyX" id="ZEh-0J-kh9"/>
+                <outlet property="titleLabel" destination="LaJ-kg-p3i" id="WDh-kR-tT2"/>
+            </connections>
+            <point key="canvasLocation" x="136.23188405797103" y="165.40178571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="accessory_more_black_normal_Normal" width="18" height="4"/>
+    </resources>
+</document>
