@@ -18,6 +18,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     var viewModel: MypageViewModel!
     private let disposeBag = DisposeBag()
     private let loadDataTrigger = PublishSubject<Void>()
+    private let deletePlaylistTrigger = PublishSubject<String>()
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<MypageSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
@@ -43,7 +44,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name(Strings.playlistCreatedNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name(Strings.reloadPlaylistNotification), object: nil)
     }
     
     @objc func reloadData() {
@@ -66,7 +67,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func bindViewModel() {
-        let input = MypageViewModel.Input(loadDataTrigger: loadDataTrigger)
+        let input = MypageViewModel.Input(loadDataTrigger: loadDataTrigger, deletePlaylist: deletePlaylistTrigger)
         let output = viewModel.transform(input: input)
         output.mypageDataModel
             .bind(to: tableView.rx.items(dataSource: dataSource))
@@ -83,12 +84,41 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
                 SceneCoordinator.shared.transition(to: Scene.playlistDetail(playlistName: playlistName))
             }
         }).disposed(by: disposeBag)
+        
+        output.deletePlaylistResult.subscribe(onNext: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                self.showErrorAlert(message: error.localizedDescription, completion: nil)
+            case .success:
+                NotificationCenter.default.post(name: Notification.Name(Strings.reloadPlaylistNotification), object: nil)
+            }
+        }).disposed(by: disposeBag)
     }
     
     private func setupTableView() {
+        tableView.addGestureRecognizer(setupGesture())
         tableView.delegate = self
         tableView.register(cellType: LibraryTableViewCell.self)
         tableView.register(cellType: PlaylistTableViewCell.self)
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                switch dataSource[indexPath] {
+                case .favourite:
+                    return
+                case .playlist(let playlistSectionModel):
+                    showConfirmMessage(title: playlistSectionModel.playlist, message: Strings.deletePlaylistMessage, confirmTitle: Strings.confirm, cancelTitle: Strings.cancel) { [weak self] selectedCase in
+                        if selectedCase == .confirm {
+                            self?.deletePlaylistTrigger.onNext(playlistSectionModel.playlist)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -141,5 +171,12 @@ extension MypageViewController: UITableViewDelegate {
     
     @objc func handleTapFooter(gestureRecognizer: UIGestureRecognizer) {
         SceneCoordinator.shared.transition(to: Scene.createPlaylist)
+    }
+}
+
+extension MypageViewController: UIGestureRecognizerDelegate {
+    func setupGesture() -> UILongPressGestureRecognizer {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        return longPress
     }
 }

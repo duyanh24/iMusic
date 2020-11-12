@@ -43,6 +43,7 @@ struct Strings {
     static let confirm = "Đồng ý"
     static let cancel = "Huỷ"
     static let deleteSearchHistoryMessage = "Xoá lịch sử tìm kiếm?"
+    static let deletePlaylistMessage = "Bạn có muốn xoá playlist này?"
     
     //mypage
     static let library = "Thư viện"
@@ -51,7 +52,7 @@ struct Strings {
     static let createPlaylist = "Tạo playlist mới"
     
     //notification
-    static let playlistCreatedNotification = "playlistCreatedNotification"
+    static let reloadPlaylistNotification = "reloadPlaylistNotification"
     static let playerNotification = "PlayerNotification"
     static let tracks = "tracks"
     static let selectedTrackItem = "selectedTrackItem"

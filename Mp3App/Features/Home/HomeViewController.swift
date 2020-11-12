@@ -91,6 +91,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         tableView.register(cellType: SlideTableViewCell.self)
         tableView.register(cellType: AlbumsTableViewCell.self)
         tableView.register(cellType: ChartTableViewCell.self)
+        tableView.contentInset.bottom = 50
     }
 }
 
