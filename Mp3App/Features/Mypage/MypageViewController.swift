@@ -101,6 +101,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         tableView.delegate = self
         tableView.register(cellType: LibraryTableViewCell.self)
         tableView.register(cellType: PlaylistTableViewCell.self)
+        tableView.contentInset.bottom = 50
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){

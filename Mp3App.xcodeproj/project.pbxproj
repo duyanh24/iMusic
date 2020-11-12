@@ -155,6 +155,7 @@
 		0898F302255D14F600B93845 /* PlaylistBottomSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898F300255D14F600B93845 /* PlaylistBottomSheetCell.swift */; };
 		0898F303255D14F600B93845 /* PlaylistBottomSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0898F301255D14F600B93845 /* PlaylistBottomSheetCell.xib */; };
 		0898F305255D150C00B93845 /* PlaylistBottomSheetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898F304255D150C00B93845 /* PlaylistBottomSheetCellViewModel.swift */; };
+		0898F307255D36A000B93845 /* ChartCellFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898F306255D36A000B93845 /* ChartCellFooterView.swift */; };
 		089E60FE253829EF00B993C7 /* CreatePlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E60FD253829EF00B993C7 /* CreatePlaylistViewController.swift */; };
 		089E610025382A0E00B993C7 /* CreatePlaylistViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */; };
 		089E610225382C3700B993C7 /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */; };
@@ -372,6 +373,7 @@
 		0898F300255D14F600B93845 /* PlaylistBottomSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistBottomSheetCell.swift; sourceTree = "<group>"; };
 		0898F301255D14F600B93845 /* PlaylistBottomSheetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistBottomSheetCell.xib; sourceTree = "<group>"; };
 		0898F304255D150C00B93845 /* PlaylistBottomSheetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistBottomSheetCellViewModel.swift; sourceTree = "<group>"; };
+		0898F306255D36A000B93845 /* ChartCellFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCellFooterView.swift; sourceTree = "<group>"; };
 		089E60FD253829EF00B993C7 /* CreatePlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewController.swift; sourceTree = "<group>"; };
 		089E60FF25382A0E00B993C7 /* CreatePlaylistViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePlaylistViewController.storyboard; sourceTree = "<group>"; };
 		089E610125382C3700B993C7 /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 				08143BE6252C5A3400BF3993 /* ChartTableViewCell.xib */,
 				08143BE9252C5E0500BF3993 /* ChartTableViewCellViewModel.swift */,
 				08143BEB252C76B300BF3993 /* ChartCellHeaderView.swift */,
+				0898F306255D36A000B93845 /* ChartCellFooterView.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -1570,6 +1573,7 @@
 				08504FBA2523346F0033DED0 /* SceneCoordinator.swift in Sources */,
 				0898F305255D150C00B93845 /* PlaylistBottomSheetCellViewModel.swift in Sources */,
 				18E9F197253776770049A45B /* PlaylistDetailCellViewModel.swift in Sources */,
+				0898F307255D36A000B93845 /* ChartCellFooterView.swift in Sources */,
 				1845F904252C7810000D0FDC /* AlbumsTableViewCell.swift in Sources */,
 				08504FBC2523346F0033DED0 /* Result.swift in Sources */,
 				18EF836A2533533100A57CEF /* AuthencationService.swift in Sources */,

@@ -20,16 +20,24 @@ class ChartTableViewCellViewModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        return Output(albumData: .just(album), rank: .just(rank))
+        let showTrackOption = input.optionButton.do(onNext: { [weak self] _ in
+            guard let track = self?.album.track else {
+                return
+            }
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.ShowTrackOption), object: nil, userInfo: [Strings.tracks: track])
+        }).mapToVoid()
+        return Output(albumData: .just(album), rank: .just(rank), showTrackOption: showTrackOption)
     }
 }
 
 extension ChartTableViewCellViewModel {
     struct Input {
+        var optionButton: Observable<Void>
     }
     
     struct Output {
         var albumData: Driver<Album>
         var rank: Driver<Int>
+        var showTrackOption: Observable<Void>
     }
 }
