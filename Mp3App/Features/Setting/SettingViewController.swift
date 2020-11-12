@@ -14,6 +14,8 @@ import RxCocoa
 
 class SettingViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var avatarLabel: UILabel!
+    @IBOutlet weak var avatarView: UIView!
     
     var viewModel: SettingViewModel!
     private let disposeBag = DisposeBag()
@@ -21,6 +23,21 @@ class SettingViewController: BaseViewController, StoryboardBased, ViewModelBased
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func prepareUI() {
+        super.prepareUI()
+        avatarView.layer.cornerRadius = 20
     }
     
     private func bindViewModel() {
