@@ -25,4 +25,8 @@ struct PlaylistService {
     func getTracksFromPlaylist(playlistName: String) -> Observable<Result<[Track], Error>> {
         return FirebaseDatabase.shared.getTracksFromPlaylist(playlistName: playlistName)
     }
+    
+    func addTrackToPlaylist(playlistName: String, track: Track) -> Observable<Result<Void, Error>> {
+        return FirebaseDatabase.shared.addTrackToPlaylist(playlistName: playlistName, track: track)
+    }
 }

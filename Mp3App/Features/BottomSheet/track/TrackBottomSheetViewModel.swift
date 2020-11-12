@@ -19,21 +19,30 @@ class TrackBottomSheetViewModel: ServicesViewModel {
     }
     
     func transform(input: Input) -> Output {
-        let addTrackToFavourite =  input.addTrackToFavouriteButton.flatMapLatest { [weak self] _ -> Observable<Result<Void, Error>> in
-            guard let self = self else {
-                return .empty()
-            }
-            return self.services.libraryService.addTrackToFavourite(track: self.track)
+        let addTrackToFavourite = input.addTrackToFavouriteButton
+            .withLatestFrom(input.isTrackAlreadyExistsInFavorites)
+            .flatMapLatest { [weak self] isTrackAlreadyExistsInFavorites -> Observable<Result<Void, Error>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                if isTrackAlreadyExistsInFavorites {
+                    return self.services.libraryService.removeTrackInFavourite(trackId: self.track.id ?? 0)
+                }
+                return self.services.libraryService.addTrackToFavourite(track: self.track)
         }
         
         let checkTrackAlreadyExistsInFavorites = services.libraryService.checkTrackAlreadyExitsInFavourite(trackId: track.id ?? 0)
-        return Output(track: .just(track), addTrackToFavouriteResult: addTrackToFavourite, isTrackAlreadyExistsInFavorites: checkTrackAlreadyExistsInFavorites)
+        
+        return Output(track: .just(track),
+                      addTrackToFavouriteResult: addTrackToFavourite,
+                      isTrackAlreadyExistsInFavorites: checkTrackAlreadyExistsInFavorites)
     }
 }
 
 extension TrackBottomSheetViewModel {
     struct Input {
         var addTrackToFavouriteButton: Observable<Void>
+        var isTrackAlreadyExistsInFavorites: Observable<Bool>
     }
     
     struct Output {

@@ -110,6 +110,30 @@ class FirebaseDatabase {
         return playlistDetailResult
     }
     
+    func addTrackToPlaylist(playlistName: String, track: Track) -> Observable<Result<Void, Error>> {
+        return Observable.create { observer -> Disposable in
+            let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
+            if userId.isEmpty {
+                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+            } else {
+                if let trackId = track.id {
+                    let trackDictionary: [String : Any] = [
+                        FirebaseProperty.id.rawValue : trackId,
+                        FirebaseProperty.title.rawValue : track.title ?? "",
+                        FirebaseProperty.artworkURL.rawValue : track.artworkURL ?? "",
+                        FirebaseProperty.description.rawValue : track.user?.username ?? ""
+                    ]
+                    Database.database().reference().child(FirebaseProperty.users    .rawValue).child(userId).child(playlistName).child(String(trackId)).setValue(trackDictionary)
+                    observer.onNext(.success(()))
+                } else {
+                    observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+                }
+            }
+            observer.onCompleted()
+            return Disposables.create()
+        }
+    }
+    
     func addTrackToFavourite(track: Track) -> Observable<Result<Void, Error>> {
         return Observable.create { observer -> Disposable in
             let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
@@ -150,6 +174,20 @@ class FirebaseDatabase {
                     observer.onNext(.failure(APIError(statusCode: nil, statusMessage: error.localizedDescription)))
                 }
             }
+            return Disposables.create()
+        }
+    }
+    
+    func removeTrackInFavourite(trackId: Int) -> Observable<Result<Void, Error>> {
+        return Observable.create { [weak self] observer -> Disposable in
+            let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
+            if userId.isEmpty {
+                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+            } else {
+                self?.reference.child(FirebaseProperty.favourite.rawValue).child(userId).child(String(trackId)).removeValue()
+                observer.onNext(.success(()))
+            }
+            observer.onCompleted()
             return Disposables.create()
         }
     }

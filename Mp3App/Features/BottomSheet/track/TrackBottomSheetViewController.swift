@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Reusable
+import MaterialComponents.MaterialBottomSheet
 
 class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var containerView: UIView!
@@ -24,6 +25,8 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
     
     var viewModel: TrackBottomSheetViewModel!
     private let disposeBag = DisposeBag()
+    private let isTrackAlreadyExistsInFavorites = PublishSubject<Bool>()
+    private var track = Track()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +40,13 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
     }
     
     private func bindViewModel() {
-        let input = TrackBottomSheetViewModel.Input(addTrackToFavouriteButton: addToFavouriteButton.rx.tap.asObservable())
+        let input = TrackBottomSheetViewModel.Input(addTrackToFavouriteButton: addToFavouriteButton.rx.tap.asObservable(),
+                                                    isTrackAlreadyExistsInFavorites: isTrackAlreadyExistsInFavorites)
         let output = viewModel.transform(input: input)
         
         output.track
         .subscribe(onNext: { [weak self] track in
+            self?.track = track
             self?.titleLabel.text = track.title
             self?.singerLabel.text = track.user?.username
             guard let url = track.artworkURL else {
@@ -67,9 +72,19 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let value):
-                value ? (self.favouriteLabel.text = "Xoá khỏi danh sách yêu thích") : (self.favouriteLabel.text = "Thêm vào danh sách yêu thích")
+                self.isTrackAlreadyExistsInFavorites.onNext(value)
+                value ? (self.favouriteLabel.text = Strings.removeTrackInFavourite) : (self.favouriteLabel.text = Strings.addTrackToFavourite)
                 value ? (self.favouriteImageView.image = Asset.feedLikeSelectedIcoNormal.image) : (self.favouriteImageView.image = Asset.icLikeGrey1616Normal.image)
             }
+        }).disposed(by: disposeBag)
+        
+        addToPlaylistButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            self?.dismiss(animated: false, completion: {
+                guard let track = self?.track else {
+                    return
+                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.ShowPlaylistOption), object: nil, userInfo: [Strings.tracks: track])
+            })
         }).disposed(by: disposeBag)
     }
 }

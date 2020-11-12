@@ -59,6 +59,7 @@ struct Strings {
     static let changeTabSearch = "ChangeTabSearch"
     static let deleteSearchHistory = "deleteSearchHistory"
     static let ShowTrackOption = "ShowTrackOption"
+    static let ShowPlaylistOption = "ShowPlaylistOption"
     
     //alert message
     static let sureToSignOut = "Bạn có chắc chắn muốn đăng xuất?"
@@ -66,6 +67,8 @@ struct Strings {
     static let yes = "Yes"
     static let no = "No"
     static let OK = "OK"
+    static let removeTrackInFavourite = "Xoá khỏi danh sách yêu thích"
+    static let addTrackToFavourite = "Thêm vào danh sách yêu thích"
     
     //format
     static let simpleDateFormat = "yyyy-MM-DD"
