@@ -1,14 +1,14 @@
 //
-//  HeaderOfChartCellUIView.swift
+//  ChartCellFooterView.swift
 //  Mp3App
 //
-//  Created by AnhLD on 10/6/20.
+//  Created by AnhLD on 11/12/20.
 //  Copyright © 2020 AnhLD. All rights reserved.
 //
 
 import UIKit
 
-class ChartCellHeaderView: UIView {
+class ChartCellFooterView: UIView {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,17 +25,19 @@ class ChartCellHeaderView: UIView {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.backgroundColor = UIColor(red: 35/255, green: 26/255, blue: 49/255, alpha: 1)
         containerView.layer.cornerRadius = 5
-        self.addSubview(containerView)
+        addSubview(containerView)
         
         containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: -5).isActive = true
         containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 5).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Strings.chart
+        label.text = Strings.more
         label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .center
         containerView.addSubview(label)
         
         label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true

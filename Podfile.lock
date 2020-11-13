@@ -332,6 +332,35 @@ PODS:
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.4.0)
   - leveldb-library (1.22)
+  - MaterialComponents/Availability (119.0.0)
+  - MaterialComponents/BottomSheet (119.0.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/Elevation (119.0.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (119.0.0)
+  - MaterialComponents/private/Color (119.0.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/KeyboardWatcher (119.0.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (119.0.0)
+  - MaterialComponents/ShadowElevations (119.0.0)
+  - MaterialComponents/ShadowLayer (119.0.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (119.0.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (119.0.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -346,6 +375,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - FirebaseFirestoreSwift
+  - MaterialComponents/BottomSheet
   - XLPagerTabStrip (~> 9.0)
 
 SPEC REPOS:
@@ -368,6 +398,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - leveldb-library
+    - MaterialComponents
     - nanopb
     - PromisesObjC
     - XLPagerTabStrip
@@ -391,10 +422,11 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  MaterialComponents: 69a725e28406a97816441dea4ec6ec38265a08bb
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 8ff8dee51aadb2b3bae6c0d5485ffd059387525d
+PODFILE CHECKSUM: ea9d85d2da883050093e6061d054012f04f0e9ed
 
 COCOAPODS: 1.9.3

@@ -17,4 +17,16 @@ struct LibraryService {
     func getTracksFromFavourite() -> Observable<Result<[Track], Error>> {
         return FirebaseDatabase.shared.getTracksFromFavourite()
     }
+    
+    func addTrackToFavourite(track: Track) -> Observable<Result<Void, Error>> {
+        return FirebaseDatabase.shared.addTrackToFavourite(track: track)
+    }
+    
+    func checkTrackAlreadyExitsInFavourite(trackId: Int) -> Observable<Result<Bool, Error>> {
+        return FirebaseDatabase.shared.checkTrackAlreadyExitsInFavourite(trackId: trackId)
+    }
+    
+    func removeTrackInFavourite(trackId: Int) -> Observable<Result<Void, Error>> {
+        return FirebaseDatabase.shared.removeTrackInFavourite(trackId: trackId)
+    }
 }

@@ -13,4 +13,5 @@ pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'FirebaseFirestoreSwift'
 pod 'XLPagerTabStrip', '~> 9.0'
+pod 'MaterialComponents/BottomSheet'
 end
