@@ -19,7 +19,7 @@ class SettingViewModel: ServicesViewModel {
                 self?.services.authencationService.logout()
             })
             .mapToVoid()
-        return Output(logoutSuccess: logoutSuccess)
+        return Output(logoutSuccess: logoutSuccess, email: .just(AccountDefault.shared.retrieveStringData(key: .emailKey)))
     }
 }
 
@@ -30,5 +30,6 @@ extension SettingViewModel {
     
     struct Output {
         var logoutSuccess: Observable<Void>
+        var email: Observable<String>
     }
 }

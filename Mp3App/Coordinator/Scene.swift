@@ -20,6 +20,7 @@ enum Scene {
     case createPlaylist
     case libraryDetail
     case tracks(tracks: [Track], title: String)
+    case webView(url: String)
 }
 
 extension Scene: TargetScene {
@@ -92,6 +93,11 @@ extension Scene: TargetScene {
             let tracksViewModel = TracksViewModel(tracks: tracks, title: title)
             let tracksViewController = TracksViewController.instantiate(withViewModel: tracksViewModel)
             return .push(tracksViewController)
+            
+        case .webView(let url):
+            let webViewController = WebViewController.instantiate()
+            webViewController.setupURL(url: url)
+            return .present(webViewController)
         }
     }
 }
