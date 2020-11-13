@@ -109,12 +109,20 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDg-ZI-kCt">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="DTo-35-o6x"/>
+                                            <constraint firstAttribute="bottom" secondItem="mDg-ZI-kCt" secondAttribute="bottom" id="Gvc-rx-jy0"/>
                                             <constraint firstItem="TKI-cZ-Odt" firstAttribute="leading" secondItem="GGa-HR-jYY" secondAttribute="trailing" constant="10" id="Hqr-TG-DwV"/>
                                             <constraint firstItem="GGa-HR-jYY" firstAttribute="centerY" secondItem="i3i-BM-acU" secondAttribute="centerY" id="K5F-7A-ySm"/>
+                                            <constraint firstItem="mDg-ZI-kCt" firstAttribute="top" secondItem="i3i-BM-acU" secondAttribute="top" id="M15-8a-lBf"/>
+                                            <constraint firstAttribute="trailing" secondItem="mDg-ZI-kCt" secondAttribute="trailing" id="RBP-jr-xpn"/>
+                                            <constraint firstItem="mDg-ZI-kCt" firstAttribute="leading" secondItem="i3i-BM-acU" secondAttribute="leading" id="kCp-Vs-ld0"/>
                                             <constraint firstItem="TKI-cZ-Odt" firstAttribute="centerY" secondItem="i3i-BM-acU" secondAttribute="centerY" id="l0m-NX-Mnx"/>
                                             <constraint firstItem="GGa-HR-jYY" firstAttribute="leading" secondItem="i3i-BM-acU" secondAttribute="leading" id="ozk-QT-VKa"/>
                                             <constraint firstAttribute="trailing" secondItem="TKI-cZ-Odt" secondAttribute="trailing" constant="20" id="q0Q-Ew-kQU"/>
@@ -136,13 +144,20 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5WG-mI-U8C">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="5WG-mI-U8C" firstAttribute="leading" secondItem="rL2-f7-7L2" secondAttribute="leading" id="3ul-ww-liH"/>
                                             <constraint firstItem="MAt-He-KSm" firstAttribute="leading" secondItem="rL2-f7-7L2" secondAttribute="leading" id="Bxq-fo-atI"/>
+                                            <constraint firstItem="5WG-mI-U8C" firstAttribute="top" secondItem="rL2-f7-7L2" secondAttribute="top" id="GAF-JH-9RD"/>
                                             <constraint firstAttribute="trailing" secondItem="BBC-fs-yxL" secondAttribute="trailing" constant="20" id="MqI-jZ-5Bt"/>
                                             <constraint firstItem="BBC-fs-yxL" firstAttribute="leading" secondItem="MAt-He-KSm" secondAttribute="trailing" constant="10" id="ZSF-Kr-h5K"/>
                                             <constraint firstAttribute="height" constant="40" id="akU-a2-OO1"/>
+                                            <constraint firstAttribute="trailing" secondItem="5WG-mI-U8C" secondAttribute="trailing" id="cai-KD-Psv"/>
+                                            <constraint firstAttribute="bottom" secondItem="5WG-mI-U8C" secondAttribute="bottom" id="fv4-gH-ZZY"/>
                                             <constraint firstItem="BBC-fs-yxL" firstAttribute="centerY" secondItem="rL2-f7-7L2" secondAttribute="centerY" id="hMx-RF-gLj"/>
                                             <constraint firstItem="MAt-He-KSm" firstAttribute="centerY" secondItem="rL2-f7-7L2" secondAttribute="centerY" id="wwI-GH-R8l"/>
                                         </constraints>
@@ -163,11 +178,18 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26U-k0-Bx0">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="26U-k0-Bx0" firstAttribute="leading" secondItem="sYj-SA-WNY" secondAttribute="leading" id="2rw-RL-QJQ"/>
                                             <constraint firstAttribute="height" constant="50" id="46B-XU-jqR"/>
+                                            <constraint firstAttribute="trailing" secondItem="26U-k0-Bx0" secondAttribute="trailing" id="6zb-BZ-9Tl"/>
                                             <constraint firstItem="dpJ-BL-Mg4" firstAttribute="centerY" secondItem="sYj-SA-WNY" secondAttribute="centerY" id="9PU-pU-cBq"/>
+                                            <constraint firstAttribute="bottom" secondItem="26U-k0-Bx0" secondAttribute="bottom" id="DHv-Fw-5X4"/>
+                                            <constraint firstItem="26U-k0-Bx0" firstAttribute="top" secondItem="sYj-SA-WNY" secondAttribute="top" id="ccn-Oh-3Lz"/>
                                             <constraint firstItem="dpJ-BL-Mg4" firstAttribute="leading" secondItem="aJA-ES-lim" secondAttribute="trailing" constant="10" id="iti-j9-Q2t"/>
                                             <constraint firstItem="aJA-ES-lim" firstAttribute="leading" secondItem="sYj-SA-WNY" secondAttribute="leading" id="oby-El-RIi"/>
                                             <constraint firstAttribute="trailing" secondItem="dpJ-BL-Mg4" secondAttribute="trailing" constant="20" id="rUk-10-Zfh"/>
@@ -240,7 +262,11 @@
                     <connections>
                         <outlet property="avatarLabel" destination="Rjh-VW-TAz" id="A82-3n-rlm"/>
                         <outlet property="avatarView" destination="UWz-lO-v8Q" id="vou-8g-zNT"/>
+                        <outlet property="emailLabel" destination="tca-JH-CvP" id="8bB-3h-hKy"/>
+                        <outlet property="helpButton" destination="mDg-ZI-kCt" id="1YB-Cf-qBb"/>
                         <outlet property="logoutButton" destination="j4k-NB-wPS" id="yUj-qN-hHT"/>
+                        <outlet property="privacyPolicyButton" destination="26U-k0-Bx0" id="jW7-RE-eqk"/>
+                        <outlet property="serviceTermsButton" destination="5WG-mI-U8C" id="wxV-gj-eqY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ti-ZZ-Jke" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
