@@ -50,7 +50,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     
     private func setupPlayerView() {
         containerView.frame = CGRect(x: 0,
-                                     y: UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight,
+                                     y: UIScreen.main.bounds.height - getTabbarHeight(),
                                      width: UIScreen.main.bounds.width,
                                      height: UIScreen.main.bounds.height + miniPlayerHeight)
         view.addSubview(containerView)

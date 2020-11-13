@@ -18,7 +18,7 @@ class TrackCellViewModel : ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        return Output(track: .just(track))
+        return Output(track: .just(track), isPlaying: TrackPlayer.shared.isPlayingTrigger)
     }
 }
 
@@ -28,5 +28,6 @@ extension TrackCellViewModel {
     
     struct Output {
         var track: Observable<Track>
+        var isPlaying: Observable<Bool>
     }
 }

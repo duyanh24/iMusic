@@ -26,7 +26,7 @@ class TrackInformationView: UIView, NibOwnerLoadable, ViewModelBased {
             let cell = tableView.dequeueReusableCell(for: indexPath) as TrackCell
             let trackCellViewModel = TrackCellViewModel(track: track)
             cell.configureCell(viewModel: trackCellViewModel)
-            track.isPlaying ? cell.showPlayImageView() : cell.hidePlayImageView()
+            track.isPlaying ? cell.showAudioEqualizer() : cell.hideAudioEqualizer()
             return cell
     })  
     
