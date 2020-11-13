@@ -91,6 +91,7 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
         tableView.register(cellType: SlideTableViewCell.self)
         tableView.register(cellType: AlbumsTableViewCell.self)
         tableView.register(cellType: ChartTableViewCell.self)
+        tableView.contentInset.bottom = 50
     }
 }
 
@@ -131,7 +132,12 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNonzeroMagnitude
+        switch dataSource[section] {
+        case .chartAlbums:
+            return 40
+        default:
+            return .leastNonzeroMagnitude
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -144,6 +150,11 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        switch dataSource[section] {
+        case .chartAlbums:
+            return ChartCellFooterView()
+        default:
+            return nil
+        }
     }
 }

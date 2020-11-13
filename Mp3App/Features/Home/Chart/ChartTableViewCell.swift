@@ -18,6 +18,7 @@ class ChartTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
+    @IBOutlet weak var optionButton: UIButton!
     
     var viewModel: ChartTableViewCellViewModel!
     private var disposeBag = DisposeBag()
@@ -48,7 +49,7 @@ class ChartTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     }
     
     private func binViewModel() {
-        let input = ChartTableViewCellViewModel.Input()
+        let input = ChartTableViewCellViewModel.Input(optionButton: optionButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         
         output.albumData.drive(onNext: { [weak self] (album) in
@@ -63,5 +64,7 @@ class ChartTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
         output.rank.drive(onNext: { [weak self] (rank) in
             self?.rankLabel.text = "0\(rank)"
         }).disposed(by: disposeBag)
+        
+        output.showTrackOption.subscribe().disposed(by: disposeBag)
     }
 }

@@ -21,17 +21,28 @@ class MypageViewModel: ServicesViewModel {
             }
             return self.getAllMypageData()
         }.map({ $0.toDataSource()})
-        return Output(mypageDataModel: mypageDataModel)
+        
+        let deletePlaylistResult = input.deletePlaylist
+            .flatMapLatest { [weak self] playlistName -> Observable<Result<Void, Error>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                return self.services.playlistService.deletePlaylist(playlistName: playlistName)
+        }
+        
+        return Output(mypageDataModel: mypageDataModel, deletePlaylistResult: deletePlaylistResult)
     }
 }
 
 extension MypageViewModel {
     struct Input {
         var loadDataTrigger: Observable<Void>
+        var deletePlaylist: Observable<String>
     }
     
     struct Output {
         var mypageDataModel: Observable<[MypageSectionModel]>
+        var deletePlaylistResult: Observable<Result<Void, Error>>
     }
 }
 

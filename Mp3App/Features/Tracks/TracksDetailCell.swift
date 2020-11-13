@@ -14,6 +14,7 @@ class TracksDetailCell: UITableViewCell, ViewModelBased, NibReusable {
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var optionButton: UIButton!
     
     var viewModel: TracksDetailCellViewModel!
     private var disposeBag = DisposeBag()
@@ -43,7 +44,7 @@ class TracksDetailCell: UITableViewCell, ViewModelBased, NibReusable {
     }
 
     private func bindViewModel() {
-        let input = TracksDetailCellViewModel.Input()
+        let input = TracksDetailCellViewModel.Input(optionButton: optionButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
                 
         output.track
@@ -56,5 +57,7 @@ class TracksDetailCell: UITableViewCell, ViewModelBased, NibReusable {
                 self?.albumImageView.setImage(stringURL: url)
             })
             .disposed(by: disposeBag)
+        
+        output.showTrackOption.subscribe().disposed(by: disposeBag)
     }
 }
