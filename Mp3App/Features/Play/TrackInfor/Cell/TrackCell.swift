@@ -63,8 +63,8 @@ class TrackCell: UITableViewCell, NibReusable, ViewModelBased {
         })
         .disposed(by: disposeBag)
         
-        output.isPlaying.subscribe(onNext: { [weak self] isPlaying in
-            isPlaying ? (self?.audioEqualizer.startAnimating()) : (self?.audioEqualizer.stopAnimating())
+        output.isPlaying.subscribe(onNext: { [weak self] isCurrentTrack, isPlaying in
+            isCurrentTrack && isPlaying ? self?.audioEqualizer.startAnimating() : self?.audioEqualizer.stopAnimating()
         })
         .disposed(by: disposeBag)
     }

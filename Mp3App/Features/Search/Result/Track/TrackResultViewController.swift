@@ -52,7 +52,9 @@ class TrackResultViewController: BaseResultViewController, StoryboardBased, View
     }
     
     private func bindViewModel() {
-        let input = TrackResultViewModel.Input(searchTrack: keywordTrigger, loadMore: loadMoreTrigger)
+        let input = TrackResultViewModel.Input(searchTrack: keywordTrigger,
+                                               loadMore: loadMoreTrigger,
+                                               play: tableView.rx.modelSelected(Track.self).asObservable())
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
@@ -62,6 +64,8 @@ class TrackResultViewController: BaseResultViewController, StoryboardBased, View
             self?.isLoadMoreEnabled = isLoadMoreEnabled
         })
         .disposed(by: disposeBag)
+        
+        output.playTrack.subscribe().disposed(by: disposeBag)
         
         output.dataSource.skip(1)
             .do(onNext: { [weak self] data in

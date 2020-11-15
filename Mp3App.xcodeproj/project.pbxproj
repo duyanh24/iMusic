@@ -1075,8 +1075,8 @@
 				08832BC12541723B00E56718 /* TrackInforCellViewModel.swift */,
 				08D7AD7A254164E2007D77C3 /* TrackInforCell.xib */,
 				08D7AD7D254168F2007D77C3 /* TrackCell.swift */,
-				08D7AD7E254168F2007D77C3 /* TrackCell.xib */,
 				08D6EE3025417DD900D7006F /* TrackCellViewModel.swift */,
+				08D7AD7E254168F2007D77C3 /* TrackCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

@@ -75,7 +75,11 @@ class TrackResultViewModel: ServicesViewModel {
             self?.dataSource.accept(trackSectionModel)
         }).mapToVoid()
         
-        return Output(dataSource: dataSource.asObservable(), activityIndicator: activityIndicator.asObservable(), loadData: loadData, loadMoreData: loadMoreData, isLoadMoreEnabled: isLoadMoreEnabled)
+        let playTrack = input.play.do(onNext: { track in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: [track]])
+        }).mapToVoid()
+        
+        return Output(dataSource: dataSource.asObservable(), activityIndicator: activityIndicator.asObservable(), loadData: loadData, loadMoreData: loadMoreData, isLoadMoreEnabled: isLoadMoreEnabled, playTrack: playTrack)
     }
 }
 
@@ -83,6 +87,7 @@ extension TrackResultViewModel {
     struct Input {
         var searchTrack: Observable<String>
         var loadMore: Observable<Void>
+        var play: Observable<Track>
     }
     
     struct Output {
@@ -91,6 +96,7 @@ extension TrackResultViewModel {
         var loadData: Observable<Void>
         var loadMoreData: Observable<Void>
         var isLoadMoreEnabled: Observable<Bool>
+        var playTrack: Observable<Void>
     }
 }
 
