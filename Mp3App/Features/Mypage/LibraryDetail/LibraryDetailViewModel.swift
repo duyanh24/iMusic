@@ -26,19 +26,25 @@ class LibraryDetailViewModel: ServicesViewModel {
             return [TrackSectionModel(model: "", items: tracks)]
         }.trackActivity(activityIndicator)
         
-        return Output(dataSource: dataSource, activityIndicator: activityIndicator.asObservable(), showPlayerView: showPlayerView)
+        let playTrack = input.play.do(onNext: { track in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: [track]])
+        }).mapToVoid()
+        
+        return Output(dataSource: dataSource, activityIndicator: activityIndicator.asObservable(), showPlayerView: showPlayerView, playTrack: playTrack)
     }
 }
 
 extension LibraryDetailViewModel {
     struct Input {
         var playButton: Observable<Void>
+        var play: Observable<Track>
     }
     
     struct Output {
         var dataSource: Observable<[TrackSectionModel]>
         var activityIndicator: Observable<Bool>
         var showPlayerView: Observable<Void>
+        var playTrack: Observable<Void>
     }
 }
 

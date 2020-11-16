@@ -41,7 +41,8 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
     
     private func bindViewModel() {
         let input = TrackBottomSheetViewModel.Input(addTrackToFavouriteButton: addToFavouriteButton.rx.tap.asObservable(),
-                                                    isTrackAlreadyExistsInFavorites: isTrackAlreadyExistsInFavorites)
+                                                isTrackAlreadyExistsInFavorites: isTrackAlreadyExistsInFavorites,
+                                                play: playButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         
         output.track
@@ -86,5 +87,10 @@ class TrackBottomSheetViewController: BaseViewController, StoryboardBased, ViewM
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.ShowPlaylistOption), object: nil, userInfo: [Strings.tracks: track])
             })
         }).disposed(by: disposeBag)
+        
+        output.playTrack.subscribe(onNext: { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
+        })
+        .disposed(by: disposeBag)
     }
 }

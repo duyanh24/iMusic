@@ -11,7 +11,7 @@ import Foundation
 struct APIURL {
     static let baseURLv2 = "https://api-v2.soundcloud.com"
     static let baseURLv1 = "https://api.soundcloud.com"
-    static let APIStream = "https://api.soundcloud.com/tracks/%d/stream?client_id=c4c979fd6f241b5b30431d722af212e8"
+    static let APIStream = "https://api.soundcloud.com/tracks/%d/stream?client_id=91f71f725804f4915f4cc95f69fff503"
 }
 
 struct Constants {

@@ -32,7 +32,6 @@ class HomeViewModel: ServicesViewModel {
             default:
                 break
             }
-            
         }).mapToVoid()
         
         return Output(homeDataModel: homeDataModel,

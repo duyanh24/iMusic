@@ -13,6 +13,7 @@ import RxCocoa
 class PlayerViewModel: ServicesViewModel {
     var services: PlayerServices!
     private let errorTracker = ErrorTracker()
+    private var isTrackAlreadyExistsInFavorites = false
     
     func transform(input: Input) -> Output {
         let startPlayTracks = input.tracks.do(onNext: { tracks in
@@ -44,6 +45,34 @@ class PlayerViewModel: ServicesViewModel {
             TrackPlayer.shared.setupRepeatMode()
         }).mapToVoid()
         
+        let checkTrackAlreadyExistsInFavorites = TrackPlayer.shared.currentTrack.flatMapLatest { [weak self] track -> Observable<Result<Bool, Error>> in
+            guard let self = self else {
+                return .empty()
+            }
+            return self.services.libraryService.checkTrackAlreadyExitsInFavourite(trackId: track?.id ?? 0)
+        }.map { result -> Bool in
+            switch result {
+            case .success(let value):
+                self.isTrackAlreadyExistsInFavorites = value
+                return value
+            case .failure(let error):
+                print(error.localizedDescription)
+                return false
+            }
+        }
+        
+        let addTrackToFavourite = input.addTrackToFavouriteButton
+            .withLatestFrom(TrackPlayer.shared.currentTrack)
+            .flatMapLatest { [weak self] track -> Observable<Result<Void, Error>> in
+                guard let self = self, let trackId = track?.id, let track = track else {
+                    return .just(Result(error: APIError(statusCode: nil, statusMessage: ErrorMessage.unknownError)))
+                }
+                if self.isTrackAlreadyExistsInFavorites {
+                    return self.services.libraryService.removeTrackInFavourite(trackId: trackId)
+                }
+                return self.services.libraryService.addTrackToFavourite(track: track)
+        }
+        
         return Output(playList: Observable.combineLatest(input.tracks, TrackPlayer.shared.currentTrack),
                       nextTrack: nextTrack,
                       prevTrack: prevTrack,
@@ -57,7 +86,9 @@ class PlayerViewModel: ServicesViewModel {
                       randomMode: randomMode,
                       isRandomModeSelected: TrackPlayer.shared.randomMode.asObservable(),
                       repeatMode: repeatMode,
-                      isRepeatModeSelected: TrackPlayer.shared.repeatMode.asObservable())
+                      isRepeatModeSelected: TrackPlayer.shared.repeatMode.asObservable(),
+                      isTrackAlreadyExistsInFavorites: checkTrackAlreadyExistsInFavorites,
+                      addTrackToFavouriteResult: addTrackToFavourite)
     }
 }
 
@@ -70,6 +101,7 @@ extension PlayerViewModel {
         var repeatModeButton: Observable<Void>
         var tracks: Observable<[Track]>
         var seekValueSlider: Observable<Float>
+        var addTrackToFavouriteButton: Observable<Void>
     }
     
     struct Output {
@@ -87,5 +119,7 @@ extension PlayerViewModel {
         var isRandomModeSelected: Observable<Bool>
         var repeatMode: Observable<Void>
         var isRepeatModeSelected: Observable<Bool>
+        var isTrackAlreadyExistsInFavorites: Observable<Bool>
+        var addTrackToFavouriteResult: Observable<Result<Void, Error>>
     }
 }

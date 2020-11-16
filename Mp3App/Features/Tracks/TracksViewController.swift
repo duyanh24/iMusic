@@ -43,7 +43,7 @@ class TracksViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func bindViewModel() {
-        let input = TracksViewModel.Input(playButton: playButton.rx.tap.asObservable())
+        let input = TracksViewModel.Input(playButton: playButton.rx.tap.asObservable(), play: tableView.rx.modelSelected(Track.self).asObservable())
         let output = viewModel.transform(input: input)
         
         output.dataSource.subscribe(onNext: { [weak self] dataSource in
@@ -52,6 +52,7 @@ class TracksViewController: BaseViewController, StoryboardBased, ViewModelBased 
         }).disposed(by: disposeBag)
         
         output.showPlayerView.subscribe().disposed(by: disposeBag)
+        output.playTrack.subscribe().disposed(by: disposeBag)
         
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))

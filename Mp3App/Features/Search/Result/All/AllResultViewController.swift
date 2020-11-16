@@ -62,7 +62,8 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
     }
     
     private func bindViewModel() {
-        let input = AllResultViewModel.Input(searchAll: keywordTrigger)
+        let input = AllResultViewModel.Input(searchAll: keywordTrigger,
+                                        play: tableView.rx.modelSelected(SearchSectionItem.self).asObservable())
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
@@ -77,6 +78,22 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        output.playTrack.subscribe().disposed(by: disposeBag)
+        
+        output.showPlaylistDetail.subscribe(onNext: { playlist in
+            let tracks = playlist.tracks?.filter({ track -> Bool in
+                guard let streamable = track.streamable else {
+                    return false
+                }
+                if !streamable || track.title == nil || track.artworkURL == nil {
+                    return false
+                }
+                return true
+            })
+            SceneCoordinator.shared.transition(to: Scene.tracks(tracks: tracks ?? [], title: playlist.title ?? ""))
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {

@@ -33,9 +33,14 @@ class TrackBottomSheetViewModel: ServicesViewModel {
         
         let checkTrackAlreadyExistsInFavorites = services.libraryService.checkTrackAlreadyExitsInFavourite(trackId: track.id ?? 0)
         
+        let playTrack = input.play.do(onNext: { [weak self] _ in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: [self?.track]])
+        }).mapToVoid()
+        
         return Output(track: .just(track),
                       addTrackToFavouriteResult: addTrackToFavourite,
-                      isTrackAlreadyExistsInFavorites: checkTrackAlreadyExistsInFavorites)
+                      isTrackAlreadyExistsInFavorites: checkTrackAlreadyExistsInFavorites,
+                      playTrack: playTrack)
     }
 }
 
@@ -43,11 +48,13 @@ extension TrackBottomSheetViewModel {
     struct Input {
         var addTrackToFavouriteButton: Observable<Void>
         var isTrackAlreadyExistsInFavorites: Observable<Bool>
+        var play: Observable<Void>
     }
     
     struct Output {
         var track: Observable<Track>
         var addTrackToFavouriteResult: Observable<Result<Void, Error>>
         var isTrackAlreadyExistsInFavorites: Observable<Result<Bool, Error>>
+        var playTrack: Observable<Void>
     }
 }

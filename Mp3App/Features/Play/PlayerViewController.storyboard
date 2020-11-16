@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DWQ-Md-4bU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DWQ-Md-4bU">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -212,6 +212,12 @@
                                                     <constraint firstAttribute="height" constant="25" id="oJz-j1-biP"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2f-qm-N66">
+                                                <rect key="frame" x="10" y="5" width="45" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="45" id="8fZ-ve-bjs"/>
+                                                </constraints>
+                                            </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icLikeBlackCopy5_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="Zjd-dL-V7J">
                                                 <rect key="frame" x="369" y="12.666666666666629" width="25" height="25"/>
                                                 <constraints>
@@ -233,8 +239,11 @@
                                         <constraints>
                                             <constraint firstItem="Zjd-dL-V7J" firstAttribute="centerY" secondItem="P4L-Ku-ZGn" secondAttribute="centerY" id="04v-Tu-gJa"/>
                                             <constraint firstItem="gdj-CO-7u2" firstAttribute="centerY" secondItem="P4L-Ku-ZGn" secondAttribute="centerY" id="8BA-PG-Lg7"/>
+                                            <constraint firstAttribute="bottom" secondItem="P2f-qm-N66" secondAttribute="bottom" constant="5" id="Dys-fb-Q1i"/>
                                             <constraint firstAttribute="trailing" secondItem="Zjd-dL-V7J" secondAttribute="trailing" constant="20" id="IDd-fA-KWM"/>
+                                            <constraint firstItem="P2f-qm-N66" firstAttribute="leading" secondItem="P4L-Ku-ZGn" secondAttribute="leading" constant="10" id="KCW-bJ-j1X"/>
                                             <constraint firstItem="PEb-Mx-TDT" firstAttribute="centerY" secondItem="P4L-Ku-ZGn" secondAttribute="centerY" id="TYM-yh-WKf"/>
+                                            <constraint firstItem="P2f-qm-N66" firstAttribute="top" secondItem="P4L-Ku-ZGn" secondAttribute="top" constant="5" id="UAf-SK-vNB"/>
                                             <constraint firstItem="Zjd-dL-V7J" firstAttribute="leading" secondItem="gdj-CO-7u2" secondAttribute="trailing" constant="10" id="epb-xB-MqY"/>
                                             <constraint firstItem="PEb-Mx-TDT" firstAttribute="leading" secondItem="P4L-Ku-ZGn" secondAttribute="leading" constant="20" id="lo7-4b-994"/>
                                             <constraint firstAttribute="height" constant="50" id="nkR-Tj-j0H"/>
@@ -404,12 +413,15 @@
                         <viewLayoutGuide key="safeArea" id="spr-jf-rwY"/>
                     </view>
                     <connections>
+                        <outlet property="addTrackToFavouriteButton" destination="P2f-qm-N66" id="DTv-0W-zK0"/>
                         <outlet property="audioPlayerView" destination="p8g-WH-a9J" id="477-t7-EJ5"/>
                         <outlet property="containerBottomView" destination="P4L-Ku-ZGn" id="xE0-ei-cOS"/>
                         <outlet property="controlPlayerView" destination="UPV-Tj-dg0" id="hkZ-dF-C4a"/>
                         <outlet property="descriptionLabel" destination="XIr-Qp-svw" id="fhT-3w-frK"/>
                         <outlet property="descriptionMiniPlayerLabel" destination="3v6-Oh-YYD" id="uDV-Vc-5LA"/>
+                        <outlet property="favouriteImageView" destination="PEb-Mx-TDT" id="Ilv-sp-sNw"/>
                         <outlet property="hideButton" destination="8GE-fg-ihx" id="TQO-5H-I4f"/>
+                        <outlet property="miniAddTrackToFavouriteButton" destination="aRY-44-0gu" id="WUZ-kK-fNE"/>
                         <outlet property="miniNextButton" destination="hwf-vE-8eH" id="v6K-hW-uq2"/>
                         <outlet property="miniPlayButton" destination="7BA-d2-2UM" id="Lwu-3G-2o0"/>
                         <outlet property="miniPlayerImageView" destination="hAe-Kn-eRM" id="xLU-2p-TvC"/>

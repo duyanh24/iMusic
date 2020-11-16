@@ -38,6 +38,9 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var randomModeImageView: UIImageView!
     @IBOutlet weak var repeatModeButton: UIButton!
     @IBOutlet weak var repeatModeImageView: UIImageView!
+    @IBOutlet weak var favouriteImageView: UIImageView!
+    @IBOutlet weak var addTrackToFavouriteButton: UIButton!
+    @IBOutlet weak var miniAddTrackToFavouriteButton: UIButton!
     
     private var isViewDidAppear = false
     
@@ -48,6 +51,7 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
     private var duration = 0
     private let seekValueSlider = PublishSubject<Float>()
     private var isChangingSlider = false
+    private let isTrackAlreadyExistsInFavorites = BehaviorRelay<Bool>(value: false)
     
     var isScrollEnabled: Bool = true {
         didSet {
@@ -91,7 +95,8 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
                                           randomModeButton: randomButton.rx.tap.asObservable(),
                                           repeatModeButton: repeatModeButton.rx.tap.asObservable(),
                                           tracks: tracks,
-                                          seekValueSlider: seekValueSlider)
+                                          seekValueSlider: seekValueSlider,
+                                          addTrackToFavouriteButton: addTrackToFavouriteButton.rx.tap.asObservable().merge(with: miniAddTrackToFavouriteButton.rx.tap.asObservable()))
         let output = viewModel.transform(input: input)
         
         output.playList.subscribe(onNext: { tracks, currentTrack in
@@ -143,6 +148,34 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
         
         output.isRepeatModeSelected.subscribe(onNext: { [weak self] isRepeatModeSelected in
             isRepeatModeSelected ? (self?.repeatModeImageView.image = Asset.playerButtonRepeatoneActiveNormal.image) : (self?.repeatModeImageView.image = Asset.playerButtonRepeatNormalNormal.image)
+        })
+        .disposed(by: disposeBag)
+        
+        output.isTrackAlreadyExistsInFavorites.subscribe(onNext: { [weak self] value in
+            self?.isTrackAlreadyExistsInFavorites.accept(value)
+        }).disposed(by: disposeBag)
+        
+        output.addTrackToFavouriteResult.subscribe(onNext: { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success:
+                self.isTrackAlreadyExistsInFavorites.accept(!self.isTrackAlreadyExistsInFavorites.value)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        isTrackAlreadyExistsInFavorites.skip(1).subscribe(onNext: { isTrackAlreadyExistsInFavorites in
+            if isTrackAlreadyExistsInFavorites {
+                self.favouriteImageView.image = Asset.feedLikeSelectedIcoNormal.image
+                self.miniAddTrackToFavouriteButton.setImage(Asset.icFeedLike48Normal.image, for: .normal)
+            } else {
+                self.favouriteImageView.image = Asset.icHeartWhite2020Normal.image
+                self.miniAddTrackToFavouriteButton.setImage(Asset.icHeartBlack2020Normal.image, for: .normal)
+            }
         })
         .disposed(by: disposeBag)
     }
