@@ -94,24 +94,6 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         tableView.register(cellType: PlaylistTableViewCell.self)
         tableView.contentInset.bottom = 50
     }
-    
-    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
-        if sender.state == UIGestureRecognizer.State.began {
-            let touchPoint = sender.location(in: tableView)
-            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                switch dataSource[indexPath] {
-                case .favourite:
-                    return
-                case .playlist(let playlistSectionModel):
-                    showConfirmMessage(title: playlistSectionModel.playlist, message: Strings.deletePlaylistMessage, confirmTitle: Strings.confirm, cancelTitle: Strings.cancel) { [weak self] selectedCase in
-                        if selectedCase == .confirm {
-                            self?.deletePlaylistTrigger.onNext(playlistSectionModel.playlist)
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 extension MypageViewController {
@@ -170,5 +152,23 @@ extension MypageViewController: UIGestureRecognizerDelegate {
     func setupGesture() -> UILongPressGestureRecognizer {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         return longPress
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                switch dataSource[indexPath] {
+                case .favourite:
+                    return
+                case .playlist(let playlistSectionModel):
+                    showConfirmMessage(title: playlistSectionModel.playlist, message: Strings.deletePlaylistMessage, confirmTitle: Strings.confirm, cancelTitle: Strings.cancel) { [weak self] selectedCase in
+                        if selectedCase == .confirm {
+                            self?.deletePlaylistTrigger.onNext(playlistSectionModel.playlist)
+                        }
+                    }
+                }
+            }
+        }
     }
 }

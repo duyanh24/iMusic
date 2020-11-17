@@ -37,11 +37,11 @@ class PlayerViewModel: ServicesViewModel {
             TrackPlayer.shared.seek(seconds: value)
         }).mapToVoid()
         
-        let randomMode = input.randomModeButton.do(onNext: { _ in
+        let randomMode = input.changeRandomMode.do(onNext: { _ in
             TrackPlayer.shared.setupRandomMode()
         }).mapToVoid()
         
-        let repeatMode = input.repeatModeButton.do(onNext: { _ in
+        let repeatMode = input.changeRepeatMode.do(onNext: { _ in
             TrackPlayer.shared.setupRepeatMode()
         }).mapToVoid()
         
@@ -61,7 +61,7 @@ class PlayerViewModel: ServicesViewModel {
             }
         }
         
-        let addTrackToFavourite = input.addTrackToFavouriteButton
+        let addTrackToFavourite = input.addTrackToFavourite
             .withLatestFrom(TrackPlayer.shared.currentTrack)
             .flatMapLatest { [weak self] track -> Observable<Result<Void, Error>> in
                 guard let self = self, let trackId = track?.id, let track = track else {
@@ -71,6 +71,16 @@ class PlayerViewModel: ServicesViewModel {
                     return self.services.libraryService.removeTrackInFavourite(trackId: trackId)
                 }
                 return self.services.libraryService.addTrackToFavourite(track: track)
+        }
+        
+        let showPlaylist = input.addTrackToPlaylist
+            .withLatestFrom(TrackPlayer.shared.currentTrack)
+            .flatMapLatest { track -> Observable<Void> in
+                guard let track = track else {
+                    return .empty()
+                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.ShowPlaylistOption), object: nil, userInfo: [Strings.tracks: track])
+                return.empty()
         }
         
         return Output(playList: Observable.combineLatest(input.tracks, TrackPlayer.shared.currentTrack),
@@ -88,7 +98,8 @@ class PlayerViewModel: ServicesViewModel {
                       repeatMode: repeatMode,
                       isRepeatModeSelected: TrackPlayer.shared.repeatMode.asObservable(),
                       isTrackAlreadyExistsInFavorites: checkTrackAlreadyExistsInFavorites,
-                      addTrackToFavouriteResult: addTrackToFavourite)
+                      addTrackToFavouriteResult: addTrackToFavourite,
+                      showPlaylist: showPlaylist)
     }
 }
 
@@ -97,11 +108,12 @@ extension PlayerViewModel {
         var prevButton: Observable<Void>
         var nextButton: Observable<Void>
         var playButton: Observable<Void>
-        var randomModeButton: Observable<Void>
-        var repeatModeButton: Observable<Void>
+        var changeRandomMode: Observable<Void>
+        var changeRepeatMode: Observable<Void>
         var tracks: Observable<[Track]>
         var seekValueSlider: Observable<Float>
-        var addTrackToFavouriteButton: Observable<Void>
+        var addTrackToFavourite: Observable<Void>
+        var addTrackToPlaylist: Observable<Void>
     }
     
     struct Output {
@@ -121,5 +133,6 @@ extension PlayerViewModel {
         var isRepeatModeSelected: Observable<Bool>
         var isTrackAlreadyExistsInFavorites: Observable<Bool>
         var addTrackToFavouriteResult: Observable<Result<Void, Error>>
+        var showPlaylist: Observable<Void>
     }
 }

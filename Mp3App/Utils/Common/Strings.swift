@@ -44,6 +44,7 @@ struct Strings {
     static let cancel = "Huỷ"
     static let deleteSearchHistoryMessage = "Xoá lịch sử tìm kiếm?"
     static let deletePlaylistMessage = "Bạn có muốn xoá playlist này?"
+    static let deleteTrackMessage = "Bạn có muốn xoá bài hát này?"
     
     //mypage
     static let library = "Thư viện"

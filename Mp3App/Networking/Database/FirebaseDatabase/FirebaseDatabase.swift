@@ -171,6 +171,20 @@ class FirebaseDatabase {
         }
     }
     
+    func removeTrackInPlaylist(trackId: Int, playlist: String) -> Observable<Result<Void, Error>> {
+        return Observable.create { [weak self] observer -> Disposable in
+            let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
+            if userId.isEmpty {
+                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+            } else {
+                self?.reference.child(FirebaseProperty.users.rawValue).child(userId).child(playlist).child(String(trackId)).removeValue()
+                observer.onNext(.success(()))
+            }
+            observer.onCompleted()
+            return Disposables.create()
+        }
+    }
+    
     func checkTrackAlreadyExitsInFavourite(trackId: Int) -> Observable<Result<Bool, Error>> {
         return Observable.create { [weak self] observer -> Disposable in
             let userId = AccountDefault.shared.retrieveStringData(key: .idkey)

@@ -41,6 +41,7 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var favouriteImageView: UIImageView!
     @IBOutlet weak var addTrackToFavouriteButton: UIButton!
     @IBOutlet weak var miniAddTrackToFavouriteButton: UIButton!
+    @IBOutlet weak var addTrackToPlaylistButton: UIButton!
     
     private var isViewDidAppear = false
     
@@ -92,11 +93,12 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
         let input = PlayerViewModel.Input(prevButton: prevButton.rx.tap.asObservable(),
                                           nextButton: nextButton.rx.tap.asObservable().merge(with: miniNextButton.rx.tap.asObservable()),
                                           playButton: playButton.rx.tap.asObservable().merge(with: miniPlayButton.rx.tap.asObservable()),
-                                          randomModeButton: randomButton.rx.tap.asObservable(),
-                                          repeatModeButton: repeatModeButton.rx.tap.asObservable(),
+                                          changeRandomMode: randomButton.rx.tap.asObservable(),
+                                          changeRepeatMode: repeatModeButton.rx.tap.asObservable(),
                                           tracks: tracks,
                                           seekValueSlider: seekValueSlider,
-                                          addTrackToFavouriteButton: addTrackToFavouriteButton.rx.tap.asObservable().merge(with: miniAddTrackToFavouriteButton.rx.tap.asObservable()))
+                                          addTrackToFavourite: addTrackToFavouriteButton.rx.tap.asObservable().merge(with: miniAddTrackToFavouriteButton.rx.tap.asObservable()),
+                                          addTrackToPlaylist: addTrackToPlaylistButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         
         output.playList.subscribe(onNext: { tracks, currentTrack in
@@ -178,6 +180,8 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
             }
         })
         .disposed(by: disposeBag)
+        
+        output.showPlaylist.subscribe().disposed(by: disposeBag)
     }
     
     private func setupTrackImageView() {
