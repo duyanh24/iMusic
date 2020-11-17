@@ -46,7 +46,6 @@ class FirebaseDatabase {
                     self.loginResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.unknownError)))
                 }
             }
-            
         }
     }
     
@@ -55,7 +54,7 @@ class FirebaseDatabase {
         if userId.isEmpty {
             playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
         } else {
-            reference.child(FirebaseProperty.users.rawValue).child(userId).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            reference.child(FirebaseProperty.users.rawValue).child(userId).observe(.value, with: { [weak self] snapshot in
                 let value = snapshot.value as? NSDictionary
                 if let playlist = value?.allKeys as? [String] {
                     self?.playlistResult.onNext(.success(playlist))
@@ -88,7 +87,7 @@ class FirebaseDatabase {
         if userId.isEmpty {
             playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
         } else {
-            reference.child(FirebaseProperty.users.rawValue).child(userId).child(playlistName).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            reference.child(FirebaseProperty.users.rawValue).child(userId).child(playlistName).observe(.value, with: { [weak self] (snapshot) in
                 if let value = snapshot.value as? NSDictionary {
                     var tracks: [Track] = []
                     for playlist in value {
@@ -211,7 +210,7 @@ class FirebaseDatabase {
         if userId.isEmpty {
             favouriteResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
         } else {
-            reference.child(FirebaseProperty.favourite.rawValue).child(userId).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            reference.child(FirebaseProperty.favourite.rawValue).child(userId).observe(.value, with: { [weak self] (snapshot) in
                 if let value = snapshot.value as? NSDictionary {
                     var tracks: [Track] = []
                     for playlist in value {

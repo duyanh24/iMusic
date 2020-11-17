@@ -49,7 +49,6 @@ class CreatePlaylistViewController: BaseViewController, StoryboardBased, ViewMod
             case .failure(let error):
                 self.errorLabel.text = error.localizedDescription
             case .success:
-                NotificationCenter.default.post(name: Notification.Name(Strings.reloadPlaylistNotification), object: nil)
                 SceneCoordinator.shared.pop(animated: true, toRoot: true)
             }
         }).disposed(by: disposeBag)

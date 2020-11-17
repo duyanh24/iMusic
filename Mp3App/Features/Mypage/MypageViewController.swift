@@ -38,16 +38,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNotificationCenter()
         bindViewModel()
-        loadData()
-    }
-    
-    private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name(Strings.reloadPlaylistNotification), object: nil)
-    }
-    
-    @objc func reloadData() {
         loadData()
     }
     
@@ -91,7 +82,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
             case .failure(let error):
                 self.showErrorAlert(message: error.localizedDescription, completion: nil)
             case .success:
-                NotificationCenter.default.post(name: Notification.Name(Strings.reloadPlaylistNotification), object: nil)
+                break
             }
         }).disposed(by: disposeBag)
     }
