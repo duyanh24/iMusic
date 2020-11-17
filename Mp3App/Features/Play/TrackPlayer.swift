@@ -38,7 +38,7 @@ class TrackPlayer {
         }
     }
     
-    private func resetData() {
+    func resetData() {
         player = nil
         currentTrackIndex = 0
         isPlaying = false

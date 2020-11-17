@@ -95,6 +95,7 @@ class TrackResultViewController: BaseResultViewController, StoryboardBased, View
         tableView.delegate = self
         tableView.register(cellType: TrackResultCell.self)
         tableView.contentInset.bottom = 50
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 

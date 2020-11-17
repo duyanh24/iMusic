@@ -93,6 +93,7 @@ class UserResultViewController: BaseResultViewController, StoryboardBased, ViewM
         tableView.delegate = self
         tableView.register(cellType: UserResultCell.self)
         tableView.contentInset.bottom = 50
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 

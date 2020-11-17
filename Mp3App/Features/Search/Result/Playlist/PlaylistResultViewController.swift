@@ -109,6 +109,7 @@ class PlaylistResultViewController: BaseResultViewController, StoryboardBased, V
         tableView.delegate = self
         tableView.register(cellType: PlaylistResultCell.self)
         tableView.contentInset.bottom = 50
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 

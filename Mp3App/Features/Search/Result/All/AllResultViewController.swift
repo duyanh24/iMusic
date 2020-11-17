@@ -103,6 +103,7 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
         tableView.register(cellType: TrackResultCell.self)
         tableView.register(cellType: PlaylistResultCell.self)
         tableView.contentInset.bottom = 50
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 

@@ -17,6 +17,7 @@ class SettingViewModel: ServicesViewModel {
         let logoutSuccess = input.logout
             .do(onNext: { [weak self] _ in
                 self?.services.authencationService.logout()
+                TrackPlayer.shared.resetData()
             })
             .mapToVoid()
         return Output(logoutSuccess: logoutSuccess, email: .just(AccountDefault.shared.retrieveStringData(key: .emailKey)))

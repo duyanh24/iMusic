@@ -39,6 +39,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         bindViewModel()
         setupResultView()
         setupNotificationCenter()
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +129,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         historyTableView.delegate = self
         historyTableView.register(cellType: SearchHistoryCell.self)
         historyTableView.contentInset.bottom = 50
+        historyTableView.keyboardDismissMode = .onDrag
     }
     
     private func setupNotificationCenter() {
@@ -166,5 +168,18 @@ extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+}
+
+extension SearchViewController: UIGestureRecognizerDelegate {
+    func hideKeyboardWhenTappedAround() {
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.delegate = self
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc override func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
