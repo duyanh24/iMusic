@@ -42,6 +42,10 @@ class RootTabbarController: UITabBarController, StoryboardBased {
         setupPlayerView()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func createPlayerView() {
         let playerViewModel = PlayerViewModel()
         let services = PlayerServices(playlistService: PlaylistService(), trackService: TrackService(), libraryService: LibraryService())

@@ -27,6 +27,10 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         setupNotificationCenter()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func setupButtonBar() {
         settings.style.selectedBarBackgroundColor = Colors.purpleColor
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 12, weight: .semibold)

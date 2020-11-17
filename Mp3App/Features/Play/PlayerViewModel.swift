@@ -68,8 +68,10 @@ class PlayerViewModel: ServicesViewModel {
                     return .just(Result(error: APIError(statusCode: nil, statusMessage: ErrorMessage.unknownError)))
                 }
                 if self.isTrackAlreadyExistsInFavorites {
+                    self.isTrackAlreadyExistsInFavorites = false
                     return self.services.libraryService.removeTrackInFavourite(trackId: trackId)
                 }
+                self.isTrackAlreadyExistsInFavorites = true
                 return self.services.libraryService.addTrackToFavourite(track: track)
         }
         
