@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import Reusable
 import RxDataSources
+import NVActivityIndicatorView
 
 typealias HistorySectionModel = SectionModel<String, String>
 
@@ -18,6 +19,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var searchTextField: CustomTextField!
     @IBOutlet weak var resultContainerView: UIView!
     @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     
     var viewModel: SearchViewModel!
     private let disposeBag = DisposeBag()
@@ -53,6 +55,8 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         super.prepareUI()
         setupSearchTextField()
         setupTableView()
+        loadingIndicatorView.type = .circleStrokeSpin
+        loadingIndicatorView.color = Colors.purpleColor
     }
     
     private func setupResultView() {
@@ -110,6 +114,12 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         historyTableView.rx.modelSelected(String.self).subscribe(onNext: { [weak self] value in
             self?.searchTextField.rx.text.onNext(value)
             self?.searchTextField.sendActions(for: .valueChanged)
+        })
+        .disposed(by: disposeBag)
+        
+        resultController.loading.subscribe(onNext: { [weak self] isLoading in
+            isLoading ? self?.loadingIndicatorView.startAnimating() : self?.loadingIndicatorView.stopAnimating()
+            isLoading ? (self?.searchTextField.clearButtonMode = .never) : (self?.searchTextField.clearButtonMode = .whileEditing)
         })
         .disposed(by: disposeBag)
     }

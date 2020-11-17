@@ -23,6 +23,7 @@ class TrackResultViewController: BaseResultViewController, StoryboardBased, View
     private let loadMoreTrigger = PublishSubject<Void>()
     private var isLoadMoreEnabled = true
     private let startLoadingOffset = CGFloat(20.0)
+    let loading = PublishSubject<Bool>()
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<TrackSectionModel>(
         configureCell: { _, tableView, indexPath, track in
@@ -57,7 +58,7 @@ class TrackResultViewController: BaseResultViewController, StoryboardBased, View
                                                play: tableView.rx.modelSelected(Track.self).asObservable())
         let output = viewModel.transform(input: input)
         
-        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.activityIndicator.bind(to: loading).disposed(by: disposeBag)
         output.loadData.subscribe().disposed(by: disposeBag)
         output.loadMoreData.subscribe().disposed(by: disposeBag)
         output.isLoadMoreEnabled.subscribe(onNext: { [weak self] isLoadMoreEnabled in

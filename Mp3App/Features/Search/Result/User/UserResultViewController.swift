@@ -25,6 +25,7 @@ class UserResultViewController: BaseResultViewController, StoryboardBased, ViewM
     private let loadMoreTrigger = PublishSubject<Void>()
     private var isLoadMoreEnabled = true
     private let startLoadingOffset = CGFloat(20.0)
+    let loading = PublishSubject<Bool>()
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<UserSectionModel>(
         configureCell: { _, tableView, indexPath, user in
@@ -57,7 +58,7 @@ class UserResultViewController: BaseResultViewController, StoryboardBased, ViewM
         let input = UserResultViewModel.Input(searchUser: keywordTrigger, loadMore: loadMoreTrigger)
         let output = viewModel.transform(input: input)
         
-        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.activityIndicator.bind(to: loading).disposed(by: disposeBag)
         output.loadData.subscribe().disposed(by: disposeBag)
         output.loadMoreData.subscribe().disposed(by: disposeBag)
         

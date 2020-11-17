@@ -20,6 +20,7 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
     var viewModel: AllResultViewModel!
     private let disposeBag = DisposeBag()
     private let keywordTrigger = BehaviorSubject<String>(value: "")
+    let loading = PublishSubject<Bool>()
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
@@ -66,7 +67,7 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
                                         play: tableView.rx.modelSelected(SearchSectionItem.self).asObservable())
         let output = viewModel.transform(input: input)
         
-        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.activityIndicator.bind(to: loading).disposed(by: disposeBag)
         
         output.dataSource
             .do(onNext: { [weak self] data in

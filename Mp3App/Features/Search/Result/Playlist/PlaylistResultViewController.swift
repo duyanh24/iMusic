@@ -25,6 +25,7 @@ class PlaylistResultViewController: BaseResultViewController, StoryboardBased, V
     private let loadMoreTrigger = PublishSubject<Void>()
     private var isLoadMoreEnabled = true
     private let startLoadingOffset = CGFloat(20.0)
+    let loading = PublishSubject<Bool>()
     
     private lazy var dataSource = RxTableViewSectionedReloadDataSource<PlaylistSectionModel>(
         configureCell: { _, tableView, indexPath, playlist in
@@ -58,7 +59,7 @@ class PlaylistResultViewController: BaseResultViewController, StoryboardBased, V
         let input = PlaylistResultViewModel.Input(searchPlaylist: keywordTrigger, loadMore: loadMoreTrigger)
         let output = viewModel.transform(input: input)
         
-        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.activityIndicator.bind(to: loading).disposed(by: disposeBag)
         output.loadData.subscribe().disposed(by: disposeBag)
         output.loadMoreData.subscribe().disposed(by: disposeBag)
         

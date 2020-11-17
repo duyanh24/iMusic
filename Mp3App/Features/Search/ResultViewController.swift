@@ -18,6 +18,8 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
     private var playlistResultViewController = PlaylistResultViewController.instantiate()
     private var listViewController = [BaseResultViewController]()
     private var keyword = ""
+    let loading = PublishSubject<Bool>()
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         setupButtonBar()
@@ -48,6 +50,11 @@ class ResultViewController: ButtonBarPagerTabStripViewController {
         
         let allResultViewModel = AllResultViewModel()
         allResultViewController = AllResultViewController.instantiate(withViewModel: allResultViewModel, andServices: searchServices)
+        
+        trackResultViewController.loading.bind(to: loading).disposed(by: disposeBag)
+        userResultViewController.loading.bind(to: loading).disposed(by: disposeBag)
+        playlistResultViewController.loading.bind(to: loading).disposed(by: disposeBag)
+        allResultViewController.loading.bind(to: loading).disposed(by: disposeBag)
         
         listViewController = [allResultViewController, trackResultViewController, userResultViewController, playlistResultViewController]
     }
