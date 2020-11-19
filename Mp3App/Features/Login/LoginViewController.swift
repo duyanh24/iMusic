@@ -30,6 +30,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        hideKeyboardWhenTappedAround()
     }
     
     override func prepareUI() {
@@ -82,5 +83,18 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
         let passwordAttributedPlaceholder = NSAttributedString(string: Strings.password, attributes: attributes)
         emailTextField.attributedPlaceholder = usernameAttributedPlaceholder
         passwordTextField.attributedPlaceholder = passwordAttributedPlaceholder
+    }
+}
+
+extension LoginViewController: UIGestureRecognizerDelegate {
+    func hideKeyboardWhenTappedAround() {
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.delegate = self
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc override func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
