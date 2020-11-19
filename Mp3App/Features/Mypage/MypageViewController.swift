@@ -14,6 +14,8 @@ import RxDataSources
 
 class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var loginContainer: UIView!
+    @IBOutlet weak var loginButton: UIButton!
     
     var viewModel: MypageViewModel!
     private let disposeBag = DisposeBag()
@@ -55,6 +57,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
+        loginButton.layer.cornerRadius = 5
     }
     
     private func bindViewModel() {
@@ -84,7 +87,19 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
             case .success:
                 break
             }
-        }).disposed(by: disposeBag)
+        })
+        .disposed(by: disposeBag)
+        
+        output.checkLogin.subscribe(onNext: { [weak self] isLoggedIn in
+            self?.loginContainer.isHidden = isLoggedIn
+            self?.tableView.isHidden = !isLoggedIn
+        })
+        .disposed(by: disposeBag)
+        
+        loginButton.rx.tap.subscribe(onNext: { _ in
+            SceneCoordinator.shared.transition(to: Scene.login)
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {

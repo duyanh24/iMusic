@@ -54,6 +54,7 @@ struct Strings {
     
     //setting
     static let logout = "Đăng xuất"
+    static let notLoggedIn = "Bạn chưa đăng nhập"
     static let confirmLogout = "Bạn có muốn đăng xuất?"
     static let helpURL = "https://zingmp3.vn/faq/app.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
     static let serviceTermsURL = "https://zingmp3.vn/tos.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"

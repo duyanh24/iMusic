@@ -14,6 +14,7 @@ import Reusable
 class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased {
     var viewModel: SplashViewModel!
     private let disposeBag = DisposeBag()
+    private let checkLogin = PublishSubject<Bool>()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -25,18 +26,22 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
     }
     
     private func bindViewModel() {
-        let input = SplashViewModel.Input()
+        let input = SplashViewModel.Input(checkLogin: checkLogin)
         let output = viewModel.transform(input: input)
         
         output.loginResult
-        .subscribe(onNext: { result in
+        .subscribe(onNext: { [weak self] result in
             switch result {
             case .failure:
-                SceneCoordinator.shared.transition(to: Scene.login)
+                self?.checkLogin.onNext(false)
+                SceneCoordinator.shared.transition(to: Scene.tabbar)
             case .success:
+                self?.checkLogin.onNext(true)
                 SceneCoordinator.shared.transition(to: Scene.tabbar)
             }
         })
         .disposed(by: disposeBag)
+        
+        output.cleanDataAccount.subscribe().disposed(by: disposeBag)
     }
 }

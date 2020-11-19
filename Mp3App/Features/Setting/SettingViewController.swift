@@ -20,6 +20,9 @@ class SettingViewController: BaseViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var serviceTermsButton: UIButton!
     @IBOutlet weak var privacyPolicyButton: UIButton!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var logoutContainer: UIView!
+    @IBOutlet weak var loginContainer: UIView!
+    @IBOutlet weak var loginButton: UIButton!
     
     var viewModel: SettingViewModel!
     private let disposeBag = DisposeBag()
@@ -59,13 +62,17 @@ class SettingViewController: BaseViewController, StoryboardBased, ViewModelBased
         }).disposed(by: disposeBag)
         
         output.logoutSuccess.subscribe(onNext: { _ in
-            SceneCoordinator.shared.transition(to: Scene.login)
+            SceneCoordinator.shared.transition(to: Scene.tabbar)
         })
         .disposed(by: disposeBag)
         
         output.email.subscribe(onNext: { [weak self] email in
-            self?.emailLabel.text = email
-            self?.avatarLabel.text = String(email.prefix(1)).uppercased()
+            if email.isEmpty {
+                self?.emailLabel.text = Strings.notLoggedIn
+            } else {
+                self?.emailLabel.text = email
+                self?.avatarLabel.text = String(email.prefix(1)).uppercased()
+            }
         })
         .disposed(by: disposeBag)
         
@@ -80,5 +87,16 @@ class SettingViewController: BaseViewController, StoryboardBased, ViewModelBased
         privacyPolicyButton.rx.tap.subscribe(onNext: { _ in
             SceneCoordinator.shared.transition(to: Scene.webView(url: Strings.privacyPolicyURL))
         }).disposed(by: disposeBag)
+        
+        output.checkLogin.subscribe(onNext: { [weak self] isLoggedIn in
+            self?.loginContainer.isHidden = isLoggedIn
+            self?.logoutContainer.isHidden = !isLoggedIn
+        })
+        .disposed(by: disposeBag)
+        
+        loginButton.rx.tap.subscribe(onNext: { _ in
+            SceneCoordinator.shared.transition(to: Scene.login)
+        })
+        .disposed(by: disposeBag)
     }
 }

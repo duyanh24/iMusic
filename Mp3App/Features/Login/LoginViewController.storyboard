@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="S2p-wJ-xSl">
             <objects>
-                <viewController id="bF4-E1-ne3" customClass="LoginViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="bF4-E1-ne3" customClass="LoginViewController" customModule="Mp3App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TSi-ga-y5q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

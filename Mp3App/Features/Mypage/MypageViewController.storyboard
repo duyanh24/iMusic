@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="edg-AW-ae6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="edg-AW-ae6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,23 +21,58 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHI-GF-s5y">
+                                <rect key="frame" x="30" y="392" width="354" height="122.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vui lòng đăng nhập để sử dụng tính năng này!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdJ-AC-VIT">
+                                        <rect key="frame" x="20" y="10" width="314" height="38.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0W-12-Pdj">
+                                        <rect key="frame" x="123.5" y="68.5" width="107" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="8" maxX="15" maxY="8"/>
+                                        <state key="normal" title="Đăng nhập">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="JdJ-AC-VIT" firstAttribute="leading" secondItem="cHI-GF-s5y" secondAttribute="leading" constant="20" id="1K7-0X-JFO"/>
+                                    <constraint firstItem="c0W-12-Pdj" firstAttribute="centerX" secondItem="cHI-GF-s5y" secondAttribute="centerX" id="LWz-Av-0NK"/>
+                                    <constraint firstAttribute="trailing" secondItem="JdJ-AC-VIT" secondAttribute="trailing" constant="20" id="OCI-8D-NZu"/>
+                                    <constraint firstAttribute="bottom" secondItem="c0W-12-Pdj" secondAttribute="bottom" constant="20" id="OEI-sH-wc6"/>
+                                    <constraint firstItem="JdJ-AC-VIT" firstAttribute="top" secondItem="cHI-GF-s5y" secondAttribute="top" constant="10" id="efX-tT-rP5"/>
+                                    <constraint firstItem="c0W-12-Pdj" firstAttribute="top" secondItem="JdJ-AC-VIT" secondAttribute="bottom" constant="20" id="j0V-S2-Sqv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="37F-4O-fsT" firstAttribute="top" secondItem="kMq-so-Vte" secondAttribute="top" id="5GM-0w-3sa"/>
+                            <constraint firstItem="cHI-GF-s5y" firstAttribute="centerY" secondItem="kMq-so-Vte" secondAttribute="centerY" id="LDK-PY-7tJ"/>
                             <constraint firstItem="37F-4O-fsT" firstAttribute="leading" secondItem="kMq-so-Vte" secondAttribute="leading" id="Nij-yx-NK6"/>
+                            <constraint firstItem="kMq-so-Vte" firstAttribute="trailing" secondItem="cHI-GF-s5y" secondAttribute="trailing" constant="30" id="Prm-0k-Fxm"/>
                             <constraint firstItem="kMq-so-Vte" firstAttribute="trailing" secondItem="37F-4O-fsT" secondAttribute="trailing" id="czF-KE-LaF"/>
+                            <constraint firstItem="cHI-GF-s5y" firstAttribute="leading" secondItem="kMq-so-Vte" secondAttribute="leading" constant="30" id="ggP-nL-87h"/>
+                            <constraint firstItem="cHI-GF-s5y" firstAttribute="centerX" secondItem="kMq-so-Vte" secondAttribute="centerX" id="oAK-NM-BKS"/>
                             <constraint firstItem="kMq-so-Vte" firstAttribute="bottom" secondItem="37F-4O-fsT" secondAttribute="bottom" id="y6i-Wi-dFH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kMq-so-Vte"/>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="c0W-12-Pdj" id="mlr-pG-r3a"/>
+                        <outlet property="loginContainer" destination="cHI-GF-s5y" id="FUS-UV-rfO"/>
                         <outlet property="tableView" destination="37F-4O-fsT" id="Pvo-jo-oeL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Wh-RP-fga" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="-274"/>
+            <point key="canvasLocation" x="76.811594202898561" y="-274.55357142857139"/>
         </scene>
     </scenes>
 </document>

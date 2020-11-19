@@ -52,9 +52,9 @@ class FirebaseDatabase {
     func getAllPlaylist() -> Observable<Result<[String], Error>> {
         let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
         if userId.isEmpty {
-            playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+            playlistResult.onNext(.failure(APIError(statusCode: AuthencationStatusCode.NotLoggedIn.rawValue, statusMessage: ErrorMessage.authenticalError)))
         } else {
-            reference.child(FirebaseProperty.users.rawValue).child(userId).observe(.value, with: { [weak self] snapshot in
+            reference.child(FirebaseProperty.playlist.rawValue).child(userId).observe(.value, with: { [weak self] snapshot in
                 let value = snapshot.value as? NSDictionary
                 if let playlist = value?.allKeys as? [String] {
                     self?.playlistResult.onNext(.success(playlist))
@@ -75,7 +75,7 @@ class FirebaseDatabase {
                 observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
             } else {
                 observer.onNext(.success(()))
-                Database.database().reference().child(FirebaseProperty.users.rawValue).child(userId).child(newPlaylist).setValue("")
+                Database.database().reference().child(FirebaseProperty.playlist.rawValue).child(userId).child(newPlaylist).setValue("")
             }
             observer.onCompleted()
             return Disposables.create()
@@ -87,7 +87,7 @@ class FirebaseDatabase {
         if userId.isEmpty {
             playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
         } else {
-            reference.child(FirebaseProperty.users.rawValue).child(userId).child(playlistName).observe(.value, with: { [weak self] (snapshot) in
+            reference.child(FirebaseProperty.playlist.rawValue).child(userId).child(playlistName).observe(.value, with: { [weak self] (snapshot) in
                 if let value = snapshot.value as? NSDictionary {
                     var tracks: [Track] = []
                     for playlist in value {
@@ -122,7 +122,7 @@ class FirebaseDatabase {
                         FirebaseProperty.artworkURL.rawValue : track.artworkURL ?? "",
                         FirebaseProperty.description.rawValue : track.user?.username ?? ""
                     ]
-                    Database.database().reference().child(FirebaseProperty.users    .rawValue).child(userId).child(playlistName).child(String(trackId)).setValue(trackDictionary)
+                    Database.database().reference().child(FirebaseProperty.playlist    .rawValue).child(userId).child(playlistName).child(String(trackId)).setValue(trackDictionary)
                     observer.onNext(.success(()))
                 } else {
                     observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
@@ -163,7 +163,7 @@ class FirebaseDatabase {
             if userId.isEmpty {
                 observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
             } else {
-                self?.reference.child(FirebaseProperty.users.rawValue).child(userId).child(playlistName).removeValue()
+                self?.reference.child(FirebaseProperty.playlist.rawValue).child(userId).child(playlistName).removeValue()
                 observer.onNext(.success(()))
             }
             observer.onCompleted()
@@ -177,7 +177,7 @@ class FirebaseDatabase {
             if userId.isEmpty {
                 observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
             } else {
-                self?.reference.child(FirebaseProperty.users.rawValue).child(userId).child(playlist).child(String(trackId)).removeValue()
+                self?.reference.child(FirebaseProperty.playlist.rawValue).child(userId).child(playlist).child(String(trackId)).removeValue()
                 observer.onNext(.success(()))
             }
             observer.onCompleted()
