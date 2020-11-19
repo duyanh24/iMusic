@@ -77,15 +77,15 @@ class SettingViewController: BaseViewController, StoryboardBased, ViewModelBased
         .disposed(by: disposeBag)
         
         helpButton.rx.tap.subscribe(onNext: { _ in
-            SceneCoordinator.shared.transition(to: Scene.webView(url: Strings.helpURL))
+            SceneCoordinator.shared.transition(to: Scene.webView(url: APIURL.helpURL))
         }).disposed(by: disposeBag)
         
         serviceTermsButton.rx.tap.subscribe(onNext: { _ in
-            SceneCoordinator.shared.transition(to: Scene.webView(url: Strings.serviceTermsURL))
+            SceneCoordinator.shared.transition(to: Scene.webView(url: APIURL.serviceTermsURL))
         }).disposed(by: disposeBag)
         
         privacyPolicyButton.rx.tap.subscribe(onNext: { _ in
-            SceneCoordinator.shared.transition(to: Scene.webView(url: Strings.privacyPolicyURL))
+            SceneCoordinator.shared.transition(to: Scene.webView(url: APIURL.privacyPolicyURL))
         }).disposed(by: disposeBag)
         
         output.checkLogin.subscribe(onNext: { [weak self] isLoggedIn in

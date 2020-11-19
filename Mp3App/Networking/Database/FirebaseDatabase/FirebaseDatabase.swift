@@ -52,7 +52,7 @@ class FirebaseDatabase {
     func getAllPlaylist() -> Observable<Result<[String], Error>> {
         let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
         if userId.isEmpty {
-            playlistResult.onNext(.failure(APIError(statusCode: AuthencationStatusCode.NotLoggedIn.rawValue, statusMessage: ErrorMessage.authenticalError)))
+            playlistResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
         } else {
             reference.child(FirebaseProperty.playlist.rawValue).child(userId).observe(.value, with: { [weak self] snapshot in
                 let value = snapshot.value as? NSDictionary
@@ -113,7 +113,7 @@ class FirebaseDatabase {
         return Observable.create { observer -> Disposable in
             let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
             if userId.isEmpty {
-                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.notLoggedIn)))
             } else {
                 if let trackId = track.id {
                     let trackDictionary: [String : Any] = [
@@ -137,7 +137,7 @@ class FirebaseDatabase {
         return Observable.create { observer -> Disposable in
             let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
             if userId.isEmpty {
-                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.notLoggedIn)))
             } else {
                 if let trackId = track.id {
                     let trackDictionary: [String : Any] = [
@@ -175,7 +175,7 @@ class FirebaseDatabase {
         return Observable.create { [weak self] observer -> Disposable in
             let userId = AccountDefault.shared.retrieveStringData(key: .idkey)
             if userId.isEmpty {
-                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.authenticalError)))
+                observer.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.notLoggedIn)))
             } else {
                 self?.reference.child(FirebaseProperty.playlist.rawValue).child(userId).child(playlist).child(String(trackId)).removeValue()
                 observer.onNext(.success(()))

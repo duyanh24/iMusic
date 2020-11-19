@@ -49,11 +49,11 @@
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1F-QH-oeE" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="364" y="64" width="20" height="20"/>
+                                <rect key="frame" x="369" y="66.5" width="15" height="15"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="5GI-GY-WI5"/>
-                                    <constraint firstAttribute="width" constant="20" id="a10-KX-UpF"/>
+                                    <constraint firstAttribute="height" constant="15" id="5GI-GY-WI5"/>
+                                    <constraint firstAttribute="width" constant="15" id="a10-KX-UpF"/>
                                 </constraints>
                             </view>
                         </subviews>

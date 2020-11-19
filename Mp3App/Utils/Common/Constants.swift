@@ -12,6 +12,9 @@ struct APIURL {
     static let baseURLv2 = "https://api-v2.soundcloud.com"
     static let baseURLv1 = "https://api.soundcloud.com"
     static let APIStream = "https://api.soundcloud.com/tracks/%d/stream?client_id=91f71f725804f4915f4cc95f69fff503"
+    static let helpURL = "https://zingmp3.vn/faq/app.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
+    static let serviceTermsURL = "https://zingmp3.vn/tos.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
+    static let privacyPolicyURL = "https://zingmp3.vn/privacy.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
 }
 
 struct Constants {
@@ -26,6 +29,7 @@ enum ErrorMessage {
     static let serverError = "Server error"
     static let errorOccur = "An error occurs"
     static let authenticalError = "Lỗi xác thực tài khoản"
+    static let notLoggedIn = "Vui lòng đăng nhập trước"
     static let wrongPassword = "Mật khẩu không chính xác"
     static let invalidEmail = "Email không đúng định dạng"
     static let wrongEmail = "Email không chính xác"

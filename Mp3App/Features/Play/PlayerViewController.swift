@@ -269,9 +269,9 @@ extension PlayerViewController: UIScrollViewDelegate {
         pageControl.currentPage = Int(currentPage)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (view.bounds.width - scrollView.contentOffset.x) / view.bounds.width
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (view.bounds.width - scrollView.contentOffset.x) / view.bounds.width
+//    }
 }
 
 extension Reactive where Base: PlayerViewController {
