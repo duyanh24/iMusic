@@ -65,6 +65,7 @@ class LoginViewController: BaseViewController, StoryboardBased, ViewModelBased {
                 case .failure(let error):
                     self.showErrorAlert(message: error.localizedDescription, completion: nil)
                 case .success:
+                    TrackPlayer.shared.resetData()
                     SceneCoordinator.shared.transition(to: Scene.tabbar)
                 }
             })

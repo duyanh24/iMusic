@@ -40,7 +40,7 @@ class FirebaseDatabase {
                 if let result = result {
                     AccountDefault.shared.saveStringData(data: result.user.uid, key: .idkey)
                     AccountDefault.shared.saveStringData(data: email, key: .emailKey)
-                    AccountDefault.shared.saveStringData(data: password, key: .passwordKey)
+                    Keychain.shared.saveData(password, for: email)
                     self.loginResult.onNext(.success(()))
                 } else {
                     self.loginResult.onNext(.failure(APIError(statusCode: nil, statusMessage: ErrorMessage.unknownError)))

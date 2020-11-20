@@ -16,16 +16,18 @@ class SplashViewModel: ServicesViewModel {
     
     func transform(input: Input) -> Output {
         let email = AccountDefault.shared.retrieveStringData(key: .emailKey)
-        let password = AccountDefault.shared.retrieveStringData(key: .passwordKey)
-        let loginResult = services.authencationService.login(email: email, password: password)
+        let password = Keychain.shared.getData(for: email)
         
-        let cleanDataAccount = input.checkLogin.do(onNext: { isLogedIn in
+        let loginResult = services.authencationService.login(email: email, password: password ?? "")
+        
+        let clearDataAccount = input.checkLogin.do(onNext: { isLogedIn in
             if !isLogedIn {
                 AccountDefault.shared.clearUserData()
+                Keychain.shared.clearData()
             }
         }).mapToVoid()
         
-        return Output(loginResult: loginResult, cleanDataAccount: cleanDataAccount)
+        return Output(loginResult: loginResult, clearDataAccount: clearDataAccount)
     }
 }
 
@@ -36,6 +38,6 @@ extension SplashViewModel {
     
     struct Output {
         var loginResult: Observable<Result<Void, Error>>
-        var cleanDataAccount: Observable<Void>
+        var clearDataAccount: Observable<Void>
     }
 }

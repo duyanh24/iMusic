@@ -116,13 +116,19 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quân AP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIr-Qp-svw">
-                                                <rect key="frame" x="65" y="55.666666666666671" width="49" height="14.333333333333329"/>
+                                                <rect key="frame" x="65" y="55" width="49" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="v3D-5H-ejH"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.54952031369999998" green="0.54593056439999998" blue="0.53752052780000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bông hoa đẹp nhất" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEO-bj-05O">
-                                                <rect key="frame" x="65" y="35" width="118.66666666666669" height="15.666666666666664"/>
+                                                <rect key="frame" x="65" y="32" width="118.66666666666669" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="FHA-sI-xzj"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>

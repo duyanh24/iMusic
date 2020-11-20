@@ -42,6 +42,6 @@ class SplashViewController: BaseViewController, StoryboardBased, ViewModelBased 
         })
         .disposed(by: disposeBag)
         
-        output.cleanDataAccount.subscribe().disposed(by: disposeBag)
+        output.clearDataAccount.subscribe().disposed(by: disposeBag)
     }
 }

@@ -19,6 +19,7 @@ struct AuthencationService {
     }
     
     func logout() {
-        return AccountDefault.shared.clearUserData()
+        AccountDefault.shared.clearUserData()
+        Keychain.shared.clearData()
     }
 }
