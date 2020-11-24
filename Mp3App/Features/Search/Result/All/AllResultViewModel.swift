@@ -66,8 +66,11 @@ extension AllResultViewModel {
                 var tracks = [Track]()
                 var users = [User]()
                 var playlists = [Playlist]()
-                for data in searchAllRespone.data! {
-                    switch data {
+                guard let data = searchAllRespone.data else {
+                    return SearchDataModel(tracks: [], playlits: [], users: [])
+                }
+                for item in data {
+                    switch item {
                     case .track(let track):
                         tracks.append(track)
                     case .user(let user):

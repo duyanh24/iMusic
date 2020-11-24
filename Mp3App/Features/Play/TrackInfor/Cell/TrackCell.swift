@@ -57,6 +57,7 @@ class TrackCell: UITableViewCell, NibReusable, ViewModelBased {
             self?.titleLabel.text = track.title
             self?.singerLabel.text = track.description
             guard let url = track.artworkURL else {
+                self?.trackImageView.image = Asset.defaultPlaylistNormal.image
                 return
             }
             self?.trackImageView?.setImage(stringURL: url)

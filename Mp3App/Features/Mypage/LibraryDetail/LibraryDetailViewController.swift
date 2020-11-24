@@ -64,6 +64,7 @@ class LibraryDetailViewController: BaseViewController, StoryboardBased, ViewMode
     private func setupTableView() {
         tableView.delegate = self
         tableView.register(cellType: LibraryDetailTableViewCell.self)
+        tableView.contentInset.bottom = 50
     }
 }
 

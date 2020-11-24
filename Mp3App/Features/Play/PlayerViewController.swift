@@ -229,10 +229,11 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
         titleMiniPlayerLabel.text = track.title
         descriptionLabel.text = track.description
         descriptionMiniPlayerLabel.text = track.description
+        audioPlayerView.setupDiskImage(url: track.artworkURL)
         guard let url = track.artworkURL else {
+            miniPlayerImageView.image = Asset.playerIconCdcoverSmallNormal.image
             return
         }
-        audioPlayerView.setupDiskImage(url: url)
         miniPlayerImageView.setImage(stringURL: url)
     }
     

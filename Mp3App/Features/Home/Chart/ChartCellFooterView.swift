@@ -32,17 +32,17 @@ class ChartCellFooterView: UIView {
         containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
         containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Strings.more
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.textAlignment = .center
-        containerView.addSubview(label)
-        
-        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
-        label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = Strings.more
+//        label.textColor = .white
+//        label.font = UIFont.systemFont(ofSize: 13)
+//        label.textAlignment = .center
+//        containerView.addSubview(label)
+//
+//        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+//        label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+//        label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
+//        label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
     }
 }

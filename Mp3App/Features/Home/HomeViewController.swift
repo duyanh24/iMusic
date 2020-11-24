@@ -137,7 +137,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch dataSource[section] {
         case .chartAlbums:
-            return 40
+            return 20
         default:
             return .leastNonzeroMagnitude
         }
