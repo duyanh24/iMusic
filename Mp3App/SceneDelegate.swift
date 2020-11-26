@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         guard let window = window else { return }
+        window.overrideUserInterfaceStyle = .light
         let sceneCoordinator = SceneCoordinator(window: window)
         SceneCoordinator.shared = sceneCoordinator
         SceneCoordinator.shared.transition(to: Scene.splash)

@@ -67,16 +67,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
         tabbarY = tabBar.frame.origin.y
         
         playerView.rx.hide.subscribe(onNext: { [weak self] _ in
-            guard let tabbarY = self?.tabbarY, let miniPlayerHeight = self?.miniPlayerHeight else {
-                return
-            }
-            UIView.animate(withDuration: 0.2, animations: {
-                self?.containerView.frame.origin.y = tabbarY - miniPlayerHeight
-                self?.selectedViewController?.view.alpha = 1
-                self?.tabBar.frame.origin.y = tabbarY
-                self?.playerView.scrollToPlayerPage()
-                self?.isTabbarShow = true
-            })
+            self?.hidePlayerView()
         }).disposed(by: disposeBag)
     }
     
@@ -88,12 +79,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     }
     
     @objc func showPlayer(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.containerView.frame.origin.y = 0 - self.miniPlayerHeight
-            self.selectedViewController?.view.alpha = 0
-            self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
-            self.isTabbarShow = false
-        })
+        showPlayerView()
         guard let tracks = notification.userInfo?[Strings.tracks] as? [Track] else { return }
         playerView.setTracks(tracks: tracks)
     }
@@ -150,26 +136,38 @@ class RootTabbarController: UITabBarController, StoryboardBased {
             case .ended:
                 let velocity = gesture.velocity(in: view)
                 if velocity.y > 0 {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.containerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
-                        self.selectedViewController?.view.alpha = 1
-                        self.tabBar.frame.origin.y = self.tabbarY
-                        self.isTabbarShow = true
-                    })
-                    playerView.scrollToPlayerPage()
+                    hidePlayerView()
                 } else {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.containerView.frame.origin.y = 0 - self.miniPlayerHeight
-                        self.selectedViewController?.view.alpha = 0
-                        self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
-                        self.isTabbarShow = false
-                    })
+                    showPlayerView()
                 }
                 playerView.isScrollEnabled = true
             default:
                 break
             }
         }
+    }
+    
+    private func hidePlayerView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.containerView.frame.origin.y = self.tabbarY - self.miniPlayerHeight
+            self.selectedViewController?.view.alpha = 1
+            self.tabBar.frame.origin.y = self.tabbarY
+            self.isTabbarShow = true
+        }, completion: { _ in
+            UIApplication.shared.statusBarStyle = .default
+        })
+        playerView.scrollToPlayerPage()
+    }
+    
+    private func showPlayerView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.containerView.frame.origin.y = 0 - self.miniPlayerHeight
+            self.selectedViewController?.view.alpha = 0
+            self.tabBar.frame.origin.y = self.tabbarY + self.tabBar.frame.height
+            self.isTabbarShow = false
+        }, completion: { _ in
+            UIApplication.shared.statusBarStyle = .lightContent
+        })
     }
 }
 
