@@ -75,7 +75,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
     }
     
     private func bindViewModel() {
-        let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger)
+        let input = HomeViewModel.Input(loadDataTrigger: loadDataTrigger,
+                                        play: tableView.rx.modelSelected(HomeSectionItem.self).asObservable())
         let output = viewModel.transform(input: input)
         
         output.homeDataModel
@@ -83,6 +84,8 @@ class HomeViewController: BaseViewController, StoryboardBased, ViewModelBased {
             .disposed(by: disposeBag)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        
+        output.playTrack.subscribe().disposed(by: disposeBag)
     }
     
     private func setupTableView() {
@@ -134,7 +137,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch dataSource[section] {
         case .chartAlbums:
-            return 40
+            return 20
         default:
             return .leastNonzeroMagnitude
         }

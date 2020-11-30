@@ -28,6 +28,7 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     
     var viewModel: PlaylistDetailViewModel!
     private let disposeBag = DisposeBag()
+    private let deleteTrackTrigger = PublishSubject<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,9 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
     }
     
     private func bindViewModel() {
-        let input = PlaylistDetailViewModel.Input(playButton: playButton.rx.tap.asObservable())
+        let input = PlaylistDetailViewModel.Input(playButton: playButton.rx.tap.asObservable(),
+                                                  play: tableView.rx.modelSelected(Track.self).asObservable(),
+                                                  deleteTrack: deleteTrackTrigger)
         let output = viewModel.transform(input: input)
         
         output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
@@ -59,13 +62,25 @@ class PlaylistDetailViewController: BaseViewController, StoryboardBased, ViewMod
         }).disposed(by: disposeBag)
         
         output.showPlayerView.subscribe().disposed(by: disposeBag)
+        output.playTrack.subscribe().disposed(by: disposeBag)
         
         output.dataSource
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        output.deleteTrack.subscribe(onNext: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                self.showErrorAlert(message: error.localizedDescription, completion: nil)
+            case .success:
+                break
+            }
+        }).disposed(by: disposeBag)
     }
     
     private func setupTableView() {
+        tableView.addGestureRecognizer(setupGesture())
         tableView.delegate = self
         tableView.register(cellType: PlaylistDetailTableViewCell.self)
     }
@@ -90,5 +105,29 @@ extension PlaylistDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+}
+
+extension PlaylistDetailViewController: UIGestureRecognizerDelegate {
+    func setupGesture() -> UILongPressGestureRecognizer {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        return longPress
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                let track = dataSource[indexPath]
+                showConfirmMessage(title: track.title ?? "", message: Strings.deleteTrackMessage, confirmTitle: Strings.confirm, cancelTitle: Strings.cancel) { [weak self] selectedCase in
+                    if selectedCase == .confirm {
+                        guard let trackId = track.id else {
+                            return
+                        }
+                        self?.deleteTrackTrigger.onNext(trackId)
+                    }
+                }
+            }
+        }
     }
 }

@@ -125,6 +125,7 @@
 		085D96402535A25400A9F494 /* PlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D963F2535A25400A9F494 /* PlaylistService.swift */; };
 		085D96432535ABD800A9F494 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D96412535ABD800A9F494 /* PlaylistTableViewCell.swift */; };
 		085D96442535ABD800A9F494 /* PlaylistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085D96422535ABD800A9F494 /* PlaylistTableViewCell.xib */; };
+		0872E2A52567ACEB00658B81 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0872E2A42567ACEB00658B81 /* KeyChain.swift */; };
 		087B7E7F252AF7FB00E85951 /* SlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */; };
 		087B7E80252AF7FB00E85951 /* SlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */; };
 		087D47F0255A8B7000C86C28 /* BaseResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D47EF255A8B7000C86C28 /* BaseResultViewController.swift */; };
@@ -344,6 +345,7 @@
 		085D963F2535A25400A9F494 /* PlaylistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistService.swift; sourceTree = "<group>"; };
 		085D96412535ABD800A9F494 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		085D96422535ABD800A9F494 /* PlaylistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistTableViewCell.xib; sourceTree = "<group>"; };
+		0872E2A42567ACEB00658B81 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		087B7E79252AF5D000E85951 /* FSPagerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSPagerView.framework; path = Carthage/Build/iOS/FSPagerView.framework; sourceTree = "<group>"; };
 		087B7E7D252AF7FB00E85951 /* SlideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCollectionViewCell.swift; sourceTree = "<group>"; };
 		087B7E7E252AF7FB00E85951 /* SlideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 		082F49C0253043BC00E56DF2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				0872E2A32567ACCE00658B81 /* Keychain */,
 				080FCA092534119200523A2C /* UserDefaults */,
 				082F49C6253053DC00E56DF2 /* FirebaseDatabase */,
 			);
@@ -1055,6 +1058,14 @@
 			path = Mypage;
 			sourceTree = "<group>";
 		};
+		0872E2A32567ACCE00658B81 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				0872E2A42567ACEB00658B81 /* KeyChain.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		08825F9B25554BAB0068E865 /* Tracks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1075,8 +1086,8 @@
 				08832BC12541723B00E56718 /* TrackInforCellViewModel.swift */,
 				08D7AD7A254164E2007D77C3 /* TrackInforCell.xib */,
 				08D7AD7D254168F2007D77C3 /* TrackCell.swift */,
-				08D7AD7E254168F2007D77C3 /* TrackCell.xib */,
 				08D6EE3025417DD900D7006F /* TrackCellViewModel.swift */,
+				08D7AD7E254168F2007D77C3 /* TrackCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1527,6 +1538,7 @@
 				08861D742525D65B008C0628 /* HomeScreenDataModel.swift in Sources */,
 				08504FB92523346F0033DED0 /* SceneTransitionType.swift in Sources */,
 				08D6EE2F2541769A00D7006F /* PlayerViewModel.swift in Sources */,
+				0872E2A52567ACEB00658B81 /* KeyChain.swift in Sources */,
 				08504FFE252335B60033DED0 /* SettingViewController.swift in Sources */,
 				18E9F194253774680049A45B /* PlaylistDetailTableViewCell.swift in Sources */,
 				08504FFC252335A10033DED0 /* SettingViewModel.swift in Sources */,

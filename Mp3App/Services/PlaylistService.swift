@@ -33,4 +33,8 @@ struct PlaylistService {
     func deletePlaylist(playlistName: String) -> Observable<Result<Void, Error>> {
         return FirebaseDatabase.shared.deletePlaylist(playlistName: playlistName)
     }
+    
+    func removeTrackInPlaylist(trackId: Int, playlist: String) -> Observable<Result<Void, Error>> {
+        return FirebaseDatabase.shared.removeTrackInPlaylist(trackId: trackId, playlist: playlist)
+    }
 }

@@ -30,7 +30,11 @@ class AudioPlayerView: UIView, NibOwnerLoadable {
         diskImageView.layer.cornerRadius = diskImageView.bounds.size.height / 2
     }
     
-    func setupDiskImage(url: String) {
+    func setupDiskImage(url: String?) {
+        guard let url = url else {
+            diskImageView.image = Asset.playerIconCdcoverSmallNormal.image
+            return
+        }
         let imageCropURL = Converter.changeImageURLSize(imgURL: url, desireSize: .crop)
         diskImageView.setImage(stringURL: imageCropURL)
     }

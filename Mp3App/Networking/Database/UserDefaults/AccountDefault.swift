@@ -23,7 +23,5 @@ class AccountDefault {
     
     func clearUserData() {
         userDefault.removeObject(forKey: AccountDefaultKey.idkey.rawValue)
-        userDefault.removeObject(forKey: AccountDefaultKey.emailKey.rawValue)
-        userDefault.removeObject(forKey: AccountDefaultKey.passwordKey.rawValue)
-    }
+        userDefault.removeObject(forKey: AccountDefaultKey.emailKey.rawValue)    }
 }

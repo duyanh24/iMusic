@@ -20,6 +20,7 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
     var viewModel: AllResultViewModel!
     private let disposeBag = DisposeBag()
     private let keywordTrigger = BehaviorSubject<String>(value: "")
+    let loading = PublishSubject<Bool>()
     
     private lazy var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel> = RxTableViewSectionedReloadDataSource(configureCell: { [weak self] (dataSource, tableView, indexPath, item) -> UITableViewCell in
         guard let self = self else { return UITableViewCell() }
@@ -62,10 +63,11 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
     }
     
     private func bindViewModel() {
-        let input = AllResultViewModel.Input(searchAll: keywordTrigger)
+        let input = AllResultViewModel.Input(searchAll: keywordTrigger,
+                                        play: tableView.rx.modelSelected(SearchSectionItem.self).asObservable())
         let output = viewModel.transform(input: input)
         
-        output.activityIndicator.bind(to: ProgressHUD.rx.isAnimating).disposed(by: disposeBag)
+        output.activityIndicator.bind(to: loading).disposed(by: disposeBag)
         
         output.dataSource
             .do(onNext: { [weak self] data in
@@ -77,6 +79,22 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
             })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        output.playTrack.subscribe().disposed(by: disposeBag)
+        
+        output.showPlaylistDetail.subscribe(onNext: { playlist in
+            let tracks = playlist.tracks?.filter({ track -> Bool in
+                guard let streamable = track.streamable else {
+                    return false
+                }
+                if !streamable || track.title == nil || track.artworkURL == nil {
+                    return false
+                }
+                return true
+            })
+            SceneCoordinator.shared.transition(to: Scene.tracks(tracks: tracks ?? [], title: playlist.title ?? ""))
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
@@ -85,6 +103,7 @@ class AllResultViewController: BaseResultViewController, StoryboardBased, ViewMo
         tableView.register(cellType: TrackResultCell.self)
         tableView.register(cellType: PlaylistResultCell.self)
         tableView.contentInset.bottom = 50
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 

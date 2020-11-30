@@ -13,4 +13,5 @@ enum AuthencationStatusCode: Int {
     case FIRAuthErrorCodeInvalidEmail = 17008
     case FIRAuthErrorCodeWrongPassword = 17009
     case FIRAuthErrorCodeUserNotFound = 17011
+    case NotLoggedIn = 9999
 }

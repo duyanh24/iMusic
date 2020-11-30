@@ -10,12 +10,13 @@ import UIKit
 import Reusable
 import RxSwift
 import RxCocoa
+import NVActivityIndicatorView
 
 class TrackCell: UITableViewCell, NibReusable, ViewModelBased {
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
-    @IBOutlet weak var playImageView: UIImageView!
+    @IBOutlet weak var audioEqualizer: NVActivityIndicatorView!
     
     var viewModel: TrackCellViewModel!
     private var disposeBag = DisposeBag()
@@ -35,6 +36,7 @@ class TrackCell: UITableViewCell, NibReusable, ViewModelBased {
     private func setupUI() {
         selectionStyle = .none
         trackImageView.layer.cornerRadius = 5
+        audioEqualizer.type = .audioEqualizer
     }
     
     func configureCell(viewModel: TrackCellViewModel) {
@@ -55,18 +57,24 @@ class TrackCell: UITableViewCell, NibReusable, ViewModelBased {
             self?.titleLabel.text = track.title
             self?.singerLabel.text = track.description
             guard let url = track.artworkURL else {
+                self?.trackImageView.image = Asset.defaultPlaylistNormal.image
                 return
             }
             self?.trackImageView?.setImage(stringURL: url)
         })
         .disposed(by: disposeBag)
+        
+        output.isPlaying.subscribe(onNext: { [weak self] isCurrentTrack, isPlaying in
+            isCurrentTrack && isPlaying ? self?.audioEqualizer.startAnimating() : self?.audioEqualizer.stopAnimating()
+        })
+        .disposed(by: disposeBag)
     }
     
-    func hidePlayImageView() {
-        playImageView.isHidden = true
+    func hideAudioEqualizer() {
+        audioEqualizer.isHidden = true
     }
     
-    func showPlayImageView() {
-        playImageView.isHidden = false
+    func showAudioEqualizer() {
+        audioEqualizer.isHidden = false
     }
 }

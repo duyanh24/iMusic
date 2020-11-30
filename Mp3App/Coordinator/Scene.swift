@@ -69,7 +69,7 @@ extension Scene: TargetScene {
             let loginViewModel = LoginViewModel()
             let loginServices = LoginServices(authencationService: AuthencationService())
             let loginViewController = LoginViewController.instantiate(withViewModel: loginViewModel, andServices: loginServices)
-            return .root(loginViewController)
+            return .present(loginViewController)
             
         case .playlistDetail(let playlistName):
             let playlistDetailViewModel = PlaylistDetailViewModel(playlistName: playlistName)

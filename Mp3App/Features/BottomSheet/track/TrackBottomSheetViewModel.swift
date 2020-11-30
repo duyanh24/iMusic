@@ -13,6 +13,7 @@ import RxCocoa
 class TrackBottomSheetViewModel: ServicesViewModel {
     var services: MypageServices!
     private var track = Track()
+    private let checkLogin = BehaviorSubject<Bool>(value: false)
     
     init(track: Track) {
         self.track = track
@@ -20,34 +21,46 @@ class TrackBottomSheetViewModel: ServicesViewModel {
     
     func transform(input: Input) -> Output {
         let addTrackToFavourite = input.addTrackToFavouriteButton
-            .withLatestFrom(input.isTrackAlreadyExistsInFavorites)
-            .flatMapLatest { [weak self] isTrackAlreadyExistsInFavorites -> Observable<Result<Void, Error>> in
+            .withLatestFrom(input.isTrackInFavorites)
+            .flatMapLatest { [weak self] isTrackInFavorites -> Observable<Result<Void, Error>> in
                 guard let self = self else {
                     return .empty()
                 }
-                if isTrackAlreadyExistsInFavorites {
+                if isTrackInFavorites {
                     return self.services.libraryService.removeTrackInFavourite(trackId: self.track.id ?? 0)
                 }
                 return self.services.libraryService.addTrackToFavourite(track: self.track)
         }
         
-        let checkTrackAlreadyExistsInFavorites = services.libraryService.checkTrackAlreadyExitsInFavourite(trackId: track.id ?? 0)
+        let checkTrackInFavorites = services.libraryService.checkTrackAlreadyExitsInFavourite(trackId: track.id ?? 0)
+        
+        let playTrack = input.play.do(onNext: { [weak self] _ in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: [self?.track]])
+        }).mapToVoid()
+        
+        let email = AccountDefault.shared.retrieveStringData(key: .emailKey)
+        email.isEmpty ? checkLogin.onNext(false) : checkLogin.onNext(true)
         
         return Output(track: .just(track),
                       addTrackToFavouriteResult: addTrackToFavourite,
-                      isTrackAlreadyExistsInFavorites: checkTrackAlreadyExistsInFavorites)
+                      checkTrackInFavorites: checkTrackInFavorites,
+                      playTrack: playTrack,
+                      checkLogin: checkLogin)
     }
 }
 
 extension TrackBottomSheetViewModel {
     struct Input {
         var addTrackToFavouriteButton: Observable<Void>
-        var isTrackAlreadyExistsInFavorites: Observable<Bool>
+        var isTrackInFavorites: Observable<Bool>
+        var play: Observable<Void>
     }
     
     struct Output {
         var track: Observable<Track>
         var addTrackToFavouriteResult: Observable<Result<Void, Error>>
-        var isTrackAlreadyExistsInFavorites: Observable<Result<Bool, Error>>
+        var checkTrackInFavorites: Observable<Result<Bool, Error>>
+        var playTrack: Observable<Void>
+        var checkLogin: Observable<Bool>
     }
 }

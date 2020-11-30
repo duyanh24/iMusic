@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) {
         } else {
             guard let window = window else { return false }
+    
             let sceneCoordinator = SceneCoordinator(window: window)
             SceneCoordinator.shared = sceneCoordinator
             SceneCoordinator.shared.transition(to: Scene.splash)

@@ -116,13 +116,19 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quân AP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIr-Qp-svw">
-                                                <rect key="frame" x="65" y="55.666666666666671" width="49" height="14.333333333333329"/>
+                                                <rect key="frame" x="65" y="55" width="49" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="v3D-5H-ejH"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.54952031369999998" green="0.54593056439999998" blue="0.53752052780000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bông hoa đẹp nhất" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEO-bj-05O">
-                                                <rect key="frame" x="65" y="35" width="118.66666666666669" height="15.666666666666664"/>
+                                                <rect key="frame" x="65" y="32" width="118.66666666666669" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="FHA-sI-xzj"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -212,6 +218,12 @@
                                                     <constraint firstAttribute="height" constant="25" id="oJz-j1-biP"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2f-qm-N66">
+                                                <rect key="frame" x="10" y="5" width="45" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="45" id="8fZ-ve-bjs"/>
+                                                </constraints>
+                                            </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icLikeBlackCopy5_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="Zjd-dL-V7J">
                                                 <rect key="frame" x="369" y="12.666666666666629" width="25" height="25"/>
                                                 <constraints>
@@ -228,13 +240,25 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnS-t3-vzm">
+                                                <rect key="frame" x="234" y="10" width="170" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="170" id="isy-Yn-kz6"/>
+                                                </constraints>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Zjd-dL-V7J" firstAttribute="centerY" secondItem="P4L-Ku-ZGn" secondAttribute="centerY" id="04v-Tu-gJa"/>
                                             <constraint firstItem="gdj-CO-7u2" firstAttribute="centerY" secondItem="P4L-Ku-ZGn" secondAttribute="centerY" id="8BA-PG-Lg7"/>
+                                            <constraint firstAttribute="bottom" secondItem="P2f-qm-N66" secondAttribute="bottom" constant="5" id="Dys-fb-Q1i"/>
                                             <constraint firstAttribute="trailing" secondItem="Zjd-dL-V7J" secondAttribute="trailing" constant="20" id="IDd-fA-KWM"/>
+                                            <constraint firstItem="P2f-qm-N66" firstAttribute="leading" secondItem="P4L-Ku-ZGn" secondAttribute="leading" constant="10" id="KCW-bJ-j1X"/>
+                                            <constraint firstAttribute="bottom" secondItem="DnS-t3-vzm" secondAttribute="bottom" constant="10" id="Oqj-nV-baD"/>
                                             <constraint firstItem="PEb-Mx-TDT" firstAttribute="centerY" secondItem="P4L-Ku-ZGn" secondAttribute="centerY" id="TYM-yh-WKf"/>
+                                            <constraint firstItem="P2f-qm-N66" firstAttribute="top" secondItem="P4L-Ku-ZGn" secondAttribute="top" constant="5" id="UAf-SK-vNB"/>
+                                            <constraint firstAttribute="trailing" secondItem="DnS-t3-vzm" secondAttribute="trailing" constant="10" id="Xv3-Me-vfb"/>
+                                            <constraint firstItem="DnS-t3-vzm" firstAttribute="top" secondItem="P4L-Ku-ZGn" secondAttribute="top" constant="10" id="a76-yi-NxP"/>
                                             <constraint firstItem="Zjd-dL-V7J" firstAttribute="leading" secondItem="gdj-CO-7u2" secondAttribute="trailing" constant="10" id="epb-xB-MqY"/>
                                             <constraint firstItem="PEb-Mx-TDT" firstAttribute="leading" secondItem="P4L-Ku-ZGn" secondAttribute="leading" constant="20" id="lo7-4b-994"/>
                                             <constraint firstAttribute="height" constant="50" id="nkR-Tj-j0H"/>
@@ -404,12 +428,16 @@
                         <viewLayoutGuide key="safeArea" id="spr-jf-rwY"/>
                     </view>
                     <connections>
+                        <outlet property="addTrackToFavouriteButton" destination="P2f-qm-N66" id="DTv-0W-zK0"/>
+                        <outlet property="addTrackToPlaylistButton" destination="DnS-t3-vzm" id="U0Y-63-yms"/>
                         <outlet property="audioPlayerView" destination="p8g-WH-a9J" id="477-t7-EJ5"/>
                         <outlet property="containerBottomView" destination="P4L-Ku-ZGn" id="xE0-ei-cOS"/>
                         <outlet property="controlPlayerView" destination="UPV-Tj-dg0" id="hkZ-dF-C4a"/>
                         <outlet property="descriptionLabel" destination="XIr-Qp-svw" id="fhT-3w-frK"/>
                         <outlet property="descriptionMiniPlayerLabel" destination="3v6-Oh-YYD" id="uDV-Vc-5LA"/>
+                        <outlet property="favouriteImageView" destination="PEb-Mx-TDT" id="Ilv-sp-sNw"/>
                         <outlet property="hideButton" destination="8GE-fg-ihx" id="TQO-5H-I4f"/>
+                        <outlet property="miniAddTrackToFavouriteButton" destination="aRY-44-0gu" id="WUZ-kK-fNE"/>
                         <outlet property="miniNextButton" destination="hwf-vE-8eH" id="v6K-hW-uq2"/>
                         <outlet property="miniPlayButton" destination="7BA-d2-2UM" id="Lwu-3G-2o0"/>
                         <outlet property="miniPlayerImageView" destination="hAe-Kn-eRM" id="xLU-2p-TvC"/>

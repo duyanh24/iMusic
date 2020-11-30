@@ -38,7 +38,7 @@ class TrackPlayer {
         }
     }
     
-    private func resetData() {
+    func resetData() {
         player = nil
         currentTrackIndex = 0
         isPlaying = false
@@ -71,13 +71,6 @@ class TrackPlayer {
             if self.player?.currentItem?.status == .readyToPlay {
                 let time = CMTimeGetSeconds(player.currentTime())
                 self.currentTime.onNext(Int(time))
-                
-                if time >= durationInSeconds - 1 {
-                    player.pause()
-                    self.isPlaying = false
-                    self.isPlayingTrigger.onNext(self.isPlaying)
-                    self.nextTrack(isAutoNext: true)
-                }
             }
         }
         currentTrack.accept(track)
@@ -177,6 +170,7 @@ class TrackPlayer {
     
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(playTrackSelected(_:)), name: Notification.Name(Strings.selectedTrackItem), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
     }
     
     @objc func playTrackSelected(_ notification: Notification) {
@@ -184,5 +178,14 @@ class TrackPlayer {
         currentTrackIndex = index
         player = nil
         startTracks(track: tracks[index])
+    }
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        if let player = player {
+            player.pause()
+        }
+        isPlaying = false
+        isPlayingTrigger.onNext(isPlaying)
+        nextTrack(isAutoNext: true)
     }
 }

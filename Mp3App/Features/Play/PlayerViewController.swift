@@ -38,6 +38,10 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var randomModeImageView: UIImageView!
     @IBOutlet weak var repeatModeButton: UIButton!
     @IBOutlet weak var repeatModeImageView: UIImageView!
+    @IBOutlet weak var favouriteImageView: UIImageView!
+    @IBOutlet weak var addTrackToFavouriteButton: UIButton!
+    @IBOutlet weak var miniAddTrackToFavouriteButton: UIButton!
+    @IBOutlet weak var addTrackToPlaylistButton: UIButton!
     
     private var isViewDidAppear = false
     
@@ -48,6 +52,7 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
     private var duration = 0
     private let seekValueSlider = PublishSubject<Float>()
     private var isChangingSlider = false
+    private let isTrackAlreadyExistsInFavorites = BehaviorRelay<Bool>(value: false)
     
     var isScrollEnabled: Bool = true {
         didSet {
@@ -88,10 +93,12 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
         let input = PlayerViewModel.Input(prevButton: prevButton.rx.tap.asObservable(),
                                           nextButton: nextButton.rx.tap.asObservable().merge(with: miniNextButton.rx.tap.asObservable()),
                                           playButton: playButton.rx.tap.asObservable().merge(with: miniPlayButton.rx.tap.asObservable()),
-                                          randomModeButton: randomButton.rx.tap.asObservable(),
-                                          repeatModeButton: repeatModeButton.rx.tap.asObservable(),
+                                          changeRandomMode: randomButton.rx.tap.asObservable(),
+                                          changeRepeatMode: repeatModeButton.rx.tap.asObservable(),
                                           tracks: tracks,
-                                          seekValueSlider: seekValueSlider)
+                                          seekValueSlider: seekValueSlider,
+                                          addTrackToFavourite: addTrackToFavouriteButton.rx.tap.asObservable().merge(with: miniAddTrackToFavouriteButton.rx.tap.asObservable()),
+                                          addTrackToPlaylist: addTrackToPlaylistButton.rx.tap.asObservable())
         let output = viewModel.transform(input: input)
         
         output.playList.subscribe(onNext: { tracks, currentTrack in
@@ -145,6 +152,36 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
             isRepeatModeSelected ? (self?.repeatModeImageView.image = Asset.playerButtonRepeatoneActiveNormal.image) : (self?.repeatModeImageView.image = Asset.playerButtonRepeatNormalNormal.image)
         })
         .disposed(by: disposeBag)
+        
+        output.isTrackAlreadyExistsInFavorites.subscribe(onNext: { [weak self] value in
+            self?.isTrackAlreadyExistsInFavorites.accept(value)
+        }).disposed(by: disposeBag)
+        
+        output.addTrackToFavouriteResult.subscribe(onNext: { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success:
+                self.isTrackAlreadyExistsInFavorites.accept(!self.isTrackAlreadyExistsInFavorites.value)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        isTrackAlreadyExistsInFavorites.skip(1).subscribe(onNext: { isTrackAlreadyExistsInFavorites in
+            if isTrackAlreadyExistsInFavorites {
+                self.favouriteImageView.image = Asset.feedLikeSelectedIcoNormal.image
+                self.miniAddTrackToFavouriteButton.setImage(Asset.icFeedLike48Normal.image, for: .normal)
+            } else {
+                self.favouriteImageView.image = Asset.icHeartWhite2020Normal.image
+                self.miniAddTrackToFavouriteButton.setImage(Asset.icHeartBlack2020Normal.image, for: .normal)
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        output.showPlaylist.subscribe().disposed(by: disposeBag)
     }
     
     private func setupTrackImageView() {
@@ -192,10 +229,11 @@ class PlayerViewController: BaseViewController, StoryboardBased, ViewModelBased 
         titleMiniPlayerLabel.text = track.title
         descriptionLabel.text = track.description
         descriptionMiniPlayerLabel.text = track.description
+        audioPlayerView.setupDiskImage(url: track.artworkURL)
         guard let url = track.artworkURL else {
+            miniPlayerImageView.image = Asset.playerIconCdcoverSmallNormal.image
             return
         }
-        audioPlayerView.setupDiskImage(url: url)
         miniPlayerImageView.setImage(stringURL: url)
     }
     
@@ -232,9 +270,9 @@ extension PlayerViewController: UIScrollViewDelegate {
         pageControl.currentPage = Int(currentPage)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (view.bounds.width - scrollView.contentOffset.x) / view.bounds.width
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        controlPlayerView.frame.origin.y = controlPlayerViewY + (containerBottomView.frame.size.height + ScreenSize.getBottomSafeArea()) * (view.bounds.width - scrollView.contentOffset.x) / view.bounds.width
+//    }
 }
 
 extension Reactive where Base: PlayerViewController {

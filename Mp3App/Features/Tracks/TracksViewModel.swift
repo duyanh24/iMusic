@@ -24,18 +24,24 @@ class TracksViewModel: ViewModel {
             NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: self?.tracks ?? []])
         }).mapToVoid()
         
-        return Output(dataSource: .just([TrackSectionModel(model: "", items: tracks)]), showPlayerView: showPlayerView, title: .just(title))
+        let playTrack = input.play.do(onNext: { track in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: [track]])
+        }).mapToVoid()
+        
+        return Output(dataSource: .just([TrackSectionModel(model: "", items: tracks)]), showPlayerView: showPlayerView, title: .just(title), playTrack: playTrack)
     }
 }
 
 extension TracksViewModel {
     struct Input {
         var playButton: Observable<Void>
+        var play: Observable<Track>
     }
     
     struct Output {
         var dataSource: Observable<[TrackSectionModel]>
         var showPlayerView: Observable<Void>
         var title: Observable<String>
+        var playTrack: Observable<Void>
     }
 }

@@ -30,13 +30,32 @@ class PlaylistDetailViewModel: ServicesViewModel {
         let dataSource = tracks.map { tracks -> [TrackSectionModel] in
             return [TrackSectionModel(model: "", items: tracks)]
         }.trackActivity(activityIndicator)
-        return Output(dataSource: dataSource, playlistName: .just(playlistName), activityIndicator: activityIndicator.asObservable(), showPlayerView: showPlayerView)
+        
+        let playTrack = input.play.do(onNext: { track in
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: [track]])
+        }).mapToVoid()
+        
+        let deleteTrack = input.deleteTrack.flatMapLatest { [weak self] trackId -> Observable<Result<Void, Error>> in
+            guard let self = self else {
+                return .empty()
+            }
+            return self.services.playlistService.removeTrackInPlaylist(trackId: trackId, playlist: self.playlistName)
+        }
+        
+        return Output(dataSource: dataSource,
+                      playlistName: .just(playlistName),
+                      activityIndicator: activityIndicator.asObservable(),
+                      showPlayerView: showPlayerView,
+                      playTrack: playTrack,
+                      deleteTrack: deleteTrack)
     }
 }
 
 extension PlaylistDetailViewModel {
     struct Input {
         var playButton: Observable<Void>
+        var play: Observable<Track>
+        var deleteTrack: Observable<Int>
     }
     
     struct Output {
@@ -44,6 +63,8 @@ extension PlaylistDetailViewModel {
         var playlistName: Observable<String>
         var activityIndicator: Observable<Bool>
         var showPlayerView: Observable<Void>
+        var playTrack: Observable<Void>
+        var deleteTrack: Observable<Result<Void, Error>>
     }
 }
 

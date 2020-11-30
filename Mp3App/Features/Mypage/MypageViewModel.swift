@@ -13,6 +13,7 @@ import RxCocoa
 class MypageViewModel: ServicesViewModel {
     var services: MypageServices!
     private let errorTracker = ErrorTracker()
+    private let checkLogin = BehaviorSubject<Bool>(value: false)
     
     func transform(input: Input) -> Output {
         let mypageDataModel = input.loadDataTrigger.flatMapLatest { [weak self] _ -> Observable<MypageScreenDataModel> in
@@ -30,7 +31,12 @@ class MypageViewModel: ServicesViewModel {
                 return self.services.playlistService.deletePlaylist(playlistName: playlistName)
         }
         
-        return Output(mypageDataModel: mypageDataModel, deletePlaylistResult: deletePlaylistResult)
+        let email = AccountDefault.shared.retrieveStringData(key: .emailKey)
+        email.isEmpty ? checkLogin.onNext(false) : checkLogin.onNext(true)
+        
+        return Output(mypageDataModel: mypageDataModel,
+                      deletePlaylistResult: deletePlaylistResult,
+                      checkLogin: checkLogin)
     }
 }
 
@@ -43,6 +49,7 @@ extension MypageViewModel {
     struct Output {
         var mypageDataModel: Observable<[MypageSectionModel]>
         var deletePlaylistResult: Observable<Result<Void, Error>>
+        var checkLogin: Observable<Bool>
     }
 }
 

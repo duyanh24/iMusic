@@ -47,6 +47,7 @@ class AlbumCollectionViewCell: UICollectionViewCell, ViewModelBased, NibReusable
                 // show data album
                 self?.albumTitleLabel.text = album.track?.title
                 guard let url = album.track?.artworkURL else {
+                    self?.albumImageView.image = Asset.defaultPlaylistNormal.image
                     return
                 }
                 let imageMediumURL = Converter.changeImageURLSize(imgURL: url, desireSize: .medium)

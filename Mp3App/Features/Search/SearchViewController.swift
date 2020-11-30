@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import Reusable
 import RxDataSources
+import NVActivityIndicatorView
 
 typealias HistorySectionModel = SectionModel<String, String>
 
@@ -18,6 +19,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
     @IBOutlet weak var searchTextField: CustomTextField!
     @IBOutlet weak var resultContainerView: UIView!
     @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var loadingIndicatorView: NVActivityIndicatorView!
     
     var viewModel: SearchViewModel!
     private let disposeBag = DisposeBag()
@@ -37,6 +39,7 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         bindViewModel()
         setupResultView()
         setupNotificationCenter()
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +56,8 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
         super.prepareUI()
         setupSearchTextField()
         setupTableView()
+        loadingIndicatorView.type = .circleStrokeSpin
+        loadingIndicatorView.color = Colors.purpleColor
     }
     
     private func setupResultView() {
@@ -112,12 +117,19 @@ class SearchViewController: BaseViewController, StoryboardBased, ViewModelBased 
             self?.searchTextField.sendActions(for: .valueChanged)
         })
         .disposed(by: disposeBag)
+        
+        resultController.loading.subscribe(onNext: { [weak self] isLoading in
+            isLoading ? self?.loadingIndicatorView.startAnimating() : self?.loadingIndicatorView.stopAnimating()
+            isLoading ? (self?.searchTextField.clearButtonMode = .never) : (self?.searchTextField.clearButtonMode = .whileEditing)
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
         historyTableView.delegate = self
         historyTableView.register(cellType: SearchHistoryCell.self)
         historyTableView.contentInset.bottom = 50
+        historyTableView.keyboardDismissMode = .onDrag
     }
     
     private func setupNotificationCenter() {
@@ -156,5 +168,18 @@ extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+}
+
+extension SearchViewController: UIGestureRecognizerDelegate {
+    func hideKeyboardWhenTappedAround() {
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.delegate = self
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc override func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

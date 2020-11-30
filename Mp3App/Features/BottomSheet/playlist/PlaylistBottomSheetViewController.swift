@@ -64,7 +64,9 @@ class PlaylistBottomSheetViewController: BaseViewController, StoryboardBased, Vi
             case .failure(let error):
                 self.showErrorAlert(message: error.localizedDescription, completion: nil)
             case .success:
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    UIApplication.topViewController()?.showErrorAlert(message: Strings.addTrackToPlaylistSuccess)
+                })
             }
         }).disposed(by: disposeBag)
     }

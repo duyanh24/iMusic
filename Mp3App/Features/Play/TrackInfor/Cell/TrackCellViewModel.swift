@@ -18,7 +18,18 @@ class TrackCellViewModel : ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        return Output(track: .just(track))
+        let isCurrentTrack = TrackPlayer.shared.currentTrack.flatMapLatest { [weak self] currentTrack -> Observable<Bool> in
+            guard let track = self?.track, let currentTrack = currentTrack else {
+                return .just(false)
+            }
+            if track.id == currentTrack.id {
+                return .just(true)
+            }
+            return .just(false)
+        }
+        
+        let isPlaying = Observable.combineLatest(isCurrentTrack, TrackPlayer.shared.isPlayingTrigger)
+        return Output(track: .just(track), isPlaying: isPlaying, isCurrentTrack: isCurrentTrack)
     }
 }
 
@@ -28,5 +39,7 @@ extension TrackCellViewModel {
     
     struct Output {
         var track: Observable<Track>
+        var isPlaying: Observable<(Bool, Bool)>
+        var isCurrentTrack: Observable<Bool>
     }
 }

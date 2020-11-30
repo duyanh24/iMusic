@@ -14,6 +14,8 @@ import RxDataSources
 
 class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var loginContainer: UIView!
+    @IBOutlet weak var loginButton: UIButton!
     
     var viewModel: MypageViewModel!
     private let disposeBag = DisposeBag()
@@ -38,16 +40,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNotificationCenter()
         bindViewModel()
-        loadData()
-    }
-    
-    private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name(Strings.reloadPlaylistNotification), object: nil)
-    }
-    
-    @objc func reloadData() {
         loadData()
     }
     
@@ -64,6 +57,7 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
     override func prepareUI() {
         super.prepareUI()
         setupTableView()
+        loginButton.layer.cornerRadius = 5
     }
     
     private func bindViewModel() {
@@ -91,9 +85,21 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
             case .failure(let error):
                 self.showErrorAlert(message: error.localizedDescription, completion: nil)
             case .success:
-                NotificationCenter.default.post(name: Notification.Name(Strings.reloadPlaylistNotification), object: nil)
+                break
             }
-        }).disposed(by: disposeBag)
+        })
+        .disposed(by: disposeBag)
+        
+        output.checkLogin.subscribe(onNext: { [weak self] isLoggedIn in
+            self?.loginContainer.isHidden = isLoggedIn
+            self?.tableView.isHidden = !isLoggedIn
+        })
+        .disposed(by: disposeBag)
+        
+        loginButton.rx.tap.subscribe(onNext: { _ in
+            SceneCoordinator.shared.transition(to: Scene.login)
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
@@ -102,24 +108,6 @@ class MypageViewController: BaseViewController, StoryboardBased, ViewModelBased 
         tableView.register(cellType: LibraryTableViewCell.self)
         tableView.register(cellType: PlaylistTableViewCell.self)
         tableView.contentInset.bottom = 50
-    }
-    
-    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
-        if sender.state == UIGestureRecognizer.State.began {
-            let touchPoint = sender.location(in: tableView)
-            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                switch dataSource[indexPath] {
-                case .favourite:
-                    return
-                case .playlist(let playlistSectionModel):
-                    showConfirmMessage(title: playlistSectionModel.playlist, message: Strings.deletePlaylistMessage, confirmTitle: Strings.confirm, cancelTitle: Strings.cancel) { [weak self] selectedCase in
-                        if selectedCase == .confirm {
-                            self?.deletePlaylistTrigger.onNext(playlistSectionModel.playlist)
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -179,5 +167,23 @@ extension MypageViewController: UIGestureRecognizerDelegate {
     func setupGesture() -> UILongPressGestureRecognizer {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         return longPress
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                switch dataSource[indexPath] {
+                case .favourite:
+                    return
+                case .playlist(let playlistSectionModel):
+                    showConfirmMessage(title: playlistSectionModel.playlist, message: Strings.deletePlaylistMessage, confirmTitle: Strings.confirm, cancelTitle: Strings.cancel) { [weak self] selectedCase in
+                        if selectedCase == .confirm {
+                            self?.deletePlaylistTrigger.onNext(playlistSectionModel.playlist)
+                        }
+                    }
+                }
+            }
+        }
     }
 }

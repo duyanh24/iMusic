@@ -44,6 +44,7 @@ struct Strings {
     static let cancel = "Huỷ"
     static let deleteSearchHistoryMessage = "Xoá lịch sử tìm kiếm?"
     static let deletePlaylistMessage = "Bạn có muốn xoá playlist này?"
+    static let deleteTrackMessage = "Bạn có muốn xoá bài hát này?"
     
     //mypage
     static let library = "Thư viện"
@@ -53,10 +54,8 @@ struct Strings {
     
     //setting
     static let logout = "Đăng xuất"
+    static let notLoggedIn = "Bạn chưa đăng nhập"
     static let confirmLogout = "Bạn có muốn đăng xuất?"
-    static let helpURL = "https://zingmp3.vn/faq/app.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
-    static let serviceTermsURL = "https://zingmp3.vn/tos.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
-    static let privacyPolicyURL = "https://zingmp3.vn/privacy.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
     
     //notification
     static let reloadPlaylistNotification = "reloadPlaylistNotification"
@@ -77,6 +76,10 @@ struct Strings {
     static let OK = "OK"
     static let removeTrackInFavourite = "Xoá khỏi danh sách yêu thích"
     static let addTrackToFavourite = "Thêm vào danh sách yêu thích"
+    static let addTrackToFavouriteSuccess = "Đã thêm vào danh sách yêu thích"
+    static let addTrackToPlaylistSuccess = "Đã thêm vào playlist"
+    static let removeTrackToFavouriteSuccess = "Đã xoá khỏi danh sách yêu thích"
+    static let notLoggedInMessage = "Vui lòng đăng nhập trước"
     
     //format
     static let simpleDateFormat = "yyyy-MM-DD"

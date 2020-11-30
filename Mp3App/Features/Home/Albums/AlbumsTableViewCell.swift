@@ -64,7 +64,7 @@ class AlbumsTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
     }
     
     private func bindViewModel() {
-        let input = AlbumsTableViewCellViewModel.Input()
+        let input = AlbumsTableViewCellViewModel.Input(play: collectionView.rx.modelSelected(Album.self).asObservable())
         
         let output = viewModel.transform(input: input)
         
@@ -83,6 +83,8 @@ class AlbumsTableViewCell: UITableViewCell, ViewModelBased, NibReusable {
             .drive(onNext: { [weak self] contentOffset in
                 self?.collectionView.setContentOffset(contentOffset, animated: false)
             }).disposed(by: disposeBag)
+        
+        output.playTrack.subscribe().disposed(by: disposeBag)
     }
 }
 

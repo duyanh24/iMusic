@@ -24,18 +24,32 @@ class HomeViewModel: ServicesViewModel {
             }
             return self.getAllHomeData().trackActivity(activityIndicator)
         }.map({ $0.toDataSource()})
-        return Output(homeDataModel: homeDataModel, activityIndicator: activityIndicator.asObservable())
+        
+        let playTrack = input.play.do(onNext: { homeSectionItem in
+            switch homeSectionItem {
+            case .albumsChart(_, let album):
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Strings.playerNotification), object: nil, userInfo: [Strings.tracks: [album.track]])
+            default:
+                break
+            }
+        }).mapToVoid()
+        
+        return Output(homeDataModel: homeDataModel,
+                    activityIndicator: activityIndicator.asObservable(),
+                    playTrack: playTrack)
     }
 }
 
 extension HomeViewModel {
     struct Input {
         var loadDataTrigger: Observable<Void>
+        var play: Observable<HomeSectionItem>
     }
     
     struct Output {
         var homeDataModel: Observable<[HomeSectionModel]>
         var activityIndicator: Observable<Bool>
+        var playTrack: Observable<Void>
     }
 }
 
