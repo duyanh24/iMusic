@@ -23,6 +23,7 @@ class CreatePlaylistViewController: BaseViewController, StoryboardBased, ViewMod
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        hideKeyboardWhenTappedAround()
     }
     
     override func prepareUI() {
@@ -52,5 +53,18 @@ class CreatePlaylistViewController: BaseViewController, StoryboardBased, ViewMod
                 SceneCoordinator.shared.pop(animated: true, toRoot: true)
             }
         }).disposed(by: disposeBag)
+    }
+}
+
+extension CreatePlaylistViewController: UIGestureRecognizerDelegate {
+    func hideKeyboardWhenTappedAround() {
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.delegate = self
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc override func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

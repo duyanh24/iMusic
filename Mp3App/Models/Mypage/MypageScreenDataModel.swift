@@ -18,12 +18,11 @@ class MypageScreenDataModel {
     func toDataSource() -> [MypageSectionModel] {
         var sectionModels = [MypageSectionModel]()
         sectionModels.append(.favourite(type: .favourite, items: [MypageSectionItem.favourite(type: .favourite, libraryTitle: Strings.favouriteSong)]))
-        if !playlistNames.isEmpty {
-            sectionModels.append(.playlist(
-                type: .playlist,
-                items: playlistNames.map { MypageSectionItem.playlist(type: .playlist, playlist: $0)})
-            )
-        }
+        
+        sectionModels.append(.playlist(
+            type: .playlist,
+            items: playlistNames.map { MypageSectionItem.playlist(type: .playlist, playlist: $0)})
+        )
         return sectionModels
     }
 }
