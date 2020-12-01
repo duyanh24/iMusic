@@ -71,8 +71,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e60-VX-cOE">
                                                 <rect key="frame" x="0.0" y="80" width="414" height="50"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qb5-vb-eMe">
-                                                        <rect key="frame" x="20" y="14" width="25" height="21.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_play_number_grey_Normal" translatesAutoresizingMaskIntoConstraints="NO" id="qb5-vb-eMe">
+                                                        <rect key="frame" x="20" y="12.5" width="25" height="25"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="5Ez-s6-nlh"/>
@@ -218,6 +218,6 @@
     <resources>
         <image name="ic_add_to_playlist_black_18_Normal" width="18" height="18"/>
         <image name="ic_like_grey_16_16_Normal" width="16" height="16"/>
-        <image name="play" catalog="system" width="120" height="128"/>
+        <image name="ic_play_number_grey_Normal" width="18" height="18"/>
     </resources>
 </document>
