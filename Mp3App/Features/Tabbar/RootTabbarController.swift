@@ -12,6 +12,25 @@ import RxSwift
 import RxCocoa
 import MaterialComponents.MaterialBottomSheet
 
+extension RootTabbarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if selectedIndex == 3 {
+            self.containerView.frame.origin.y = UIScreen.main.bounds.height
+        } else {
+            self.containerView.frame.origin.y = UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight
+        }
+        return true
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if tabBar.items?[3] == item {
+            self.containerView.frame.origin.y = UIScreen.main.bounds.height
+        } else {
+            self.containerView.frame.origin.y = UIScreen.main.bounds.height - getTabbarHeight() - miniPlayerHeight
+        }
+    }
+}
+
 class RootTabbarController: UITabBarController, StoryboardBased {
     private var tabbarY: CGFloat!
     private let miniPlayerHeight: CGFloat = 52
@@ -28,6 +47,7 @@ class RootTabbarController: UITabBarController, StoryboardBased {
     override func loadView() {
         super.loadView()
         createPlayerView()
+        delegate = self
     }
     
     override func viewDidLoad() {
