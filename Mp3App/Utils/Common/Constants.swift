@@ -11,7 +11,7 @@ import Foundation
 struct APIURL {
     static let baseURLv2 = "https://api-v2.soundcloud.com"
     static let baseURLv1 = "https://api.soundcloud.com"
-    static let APIStream = "https://api.soundcloud.com/tracks/%d/stream?client_id=91f71f725804f4915f4cc95f69fff503"
+    static let APIStream = "https://api.soundcloud.com/tracks/%d/stream?client_id=\(Constants.APIKeyStream)"
     static let helpURL = "https://zingmp3.vn/faq/app.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
     static let serviceTermsURL = "https://zingmp3.vn/tos.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
     static let privacyPolicyURL = "https://zingmp3.vn/privacy.html?os=android&osVersion=22&manufacturer=OPPO&model=A1601"
@@ -19,6 +19,12 @@ struct APIURL {
 
 struct Constants {
     static let APIKey = "a25e51780f7f86af0afa91f241d091f8"
+    static let APIKeyStream = "91f71f725804f4915f4cc95f69fff503"
+    // 91f71f725804f4915f4cc95f69fff503
+    // 73a3db34973aee46de488c0b902b5cc3
+    // stJqxq59eT4rgFHFLYiyAL2BDbuL3BAv
+    // c4c979fd6f241b5b30431d722af212e8
+    
     static let passwordMaxLength = 15
     static let passwordMinLength = 6
 }
