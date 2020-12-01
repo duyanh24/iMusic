@@ -43,6 +43,7 @@ class TrackPlayer {
         currentTrackIndex = 0
         isPlaying = false
         tracksPlayedId = []
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func startTracks(track: Track) {
